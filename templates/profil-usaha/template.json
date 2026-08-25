@@ -1,0 +1,13 @@
+{
+  "id": "profil-usaha",
+  "name": "Profil Usaha",
+  "description": "Situs perusahaan multi-halaman: beranda, layanan, tentang, dan kontak dengan form WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["perusahaan", "jasa", "multi-halaman"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "featured",
+  "seedPrompt": "Sesuaikan situs profil usaha ini untuk {{nama usaha}} yang bergerak di bidang {{bidang}} di {{kota}}. Ganti nama, deskripsi layanan, nomor WhatsApp, dan alamat contoh dengan data itu. Sesuaikan palet warna dengan identitas merek, dan pertahankan struktur 4 halaman beserta hamburger menu-nya.",
+  "author": "HyVay",
+  "license": "MIT"
+}

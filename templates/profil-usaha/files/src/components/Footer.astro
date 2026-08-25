@@ -1,0 +1,26 @@
+---
+import { usaha } from '../data/site';
+---
+<footer class="border-t border-slate-200 bg-slate-50">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
+    <div>
+      <p class="text-base font-semibold text-slate-900">{usaha.nama}</p>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600">{usaha.tagline}</p>
+    </div>
+    <div>
+      <p class="text-sm font-medium text-slate-900">Kontak</p>
+      <ul class="mt-2 space-y-1.5 text-sm text-slate-600">
+        <li><a href={`https://wa.me/${usaha.telepon}`} class="transition-colors hover:text-teal-700">WhatsApp {usaha.telepon}</a></li>
+        <li><a href={`mailto:${usaha.email}`} class="transition-colors hover:text-teal-700">{usaha.email}</a></li>
+        <li>{usaha.alamat}</li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-medium text-slate-900">Jam operasional</p>
+      <p class="mt-2 text-sm text-slate-600">{usaha.jam}</p>
+    </div>
+  </div>
+  <div class="border-t border-slate-200 px-4 py-5 text-center text-xs text-slate-500 md:px-6">
+    © {new Date().getFullYear()} {usaha.nama}. Seluruh hak cipta dilindungi.
+  </div>
+</footer>

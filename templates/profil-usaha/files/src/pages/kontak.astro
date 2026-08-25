@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { usaha, layanan } from '../data/site';
+---
+<Base
+  title={`Kontak — ${usaha.nama}`}
+  description={`Hubungi ${usaha.nama} di ${usaha.alamat}. Kirim kebutuhan Anda lewat WhatsApp dan dapatkan estimasi biaya.`}
+>
+  <Header />
+  <main>
+    <section class="border-b border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <h1 class="text-3xl font-semibold text-slate-900 md:text-4xl">Kontak</h1>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+          Isi formulir di bawah, pesan akan terbuka di WhatsApp kami lengkap dengan detail yang Anda tulis.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <!-- Formulir -->
+        <div>
+          <form id="kontak-form" class="space-y-4">
+            <div>
+              <label for="nama" class="block text-sm font-medium text-slate-800">Nama</label>
+              <input
+                id="nama" name="nama" required placeholder="Nama Anda"
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-teal-600"
+              />
+            </div>
+            <div>
+              <label for="layanan" class="block text-sm font-medium text-slate-800">Kebutuhan</label>
+              <select
+                id="layanan" name="layanan"
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-teal-600"
+              >
+                {layanan.map((l) => <option value={l.nama}>{l.nama}</option>)}
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label for="lokasi" class="block text-sm font-medium text-slate-800">Lokasi proyek</label>
+              <input
+                id="lokasi" name="lokasi" placeholder="Kecamatan / kota"
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-teal-600"
+              />
+            </div>
+            <div>
+              <label for="pesan" class="block text-sm font-medium text-slate-800">Detail pekerjaan</label>
+              <textarea
+                id="pesan" name="pesan" rows="4" required placeholder="Perkiraan luas, kondisi saat ini, target waktu"
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-teal-600"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700 sm:w-auto"
+            >
+              Kirim via WhatsApp
+            </button>
+          </form>
+          <p class="mt-3 text-xs text-slate-500">
+            Situs ini statis tanpa basis data — pesan dikirim sebagai chat WhatsApp ke nomor kami.
+          </p>
+        </div>
+
+        <!-- Detail -->
+        <div class="space-y-6">
+          <div class="rounded-xl border border-slate-200 bg-white p-6">
+            <p class="text-sm font-medium text-slate-900">Alamat</p>
+            <p class="mt-1 text-sm text-slate-600">{usaha.alamat}</p>
+            <p class="mt-4 text-sm font-medium text-slate-900">Jam operasional</p>
+            <p class="mt-1 text-sm text-slate-600">{usaha.jam}</p>
+            <p class="mt-4 text-sm font-medium text-slate-900">Email</p>
+            <a href={`mailto:${usaha.email}`} class="mt-1 block text-sm text-teal-700 transition-colors hover:text-teal-800">
+              {usaha.email}
+            </a>
+          </div>
+          <a
+            href={`https://wa.me/${usaha.telepon}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-4 text-sm font-medium text-white transition-colors duration-150 hover:bg-slate-800"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.1 14.9l-.4-.2-2.9.8.8-2.8-.2-.4A8 8 0 0112 4z" />
+            </svg>
+            Chat langsung: {usaha.telepon}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: usaha.telepon }}>
+    const form = document.getElementById('kontak-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Halo, saya ${d.get('nama')}.`,
+        `Kebutuhan: ${d.get('layanan')}`,
+        `Lokasi: ${d.get('lokasi') || '-'}`,
+        `Detail: ${d.get('pesan')}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

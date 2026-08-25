@@ -1,0 +1,26 @@
+---
+import { toko } from '../data/toko';
+---
+<footer class="border-t border-stone-200 bg-stone-50">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
+    <div>
+      <p class="text-base font-semibold text-stone-900">{toko.nama}</p>
+      <p class="mt-2 text-sm leading-relaxed text-stone-600">{toko.tagline}</p>
+    </div>
+    <div>
+      <p class="text-sm font-medium text-stone-900">Toko</p>
+      <ul class="mt-2 space-y-1.5 text-sm text-stone-600">
+        <li>{toko.alamat}</li>
+        <li>{toko.jam}</li>
+        <li><a href={`https://wa.me/${toko.telepon}`} class="transition-colors hover:text-amber-700">WhatsApp {toko.telepon}</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-medium text-stone-900">Pengiriman</p>
+      <p class="mt-2 text-sm leading-relaxed text-stone-600">{toko.ongkir}</p>
+    </div>
+  </div>
+  <div class="border-t border-stone-200 px-4 py-5 text-center text-xs text-stone-500 md:px-6">
+    © {new Date().getFullYear()} {toko.nama}
+  </div>
+</footer>

@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import KartuProduk from '../components/KartuProduk.astro';
+import { toko, produk } from '../data/toko';
+
+const unggulan = produk.filter((p) => p.stok).slice(0, 3);
+---
+<Base title={`${toko.nama} — ${toko.tagline}`} description={toko.deskripsi}>
+  <Header />
+  <main>
+    <section class="relative overflow-hidden border-b border-stone-200">
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1600&q=80"
+          alt=""
+          class="h-full w-full object-cover"
+        />
+        <div class="absolute inset-0 bg-stone-950/60"></div>
+      </div>
+      <div class="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-32">
+        <div class="max-w-xl">
+          <h1 class="text-3xl font-semibold leading-tight text-white md:text-5xl">{toko.tagline}</h1>
+          <p class="mt-5 text-base leading-relaxed text-stone-200 md:text-lg">{toko.deskripsi}</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="/produk/"
+              class="inline-flex items-center justify-center rounded-lg bg-amber-700 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-amber-800"
+            >
+              Lihat Katalog
+            </a>
+            <a
+              href={`https://wa.me/${toko.telepon}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/10"
+            >
+              Tanya Stok
+            </a>
+          </div>
+          <p class="mt-6 text-xs text-stone-300">{toko.ongkir}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-semibold text-stone-900 md:text-3xl">Paling dicari</h2>
+          <p class="mt-2 text-sm text-stone-600">Tiga produk yang paling sering dipesan bulan ini.</p>
+        </div>
+        <a href="/produk/" class="text-sm font-medium text-amber-700 transition-colors hover:text-amber-800">
+          Semua produk →
+        </a>
+      </div>
+      <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {unggulan.map((item) => <KartuProduk item={item} />)}
+      </div>
+    </section>
+
+    <section class="border-t border-stone-200 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {[
+            { judul: 'Sangrai mingguan', isi: 'Semua pesanan dikirim maksimal dua hari setelah tanggal sangrai.' },
+            { judul: 'Pesan lewat WhatsApp', isi: 'Tanpa keranjang dan tanpa akun — cukup chat, kami balas dengan total dan ongkir.' },
+            { judul: 'Bisa giling di tempat', isi: 'Sebutkan alat seduh Anda, kami sesuaikan tingkat kehalusannya gratis.' },
+          ].map((f) => (
+            <div>
+              <h3 class="text-base font-medium text-stone-900">{f.judul}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-stone-600">{f.isi}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

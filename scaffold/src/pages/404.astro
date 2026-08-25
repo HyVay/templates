@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="404 — Halaman tidak ditemukan" description="Halaman yang kamu cari tidak ditemukan.">
+  <main class="min-h-screen flex flex-col items-center justify-center gap-6 bg-white text-slate-900 px-6 text-center">
+    <a href="/" aria-label="HyVay">
+      <svg width="72" height="72" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#185A3B">
+          <rect x="40" y="90" width="58" height="300"></rect>
+          <rect x="184" y="90" width="58" height="300"></rect>
+          <rect x="40" y="200" width="202" height="60"></rect>
+        </g>
+        <polygon fill="#38966A" points="165,128 330,410 470,128 393,128 330,300 242,128"></polygon>
+      </svg>
+    </a>
+    <div class="space-y-2">
+      <p class="text-6xl font-bold">404</p>
+      <p class="text-slate-500">Halaman yang kamu cari tidak ditemukan.</p>
+    </div>
+    <a href="/" class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">Kembali ke beranda</a>
+  </main>
+</Base>

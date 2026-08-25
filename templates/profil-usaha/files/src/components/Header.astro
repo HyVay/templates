@@ -1,0 +1,65 @@
+---
+import { usaha } from '../data/site';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/layanan/', label: 'Layanan' },
+  { href: '/tentang/', label: 'Tentang' },
+  { href: '/kontak/', label: 'Kontak' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
+    <a href="/" class="text-lg font-semibold tracking-tight text-slate-900">{usaha.nama}</a>
+    <nav class="hidden md:flex md:items-center md:gap-8">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'text-sm transition-colors hover:text-teal-700',
+            here === l.href ? 'font-medium text-teal-700' : 'text-slate-700',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-slate-700 transition-colors hover:bg-slate-100 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block rounded-lg px-2 py-3 text-base text-slate-800 transition-colors hover:bg-slate-50">
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

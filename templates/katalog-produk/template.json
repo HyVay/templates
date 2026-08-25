@@ -1,0 +1,13 @@
+{
+  "id": "katalog-produk",
+  "name": "Katalog Produk",
+  "description": "Toko online tanpa checkout: katalog produk dengan filter kategori dan pesanan langsung via WhatsApp.",
+  "category": "Toko",
+  "tags": ["katalog", "umkm", "whatsapp"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "popular",
+  "seedPrompt": "Sesuaikan katalog ini untuk toko {{nama toko}} yang menjual {{jenis produk}}. Ganti daftar produk, kategori, harga, nomor WhatsApp, dan alamat contoh dengan data toko itu. Pertahankan filter kategori dan tombol pesan WhatsApp-nya, dan pastikan kartu produk tetap satu kolom di layar HP.",
+  "author": "HyVay",
+  "license": "MIT"
+}

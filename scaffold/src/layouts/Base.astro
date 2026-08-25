@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+import { FAVICON } from '../config/site';
+const { title, description = '' } = Astro.props;
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <!-- Browser-tab icon. No type= on purpose: FAVICON may be swapped for a PNG/JPG
+         from the media library, and a wrong type makes some browsers skip the icon. -->
+    <link rel="icon" href={FAVICON} />
+    <link rel="apple-touch-icon" href={FAVICON} />
+    <script is:inline>
+      // Report runtime errors to the HyVay studio (parent frame) for the
+      // one-click "Fix it" action. No-op when the app runs standalone.
+      (function () {
+        function report(message, stack) {
+          try {
+            if (window.parent) window.parent.postMessage({ type: 'hyvay:runtime-error', message: String(message), stack: stack }, '*');
+          } catch (e) {}
+        }
+        window.addEventListener('error', function (e) { report(e.message, e.error && e.error.stack); });
+        window.addEventListener('unhandledrejection', function (e) {
+          var r = e.reason || {};
+          report(r.message || r || 'Unhandled rejection', r.stack);
+        });
+        // Report the current route so the studio address bar reflects in-app navigation.
+        try {
+          if (window.parent) window.parent.postMessage({ type: 'hyvay:navigate', path: location.pathname + location.search }, '*');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

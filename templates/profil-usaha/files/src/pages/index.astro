@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { usaha, layanan, keunggulan } from '../data/site';
+---
+<Base title={`${usaha.nama} — ${usaha.tagline}`} description={usaha.deskripsi}>
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-slate-200 bg-slate-900">
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80"
+          alt=""
+          class="h-full w-full object-cover opacity-30"
+        />
+      </div>
+      <div class="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-32">
+        <div class="max-w-2xl">
+          <h1 class="text-3xl font-semibold leading-tight text-white md:text-5xl">{usaha.tagline}</h1>
+          <p class="mt-5 text-base leading-relaxed text-slate-200 md:text-lg">{usaha.deskripsi}</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="/kontak/"
+              class="inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
+            >
+              Minta Penawaran
+            </a>
+            <a
+              href="/layanan/"
+              class="inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/10"
+            >
+              Lihat Layanan
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layanan ringkas -->
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <h2 class="text-2xl font-semibold text-slate-900 md:text-3xl">Layanan kami</h2>
+      <p class="mt-2 max-w-2xl text-sm text-slate-600 md:text-base">
+        Tiga lini pekerjaan utama, semuanya dikerjakan tim internal dengan pengawas di lokasi.
+      </p>
+      <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {layanan.map((l) => (
+          <article class="rounded-xl border border-slate-200 bg-white p-6 transition-shadow duration-150 hover:shadow-md">
+            <h3 class="text-lg font-medium text-slate-900">{l.nama}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{l.ringkas}</p>
+            <p class="mt-4 text-sm font-medium text-teal-700">{l.mulai}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Keunggulan -->
+    <section class="border-y border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <h2 class="text-2xl font-semibold text-slate-900 md:text-3xl">Kenapa memilih kami</h2>
+        <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+          {keunggulan.map((k) => (
+            <div>
+              <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-teal-600/10 text-teal-700">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="mt-4 text-base font-medium text-slate-900">{k.judul}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{k.isi}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="rounded-2xl bg-slate-900 px-6 py-12 text-center md:px-12">
+        <h2 class="text-2xl font-semibold text-white md:text-3xl">Punya rencana pekerjaan?</h2>
+        <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+          Kirim ukuran ruang dan kebutuhan Anda, kami balas dengan estimasi biaya di hari yang sama.
+        </p>
+        <a
+          href={`https://wa.me/${usaha.telepon}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-7 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
+        >
+          Chat WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

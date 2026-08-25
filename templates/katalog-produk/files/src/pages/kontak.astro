@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { toko, produk } from '../data/toko';
+---
+<Base
+  title={`Kontak — ${toko.nama}`}
+  description={`Alamat, jam buka, dan cara memesan dari ${toko.nama} di ${toko.alamat}.`}
+>
+  <Header />
+  <main>
+    <section class="border-b border-stone-200 bg-stone-50">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <h1 class="text-3xl font-semibold text-stone-900 md:text-4xl">Kontak & pesanan</h1>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-stone-600 md:text-base">
+          Susun pesanan Anda di formulir ini, lalu kirim. Kami balas dengan total harga dan ongkir.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <div>
+          <form id="pesan-form" class="space-y-4">
+            <div>
+              <label for="nama" class="block text-sm font-medium text-stone-800">Nama</label>
+              <input
+                id="nama" name="nama" required placeholder="Nama penerima"
+                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
+              />
+            </div>
+            <div>
+              <label for="produk" class="block text-sm font-medium text-stone-800">Produk</label>
+              <select
+                id="produk" name="produk"
+                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
+              >
+                {produk.filter((p) => p.stok).map((p) => <option value={p.nama}>{p.nama} — {p.satuan}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="jumlah" class="block text-sm font-medium text-stone-800">Jumlah</label>
+              <input
+                id="jumlah" name="jumlah" type="number" min="1" value="1"
+                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
+              />
+            </div>
+            <div>
+              <label for="catatan" class="block text-sm font-medium text-stone-800">Catatan</label>
+              <textarea
+                id="catatan" name="catatan" rows="3" placeholder="Alat seduh, tingkat gilingan, alamat kirim"
+                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full rounded-lg bg-amber-700 px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-amber-800 sm:w-auto"
+            >
+              Kirim pesanan via WhatsApp
+            </button>
+          </form>
+          <p class="mt-3 text-xs text-stone-500">
+            Situs ini statis tanpa keranjang dan tanpa pembayaran online — pesanan masuk sebagai chat WhatsApp.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="rounded-xl border border-stone-200 bg-white p-6">
+            <p class="text-sm font-medium text-stone-900">Alamat toko</p>
+            <p class="mt-1 text-sm text-stone-600">{toko.alamat}</p>
+            <p class="mt-4 text-sm font-medium text-stone-900">Jam buka</p>
+            <p class="mt-1 text-sm text-stone-600">{toko.jam}</p>
+            <p class="mt-4 text-sm font-medium text-stone-900">Pengiriman</p>
+            <p class="mt-1 text-sm text-stone-600">{toko.ongkir}</p>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&q=80"
+            alt="Bagian dalam toko kopi"
+            loading="lazy"
+            class="h-auto max-w-full rounded-xl object-cover"
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: toko.telepon, namaToko: toko.nama }}>
+    const form = document.getElementById('pesan-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Halo ${namaToko}, saya ${d.get('nama')}.`,
+        `Pesanan: ${d.get('produk')} x ${d.get('jumlah')}`,
+        `Catatan: ${d.get('catatan') || '-'}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

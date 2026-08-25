@@ -1,0 +1,13 @@
+{
+  "id": "undangan-pernikahan",
+  "name": "Undangan Pernikahan",
+  "description": "Undangan digital satu halaman dengan hitung mundur, galeri, peta lokasi, dan RSVP via WhatsApp.",
+  "category": "Undangan",
+  "tags": ["undangan", "pernikahan", "acara"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "popular",
+  "seedPrompt": "Sesuaikan undangan ini untuk pasangan {{mempelai}}, akad {{tanggal}} di {{lokasi}}. Ganti semua nama, tanggal, dan alamat contoh dengan data itu, sesuaikan palet warna agar cocok dengan tema acara, dan pastikan tetap rapi di layar 390px.",
+  "author": "HyVay",
+  "license": "MIT"
+}
