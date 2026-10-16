@@ -1,0 +1,13 @@
+{
+  "id": "rental-kendaraan",
+  "name": "Rental Mobil & Motor",
+  "description": "Situs rental kendaraan: daftar armada dengan harga per hari (lepas kunci atau dengan sopir), filter mobil/motor, syarat sewa, dan booking tanggal via WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["rental", "mobil", "motor", "booking"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama rental}} di {{kota}}. Ganti daftar unit (nama, tahun, transmisi, kapasitas, harga lepas kunci dan dengan sopir), foto unit, syarat sewa, deposit, area antar-jemput, alamat, dan nomor WhatsApp contoh di src/data/rental.ts. Pertahankan filter Mobil/Motor di halaman armada, daftar syarat bernomor, dan form booking yang mengirim tanggal ambil dan kembali ke WhatsApp. Jangan mengarang harga; tanyakan ke pemilik bila data belum ada.",
+  "author": "HyVay",
+  "license": "MIT"
+}

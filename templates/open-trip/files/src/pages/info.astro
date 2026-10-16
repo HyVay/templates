@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { travel } from '../data/trip';
+
+const syarat = [
+  ['Identitas', 'Peserta WNI membawa KTP, WNA membawa paspor. Untuk penerbangan, nama di booking harus sama persis dengan identitas.'],
+  ['Kesehatan', 'Trekking Padar dan Ijen butuh kondisi fisik wajar. Beri tahu kami bila punya riwayat asma, jantung, atau sedang hamil, supaya itinerary bisa disesuaikan.'],
+  ['Barang bawaan', 'Satu tas ransel dan satu koper kabin. Kapal kayu dan bus kecil tidak punya ruang untuk koper besar.'],
+  ['Anak-anak', 'Usia 5 tahun ke atas boleh ikut dengan pendamping. Di bawah 12 tahun bayar 75% dan berbagi kamar dengan orang tua.'],
+  ['Asuransi', 'Tidak termasuk. Kami sarankan asuransi perjalanan untuk trip yang memakai pesawat.'],
+  ['Grup WhatsApp', 'Dibuat 7 hari sebelum berangkat. Semua pengumuman, lokasi meeting point, dan nomor tour leader dibagikan di sana.'],
+];
+---
+<Base
+  title={`Info & Syarat — ${travel.nama}`}
+  description={`Syarat ikut open trip ${travel.nama}: dokumen, kesehatan, bawaan, pembayaran DP, dan kebijakan pembatalan.`}
+>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-[#0B3C5D]/15 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#F26B1D]">Baca sebelum booking</p>
+        <h1 class="mt-3 font-display text-5xl font-extrabold leading-none tracking-tight text-[#0B3C5D] md:text-7xl">Info &amp; syarat</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#0B3C5D]/75 md:text-base">
+          Ringkas, tapi ini yang menentukan perjalanan lancar. Semua poin juga dikirim ulang ke grup WhatsApp peserta.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-12">
+        <div class="md:col-span-7">
+          <h2 class="font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D]">Syarat peserta</h2>
+          <ol class="mt-6 divide-y divide-[#0B3C5D]/15 border-y border-[#0B3C5D]/15">
+            {syarat.map(([judul, isi], i) => (
+              <li class="flex gap-5 py-5">
+                <span class="w-10 shrink-0 font-display text-2xl font-extrabold text-[#F26B1D]">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="font-semibold text-[#0B3C5D]">{judul}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-[#0B3C5D]/80">{isi}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="md:col-span-5">
+          <h2 class="font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D]">Pembayaran</h2>
+          <p class="mt-4 text-sm leading-relaxed text-[#0B3C5D]/80">{travel.dp}. Transfer ke rekening atas nama usaha; nomor rekening diberikan lewat WhatsApp setelah kursi dikonfirmasi.</p>
+          <h2 class="mt-10 font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D]">Pembatalan</h2>
+          <div class="mt-4 overflow-hidden rounded-lg border border-[#0B3C5D]/15 bg-white">
+            <table class="w-full border-collapse text-left text-sm">
+              <thead>
+                <tr class="border-b border-[#0B3C5D]/15 font-mono text-[11px] uppercase tracking-widest text-[#0B3C5D]/60">
+                  <th scope="col" class="px-4 py-3 font-medium">Dibatalkan</th>
+                  <th scope="col" class="px-4 py-3 font-medium">Ketentuan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#0B3C5D]/10">
+                {travel.pembatalan.map((r) => (
+                  <tr>
+                    <td class="px-4 py-3 align-top font-semibold text-[#0B3C5D]">{r.kapan}</td>
+                    <td class="px-4 py-3 align-top text-[#0B3C5D]/80">{r.potongan}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-xs leading-relaxed text-[#0B3C5D]/60">Pembatalan dari pihak kami (cuaca, kuota tidak terpenuhi) mengembalikan seluruh pembayaran atau dipindah ke tanggal lain, sesuai pilihan peserta.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

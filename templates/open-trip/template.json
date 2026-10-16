@@ -1,0 +1,13 @@
+{
+  "id": "open-trip",
+  "name": "Open Trip & Travel",
+  "description": "Situs penyelenggara open trip: daftar paket dengan tanggal keberangkatan, sisa kursi, itinerary per hari, syarat dan pembayaran, serta booking via WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["open-trip", "travel", "wisata", "booking"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama travel}} yang berangkat dari {{kota}}. Ganti daftar paket (destinasi, durasi, harga, kuota, tanggal keberangkatan, itinerary per hari, termasuk/tidak termasuk, meeting point), kebijakan DP dan pembatalan, serta nomor WhatsApp contoh di src/data/trip.ts. Pertahankan baris paket dengan tanggal keberangkatan dan sisa kursi, itinerary yang bisa dibuka-tutup, dan form booking yang mengirim ke WhatsApp. Ganti foto dengan foto perjalanan sendiri.",
+  "author": "HyVay",
+  "license": "MIT"
+}

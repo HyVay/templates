@@ -1,0 +1,38 @@
+---
+import { kos, tipeKamar, rupiah } from '../data/kos';
+---
+<footer class="border-t border-[#1F2A1F]/10 bg-[#1F2A1F] text-[#F7F5F0]">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6">
+    <div class="md:col-span-5">
+      <p class="font-display text-2xl font-semibold">{kos.nama}</p>
+      <p class="mt-1 text-xs uppercase tracking-widest text-[#F7F5F0]/60">{kos.jenis} · {kos.kota}</p>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-[#F7F5F0]/75">{kos.tagline}</p>
+    </div>
+    <div class="md:col-span-3">
+      <p class="text-xs uppercase tracking-widest text-[#F7F5F0]/60">Harga per bulan</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        {tipeKamar.map((t) => (
+          <li class="flex justify-between gap-3">
+            <span class="text-[#F7F5F0]/75">{t.nama}</span>
+            <span class="tabular-nums">{rupiah(t.harga)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="md:col-span-4">
+      <p class="text-xs uppercase tracking-widest text-[#F7F5F0]/60">Alamat</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li>{kos.alamat}</li>
+        <li><a href={kos.maps} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-colors duration-150 hover:text-[#A9C06B]">Buka di Google Maps</a></li>
+        <li><a href={`https://wa.me/${kos.telepon}`} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-colors duration-150 hover:text-[#A9C06B]">WhatsApp {kos.telepon}</a></li>
+        <li class="text-[#F7F5F0]/75">Survei: {kos.jamSurvei}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-[#F7F5F0]/15 px-4 py-5 text-xs text-[#F7F5F0]/60 md:px-6">
+    <div class="mx-auto flex max-w-6xl flex-col gap-1 sm:flex-row sm:justify-between">
+      <span>© {new Date().getFullYear()} {kos.nama}.</span>
+      <span>Ketersediaan diperbarui {kos.pembaruan}.</span>
+    </div>
+  </div>
+</footer>

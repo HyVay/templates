@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { sekolah, guru } from '../data/sekolah';
+---
+<Base title={`Guru — ${sekolah.nama}`} description={`${guru.length} guru tetap ${sekolah.nama}: ${guru.map((g) => g.nama).join(', ')}. Dua guru per kelompok, tetap sepanjang tahun.`}>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-[#1F4E79]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F28C38]">Guru</p>
+        <h1 class="font-display mt-3 text-4xl font-semibold leading-tight md:text-6xl">Orang-orang yang menyambut anak Anda tiap pagi</h1>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#1F4E79]/75">Semua guru mengikuti pelatihan pembelajaran sentra dan pertolongan pertama tiap tahun. Guru kelas bisa dihubungi orang tua lewat grup kelompok pada jam sekolah.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <ul class="divide-y divide-[#1F4E79]/10">
+        {guru.map((g) => (
+          <li class="grid grid-cols-[6rem_1fr] items-center gap-5 py-6 sm:grid-cols-[9rem_1fr] md:grid-cols-12 md:gap-8">
+            <img src={g.foto} alt={`Potret ${g.nama}`} loading="lazy" class="aspect-square w-full rounded-2xl object-cover md:col-span-2" />
+            <div class="md:col-span-10 md:grid md:grid-cols-10 md:items-baseline md:gap-6">
+              <p class="font-display text-xl font-semibold md:col-span-4 md:text-2xl">{g.nama}</p>
+              <p class="mt-0.5 text-sm font-semibold text-[#F28C38] md:col-span-3 md:mt-0">{g.peran}</p>
+              <p class="mt-1 text-sm text-[#1F4E79]/70 md:col-span-3 md:mt-0">{g.latar}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Base>

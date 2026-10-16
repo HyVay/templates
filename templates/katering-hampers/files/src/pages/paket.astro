@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DaftarPaket from '../components/DaftarPaket.astro';
+import { dapur, kateringHarian, nasiBox, prasmanan, menuMingguan } from '../data/dapur';
+
+const anchors = [
+  { href: '#harian', label: 'Katering harian' },
+  { href: '#nasi-box', label: 'Nasi box' },
+  { href: '#prasmanan', label: 'Prasmanan' },
+  { href: '#menu-mingguan', label: 'Menu mingguan' },
+];
+---
+<Base
+  title={`Paket & Menu — ${dapur.nama}`}
+  description={`Paket katering harian, nasi box, dan prasmanan ${dapur.nama}, ${dapur.kota}, dengan harga per porsi dan minimum pesan.`}
+>
+  <Fonts />
+  <div class="bg-[#FCFAF5] text-[#3A4A2F]">
+    <Header />
+    <main>
+      <section class="border-b border-[#3A4A2F]/15">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">Harga sudah termasuk kemasan</p>
+          <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] md:text-7xl">Paket & menu</h1>
+          <p class="mt-5 max-w-lg font-display text-xl italic text-[#3A4A2F]/75">
+            Semua porsi adalah porsi orang rumah. Untuk acara dengan tamu yang makan banyak, tambahkan 10% dari jumlah kepala.
+          </p>
+        </div>
+      </section>
+      <nav class="sticky top-14 z-40 border-b border-[#3A4A2F]/15 bg-[#FCFAF5]/95 backdrop-blur md:top-16" aria-label="Lompat ke bagian">
+        <div class="mx-auto flex max-w-6xl gap-6 overflow-x-auto px-4 py-3 text-sm md:px-6">
+          {anchors.map((a) => <a href={a.href} class="shrink-0 transition-colors duration-150 hover:text-[#8C2F39]">{a.label}</a>)}
+        </div>
+      </nav>
+
+      <div class="mx-auto max-w-6xl space-y-16 px-4 py-12 md:px-6 md:py-16">
+        <DaftarPaket id="harian" judul="Katering harian" keterangan="Dikirim Senin - Jumat sebelum 11.30. Pesan mingguan, bayar tiap Jumat." items={kateringHarian} />
+        <DaftarPaket id="nasi-box" judul="Nasi box" keterangan="Box kertas food grade dengan sendok dan tisu. Label nama acara gratis." items={nasiBox} />
+        <DaftarPaket id="prasmanan" judul="Prasmanan" keterangan="Termasuk meja saji, pemanas, dan pramusaji. Peralatan diambil kembali setelah acara." items={prasmanan} />
+
+        <section id="menu-mingguan" class="scroll-mt-24">
+          <div class="flex items-baseline justify-between gap-4 border-b-2 border-[#3A4A2F] pb-2">
+            <h2 class="font-display text-3xl font-semibold md:text-4xl">Menu mingguan</h2>
+            <span class="font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/60">Paket kantor</span>
+          </div>
+          <p class="mt-3 text-sm text-[#3A4A2F]/75">Berlaku untuk Paket Kantor A dan B. Minggu berikutnya menunya berganti; daftar dikirim tiap Jumat ke pelanggan.</p>
+          <!-- Desktop tabel -->
+          <table class="mt-4 hidden w-full border-collapse text-left text-sm md:table">
+            <thead>
+              <tr class="border-b border-[#3A4A2F]/20 font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/60">
+                <th scope="col" class="py-3 pr-4 font-medium">Hari</th>
+                <th scope="col" class="py-3 pr-4 font-medium">Lauk utama</th>
+                <th scope="col" class="py-3 pr-4 font-medium">Sayur</th>
+                <th scope="col" class="py-3 font-medium">Tambahan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#3A4A2F]/10">
+              {menuMingguan.map((m) => (
+                <tr>
+                  <th scope="row" class="py-3 pr-4 font-display text-lg font-semibold">{m.hari}</th>
+                  <td class="py-3 pr-4">{m.lauk}</td>
+                  <td class="py-3 pr-4">{m.sayur}</td>
+                  <td class="py-3 text-[#3A4A2F]/75">{m.tambahan}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <!-- HP blok -->
+          <ul class="mt-4 divide-y divide-[#3A4A2F]/10 md:hidden">
+            {menuMingguan.map((m) => (
+              <li class="py-4">
+                <p class="font-display text-xl font-semibold">{m.hari}</p>
+                <p class="mt-1 text-sm">{m.lauk} · {m.sayur}</p>
+                <p class="text-sm text-[#3A4A2F]/70">{m.tambahan}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</Base>

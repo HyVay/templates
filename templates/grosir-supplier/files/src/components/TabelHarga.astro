@@ -7,6 +7,8 @@ import { rupiah, type Produk } from '../data/grosir';
 
 interface Props { items: Produk[]; id?: string }
 const { items, id = 'tabel-harga' } = Astro.props;
+/** "karung 5 kg" → "karung", "1 kg" → "kg" */
+const unit = (satuan: string) => satuan.split(' ').find((w) => !/^\d/.test(w)) ?? satuan;
 ---
 <!-- Desktop -->
 <div class="hidden border-2 border-[#0A2342] bg-white md:block">
@@ -34,7 +36,7 @@ const { items, id = 'tabel-harga' } = Astro.props;
           <td class="px-4 py-3 text-right tabular-nums">{rupiah(p.eceran)}</td>
           <td class="px-4 py-3 text-right tabular-nums">{rupiah(p.lusin)}</td>
           <td class="px-4 py-3 text-right font-display text-base font-bold tabular-nums text-[#0A2342]">{rupiah(p.karton)}</td>
-          <td class="px-4 py-3 text-right tabular-nums">{p.moq} {p.satuan.split(' ')[0]}</td>
+          <td class="px-4 py-3 text-right tabular-nums">{p.moq} {unit(p.satuan)}</td>
         </tr>
       ))}
     </tbody>

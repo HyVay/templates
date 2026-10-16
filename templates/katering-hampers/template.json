@@ -1,0 +1,13 @@
+{
+  "id": "katering-hampers",
+  "name": "Katering & Hampers PO",
+  "description": "Situs katering rumahan: paket per porsi, nasi box, prasmanan, menu mingguan, hampers musiman dengan batas pre-order, dan pemesanan via WhatsApp.",
+  "category": "Kuliner",
+  "tags": ["katering", "hampers", "pre-order", "nasi-box"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama katering}} di {{kota}}. Ganti paket katering, nasi box, prasmanan, menu mingguan, tier hampers, batas PO, DP, area antar, dan nomor WhatsApp contoh di src/data/dapur.ts dengan data usaha itu. Pertahankan struktur 4 halaman (beranda, paket, hampers, pesan), daftar paket dengan kolom minimum pesan, tabel perbandingan hampers, dan form pesan via WhatsApp. Kalau tidak menjual hampers, ganti halaman hampers menjadi paket acara (aqiqah, arisan, rapat).",
+  "author": "HyVay",
+  "license": "MIT"
+}

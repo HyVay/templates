@@ -2,6 +2,38 @@
   "contract": 1,
   "templates": [
     {
+      "id": "cv-online",
+      "name": "CV Online",
+      "description": "CV satu halaman yang bisa dicetak: profil di kolom kiri, pengalaman sebagai timeline, proyek pilihan, keahlian, pendidikan, dan sertifikasi.",
+      "category": "Portofolio",
+      "tags": [
+        "cv",
+        "resume",
+        "karier",
+        "pribadi"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 3
+    },
+    {
+      "id": "grosir-supplier",
+      "name": "Grosir & Supplier",
+      "description": "Situs distributor B2B: tabel harga bertingkat (eceran, lusin, karton) dengan filter kategori, MOQ, area kirim, dan permintaan penawaran via WhatsApp.",
+      "category": "Toko",
+      "tags": [
+        "grosir",
+        "supplier",
+        "b2b",
+        "harga-bertingkat"
+      ],
+      "badge": "featured",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
       "id": "katalog-produk",
       "name": "Katalog Produk",
       "description": "Toko online tanpa checkout: katalog produk dengan filter kategori dan pesanan langsung via WhatsApp.",
@@ -15,6 +47,22 @@
       "scaffold": "astro-static",
       "contract": 1,
       "files": 7
+    },
+    {
+      "id": "katering-hampers",
+      "name": "Katering & Hampers PO",
+      "description": "Situs katering rumahan: paket per porsi, nasi box, prasmanan, menu mingguan, hampers musiman dengan batas pre-order, dan pemesanan via WhatsApp.",
+      "category": "Kuliner",
+      "tags": [
+        "katering",
+        "hampers",
+        "pre-order",
+        "nasi-box"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
     },
     {
       "id": "klinik-praktik",
@@ -49,6 +97,22 @@
       "files": 8
     },
     {
+      "id": "kos-kontrakan",
+      "name": "Kos & Kontrakan",
+      "description": "Situs kos multi-halaman: tipe kamar dengan foto, fasilitas, harga bulanan, sisa kamar, aturan kos, biaya tambahan, dan jadwal survei via WhatsApp.",
+      "category": "Bisnis",
+      "tags": [
+        "kos",
+        "kontrakan",
+        "sewa-kamar",
+        "properti"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
       "id": "kursus-bimbel",
       "name": "Kursus & Bimbel",
       "description": "Situs bimbingan belajar multi-halaman: tabel program dan biaya, profil pengajar, info gelombang, dan pendaftaran via WhatsApp.",
@@ -81,6 +145,22 @@
       "files": 8
     },
     {
+      "id": "link-bio",
+      "name": "Link di Bio",
+      "description": "Satu halaman untuk tautan di bio sosial media: profil, daftar tautan bernomor, produk sorotan, dan kontak WhatsApp. Dirancang untuk layar HP.",
+      "category": "Lainnya",
+      "tags": [
+        "link-bio",
+        "kreator",
+        "sosial-media",
+        "umkm"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 3
+    },
+    {
       "id": "masjid-komunitas",
       "name": "Masjid & Komunitas",
       "description": "Situs masjid atau organisasi: jadwal sholat, kajian rutin, pengumuman, infaq dengan nomor rekening, dan kontak pengurus.",
@@ -90,6 +170,22 @@
         "komunitas",
         "organisasi",
         "kegiatan"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "open-trip",
+      "name": "Open Trip & Travel",
+      "description": "Situs penyelenggara open trip: daftar paket dengan tanggal keberangkatan, sisa kursi, itinerary per hari, syarat dan pembayaran, serta booking via WhatsApp.",
+      "category": "Bisnis",
+      "tags": [
+        "open-trip",
+        "travel",
+        "wisata",
+        "booking"
       ],
       "badge": "new",
       "scaffold": "astro-static",
@@ -113,6 +209,22 @@
       "files": 8
     },
     {
+      "id": "profil-desa",
+      "name": "Profil Desa & Wisata Desa",
+      "description": "Situs desa multi-halaman: angka desa, destinasi wisata, UMKM warga, layanan surat dengan syarat dan waktu, perangkat desa, pengumuman, dan agenda.",
+      "category": "Lainnya",
+      "tags": [
+        "desa",
+        "wisata-desa",
+        "pemerintahan",
+        "umkm"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 8
+    },
+    {
       "id": "profil-usaha",
       "name": "Profil Usaha",
       "description": "Situs perusahaan multi-halaman: beranda, layanan, tentang, dan kontak dengan form WhatsApp.",
@@ -128,6 +240,22 @@
       "files": 7
     },
     {
+      "id": "rental-kendaraan",
+      "name": "Rental Mobil & Motor",
+      "description": "Situs rental kendaraan: daftar armada dengan harga per hari (lepas kunci atau dengan sopir), filter mobil/motor, syarat sewa, dan booking tanggal via WhatsApp.",
+      "category": "Bisnis",
+      "tags": [
+        "rental",
+        "mobil",
+        "motor",
+        "booking"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
       "id": "restoran-kafe",
       "name": "Restoran & Kafe",
       "description": "Situs kedai makan multi-halaman: menu bergaya cetak dengan harga, galeri, jam buka, dan reservasi meja via WhatsApp.",
@@ -139,6 +267,54 @@
         "reservasi"
       ],
       "badge": "featured",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "salon-barbershop",
+      "name": "Salon & Barbershop",
+      "description": "Situs barbershop atau salon multi-halaman: daftar harga dengan durasi, profil barber, galeri hasil, dan booking jam via WhatsApp.",
+      "category": "Bisnis",
+      "tags": [
+        "barbershop",
+        "salon",
+        "booking",
+        "jasa"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "sekolah-paud",
+      "name": "Sekolah & PAUD",
+      "description": "Situs PAUD/TK multi-halaman: tabel program per kelompok usia, jadwal harian, profil guru, info PPDB dengan tabel biaya, dan pendaftaran via WhatsApp.",
+      "category": "Pendidikan",
+      "tags": [
+        "paud",
+        "tk",
+        "sekolah",
+        "ppdb"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "turnamen-esports",
+      "name": "Turnamen Esports",
+      "description": "Situs turnamen game komunitas: hadiah, format, jadwal, bracket playoff dari data, peraturan, dan pendaftaran tim via WhatsApp.",
+      "category": "Acara",
+      "tags": [
+        "esports",
+        "turnamen",
+        "mobile-legends",
+        "komunitas"
+      ],
+      "badge": "new",
       "scaffold": "astro-static",
       "contract": 1,
       "files": 9
@@ -173,6 +349,22 @@
       "scaffold": "astro-static",
       "contract": 1,
       "files": 2
+    },
+    {
+      "id": "webinar-online",
+      "name": "Webinar & Kelas Online",
+      "description": "Situs satu acara daring: jadwal sesi, hitung mundur, yang dipelajari, pemateri, silabus, tabel harga early bird, dan pendaftaran via WhatsApp.",
+      "category": "Acara",
+      "tags": [
+        "webinar",
+        "kelas-online",
+        "zoom",
+        "pendaftaran"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 8
     }
   ]
 }

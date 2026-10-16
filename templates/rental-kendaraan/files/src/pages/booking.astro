@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { rental, unit, rupiah } from '../data/rental';
+
+const input = 'mt-1 w-full rounded-md border border-[#1C1C1C]/30 bg-white px-3 py-3 text-sm text-[#1C1C1C] outline-none transition-colors duration-150 placeholder:text-[#1C1C1C]/40 focus:border-[#1E5EFF]';
+const label = 'font-mono text-xs uppercase tracking-widest text-[#1C1C1C]/70';
+---
+<Base
+  title={`Booking — ${rental.nama}`}
+  description={`Booking mobil atau motor di ${rental.nama}: pilih unit, tanggal ambil dan kembali, lokasi serah terima. Konfirmasi lewat WhatsApp.`}
+>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-[#1C1C1C]/15 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#1E5EFF]">Dikonfirmasi dalam 15 menit pada jam kerja</p>
+        <h1 class="mt-3 font-display text-5xl font-semibold uppercase leading-none tracking-wide text-[#1C1C1C] md:text-7xl">Booking</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#1C1C1C]/75 md:text-base">
+          Isi form, pesan terbuka di WhatsApp dengan detail yang Anda tulis. Booking sah setelah DP 30% diterima.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-12">
+        <div class="md:col-span-7">
+          <form id="booking-form" class="space-y-5">
+            <div>
+              <label for="unit" class={label}>Unit</label>
+              <select id="unit" name="unit" required class={input}>
+                {unit.filter((u) => u.tersedia).map((u) => (
+                  <option value={u.nama}>{u.nama} · {u.jenis} · {u.transmisi}{u.lepasKunci > 0 ? ` · ${rupiah(u.lepasKunci)}/hari` : ' · hanya dengan sopir'}</option>
+                ))}
+              </select>
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="ambil" class={label}>Tanggal & jam ambil</label>
+                <input id="ambil" name="ambil" type="datetime-local" required class={input} />
+              </div>
+              <div>
+                <label for="kembali" class={label}>Tanggal & jam kembali</label>
+                <input id="kembali" name="kembali" type="datetime-local" required class={input} />
+              </div>
+            </div>
+            <fieldset>
+              <legend class={label}>Pakai sopir?</legend>
+              <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-md border border-[#1C1C1C]/30 bg-white px-3 py-2 text-sm has-[:checked]:border-[#1E5EFF] has-[:checked]:bg-[#1E5EFF]/5">
+                  <input type="radio" name="sopir" value="Lepas kunci" checked class="accent-[#1E5EFF]" /> Lepas kunci
+                </label>
+                <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-md border border-[#1C1C1C]/30 bg-white px-3 py-2 text-sm has-[:checked]:border-[#1E5EFF] has-[:checked]:bg-[#1E5EFF]/5">
+                  <input type="radio" name="sopir" value="Dengan sopir" class="accent-[#1E5EFF]" /> Dengan sopir
+                </label>
+              </div>
+            </fieldset>
+            <div>
+              <label for="lokasi" class={label}>Lokasi serah terima</label>
+              <input id="lokasi" name="lokasi" required placeholder="Bandara Ngurah Rai, nama hotel, atau alamat" class={input} />
+            </div>
+            <div>
+              <label for="nama" class={label}>Nama</label>
+              <input id="nama" name="nama" required placeholder="Nama penyewa" class={input} />
+            </div>
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-md bg-[#1E5EFF] px-6 py-4 font-display text-lg font-medium uppercase tracking-wide text-white transition-colors duration-150 hover:bg-[#1C1C1C] sm:w-auto">
+              Kirim via WhatsApp
+            </button>
+          </form>
+          <p class="mt-3 text-xs text-[#1C1C1C]/60">Situs ini statis tanpa basis data. Permintaan booking dikirim sebagai chat WhatsApp dan dikonfirmasi manual.</p>
+        </div>
+
+        <div class="md:col-span-5">
+          <div class="rounded-md border border-[#1C1C1C]/15 bg-white">
+            <div class="border-b border-[#1C1C1C]/15 px-5 py-3 font-mono text-xs uppercase tracking-widest text-[#1C1C1C]/60">Yang perlu disiapkan</div>
+            <dl class="divide-y divide-[#1C1C1C]/10 px-5">
+              <div class="py-4">
+                <dt class="font-display text-lg font-medium uppercase tracking-wide">Dokumen</dt>
+                <dd class="mt-1 text-sm text-[#1C1C1C]/75">KTP dan SIM yang berlaku, difoto saat serah terima.</dd>
+              </div>
+              <div class="py-4">
+                <dt class="font-display text-lg font-medium uppercase tracking-wide">Deposit</dt>
+                <dd class="mt-1 text-sm text-[#1C1C1C]/75">{rental.deposit}.</dd>
+              </div>
+              <div class="py-4">
+                <dt class="font-display text-lg font-medium uppercase tracking-wide">Pembayaran</dt>
+                <dd class="mt-1 text-sm text-[#1C1C1C]/75">DP 30% transfer, pelunasan saat serah terima. Pembatalan gratis sampai 24 jam sebelumnya.</dd>
+              </div>
+              <div class="py-4">
+                <dt class="font-display text-lg font-medium uppercase tracking-wide">Kantor</dt>
+                <dd class="mt-1 text-sm text-[#1C1C1C]/75">{rental.alamat}<br />{rental.jam}</dd>
+              </div>
+            </dl>
+          </div>
+          <a href={`https://wa.me/${rental.telepon}`} target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center justify-center gap-2 rounded-md bg-[#1C1C1C] px-5 py-4 font-display text-lg font-medium uppercase tracking-wide text-white transition-colors duration-150 hover:bg-[#1E5EFF]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.1 14.9l-.4-.2-2.9.8.8-2.8-.2-.4A8 8 0 0112 4z" /></svg>
+            Chat langsung: {rental.telepon}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: rental.telepon }}>
+    const form = document.getElementById('booking-form');
+    const rapi = (v) => (v ? String(v).replace('T', ' ') : '-');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Halo, saya ${d.get('nama')}, mau booking:`,
+        `Unit: ${d.get('unit')}`,
+        `Ambil: ${rapi(d.get('ambil'))}`,
+        `Kembali: ${rapi(d.get('kembali'))}`,
+        `Skema: ${d.get('sopir')}`,
+        `Serah terima: ${d.get('lokasi')}`,
+        'Mohon info ketersediaan dan totalnya.',
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

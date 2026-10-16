@@ -1,0 +1,31 @@
+---
+/** Daftar paket tipografis: nama … harga, isi italic di bawah, kolom minimum pesan mono. */
+import { rupiah, type Paket } from '../data/dapur';
+
+interface Props { judul: string; keterangan?: string; items: Paket[]; id?: string }
+const { judul, keterangan, items, id } = Astro.props;
+---
+<section id={id} class="scroll-mt-24">
+  <div class="flex items-baseline justify-between gap-4 border-b-2 border-[#3A4A2F] pb-2">
+    <h2 class="font-display text-3xl font-semibold md:text-4xl">{judul}</h2>
+    <span class="font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/60">{items.length} pilihan</span>
+  </div>
+  {keterangan && <p class="mt-3 text-sm text-[#3A4A2F]/75">{keterangan}</p>}
+  <ul class="mt-4 divide-y divide-[#3A4A2F]/15">
+    {items.map((p) => (
+      <li class="grid grid-cols-1 gap-2 py-5 md:grid-cols-12 md:gap-6">
+        <div class="md:col-span-9">
+          <div class="flex items-baseline gap-3">
+            <h3 class="font-display text-2xl font-semibold leading-none">{p.nama}</h3>
+            {p.favorit && <span class="text-[11px] font-semibold uppercase tracking-widest text-[#8C2F39]">Favorit</span>}
+            <span class="hidden flex-1 border-b border-dotted border-[#3A4A2F]/40 md:block"></span>
+            <span class="hidden font-display text-2xl font-semibold tabular-nums md:block">{rupiah(p.harga)}<span class="text-sm font-normal text-[#3A4A2F]/60"> / {p.satuan}</span></span>
+          </div>
+          <p class="mt-1.5 font-display text-base italic text-[#3A4A2F]/75">{p.isi}</p>
+          <p class="mt-2 font-display text-xl font-semibold tabular-nums md:hidden">{rupiah(p.harga)}<span class="text-sm font-normal text-[#3A4A2F]/60"> / {p.satuan}</span></p>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-wider text-[#3A4A2F]/60 md:col-span-3 md:pt-2 md:text-right">min. {p.minimal}</p>
+      </li>
+    ))}
+  </ul>
+</section>

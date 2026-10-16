@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BarisKamar from '../components/BarisKamar.astro';
+import { kos, tipeKamar, rupiah } from '../data/kos';
+---
+<Base
+  title={`Kamar — ${kos.nama}`}
+  description={`Tipe kamar ${kos.nama}: ${tipeKamar.map((t) => `${t.nama} ${rupiah(t.harga)}/bulan`).join(', ')}. Ketersediaan diperbarui ${kos.pembaruan}.`}
+>
+  <Fonts />
+  <div class="bg-[#F7F5F0] text-[#1F2A1F]">
+    <Header />
+    <main>
+      <section class="border-b border-[#1F2A1F]/10">
+        <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#6B7F3A]">Ketersediaan per {kos.pembaruan}</p>
+          <h1 class="mt-3 font-display text-4xl font-semibold leading-[1] tracking-tight md:text-6xl">Kamar & harga</h1>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-[#1F2A1F]/80">
+            Harga sudah termasuk air, Wi-Fi, dan kebersihan area bersama. Minimal sewa 6 bulan, bayar bulanan.
+          </p>
+        </div>
+      </section>
+      <section class="mx-auto max-w-6xl divide-y divide-[#1F2A1F]/10 px-4 md:px-6">
+        {tipeKamar.map((t) => <BarisKamar tipe={t} detail />)}
+      </section>
+      <section class="border-t border-[#1F2A1F]/10 bg-white">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-6">
+          <p class="text-sm text-[#1F2A1F]/70">
+            Kamar yang tertulis "Penuh" bisa masuk daftar tunggu; kami kabari begitu ada yang pindah. Tidak ada biaya untuk daftar tunggu.
+          </p>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

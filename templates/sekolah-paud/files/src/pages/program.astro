@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TabelProgram from '../components/TabelProgram.astro';
+import { sekolah, program, jadwalHarian } from '../data/sekolah';
+---
+<Base title={`Program — ${sekolah.nama}`} description={`Program ${sekolah.nama}: ${program.map((p) => `${p.nama} (${p.usia})`).join(', ')}. Jadwal harian dari penyambutan sampai penjemputan.`}>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-[#1F4E79]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F28C38]">Program</p>
+        <h1 class="font-display mt-3 text-4xl font-semibold leading-tight md:text-6xl">Kelompok, jam, dan biaya</h1>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#1F4E79]/75">Kuota tiap kelompok: {program.map((p) => `${p.nama} ${p.kuota} anak`).join(', ')}. Anak bisa pindah kelompok di tengah tahun bila guru dan orang tua sepakat.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <TabelProgram />
+    </section>
+
+    <section class="border-t border-[#1F4E79]/15 bg-white/60">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
+        <div class="md:col-span-4">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Jadwal harian</p>
+          <h2 class="font-display mt-2 text-3xl font-semibold leading-tight md:text-4xl">Satu hari di TK A dan TK B</h2>
+          <p class="mt-4 text-sm leading-relaxed text-[#1F4E79]/75">Kelompok Bermain memakai urutan yang sama, dipadatkan menjadi dua jam: lingkaran pagi, satu sentra, bekal, halaman, pulang.</p>
+        </div>
+        <ol class="relative border-l-2 border-[#F28C38]/40 md:col-span-7 md:col-start-6">
+          {jadwalHarian.map((j) => (
+            <li class="relative pb-7 pl-8 last:pb-0">
+              <span class="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-2 border-[#FFF7E8] bg-[#F28C38]" aria-hidden="true"></span>
+              <p class="font-display text-lg font-semibold tabular-nums">{j.jam}</p>
+              <p class="mt-0.5 text-sm leading-relaxed text-[#1F4E79]/80 md:text-base">{j.apa}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

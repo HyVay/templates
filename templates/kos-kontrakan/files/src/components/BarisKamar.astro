@@ -1,0 +1,41 @@
+---
+/** Satu tipe kamar sebagai baris besar: foto kiri, detail + harga + status kanan. */
+import { rupiah, type TipeKamar } from '../data/kos';
+
+interface Props { tipe: TipeKamar; detail?: boolean }
+const { tipe, detail = false } = Astro.props;
+const kosong = tipe.sisa > 0;
+---
+<article id={tipe.slug} class="grid grid-cols-1 gap-6 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+  <img src={tipe.foto} alt={tipe.alt} loading="lazy" class="aspect-[4/3] w-full rounded-lg object-cover md:col-span-5" />
+  <div class="flex flex-col md:col-span-7">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h3 class="font-display text-2xl font-semibold leading-tight md:text-3xl">{tipe.nama}</h3>
+        <p class="mt-1 text-sm text-[#1F2A1F]/60">{tipe.ukuran} · {tipe.jumlah} kamar</p>
+      </div>
+      {kosong ? (
+        <span class="shrink-0 rounded-lg bg-[#6B7F3A] px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-[#F7F5F0]">Sisa {tipe.sisa}</span>
+      ) : (
+        <span class="shrink-0 rounded-lg border border-[#1F2A1F]/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-[#1F2A1F]/50">Penuh</span>
+      )}
+    </div>
+    <p class="mt-4 text-sm leading-relaxed text-[#1F2A1F]/80">{tipe.fasilitas.join(' · ')}</p>
+    {detail && <p class="mt-3 text-sm leading-relaxed text-[#1F2A1F]/60">{tipe.catatan}</p>}
+    <div class="mt-auto flex flex-col gap-4 pt-6 sm:flex-row sm:items-end sm:justify-between">
+      <p>
+        <span class="font-display text-3xl font-semibold tabular-nums">{rupiah(tipe.harga)}</span>
+        <span class="text-sm text-[#1F2A1F]/60"> / bulan</span>
+      </p>
+      <a
+        href={`/survei/?tipe=${tipe.slug}`}
+        class:list={[
+          'inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-medium transition-colors duration-150',
+          kosong ? 'bg-[#1F2A1F] text-[#F7F5F0] hover:bg-[#6B7F3A]' : 'border border-[#1F2A1F]/20 text-[#1F2A1F]/70 hover:border-[#1F2A1F]',
+        ]}
+      >
+        {kosong ? 'Jadwalkan survei' : 'Masuk daftar tunggu'}
+      </a>
+    </div>
+  </div>
+</article>

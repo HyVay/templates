@@ -67,7 +67,7 @@ export const pemateri = {
     nama: 'Ratih Kusuma',
     peran: 'Konsultan keuangan UMKM',
     bio: 'Sepuluh tahun mendampingi warung, toko kelontong, dan katering rumahan merapikan pembukuan. Sebelumnya bekerja sebagai akuntan di perusahaan distribusi. Mengajar dengan contoh dari struk belanja sungguhan, bukan teori.',
-    foto: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=800&q=80',
+    foto: 'https://images.unsplash.com/photo-1548142813-c348350df52b?w=800&q=80',
 };
 
 export const paket = [

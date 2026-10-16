@@ -1,0 +1,13 @@
+{
+  "id": "sekolah-paud",
+  "name": "Sekolah & PAUD",
+  "description": "Situs PAUD/TK multi-halaman: tabel program per kelompok usia, jadwal harian, profil guru, info PPDB dengan tabel biaya, dan pendaftaran via WhatsApp.",
+  "category": "Pendidikan",
+  "tags": ["paud", "tk", "sekolah", "ppdb"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama sekolah}} di {{kota}}, jenjang {{PAUD/TK/SD}}. Ganti program dan kelompok usia, jam belajar, jadwal harian, daftar guru, jadwal gelombang PPDB, tabel biaya, syarat dokumen, alamat, dan nomor WhatsApp contoh di src/data/sekolah.ts. Pertahankan 4 halaman (beranda, program, guru, PPDB), tabel program, timeline jadwal harian, dan form pendaftaran via WhatsApp. Jangan tambahkan ikon kartun.",
+  "author": "HyVay",
+  "license": "MIT"
+}

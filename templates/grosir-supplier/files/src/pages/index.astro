@@ -39,14 +39,14 @@ const jumlahKategori = kategori.length - 1;
 
     <!-- Strip angka -->
     <section class="border-y-2 border-[#0A2342] bg-white">
-      <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x-2 divide-y-2 divide-[#0A2342] md:grid-cols-4 md:divide-y-0">
+      <div class="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
         {[
-          { angka: String(jumlahKategori), label: 'kategori barang' },
-          { angka: 'H+1', label: 'kirim untuk Surabaya' },
-          { angka: 'Rp 1 jt', label: 'minimum gratis ongkir' },
-          { angka: '3 tingkat', label: 'harga eceran, lusin, karton' },
-        ].map((s, i) => (
-          <div class:list={['px-4 py-6 md:px-6 md:py-8', i === 2 && 'md:border-l-0', i >= 2 && 'border-t-2 border-[#0A2342] md:border-t-0']}>
+          { angka: String(jumlahKategori), label: 'kategori barang', cls: '' },
+          { angka: 'H+1', label: 'kirim untuk Surabaya', cls: 'border-l-2' },
+          { angka: 'Rp 1 jt', label: 'minimum gratis ongkir', cls: 'border-t-2 md:border-l-2 md:border-t-0' },
+          { angka: '3 tingkat', label: 'harga eceran, lusin, karton', cls: 'border-l-2 border-t-2 md:border-t-0' },
+        ].map((s) => (
+          <div class:list={['border-[#0A2342] px-4 py-6 md:px-6 md:py-8', s.cls]}>
             <p class="font-display text-4xl font-bold uppercase tracking-wide text-[#0A2342] md:text-5xl">{s.angka}</p>
             <p class="mt-1 text-sm text-[#0A2342]/70">{s.label}</p>
           </div>

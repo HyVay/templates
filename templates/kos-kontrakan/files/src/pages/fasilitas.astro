@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { kos, fasilitasUmum, aturan, biayaTambahan } from '../data/kos';
+---
+<Base title={`Fasilitas & Aturan — ${kos.nama}`} description={`Fasilitas bersama, aturan kos, deposit, dan biaya tambahan di ${kos.nama}, ${kos.kota}.`}>
+  <Fonts />
+  <div class="bg-[#F7F5F0] text-[#1F2A1F]">
+    <Header />
+    <main>
+      <section class="border-b border-[#1F2A1F]/10">
+        <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#6B7F3A]">Supaya tidak ada kejutan</p>
+          <h1 class="mt-3 font-display text-4xl font-semibold leading-[1] tracking-tight md:text-6xl">Fasilitas, aturan, dan biaya</h1>
+        </div>
+      </section>
+
+      <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
+        <div class="md:col-span-5">
+          <h2 class="font-display text-2xl font-semibold">Fasilitas bersama</h2>
+          <ul class="mt-4 divide-y divide-[#1F2A1F]/10 border-y border-[#1F2A1F]/10 text-sm">
+            {fasilitasUmum.map((f) => <li class="py-2.5">{f}</li>)}
+          </ul>
+        </div>
+        <div class="md:col-span-7">
+          <h2 class="font-display text-2xl font-semibold">Aturan kos</h2>
+          <ol class="mt-4 divide-y divide-[#1F2A1F]/10 border-y border-[#1F2A1F]/10">
+            {aturan.map((a, i) => (
+              <li class="flex gap-5 py-3">
+                <span class="font-mono text-sm text-[#6B7F3A]">0{i + 1}</span>
+                <p class="text-sm leading-relaxed">{a}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section class="border-t border-[#1F2A1F]/10 bg-white">
+        <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+          <h2 class="font-display text-2xl font-semibold">Deposit & biaya tambahan</h2>
+          <dl class="mt-4 divide-y divide-[#1F2A1F]/10 border-y border-[#1F2A1F]/10">
+            {biayaTambahan.map((b) => (
+              <div class="grid grid-cols-1 gap-1 py-4 sm:grid-cols-12 sm:gap-4">
+                <dt class="font-medium sm:col-span-4">{b.nama}</dt>
+                <dd class="font-display text-lg font-semibold sm:col-span-3">{b.nilai}</dd>
+                <dd class="text-sm text-[#1F2A1F]/70 sm:col-span-5">{b.catatan}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

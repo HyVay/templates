@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { dapur, poMusiman, hampers, hampersBaris, foto, rupiah } from '../data/dapur';
+---
+<Base
+  title={`${poMusiman.judul} — ${dapur.nama}`}
+  description={`${poMusiman.judul} dari ${dapur.nama}: ${hampers.map((h) => `${h.nama} ${rupiah(h.harga)}`).join(', ')}. ${poMusiman.tutup}.`}
+>
+  <Fonts />
+  <div class="bg-[#FCFAF5] text-[#3A4A2F]">
+    <Header />
+    <main>
+      <section class="border-b border-[#3A4A2F]/15">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-14 md:grid-cols-12 md:items-end md:px-6 md:py-20">
+          <div class="md:col-span-8">
+            <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">Pre-order musiman</p>
+            <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] md:text-7xl">{poMusiman.judul}</h1>
+            <p class="mt-5 max-w-lg font-display text-xl italic text-[#3A4A2F]/75">
+              Kue kering dipanggang H-5 pengiriman supaya masih renyah saat sampai. Isi bisa diganti sesuai permintaan, harga menyesuaikan.
+            </p>
+          </div>
+          <dl class="border-l-4 border-[#8C2F39] bg-[#8C2F39]/10 p-5 text-sm md:col-span-4">
+            <dt class="text-xs uppercase tracking-widest text-[#8C2F39]">Batas PO</dt>
+            <dd class="mt-1 font-semibold">{poMusiman.tutup}</dd>
+            <dt class="mt-3 text-xs uppercase tracking-widest text-[#8C2F39]">Pengiriman</dt>
+            <dd class="mt-1 font-semibold">{poMusiman.kirim}</dd>
+            <dd class="mt-3 text-[#3A4A2F]/75">{poMusiman.catatan}</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Tabel perbandingan: desktop satu tabel, HP per tier satu blok -->
+      <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <table class="hidden w-full border-collapse text-left text-sm md:table">
+          <thead>
+            <tr class="border-b-2 border-[#3A4A2F] align-bottom">
+              <th scope="col" class="w-1/4 py-4 pr-4 font-mono text-xs font-medium uppercase tracking-widest text-[#3A4A2F]/60">Isi</th>
+              {hampers.map((h) => (
+                <th scope="col" class="w-1/4 py-4 pr-4">
+                  <span class="block font-display text-2xl font-semibold leading-none">{h.nama}</span>
+                  <span class="mt-2 block font-display text-xl tabular-nums text-[#8C2F39]">{rupiah(h.harga)}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#3A4A2F]/10">
+            {hampersBaris.map((b) => (
+              <tr>
+                <th scope="row" class="py-4 pr-4 align-top font-medium">{b}</th>
+                {hampers.map((h) => <td class="py-4 pr-4 align-top text-[#3A4A2F]/85">{h.isi[b]}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="space-y-8 md:hidden">
+          {hampers.map((h) => (
+            <section class="border-t-2 border-[#3A4A2F] pt-4">
+              <div class="flex items-baseline justify-between gap-3">
+                <h2 class="font-display text-2xl font-semibold">{h.nama}</h2>
+                <span class="font-display text-xl tabular-nums text-[#8C2F39]">{rupiah(h.harga)}</span>
+              </div>
+              <dl class="mt-3 divide-y divide-[#3A4A2F]/10 text-sm">
+                {hampersBaris.map((b) => (
+                  <div class="py-2">
+                    <dt class="text-xs uppercase tracking-widest text-[#3A4A2F]/60">{b}</dt>
+                    <dd class="mt-0.5">{h.isi[b]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ))}
+        </div>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="/pesan/?jenis=hampers" class="inline-flex h-12 items-center justify-center rounded-sm bg-[#3A4A2F] px-6 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#8C2F39]">Pesan hampers</a>
+          <p class="self-center text-sm text-[#3A4A2F]/70">Pesanan di atas 50 paket dapat potongan 5% dan kartu ucapan dengan logo.</p>
+        </div>
+      </section>
+
+      <section class="border-t border-[#3A4A2F]/15 bg-[#F3EFE4]">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12 md:items-center md:px-6 md:py-16">
+          <img src={foto.hampers} alt={foto.hampersAlt} loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover md:col-span-5" />
+          <div class="md:col-span-7 md:pl-6">
+            <h2 class="font-display text-3xl font-semibold md:text-4xl">Kartu ucapan ditulis tangan</h2>
+            <p class="mt-3 max-w-lg text-base leading-relaxed text-[#3A4A2F]/80">
+              Kirimkan daftar nama penerima dan kalimat ucapan lewat WhatsApp setelah DP. Untuk perusahaan, logo dicetak di kartu dan stiker penutup box.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

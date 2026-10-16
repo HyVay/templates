@@ -1,0 +1,36 @@
+---
+/** Satu baris armada: foto kecil, nama + spesifikasi mono, dua harga di kanan. */
+import { rupiah, type Unit } from '../data/rental';
+
+interface Props { u: Unit }
+const { u } = Astro.props;
+---
+<li data-jenis={u.jenis} class:list={['flex flex-col gap-4 py-5 md:flex-row md:items-center', !u.tersedia && 'opacity-60']}>
+  <div class="flex gap-4 md:flex-1 md:items-center">
+  <img src={u.foto} alt={u.nama} loading="lazy" class="aspect-[4/3] w-28 shrink-0 rounded-md object-cover sm:w-36 md:w-40" />
+  <div class="min-w-0 flex-1">
+    <div class="flex flex-wrap items-center gap-2">
+      <h3 class="font-display text-2xl font-medium uppercase tracking-wide text-[#1C1C1C]">{u.nama}</h3>
+      {!u.tersedia && <span class="rounded-md bg-[#1C1C1C]/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest">Disewa s.d. pekan depan</span>}
+    </div>
+    <p class="mt-1 font-mono text-xs uppercase tracking-widest text-[#1C1C1C]/60">
+      {u.jenis} · {u.tahun} · {u.transmisi} · {u.kursi} {u.jenis === 'Motor' ? 'orang' : 'kursi'}
+    </p>
+    <p class="mt-2 text-sm leading-relaxed text-[#1C1C1C]/75">{u.catatan}</p>
+  </div>
+  </div>
+  <div class="flex flex-wrap gap-x-6 gap-y-2 pl-32 sm:pl-40 md:w-80 md:shrink-0 md:justify-end md:pl-0 md:text-right">
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/60">Lepas kunci</p>
+      {u.lepasKunci > 0
+        ? <p class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.lepasKunci)}</p>
+        : <p class="font-display text-2xl font-medium text-[#1C1C1C]/35">—</p>}
+    </div>
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/60">Dengan sopir</p>
+      {u.sopir > 0
+        ? <p class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.sopir)}</p>
+        : <p class="font-display text-2xl font-medium text-[#1C1C1C]/35">—</p>}
+    </div>
+  </div>
+</li>

@@ -1,0 +1,13 @@
+{
+  "id": "kos-kontrakan",
+  "name": "Kos & Kontrakan",
+  "description": "Situs kos multi-halaman: tipe kamar dengan foto, fasilitas, harga bulanan, sisa kamar, aturan kos, biaya tambahan, dan jadwal survei via WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["kos", "kontrakan", "sewa-kamar", "properti"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama kos/kontrakan}} di {{kota}}, dekat {{kampus/kantor/landmark}}. Ganti tipe kamar, ukuran, fasilitas, harga bulanan, jumlah kamar kosong, fasilitas umum, aturan, biaya tambahan, alamat, dan nomor WhatsApp contoh di src/data/kos.ts dengan data kos itu. Pertahankan struktur 4 halaman (beranda, kamar, fasilitas, survei), daftar tipe kamar dengan status sisa kamar, dan form jadwal survei via WhatsApp. Untuk kontrakan rumah, ganti 'kamar' menjadi 'unit' dan harga per bulan menjadi per tahun.",
+  "author": "HyVay",
+  "license": "MIT"
+}
