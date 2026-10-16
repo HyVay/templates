@@ -1,0 +1,24 @@
+---
+import { webinar, sesi } from '../data/webinar';
+---
+<footer class="border-t border-[#3B2A1A]/15">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12 md:px-6">
+    <div class="md:col-span-5">
+      <p class="font-display text-2xl font-semibold leading-tight">{webinar.judul}</p>
+      <p class="mt-2 text-sm text-[#3B2A1A]/65">{webinar.format} · diselenggarakan {webinar.penyelenggara}</p>
+    </div>
+    <div class="md:col-span-4">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/50">Jadwal</p>
+      <ul class="mt-2 space-y-1 text-sm">
+        {sesi.map((s) => <li>{s.nomor}: {s.tanggal}, {s.jam}</li>)}
+      </ul>
+    </div>
+    <div class="md:col-span-3">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/50">Panitia</p>
+      <a href={`https://wa.me/${webinar.wa}`} class="mt-2 block text-sm transition-colors duration-150 hover:text-[#B5452E]">WhatsApp {webinar.wa}</a>
+    </div>
+  </div>
+  <div class="border-t border-[#3B2A1A]/15 px-4 py-5 text-center text-xs text-[#3B2A1A]/50 md:px-6">
+    © {new Date().getFullYear()} {webinar.penyelenggara}. Zoom adalah merek dagang pemiliknya.
+  </div>
+</footer>

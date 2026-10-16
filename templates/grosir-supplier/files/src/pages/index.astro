@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TabelHarga from '../components/TabelHarga.astro';
+import { toko, produk, kategori, areaKirim, foto } from '../data/grosir';
+
+const terlaris = produk.filter((p) => p.terlaris);
+const jumlahKategori = kategori.length - 1;
+---
+<Base title={`${toko.nama} — ${toko.tagline}`} description={toko.deskripsi}>
+  <Fonts />
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="mx-auto max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-20 md:pt-16">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#F28C28]">Distributor · {toko.kota} · sejak {toko.sejak}</p>
+          <h1 class="mt-4 font-display text-5xl font-bold uppercase leading-[0.92] tracking-wide text-[#0A2342] sm:text-6xl md:text-7xl lg:text-8xl">
+            Grosir sembako untuk warung &amp; toko di {toko.kota}
+          </h1>
+          <p class="mt-6 max-w-xl text-base leading-relaxed text-[#0A2342]/80 md:text-lg">{toko.deskripsi}</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/produk/" class="inline-flex items-center justify-center bg-[#0A2342] px-6 py-3.5 font-display text-lg font-semibold uppercase tracking-wide text-white transition-colors duration-150 hover:bg-[#F28C28] hover:text-[#0A2342]">
+              Lihat daftar harga
+            </a>
+            <a href="/kontak/" class="inline-flex items-center justify-center border-2 border-[#0A2342] px-6 py-3.5 font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:bg-[#0A2342] hover:text-white">
+              Minta penawaran
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-5">
+          <img src={foto.hero} alt="Lorong rak gudang berisi stok barang" class="aspect-[4/5] w-full border-2 border-[#0A2342] object-cover md:aspect-[4/5]" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Strip angka -->
+    <section class="border-y-2 border-[#0A2342] bg-white">
+      <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x-2 divide-y-2 divide-[#0A2342] md:grid-cols-4 md:divide-y-0">
+        {[
+          { angka: String(jumlahKategori), label: 'kategori barang' },
+          { angka: 'H+1', label: 'kirim untuk Surabaya' },
+          { angka: 'Rp 1 jt', label: 'minimum gratis ongkir' },
+          { angka: '3 tingkat', label: 'harga eceran, lusin, karton' },
+        ].map((s, i) => (
+          <div class:list={['px-4 py-6 md:px-6 md:py-8', i === 2 && 'md:border-l-0', i >= 2 && 'border-t-2 border-[#0A2342] md:border-t-0']}>
+            <p class="font-display text-4xl font-bold uppercase tracking-wide text-[#0A2342] md:text-5xl">{s.angka}</p>
+            <p class="mt-1 text-sm text-[#0A2342]/70">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Terlaris -->
+    <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#F28C28]">Paling sering dipesan</p>
+          <h2 class="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-[#0A2342] md:text-5xl">Harga minggu ini</h2>
+        </div>
+        <a href="/produk/" class="font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] underline decoration-[#F28C28] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#F28C28]">
+          Semua {produk.length} produk
+        </a>
+      </div>
+      <div class="mt-8">
+        <TabelHarga items={terlaris} id="terlaris" />
+      </div>
+      <p class="mt-4 text-sm text-[#0A2342]/70">
+        Harga lusin berlaku mulai 12 satuan, harga karton mulai 1 karton penuh. Semua harga belum termasuk ongkir.
+      </p>
+    </section>
+
+    <!-- Area kirim + foto gudang -->
+    <section class="border-y-2 border-[#0A2342] bg-white">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#F28C28]">Area kirim</p>
+          <h2 class="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-[#0A2342] md:text-5xl">Armada sendiri, bukan kurir</h2>
+          <dl class="mt-8 divide-y-2 divide-[#0A2342]/15 border-y-2 border-[#0A2342]">
+            {areaKirim.map((a) => (
+              <div class="grid grid-cols-1 gap-1 py-4 sm:grid-cols-12 sm:gap-4">
+                <dt class="font-semibold sm:col-span-5">{a.area}</dt>
+                <dd class="text-sm text-[#0A2342]/75 sm:col-span-5">{a.biaya}</dd>
+                <dd class="font-mono text-xs uppercase tracking-widest text-[#0A2342]/60 sm:col-span-2 sm:text-right">{a.estimasi}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="mt-4 text-sm leading-relaxed text-[#0A2342]/70">{toko.jamKirim}</p>
+        </div>
+        <div class="md:col-span-5">
+          <img src={foto.gudang} alt="Tumpukan karton di gudang distribusi" loading="lazy" class="aspect-[4/3] w-full border-2 border-[#0A2342] object-cover" />
+          <p class="mt-3 font-mono text-xs uppercase tracking-widest text-[#0A2342]/60">Gudang {toko.alamat}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div class="grid grid-cols-1 gap-6 border-2 border-[#0A2342] bg-[#0A2342] p-6 text-white md:grid-cols-12 md:items-center md:p-10">
+        <div class="md:col-span-8">
+          <h2 class="font-display text-3xl font-bold uppercase tracking-wide md:text-5xl">Kirim daftar belanja, kami balas totalnya</h2>
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-white/75 md:text-base">
+            Tulis nama barang dan jumlahnya. Dalam satu jam kerja Anda terima total harga, ongkir, dan jadwal kirim lewat WhatsApp.
+          </p>
+        </div>
+        <div class="md:col-span-4 md:text-right">
+          <a href="/kontak/" class="inline-flex w-full items-center justify-center bg-[#F28C28] px-6 py-4 font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:bg-white md:w-auto">
+            Minta penawaran
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

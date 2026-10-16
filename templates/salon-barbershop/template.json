@@ -1,0 +1,13 @@
+{
+  "id": "salon-barbershop",
+  "name": "Salon & Barbershop",
+  "description": "Situs barbershop atau salon multi-halaman: daftar harga dengan durasi, profil barber, galeri hasil, dan booking jam via WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["barbershop", "salon", "booking", "jasa"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama barbershop/salon}} di {{kota}}. Ganti daftar layanan beserta harga dan durasi, nama dan spesialisasi barber, jam buka, alamat, foto, dan nomor WhatsApp contoh di src/data/barber.ts dengan data asli. Pertahankan 4 halaman, daftar harga bergaya baris dengan garis, dan form booking yang mengirim pilihan layanan, barber, tanggal, dan jam ke WhatsApp. Untuk salon wanita, ganti istilah 'barber' menjadi 'stylist' dan sesuaikan daftar layanannya.",
+  "author": "HyVay",
+  "license": "MIT"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "grosir-supplier",
+  "name": "Grosir & Supplier",
+  "description": "Situs distributor B2B: tabel harga bertingkat (eceran, lusin, karton) dengan filter kategori, MOQ, area kirim, dan permintaan penawaran via WhatsApp.",
+  "category": "Toko",
+  "tags": ["grosir", "supplier", "b2b", "harga-bertingkat"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "featured",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama usaha grosir}} di {{kota}} yang menyuplai {{jenis barang}}. Ganti daftar produk beserta tiga tingkat harganya (eceran, per lusin, per karton), satuan, isi karton, MOQ, area kirim, syarat gratis ongkir, metode pembayaran, alamat gudang, dan nomor WhatsApp contoh di src/data/grosir.ts. Pertahankan tabel harga bertingkat dengan filter kategori, halaman cara order, dan form minta penawaran yang mengirim ke WhatsApp.",
+  "author": "HyVay",
+  "license": "MIT"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "turnamen-esports",
+  "name": "Turnamen Esports",
+  "description": "Situs turnamen game komunitas: hadiah, format, jadwal, bracket playoff dari data, peraturan, dan pendaftaran tim via WhatsApp.",
+  "category": "Acara",
+  "tags": ["esports", "turnamen", "mobile-legends", "komunitas"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk turnamen {{nama turnamen}} game {{nama game}} di {{kota}} pada {{tanggal}}. Ganti nama, hadiah, biaya pendaftaran, jadwal, venue, daftar tim, hasil bracket, peraturan, dan nomor WhatsApp contoh di src/data/turnamen.ts. Pertahankan 4 halaman (beranda, bracket, peraturan, daftar), bagan bracket yang diisi dari data, dan form pendaftaran tim via WhatsApp. Warna aksen boleh diganti, tetap tanpa gradien neon.",
+  "author": "HyVay",
+  "license": "MIT"
+}

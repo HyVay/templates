@@ -1,0 +1,13 @@
+{
+  "id": "webinar-online",
+  "name": "Webinar & Kelas Online",
+  "description": "Situs satu acara daring: jadwal sesi, hitung mundur, yang dipelajari, pemateri, silabus, tabel harga early bird, dan pendaftaran via WhatsApp.",
+  "category": "Acara",
+  "tags": ["webinar", "kelas-online", "zoom", "pendaftaran"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk webinar/kelas online {{judul}} oleh {{nama pemateri}} pada {{tanggal dan jam}} via {{platform}}. Ganti judul, sesi, agenda, silabus, bio pemateri, harga early bird dan normal, bonus, FAQ, dan nomor WhatsApp contoh di src/data/webinar.ts. Pertahankan 3 halaman (beranda, materi, daftar), hitung mundur, tabel harga satu tabel, dan form pendaftaran via WhatsApp.",
+  "author": "HyVay",
+  "license": "MIT"
+}

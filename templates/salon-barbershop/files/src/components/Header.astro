@@ -1,0 +1,71 @@
+---
+import { toko } from '../data/barber';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/layanan/', label: 'Layanan & harga' },
+  { href: '/tim/', label: 'Barber' },
+  { href: '/booking/', label: 'Booking' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-[#EFE9E1]/15 bg-[#111111]/95 text-[#EFE9E1] backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
+    <a href="/" class="font-display text-2xl font-semibold tracking-tight">{toko.nama}</a>
+    <nav class="hidden md:flex md:items-center md:gap-8">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'text-xs uppercase tracking-[0.18em] transition-colors duration-150 hover:text-[#B87333]',
+            here === l.href ? 'text-[#B87333]' : 'text-[#EFE9E1]/85',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+      <a href="/booking/" class="border border-[#EFE9E1] px-4 py-2 text-xs uppercase tracking-[0.18em] transition-colors duration-150 hover:border-[#B87333] hover:bg-[#B87333] hover:text-[#111111]">
+        Ambil jadwal
+      </a>
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center text-[#EFE9E1] transition-colors duration-150 hover:bg-[#EFE9E1]/10 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-[#EFE9E1]/15 bg-[#111111] md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block border-b border-[#EFE9E1]/10 px-2 py-3 text-base text-[#EFE9E1] transition-colors duration-150 hover:text-[#B87333]">
+          {l.label}
+        </a>
+      ))}
+      <a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="block px-2 py-3 text-base text-[#B87333]">
+        WhatsApp {toko.telepon}
+      </a>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

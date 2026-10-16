@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Bracket from '../components/Bracket.astro';
+import { turnamen, foto } from '../data/turnamen';
+---
+<Base
+  title={`Bracket — ${turnamen.nama}`}
+  description={`Bagan playoff 8 besar ${turnamen.nama}: perempat final, semifinal, dan grand final ${turnamen.game}, diperbarui setelah tiap pertandingan.`}
+>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-white/10">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-[#FF3D3D]">Playoff 8 besar</p>
+        <h1 class="font-display mt-4 text-5xl font-bold uppercase leading-[0.9] md:text-7xl">Bracket</h1>
+        <p class="mt-5 max-w-2xl text-sm leading-relaxed text-white/65 md:text-base">
+          Diperbarui panitia setelah tiap pertandingan selesai. Skor adalah jumlah game yang dimenangkan dalam satu seri. Tim yang kalah di semifinal memperebutkan juara 3 pada hari ketiga.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <Bracket />
+    </section>
+
+    <section class="border-t border-white/10">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-14 md:grid-cols-12 md:px-6">
+        <div class="md:col-span-5">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#FF3D3D]">Cara lolos playoff</p>
+          <p class="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
+            Dua tim teratas tiap grup lolos. Bila poin sama, urutan ditentukan head-to-head, lalu selisih waktu kemenangan. Hasil fase grup lengkap ditempel di papan venue dan diunggah ke Instagram {turnamen.instagram}.
+          </p>
+        </div>
+        <img src={foto.arena} alt="Pemain memakai headset bertanding di deretan PC" loading="lazy" class="aspect-[16/9] w-full object-cover grayscale md:col-span-7" />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

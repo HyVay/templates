@@ -1,0 +1,74 @@
+---
+import { turnamen } from '../data/turnamen';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/bracket/', label: 'Bracket' },
+  { href: '/peraturan/', label: 'Peraturan' },
+  { href: '/daftar/', label: 'Daftar' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0A0F1E]/95 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
+    <a href="/" class="font-display text-base font-bold uppercase tracking-wide text-white md:text-lg">
+      PKS <span class="text-[#FF3D3D]">2026</span>
+    </a>
+    <nav class="hidden md:flex md:items-center md:gap-7">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'font-display text-sm font-semibold uppercase tracking-wider transition-colors duration-150 hover:text-white',
+            here === l.href ? 'text-white underline decoration-[#FF3D3D] decoration-2 underline-offset-8' : 'text-white/60',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+      <a
+        href="/daftar/"
+        class="font-display bg-[#FF3D3D] px-4 py-2 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#e03030]"
+      >
+        Daftar tim
+      </a>
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center text-white transition-colors duration-150 hover:bg-white/10 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0A0F1E] md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="font-display block px-2 py-3 text-base font-semibold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-white/5">
+          {l.label}
+        </a>
+      ))}
+      <p class="mt-2 border-t border-white/10 px-2 pt-3 text-xs text-white/50">{turnamen.nama}</p>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

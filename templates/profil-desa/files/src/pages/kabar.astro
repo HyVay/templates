@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { desa, pengumuman, agenda } from '../data/desa';
+---
+<Base title={`Kabar — ${desa.nama}`} description={`Pengumuman dan agenda terbaru ${desa.nama}: ${pengumuman[0].judul}.`}>
+  <Fonts />
+  <div class="bg-[#EEF2E6] text-[#2F4A2A]">
+    <Header />
+    <main>
+      <section class="border-b border-[#2F4A2A]/15">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+          <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Kabar desa</p>
+          <h1 class="mt-3 font-display text-4xl font-semibold leading-[0.95] tracking-tight md:text-6xl">Pengumuman & agenda</h1>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-[#2F4A2A]/80">
+            Ditempel juga di papan balai desa dan dikirim ke grup WhatsApp tiap RT. Halaman ini diperbarui oleh Kaur Umum.
+          </p>
+        </div>
+      </section>
+
+      <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
+        <div class="md:col-span-8">
+          <ul class="divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
+            {pengumuman.map((p) => (
+              <li class="grid grid-cols-1 gap-2 py-7 sm:grid-cols-12 sm:gap-6">
+                <p class="font-mono text-xs text-[#2F4A2A]/60 sm:col-span-3 sm:pt-1.5">{p.tanggal}</p>
+                <div class="sm:col-span-9">
+                  <h2 class="font-display text-2xl font-semibold leading-snug">{p.judul}</h2>
+                  <p class="mt-2 text-base leading-relaxed text-[#2F4A2A]/80">{p.isi}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <aside class="md:col-span-4">
+          <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Agenda</p>
+          <ul class="mt-4 divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
+            {agenda.map((a) => (
+              <li class="flex gap-5 py-4">
+                <span class="w-16 shrink-0 font-display text-lg font-semibold leading-tight">{a.tanggal}</span>
+                <span>
+                  <span class="block font-medium">{a.kegiatan}</span>
+                  <span class="block text-sm text-[#2F4A2A]/70">{a.tempat}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

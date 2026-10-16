@@ -1,0 +1,27 @@
+---
+import { turnamen } from '../data/turnamen';
+---
+<footer class="border-t border-white/10">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12 md:px-6">
+    <div class="md:col-span-5">
+      <p class="font-display text-xl font-bold uppercase leading-tight">{turnamen.nama}</p>
+      <p class="mt-2 text-sm text-white/60">{turnamen.game} · diselenggarakan {turnamen.penyelenggara}</p>
+    </div>
+    <dl class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2 md:col-span-7">
+      <div>
+        <dt class="font-mono text-xs uppercase tracking-widest text-white/40">Venue</dt>
+        <dd class="mt-1 text-white/80">{turnamen.venue}<br />{turnamen.alamat}</dd>
+      </div>
+      <div>
+        <dt class="font-mono text-xs uppercase tracking-widest text-white/40">Panitia</dt>
+        <dd class="mt-1 text-white/80">
+          <a href={`https://wa.me/${turnamen.wa}`} class="transition-colors duration-150 hover:text-[#FF3D3D]">WhatsApp {turnamen.wa}</a><br />
+          Instagram {turnamen.instagram}
+        </dd>
+      </div>
+    </dl>
+  </div>
+  <div class="border-t border-white/10 px-4 py-5 text-center font-mono text-xs text-white/40 md:px-6">
+    © {new Date().getFullYear()} {turnamen.penyelenggara}. Nama game adalah merek dagang pemiliknya; turnamen ini acara komunitas.
+  </div>
+</footer>

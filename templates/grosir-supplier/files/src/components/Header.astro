@@ -1,0 +1,72 @@
+---
+import { toko } from '../data/grosir';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/produk/', label: 'Daftar Harga' },
+  { href: '/cara-order/', label: 'Cara Order' },
+  { href: '/kontak/', label: 'Kontak' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b-2 border-[#0A2342] bg-[#F2F2F0]">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
+    <a href="/" class="font-display text-xl font-bold uppercase tracking-wide text-[#0A2342] md:text-2xl">{toko.nama}</a>
+    <nav class="hidden md:flex md:items-center md:gap-7">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'font-display text-base font-semibold uppercase tracking-wide transition-colors duration-150 hover:text-[#F28C28]',
+            here === l.href ? 'text-[#F28C28]' : 'text-[#0A2342]',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+      <a
+        href="/kontak/"
+        class="bg-[#F28C28] px-4 py-2 font-display text-base font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:bg-[#0A2342] hover:text-white"
+      >
+        Minta penawaran
+      </a>
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center border-2 border-[#0A2342] text-[#0A2342] transition-colors duration-150 hover:bg-[#0A2342] hover:text-white md:hidden"
+    >
+      <svg id="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="square" /></svg>
+      <svg id="icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="square" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t-2 border-[#0A2342] bg-[#F2F2F0] md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block border-b border-[#0A2342]/15 px-2 py-3 font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:text-[#F28C28]">
+          {l.label}
+        </a>
+      ))}
+      <a href="/kontak/" class="mt-2 block bg-[#F28C28] px-3 py-3 text-center font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342]">Minta penawaran</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

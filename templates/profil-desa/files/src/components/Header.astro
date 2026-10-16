@@ -1,0 +1,71 @@
+---
+import { desa } from '../data/desa';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/wisata/', label: 'Wisata & UMKM' },
+  { href: '/layanan/', label: 'Layanan' },
+  { href: '/kabar/', label: 'Kabar' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-[#2F4A2A]/15 bg-[#EEF2E6]/95 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
+    <a href="/" class="flex items-baseline gap-2">
+      <span class="font-display text-xl font-semibold text-[#2F4A2A] md:text-2xl">{desa.nama}</span>
+      <span class="hidden font-mono text-[10px] uppercase tracking-widest text-[#2F4A2A]/60 sm:inline">{desa.kabupaten}</span>
+    </a>
+    <nav class="hidden md:flex md:items-center md:gap-8">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'text-sm transition-colors duration-150 hover:text-[#B86B2C]',
+            here === l.href ? 'font-medium text-[#B86B2C] underline underline-offset-8 decoration-[#B86B2C]' : 'text-[#2F4A2A]',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-sm text-[#2F4A2A] transition-colors duration-150 hover:bg-[#2F4A2A]/10 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-[#2F4A2A]/15 bg-[#EEF2E6] md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block border-b border-[#2F4A2A]/10 px-2 py-3 text-base text-[#2F4A2A] transition-colors duration-150 hover:text-[#B86B2C]">
+          {l.label}
+        </a>
+      ))}
+      <a href={`https://wa.me/${desa.telepon}`} target="_blank" rel="noopener noreferrer" class="block px-2 py-3 text-base text-[#B86B2C]">
+        WhatsApp kantor desa
+      </a>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

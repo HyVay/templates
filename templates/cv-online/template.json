@@ -1,0 +1,13 @@
+{
+  "id": "cv-online",
+  "name": "CV Online",
+  "description": "CV satu halaman yang bisa dicetak: profil di kolom kiri, pengalaman sebagai timeline, proyek pilihan, keahlian, pendidikan, dan sertifikasi.",
+  "category": "Portofolio",
+  "tags": ["cv", "resume", "karier", "pribadi"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan CV ini untuk {{nama}}, {{jabatan}} di {{kota}}. Ganti ringkasan, daftar pengalaman kerja beserta capaian, proyek, keahlian, pendidikan, sertifikasi, bahasa, dan kontak contoh di src/data/cv.ts dengan data asli; arahkan tombol Unduh PDF ke berkas milik pengguna. Pertahankan tata letak dua kolom dengan kolom kiri menempel, timeline pengalaman, dan gaya cetak satu kolom. Jangan tambahkan foto, grafik persentase, atau badge keahlian.",
+  "author": "HyVay",
+  "license": "MIT"
+}

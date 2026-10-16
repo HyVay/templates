@@ -1,0 +1,69 @@
+---
+/**
+ * Tabel harga bertingkat. Desktop: tabel penuh. HP: satu blok per produk dengan 3 harga berjejer.
+ * Setiap baris/blok membawa data-kategori supaya bisa difilter dari halaman.
+ */
+import { rupiah, type Produk } from '../data/grosir';
+
+interface Props { items: Produk[]; id?: string }
+const { items, id = 'tabel-harga' } = Astro.props;
+---
+<!-- Desktop -->
+<div class="hidden border-2 border-[#0A2342] bg-white md:block">
+  <table class="w-full border-collapse text-left text-sm">
+    <thead>
+      <tr class="border-b-2 border-[#0A2342] bg-[#0A2342] font-mono text-[11px] uppercase tracking-widest text-white">
+        <th scope="col" class="px-4 py-3 font-medium">SKU</th>
+        <th scope="col" class="px-4 py-3 font-medium">Produk</th>
+        <th scope="col" class="px-4 py-3 font-medium">Satuan</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium">Eceran</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium">≥ 12</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium">≥ 1 karton</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium">MOQ</th>
+      </tr>
+    </thead>
+    <tbody id={`${id}-desktop`} class="divide-y divide-[#0A2342]/15">
+      {items.map((p) => (
+        <tr data-kategori={p.kategori} class:list={['transition-colors duration-150 hover:bg-[#F2F2F0]', !p.stok && 'text-[#0A2342]/45']}>
+          <td class="px-4 py-3 font-mono text-xs">{p.sku}</td>
+          <td class="px-4 py-3">
+            <span class="font-semibold">{p.nama}</span>
+            <span class="block text-xs text-[#0A2342]/60">{p.kategori} · karton isi {p.isiKarton}{!p.stok && ' · stok kosong'}</span>
+          </td>
+          <td class="px-4 py-3">{p.satuan}</td>
+          <td class="px-4 py-3 text-right tabular-nums">{rupiah(p.eceran)}</td>
+          <td class="px-4 py-3 text-right tabular-nums">{rupiah(p.lusin)}</td>
+          <td class="px-4 py-3 text-right font-display text-base font-bold tabular-nums text-[#0A2342]">{rupiah(p.karton)}</td>
+          <td class="px-4 py-3 text-right tabular-nums">{p.moq} {p.satuan.split(' ')[0]}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<!-- HP -->
+<ul id={`${id}-mobile`} class="divide-y-2 divide-[#0A2342]/15 border-2 border-[#0A2342] bg-white md:hidden">
+  {items.map((p) => (
+    <li data-kategori={p.kategori} class:list={['p-4', !p.stok && 'text-[#0A2342]/45']}>
+      <div class="flex items-baseline justify-between gap-3">
+        <p class="font-semibold">{p.nama}</p>
+        <p class="font-mono text-[11px]">{p.sku}</p>
+      </div>
+      <p class="mt-0.5 text-xs text-[#0A2342]/60">{p.satuan} · karton isi {p.isiKarton} · MOQ {p.moq}{!p.stok && ' · stok kosong'}</p>
+      <div class="mt-3 flex divide-x-2 divide-[#0A2342]/15 border-t-2 border-[#0A2342]/15 pt-3 text-center">
+        <div class="flex-1 px-1">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-[#0A2342]/60">Eceran</p>
+          <p class="mt-1 text-sm tabular-nums">{rupiah(p.eceran)}</p>
+        </div>
+        <div class="flex-1 px-1">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-[#0A2342]/60">≥ 12</p>
+          <p class="mt-1 text-sm tabular-nums">{rupiah(p.lusin)}</p>
+        </div>
+        <div class="flex-1 px-1">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-[#0A2342]/60">Karton</p>
+          <p class="mt-1 font-display text-base font-bold tabular-nums">{rupiah(p.karton)}</p>
+        </div>
+      </div>
+    </li>
+  ))}
+</ul>

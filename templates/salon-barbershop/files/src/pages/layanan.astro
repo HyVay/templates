@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DaftarHarga from '../components/DaftarHarga.astro';
+import { toko, layanan } from '../data/barber';
+
+const kategori = ['Rambut', 'Cukur', 'Perawatan', 'Paket'] as const;
+---
+<Base title={`Layanan & harga — ${toko.nama}`} description={`Daftar harga ${toko.nama} ${toko.kota}: ${layanan.length} layanan potong, cukur, perawatan, dan paket. Booking via WhatsApp.`}>
+  <Fonts />
+  <div class="bg-[#111111] text-[#EFE9E1]">
+    <Header />
+    <section class="border-b border-[#EFE9E1]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333]">{layanan.length} layanan · harga sudah termasuk pajak</p>
+        <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">Layanan & harga</h1>
+        <p class="mt-5 max-w-xl text-sm leading-relaxed text-[#EFE9E1]/75 md:text-base">
+          Durasi adalah perkiraan per kursi. Kalau rambut sangat tebal atau ingin konsultasi panjang, sebutkan saat booking supaya kami sediakan slot ganda.
+        </p>
+      </div>
+    </section>
+  </div>
+  <main class="bg-[#EFE9E1] text-[#111111]">
+    <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+      {kategori.map((k) => {
+        const items = layanan.filter((l) => l.kategori === k);
+        return items.length ? (
+          <section class="grid grid-cols-1 gap-6 py-8 md:grid-cols-12 md:gap-10">
+            <h2 class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333] md:col-span-3">{k}</h2>
+            <div class="md:col-span-9">
+              <DaftarHarga items={items} />
+            </div>
+          </section>
+        ) : null;
+      })}
+      <div class="mt-6 grid grid-cols-1 gap-6 border-t border-[#111111]/15 pt-10 md:grid-cols-12">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333] md:col-span-3">Catatan</p>
+        <ul class="space-y-2 text-sm leading-relaxed text-[#111111]/80 md:col-span-9">
+          <li>Pembayaran tunai, QRIS, atau transfer setelah selesai.</li>
+          <li>Terlambat lebih dari 15 menit, jadwal dialihkan ke slot kosong berikutnya.</li>
+          <li>Pewarnaan dan paket pengantin perlu konfirmasi dulu lewat WhatsApp.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

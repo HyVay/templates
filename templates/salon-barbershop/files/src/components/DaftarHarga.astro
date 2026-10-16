@@ -1,0 +1,20 @@
+---
+import { rupiah, type Layanan } from '../data/barber';
+
+interface Props { items: Layanan[]; ringkas?: boolean }
+const { items, ringkas = false } = Astro.props;
+---
+<ul class="divide-y divide-[#111111]/15 border-y border-[#111111]/15">
+  {items.map((l) => (
+    <li class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-12 sm:items-baseline sm:gap-6">
+      <div class="sm:col-span-8">
+        <p class="font-display text-xl font-medium leading-tight md:text-2xl">{l.nama}</p>
+        {!ringkas && <p class="mt-1 text-sm leading-relaxed opacity-70">{l.ringkas}</p>}
+      </div>
+      <div class="flex items-baseline justify-between sm:col-span-4 sm:justify-end sm:gap-6">
+        <span class="font-mono text-xs uppercase tracking-[0.18em] opacity-60">{l.durasi} mnt</span>
+        <span class="font-display text-2xl font-semibold tabular-nums md:text-3xl">{rupiah(l.harga)}</span>
+      </div>
+    </li>
+  ))}
+</ul>

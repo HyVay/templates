@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { turnamen, rupiah } from '../data/turnamen';
+
+const langkah = [
+  'Isi formulir ini. Pesan terbuka di WhatsApp panitia dengan data tim Anda.',
+  `Panitia membalas dengan nomor rekening. Transfer ${rupiah(turnamen.biayaDaftar)} dalam 1×24 jam.`,
+  'Setelah bukti transfer diterima, tim masuk daftar peserta dan kapten dimasukkan ke grup WhatsApp.',
+];
+const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm text-white outline-none transition-colors duration-150 placeholder:text-white/30 focus:border-[#FF3D3D]';
+---
+<Base
+  title={`Daftar tim — ${turnamen.nama}`}
+  description={`Daftarkan tim Anda ke ${turnamen.nama}. Biaya ${rupiah(turnamen.biayaDaftar)} per tim, kuota ${turnamen.jumlahTim} tim, pendaftaran lewat WhatsApp panitia.`}
+>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-white/10">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-[#FF3D3D]">Sisa {turnamen.sisaSlot} slot · tutup {turnamen.batasDaftar}</p>
+        <h1 class="font-display mt-4 text-5xl font-bold uppercase leading-[0.9] md:text-7xl">Daftar tim</h1>
+      </div>
+    </section>
+
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
+      <form id="daftar-form" class="space-y-5 md:col-span-7">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label for="tim" class="font-display block text-sm font-semibold uppercase tracking-wide">Nama tim</label>
+            <input id="tim" name="tim" required placeholder="Maks. 20 karakter" maxlength="20" class={field} />
+          </div>
+          <div>
+            <label for="kota" class="font-display block text-sm font-semibold uppercase tracking-wide">Asal kota</label>
+            <input id="kota" name="kota" required placeholder="Semarang" class={field} />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div>
+            <label for="kapten" class="font-display block text-sm font-semibold uppercase tracking-wide">Nama kapten</label>
+            <input id="kapten" name="kapten" required placeholder="Nama lengkap" class={field} />
+          </div>
+          <div>
+            <label for="wa" class="font-display block text-sm font-semibold uppercase tracking-wide">WhatsApp kapten</label>
+            <input id="wa" name="wa" type="tel" required placeholder="08xxxxxxxxxx" class={field} />
+          </div>
+        </div>
+        <div>
+          <label for="roster" class="font-display block text-sm font-semibold uppercase tracking-wide">Roster (nickname dan ID, satu per baris)</label>
+          <textarea id="roster" name="roster" rows="6" required placeholder={'Contoh:\nRaka — 123456789 (1234)\n… sampai 5 pemain inti + 1 cadangan'} class={field}></textarea>
+        </div>
+        <button type="submit" class="font-display w-full bg-[#FF3D3D] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#e03030] sm:w-auto">
+          Kirim via WhatsApp
+        </button>
+        <p class="text-xs leading-relaxed text-white/50">
+          Situs ini statis dan tidak menyimpan data. Isian di atas disusun menjadi pesan WhatsApp ke panitia ({turnamen.wa}). Pendaftaran sah setelah biaya diterima.
+        </p>
+      </form>
+
+      <aside class="md:col-span-5">
+        <p class="font-mono text-xs uppercase tracking-widest text-white/50">Alur pendaftaran</p>
+        <ol class="mt-4 divide-y divide-white/10 border-y border-white/10">
+          {langkah.map((l, i) => (
+            <li class="grid grid-cols-[3rem_1fr] gap-3 py-4">
+              <span class="font-display text-xl font-bold text-[#FF3D3D]">0{i + 1}</span>
+              <p class="text-sm leading-relaxed text-white/80">{l}</p>
+            </li>
+          ))}
+        </ol>
+        <dl class="mt-8 divide-y divide-white/10 border border-white/15 text-sm">
+          {[
+            ['Biaya', `${rupiah(turnamen.biayaDaftar)} / tim`],
+            ['Kuota', `${turnamen.jumlahTim} tim, sisa ${turnamen.sisaSlot}`],
+            ['Batas', turnamen.batasDaftar],
+            ['Technical meeting', 'Jumat 20 Nov, 13.00 di venue'],
+          ].map(([k, v]) => (
+            <div class="flex justify-between gap-4 px-4 py-3">
+              <dt class="text-white/55">{k}</dt>
+              <dd class="text-right font-medium">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </aside>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: turnamen.wa, nama: turnamen.nama }}>
+    const form = document.getElementById('daftar-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Pendaftaran ${nama}`,
+        `Tim: ${d.get('tim')} (${d.get('kota')})`,
+        `Kapten: ${d.get('kapten')} — ${d.get('wa')}`,
+        'Roster:',
+        String(d.get('roster')),
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

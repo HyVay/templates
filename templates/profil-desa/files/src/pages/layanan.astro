@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { desa, layananSurat, perangkat } from '../data/desa';
+---
+<Base
+  title={`Layanan — ${desa.nama}`}
+  description={`Layanan surat di kantor ${desa.nama}: syarat, lama proses, dan biaya. Jam kantor ${desa.jamKantor}.`}
+>
+  <Fonts />
+  <div class="bg-[#EEF2E6] text-[#2F4A2A]">
+    <Header />
+    <main>
+      <section class="border-b border-[#2F4A2A]/15">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-14 md:grid-cols-12 md:items-end md:px-6 md:py-20">
+          <div class="md:col-span-8">
+            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Layanan kantor desa</p>
+            <h1 class="mt-3 font-display text-4xl font-semibold leading-[0.95] tracking-tight md:text-6xl">Semua surat gratis, selesai paling lama tiga hari.</h1>
+          </div>
+          <dl class="text-sm md:col-span-4">
+            <dt class="text-xs uppercase tracking-widest text-[#2F4A2A]/60">Jam kantor</dt>
+            <dd class="mt-1">{desa.jamKantor}</dd>
+            <dt class="mt-4 text-xs uppercase tracking-widest text-[#2F4A2A]/60">Alamat</dt>
+            <dd class="mt-1">{desa.alamatKantor}</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Tabel layanan: desktop tabel, HP blok bertumpuk -->
+      <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="hidden rounded-sm border border-[#2F4A2A]/20 bg-white md:block">
+          <table class="w-full border-collapse text-left text-sm">
+            <thead>
+              <tr class="border-b border-[#2F4A2A]/20 font-mono text-xs uppercase tracking-widest text-[#2F4A2A]/60">
+                <th scope="col" class="px-5 py-3 font-medium">Layanan</th>
+                <th scope="col" class="px-5 py-3 font-medium">Syarat</th>
+                <th scope="col" class="px-5 py-3 font-medium">Waktu</th>
+                <th scope="col" class="px-5 py-3 text-right font-medium">Biaya</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#2F4A2A]/10">
+              {layananSurat.map((l) => (
+                <tr>
+                  <th scope="row" class="px-5 py-4 align-top font-display text-lg font-semibold">{l.nama}</th>
+                  <td class="px-5 py-4 align-top">
+                    <ul class="space-y-1">{l.syarat.map((s) => <li>{s}</li>)}</ul>
+                  </td>
+                  <td class="px-5 py-4 align-top">{l.waktu}</td>
+                  <td class="px-5 py-4 text-right align-top font-mono text-[#B86B2C]">{l.biaya}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <ul class="divide-y divide-[#2F4A2A]/10 rounded-sm border border-[#2F4A2A]/20 bg-white md:hidden">
+          {layananSurat.map((l) => (
+            <li class="p-5">
+              <p class="font-display text-lg font-semibold">{l.nama}</p>
+              <p class="mt-1 text-xs uppercase tracking-widest text-[#2F4A2A]/60">Syarat</p>
+              <ul class="mt-1 space-y-0.5 text-sm">{l.syarat.map((s) => <li>{s}</li>)}</ul>
+              <div class="mt-3 flex justify-between border-t border-dotted border-[#2F4A2A]/20 pt-2 text-sm">
+                <span>{l.waktu}</span>
+                <span class="font-mono text-[#B86B2C]">{l.biaya}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-4 text-xs text-[#2F4A2A]/60">
+          Surat pengantar RT/RW diminta ke ketua RT masing-masing. Bawa dokumen asli untuk dicocokkan; fotokopi tidak dikembalikan.
+        </p>
+      </section>
+
+      <!-- Perangkat desa + kontak -->
+      <section class="border-t border-[#2F4A2A]/15">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
+          <div class="md:col-span-7">
+            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Perangkat desa</p>
+            <ul class="mt-4 divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
+              {perangkat.map((p) => (
+                <li class="flex items-baseline justify-between gap-4 py-3">
+                  <span class="text-sm text-[#2F4A2A]/70">{p.jabatan}</span>
+                  <span class="font-display text-lg font-medium">{p.nama}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="md:col-span-5">
+            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Tanya dulu</p>
+            <p class="mt-3 text-base leading-relaxed text-[#2F4A2A]/80">
+              Belum yakin syaratnya lengkap? Kirim pesan ke Kasi Pelayanan, dibalas pada jam kantor.
+            </p>
+            <a
+              href={`https://wa.me/${desa.telepon}?text=${encodeURIComponent('Halo Kantor Desa Kembang Arum, saya mau bertanya soal layanan surat.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex h-11 items-center rounded-sm bg-[#2F4A2A] px-5 text-sm font-medium text-[#EEF2E6] transition-colors duration-150 hover:bg-[#B86B2C]"
+            >
+              WhatsApp kantor desa
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

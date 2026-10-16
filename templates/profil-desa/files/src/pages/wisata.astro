@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { desa, destinasi, umkm, homestay, caraKeSana } from '../data/desa';
+---
+<Base
+  title={`Wisata & UMKM — ${desa.nama}`}
+  description={`Destinasi wisata ${desa.nama}: ${destinasi.map((d) => d.nama).join(', ')}. Tiket, jam buka, homestay, dan produk warga.`}
+>
+  <Fonts />
+  <div class="bg-[#EEF2E6] text-[#2F4A2A]">
+    <Header />
+    <main>
+      <section class="border-b border-[#2F4A2A]/15">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+          <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Wisata & UMKM</p>
+          <h1 class="mt-3 font-display text-4xl font-semibold leading-[0.95] tracking-tight md:text-6xl">Datang pagi, pulang sore.</h1>
+          <p class="mt-5 max-w-xl text-base leading-relaxed text-[#2F4A2A]/80">
+            Tiket dibeli di loket tiap lokasi, tunai atau QRIS. Semua pendapatan masuk ke BUMDes dan dilaporkan di papan balai desa tiap bulan.
+          </p>
+        </div>
+      </section>
+
+      <!-- Destinasi: baris foto + teks bergantian -->
+      <section class="mx-auto max-w-6xl divide-y divide-[#2F4A2A]/15 px-4 md:px-6">
+        {destinasi.map((d, i) => (
+          <article id={d.slug} class="grid grid-cols-1 gap-8 py-12 md:grid-cols-12 md:items-center md:py-16">
+            <img
+              src={d.foto}
+              alt={d.alt}
+              loading="lazy"
+              class:list={['aspect-[4/3] w-full rounded-sm object-cover md:col-span-6', i % 2 === 1 ? 'md:order-2' : '']}
+            />
+            <div class:list={['md:col-span-6', i % 2 === 1 ? 'md:order-1 md:pr-8' : 'md:pl-8']}>
+              <p class="font-mono text-xs text-[#2F4A2A]/60">0{i + 1}</p>
+              <h2 class="mt-2 font-display text-3xl font-semibold leading-tight md:text-4xl">{d.nama}</h2>
+              <p class="mt-4 text-base leading-relaxed text-[#2F4A2A]/80">{d.deskripsi}</p>
+              <dl class="mt-6 grid grid-cols-1 gap-3 border-t border-[#2F4A2A]/15 pt-4 text-sm sm:grid-cols-2">
+                <div>
+                  <dt class="text-xs uppercase tracking-widest text-[#2F4A2A]/60">Tiket</dt>
+                  <dd class="mt-1">{d.tiket}</dd>
+                </div>
+                <div>
+                  <dt class="text-xs uppercase tracking-widest text-[#2F4A2A]/60">Jam buka</dt>
+                  <dd class="mt-1">{d.jam}</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <!-- Homestay -->
+      <section class="border-y border-[#2F4A2A]/15 bg-[#2F4A2A] text-[#EEF2E6]">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12 md:items-center md:px-6 md:py-16">
+          <div class="md:col-span-7">
+            <p class="text-xs uppercase tracking-widest text-[#EEF2E6]/60">Menginap</p>
+            <h2 class="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">{homestay.jumlah} homestay rumah warga di Dusun Gondang</h2>
+            <p class="mt-4 max-w-lg text-sm leading-relaxed text-[#EEF2E6]/80">{homestay.catatan}</p>
+          </div>
+          <div class="md:col-span-5 md:text-right">
+            <p class="font-display text-2xl font-semibold">{homestay.harga}</p>
+            <a
+              href={`https://wa.me/${desa.telepon}?text=${encodeURIComponent('Halo BUMDes Kembang Arum, saya ingin memesan homestay.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex items-center justify-center rounded-sm bg-[#B86B2C] px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-[#9a5823]"
+            >
+              Pesan lewat WhatsApp BUMDes
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- UMKM -->
+      <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="text-xs uppercase tracking-widest text-[#B86B2C]">UMKM desa</p>
+        <h2 class="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">Bawa pulang, atau pesan dari rumah.</h2>
+        <ul class="mt-8 divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
+          {umkm.map((u) => (
+            <li class="grid grid-cols-1 gap-3 py-5 md:grid-cols-12 md:items-center md:gap-4">
+              <div class="md:col-span-5">
+                <p class="font-display text-xl font-semibold">{u.nama}</p>
+                <p class="mt-0.5 text-sm text-[#2F4A2A]/70">{u.pelaku}</p>
+              </div>
+              <p class="text-sm md:col-span-4">{u.produk}</p>
+              <div class="flex items-center justify-between gap-4 md:col-span-3 md:justify-end">
+                <span class="font-mono text-sm">{u.harga}</span>
+                <a
+                  href={`https://wa.me/${u.telepon}?text=${encodeURIComponent(`Halo, saya mau pesan ${u.produk} dari ${u.nama}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex h-11 items-center rounded-sm border border-[#2F4A2A]/30 px-4 text-sm transition-colors duration-150 hover:bg-[#2F4A2A] hover:text-[#EEF2E6]"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Cara ke sana -->
+      <section class="border-t border-[#2F4A2A]/15">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
+          <div class="md:col-span-4">
+            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Cara ke sana</p>
+            <h2 class="mt-3 font-display text-3xl font-semibold leading-tight">25 menit dari Borobudur</h2>
+            <a href={desa.maps} target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B86B2C]">Buka di Google Maps</a>
+          </div>
+          <ol class="divide-y divide-[#2F4A2A]/15 md:col-span-8">
+            {caraKeSana.map((c, i) => (
+              <li class="flex gap-5 py-4">
+                <span class="font-mono text-sm text-[#B86B2C]">0{i + 1}</span>
+                <p class="text-base leading-relaxed">{c}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Base>

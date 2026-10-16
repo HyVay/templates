@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Countdown from '../components/Countdown.astro';
+import { webinar, sesi, pelajari, pemateri, paket, rupiah, foto } from '../data/webinar';
+
+const detail = [
+  { k: 'Sesi 1', v: `${sesi[0].tanggal}, ${sesi[0].jam}` },
+  { k: 'Sesi 2', v: `${sesi[1].tanggal}, ${sesi[1].jam}` },
+  { k: 'Platform', v: webinar.platform },
+  { k: 'Harga', v: `${rupiah(webinar.hargaEarly)} early bird · ${rupiah(webinar.harga)} normal` },
+  { k: 'Kursi', v: `Sisa ${webinar.sisaKursi} dari ${webinar.kuota}` },
+];
+---
+<Base title={`${webinar.judul} — ${webinar.penyelenggara}`} description={`${webinar.format}: ${webinar.subjudul} Bersama ${pemateri.nama}, ${sesi[0].tanggal}. Daftar via WhatsApp.`}>
+  <Fonts />
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="mx-auto max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-24 md:pt-20">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#B5452E]">{webinar.format} · {webinar.penyelenggara}</p>
+          <h1 class="font-display mt-5 text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">{webinar.judul}</h1>
+          <p class="mt-6 max-w-xl text-base leading-relaxed text-[#3B2A1A]/75 md:text-lg">{webinar.subjudul}</p>
+          <div class="mt-10">
+            <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/50">Sesi pertama dimulai dalam</p>
+            <div class="mt-4"><Countdown target={webinar.mulaiISO} /></div>
+          </div>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href="/daftar/" class="inline-flex items-center justify-center rounded-sm bg-[#B5452E] px-6 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823]">Daftar early bird</a>
+            <a href="/materi/" class="inline-flex items-center justify-center rounded-sm border border-[#3B2A1A]/30 px-6 py-3 text-sm font-semibold transition-colors duration-150 hover:bg-[#3B2A1A]/5">Lihat silabus</a>
+          </div>
+        </div>
+        <dl class="divide-y divide-[#FAF7F2]/15 rounded-sm bg-[#3B2A1A] p-6 text-[#FAF7F2] md:col-span-5 md:self-start md:p-8">
+          {detail.map((d) => (
+            <div class="py-3.5 first:pt-0 last:pb-0">
+              <dt class="font-mono text-[11px] uppercase tracking-widest text-[#FAF7F2]/50">{d.k}</dt>
+              <dd class="mt-1 text-sm font-medium leading-relaxed">{d.v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- Yang dipelajari -->
+    <section class="border-y border-[#3B2A1A]/15 bg-[#3B2A1A]/[0.03]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
+        <div class="md:col-span-4">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Yang Anda pelajari</p>
+          <h2 class="font-display mt-3 text-3xl font-medium leading-tight md:text-4xl">Enam hal yang bisa langsung dipakai Senin pagi</h2>
+          <img src={foto.hero} alt="Struk belanja, kalkulator, dan catatan di atas meja" loading="lazy" class="mt-8 hidden aspect-[4/3] w-full rounded-sm object-cover md:block" />
+        </div>
+        <ol class="divide-y divide-[#3B2A1A]/15 border-y border-[#3B2A1A]/15 md:col-span-8">
+          {pelajari.map((p, i) => (
+            <li class="grid grid-cols-[3.5rem_1fr] gap-4 py-5">
+              <span class="font-display text-2xl text-[#B5452E]">0{i + 1}</span>
+              <p class="font-display text-xl leading-snug md:text-2xl">{p}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Pemateri -->
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
+      <img src={pemateri.foto} alt={`Potret ${pemateri.nama}`} loading="lazy" class="aspect-square w-full max-w-sm rounded-sm object-cover md:col-span-4" />
+      <div class="md:col-span-7 md:col-start-6">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Pemateri</p>
+        <h2 class="font-display mt-3 text-3xl font-medium md:text-4xl">{pemateri.nama}</h2>
+        <p class="mt-1 text-sm font-medium text-[#3B2A1A]/60">{pemateri.peran}</p>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-[#3B2A1A]/80">{pemateri.bio}</p>
+      </div>
+    </section>
+
+    <!-- Agenda -->
+    <section class="border-t border-[#3B2A1A]/15">
+      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Agenda</p>
+        <h2 class="font-display mt-3 text-3xl font-medium md:text-4xl">Dua Sabtu pagi, masing-masing dua setengah jam</h2>
+        <div class="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2">
+          {sesi.map((s) => (
+            <div>
+              <div class="border-b-2 border-[#3B2A1A] pb-3">
+                <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/55">{s.nomor} · {s.tanggal}</p>
+                <h3 class="font-display mt-1 text-2xl font-medium">{s.tema}</h3>
+              </div>
+              <table class="mt-2 w-full text-sm">
+                <tbody class="divide-y divide-[#3B2A1A]/10">
+                  {s.agenda.map((a) => (
+                    <tr>
+                      <td class="w-16 py-3 pr-3 align-top font-mono text-[#B5452E]">{a.jam}</td>
+                      <td class="py-3 align-top leading-relaxed">{a.apa}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Harga -->
+    <section class="border-t border-[#3B2A1A]/15 bg-[#3B2A1A]/[0.03]">
+      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Biaya</p>
+        <h2 class="font-display mt-3 text-3xl font-medium md:text-4xl">Satu harga untuk kedua sesi</h2>
+        <div class="mt-8 overflow-hidden rounded-sm border border-[#3B2A1A]/20 bg-[#FAF7F2]">
+          <table class="w-full text-left text-sm">
+            <thead class="border-b border-[#3B2A1A]/20 font-mono text-[11px] uppercase tracking-widest text-[#3B2A1A]/55">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-medium md:px-6">Paket</th>
+                <th scope="col" class="px-4 py-3 font-medium md:px-6">Harga</th>
+                <th scope="col" class="hidden px-4 py-3 font-medium sm:table-cell md:px-6">Berlaku</th>
+                <th scope="col" class="hidden px-4 py-3 font-medium md:table-cell md:px-6">Catatan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#3B2A1A]/10">
+              {paket.map((p) => (
+                <tr>
+                  <td class="px-4 py-4 font-semibold md:px-6">{p.nama}<span class="block text-xs font-normal text-[#3B2A1A]/55 sm:hidden">{p.berlaku}</span></td>
+                  <td class="font-display px-4 py-4 text-2xl md:px-6">{rupiah(p.harga)}</td>
+                  <td class="hidden px-4 py-4 text-[#3B2A1A]/75 sm:table-cell md:px-6">{p.berlaku}</td>
+                  <td class="hidden px-4 py-4 text-[#3B2A1A]/75 md:table-cell md:px-6">{p.catatan}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <ul class="mt-6 flex flex-col gap-2 text-sm text-[#3B2A1A]/75 sm:flex-row sm:flex-wrap sm:gap-x-8">
+          {webinar.bonus.map((b) => <li class="flex gap-2"><span class="text-[#B5452E]">+</span>{b}</li>)}
+        </ul>
+        <a href="/daftar/" class="mt-8 inline-flex items-center justify-center rounded-sm bg-[#B5452E] px-6 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823]">Daftar sebelum {webinar.batasEarly}</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

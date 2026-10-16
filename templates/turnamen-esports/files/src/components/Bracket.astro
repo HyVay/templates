@@ -1,0 +1,50 @@
+---
+/**
+ * Bagan playoff 8 tim: QF → SF → Final, diisi dari data/turnamen.ts.
+ * Desktop tiga kolom berdampingan, HP bertumpuk per babak.
+ */
+import { bracket, type Pertandingan } from '../data/turnamen';
+
+const babak: { judul: string; keterangan: string; laga: Pertandingan[] }[] = [
+  { judul: 'Perempat final', keterangan: 'Bo3 · Sabtu 14.00', laga: bracket.qf },
+  { judul: 'Semifinal', keterangan: 'Bo3 · Sabtu 19.00', laga: bracket.sf },
+  { judul: 'Grand final', keterangan: 'Bo5 · Minggu 16.00', laga: bracket.final },
+];
+
+const dimainkan = (m: Pertandingan) => m.skorA !== null && m.skorB !== null;
+const menang = (m: Pertandingan, sisi: 'a' | 'b') =>
+  dimainkan(m) && (sisi === 'a' ? (m.skorA as number) > (m.skorB as number) : (m.skorB as number) > (m.skorA as number));
+---
+<div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+  {babak.map((b, i) => (
+    <section class="md:flex md:flex-col md:justify-around">
+      <div class="border-b-2 border-[#FF3D3D] pb-2">
+        <p class="font-display text-lg font-bold uppercase tracking-wide">{b.judul}</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-white/50">{b.keterangan}</p>
+      </div>
+      <ol class="mt-4 space-y-4 md:mt-0 md:flex md:flex-1 md:flex-col md:justify-around md:space-y-0 md:py-6">
+        {b.laga.map((m, j) => (
+          <li class="border border-white/15">
+            <p class="border-b border-white/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-white/40">
+              {['QF', 'SF', 'F'][i]}{b.laga.length > 1 ? j + 1 : ''} · {dimainkan(m) ? 'Selesai' : 'Belum dimainkan'}
+            </p>
+            {(['a', 'b'] as const).map((sisi) => (
+              <div
+                class:list={[
+                  'flex items-center justify-between gap-3 px-3 py-2.5',
+                  sisi === 'a' ? 'border-b border-white/10' : '',
+                  dimainkan(m) && !menang(m, sisi) ? 'text-white/35' : 'text-white',
+                ]}
+              >
+                <span class:list={['text-sm', menang(m, sisi) ? 'font-semibold' : '']}>{m[sisi]}</span>
+                <span class:list={['font-display w-6 text-right text-lg font-bold tabular-nums', menang(m, sisi) ? 'text-[#FF3D3D]' : '']}>
+                  {dimainkan(m) ? m[sisi === 'a' ? 'skorA' : 'skorB'] : '–'}
+                </span>
+              </div>
+            ))}
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+</div>

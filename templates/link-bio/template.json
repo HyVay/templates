@@ -1,0 +1,13 @@
+{
+  "id": "link-bio",
+  "name": "Link di Bio",
+  "description": "Satu halaman untuk tautan di bio sosial media: profil, daftar tautan bernomor, produk sorotan, dan kontak WhatsApp. Dirancang untuk layar HP.",
+  "category": "Lainnya",
+  "tags": ["link-bio", "kreator", "sosial-media", "umkm"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan halaman link di bio ini untuk {{nama}}, {{profesi atau jenis usaha}}. Ganti foto profil, bio, daftar tautan beserta URL-nya, produk sorotan, akun sosial media, dan nomor WhatsApp contoh di src/data/profil.ts dengan data asli. Pertahankan satu kolom yang rapi di layar 390px, daftar tautan bernomor, dan baris ikon sosial. Warna aksen boleh diganti agar cocok dengan identitas akun.",
+  "author": "HyVay",
+  "license": "MIT"
+}

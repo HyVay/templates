@@ -1,0 +1,39 @@
+---
+import { toko } from '../data/grosir';
+---
+<footer class="border-t-2 border-[#0A2342] bg-[#0A2342] text-white">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6">
+    <div class="md:col-span-5">
+      <p class="font-display text-3xl font-bold uppercase tracking-wide">{toko.nama}</p>
+      <p class="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{toko.tagline}.</p>
+      <p class="mt-5 font-mono text-xs uppercase tracking-widest text-[#F28C28]">Gudang</p>
+      <p class="mt-1 text-sm leading-relaxed">{toko.alamat}</p>
+    </div>
+    <div class="md:col-span-4">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#F28C28]">Jam gudang</p>
+      <dl class="mt-3 divide-y divide-white/15 text-sm">
+        {toko.jam.map((j) => (
+          <div class="flex justify-between gap-4 py-2">
+            <dt class="text-white/70">{j.hari}</dt>
+            <dd class="text-right font-medium tabular-nums">{j.jam}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <div class="md:col-span-3">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#F28C28]">Pesan</p>
+      <ul class="mt-3 space-y-1.5 text-sm">
+        <li><a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="transition-colors duration-150 hover:text-[#F28C28]">WhatsApp {toko.telepon}</a></li>
+        <li><a href="/produk/" class="transition-colors duration-150 hover:text-[#F28C28]">Daftar harga lengkap</a></li>
+        <li><a href="/cara-order/" class="transition-colors duration-150 hover:text-[#F28C28]">Cara order & ongkir</a></li>
+      </ul>
+      <p class="mt-5 text-xs leading-relaxed text-white/55">{toko.gratisOngkir}. {toko.minimalOrder}.</p>
+    </div>
+  </div>
+  <div class="border-t border-white/15 px-4 py-5 text-xs text-white/50 md:px-6">
+    <div class="mx-auto flex max-w-6xl flex-col gap-1 sm:flex-row sm:justify-between">
+      <span>© {new Date().getFullYear()} {toko.nama}, {toko.kota}</span>
+      <span>Harga dapat berubah mengikuti harga distributor. Konfirmasi harga saat pemesanan.</span>
+    </div>
+  </div>
+</footer>

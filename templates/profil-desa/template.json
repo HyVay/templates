@@ -1,0 +1,13 @@
+{
+  "id": "profil-desa",
+  "name": "Profil Desa & Wisata Desa",
+  "description": "Situs desa multi-halaman: angka desa, destinasi wisata, UMKM warga, layanan surat dengan syarat dan waktu, perangkat desa, pengumuman, dan agenda.",
+  "category": "Lainnya",
+  "tags": ["desa", "wisata-desa", "pemerintahan", "umkm"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama desa}}, {{kecamatan}}, {{kabupaten}}. Ganti angka desa, nama dusun, destinasi wisata, daftar UMKM, perangkat desa, layanan surat, pengumuman, agenda, alamat kantor, dan nomor WhatsApp contoh di src/data/desa.ts dengan data desa itu. Pertahankan struktur 4 halaman (beranda, wisata, layanan, kabar), tabel layanan surat, dan daftar UMKM dengan tombol WhatsApp. Kalau desa tidak punya wisata, ganti halaman wisata menjadi potensi desa (pertanian, kerajinan).",
+  "author": "HyVay",
+  "license": "MIT"
+}

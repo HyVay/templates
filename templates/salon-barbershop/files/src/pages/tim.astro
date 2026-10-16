@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { toko, barber } from '../data/barber';
+
+const tahunIni = new Date().getFullYear();
+---
+<Base title={`Barber — ${toko.nama}`} description={`${barber.length} barber tetap di ${toko.nama} ${toko.kota}, masing-masing dengan spesialisasi dan jadwalnya sendiri.`}>
+  <Fonts />
+  <div class="bg-[#111111] text-[#EFE9E1]">
+    <Header />
+    <section class="border-b border-[#EFE9E1]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333]">{barber.length} barber tetap</p>
+        <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">Orang di balik kursi</h1>
+        <p class="mt-5 max-w-xl text-sm leading-relaxed text-[#EFE9E1]/75 md:text-base">
+          Setiap barber punya hari libur sendiri. Pilih barber saat booking, atau serahkan pada kami bila tidak ada preferensi.
+        </p>
+      </div>
+    </section>
+  </div>
+  <main class="bg-[#EFE9E1] text-[#111111]">
+    <div class="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-10">
+      <ul class="divide-y divide-[#111111]/15">
+        {barber.map((b, i) => (
+          <li id={b.slug} class="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-10">
+            <div class="md:col-span-4">
+              <img src={b.foto} alt={`Foto ${b.nama}`} loading="lazy" class="aspect-[3/4] w-full object-cover grayscale" />
+            </div>
+            <div class="flex flex-col justify-between md:col-span-8">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333]">{String(i + 1).padStart(2, '0')}</p>
+                <h2 class="mt-3 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">{b.nama}</h2>
+                <p class="mt-3 font-display text-xl italic text-[#111111]/75">{b.spesialisasi}</p>
+              </div>
+              <dl class="mt-8 grid grid-cols-2 gap-6 border-t border-[#111111]/15 pt-5 text-sm sm:grid-cols-3">
+                <div>
+                  <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/55">Pengalaman</dt>
+                  <dd class="mt-1 font-display text-2xl">{tahunIni - b.sejak} tahun</dd>
+                </div>
+                <div>
+                  <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/55">Libur</dt>
+                  <dd class="mt-1 font-display text-2xl">{b.libur}</dd>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                  <a href={`/booking/?barber=${b.slug}`} class="inline-flex h-11 w-full items-center justify-center bg-[#111111] px-5 text-xs uppercase tracking-[0.18em] text-[#EFE9E1] transition-colors duration-150 hover:bg-[#B87333]">
+                    Booking {b.nama.split(' ')[0]}
+                  </a>
+                </div>
+              </dl>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+  <Footer />
+</Base>

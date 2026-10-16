@@ -1,0 +1,38 @@
+---
+/** Hitung mundur bergaya angka besar Newsreader, dipisah titik dua. Tanpa kotak. */
+interface Props { target: string }
+const { target } = Astro.props;
+const unit = ['Hari', 'Jam', 'Menit', 'Detik'];
+---
+<div id="countdown" data-target={target} class="flex items-start gap-2 sm:gap-3">
+  {unit.map((label, i) => (
+    <>
+      <div class="text-center">
+        <p class="font-display text-4xl font-medium tabular-nums leading-none sm:text-5xl md:text-6xl" data-unit={label}>00</p>
+        <p class="mt-2 text-[11px] uppercase tracking-[0.2em] text-[#3B2A1A]/55">{label}</p>
+      </div>
+      {i < unit.length - 1 && <span class="font-display text-4xl leading-none text-[#B5452E] sm:text-5xl md:text-6xl" aria-hidden="true">:</span>}
+    </>
+  ))}
+</div>
+<script>
+  const root = document.getElementById('countdown');
+  const target = new Date(root?.dataset.target ?? '').getTime();
+  const cell = (u: string) => root?.querySelector(`[data-unit="${u}"]`);
+  const tick = () => {
+    const left = Math.max(0, target - Date.now());
+    const s = Math.floor(left / 1000);
+    const map: Record<string, number> = {
+      Hari: Math.floor(s / 86400),
+      Jam: Math.floor((s % 86400) / 3600),
+      Menit: Math.floor((s % 3600) / 60),
+      Detik: s % 60,
+    };
+    for (const [u, v] of Object.entries(map)) {
+      const el = cell(u);
+      if (el) el.textContent = String(v).padStart(2, '0');
+    }
+  };
+  tick();
+  setInterval(tick, 1000);
+</script>
