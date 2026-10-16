@@ -1,0 +1,24 @@
+---
+import { profil } from '../data/portofolio';
+---
+<footer class="border-t border-[#141414]/15">
+  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12 md:px-8">
+    <div class="md:col-span-6">
+      <p class="font-display text-3xl italic">{profil.nama}</p>
+      <p class="mt-1 text-sm text-[#141414]/60">{profil.profesi} di {profil.kota}, sejak {profil.sejak}.</p>
+    </div>
+    <ul class="space-y-1 text-sm md:col-span-3">
+      <li><a href={`https://wa.me/${profil.telepon}`} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-opacity duration-150 hover:opacity-50">WhatsApp</a></li>
+      <li><a href={`mailto:${profil.email}`} class="underline underline-offset-4 transition-opacity duration-150 hover:opacity-50">{profil.email}</a></li>
+      <li><a href={`https://instagram.com/${profil.instagram}`} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-opacity duration-150 hover:opacity-50">@{profil.instagram}</a></li>
+    </ul>
+    <ul class="space-y-1 text-sm md:col-span-3">
+      <li><a href="/karya/" class="transition-opacity duration-150 hover:opacity-50">Karya</a></li>
+      <li><a href="/tentang/" class="transition-opacity duration-150 hover:opacity-50">Tentang</a></li>
+      <li><a href="/kontak/" class="transition-opacity duration-150 hover:opacity-50">Kontak & paket</a></li>
+    </ul>
+  </div>
+  <div class="mx-auto max-w-7xl px-4 pb-6 text-xs text-[#141414]/50 md:px-8">
+    © {new Date().getFullYear()} {profil.nama}. Semua foto dilindungi hak cipta; hubungi untuk izin pemakaian.
+  </div>
+</footer>

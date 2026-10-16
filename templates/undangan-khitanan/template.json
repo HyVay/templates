@@ -1,0 +1,13 @@
+{
+  "id": "undangan-khitanan",
+  "name": "Undangan Khitanan",
+  "description": "Undangan digital satu halaman untuk tasyakuran khitan: hitung mundur, detail acara, doa, galeri, dan konfirmasi via WhatsApp.",
+  "category": "Undangan",
+  "tags": ["undangan", "khitanan", "keluarga", "acara"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan undangan ini untuk tasyakuran khitan {{nama anak}}, putra {{nama orang tua}}, pada {{tanggal}} di {{lokasi}}. Ganti semua nama, tanggal, alamat, daftar keluarga yang turut mengundang, dan nomor WhatsApp contoh di src/data/acara.ts. Pertahankan struktur satu halaman, hitung mundur, dan form konfirmasi WhatsApp-nya. Bila dipakai untuk ulang tahun atau aqiqah, ganti judul, bismillah, dan teks doa agar sesuai acaranya.",
+  "author": "HyVay",
+  "license": "MIT"
+}

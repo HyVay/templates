@@ -1,0 +1,13 @@
+{
+  "id": "klinik-praktik",
+  "name": "Klinik & Praktik Dokter",
+  "description": "Situs klinik multi-halaman: jadwal praktik per dokter dalam tabel, daftar layanan dengan biaya, profil dokter, dan janji temu via WhatsApp.",
+  "category": "Lainnya",
+  "tags": ["klinik", "dokter", "kesehatan", "janji-temu"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama klinik}} di {{kota}}. Ganti daftar dokter beserta jadwal praktik per hari, daftar layanan dan rentang biaya, jam buka, alamat, dan nomor WhatsApp contoh dengan data klinik itu. Pertahankan tabel jadwal praktik, daftar layanan dengan harga, dan form janji temu via WhatsApp-nya. Jangan menambahkan klaim yang tidak bisa dibuktikan (misalnya kerja sama asuransi tertentu) tanpa data dari pemilik.",
+  "author": "HyVay",
+  "license": "MIT"
+}

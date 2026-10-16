@@ -1,0 +1,282 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Countdown from '../components/Countdown.astro';
+import { acara, turutMengundang, galeri, fotoHero } from '../data/acara';
+
+const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
+---
+<Base
+  title={`${acara.judul} ${acara.anak}`}
+  description={`Undangan ${acara.judul.toLowerCase()} ${acara.anak}, putra ${acara.ayah} dan ${acara.ibu}, ${tanggalLengkap} di ${acara.alamat}.`}
+>
+  <Fonts />
+  <main class="bg-[#E8F1F8] text-[#1B4965]">
+    <!-- Pembuka -->
+    <section class="relative overflow-hidden">
+      <!-- Pola bintang delapan, opasitas rendah -->
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <svg class="h-full w-full" aria-hidden="true">
+          <defs>
+            <pattern id="bintang" width="72" height="72" patternUnits="userSpaceOnUse">
+              <g fill="none" stroke="#1B4965" stroke-width="1" opacity="0.14">
+                <path d="M36 6 L44 28 L66 36 L44 44 L36 66 L28 44 L6 36 L28 28 Z" />
+                <path d="M36 14 L50 22 L58 36 L50 50 L36 58 L22 50 L14 36 L22 22 Z" />
+              </g>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#bintang)" />
+        </svg>
+      </div>
+
+      <div class="relative z-10 mx-auto grid min-h-[100dvh] max-w-6xl grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-20">
+        <div class="md:col-span-7">
+          <p class="font-arab text-left text-3xl leading-relaxed text-[#1B4965] md:text-4xl" dir="rtl" lang="ar">
+            بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+          </p>
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/70">{acara.judul}</p>
+          <h1 class="font-display mt-3 text-5xl font-bold leading-[0.98] tracking-tight md:text-7xl">
+            {acara.anak}
+          </h1>
+          <p class="font-display mt-5 text-lg italic text-[#1B4965]/80 md:text-xl">
+            putra dari {acara.ayah} &amp; {acara.ibu}
+          </p>
+
+          <div class="mt-8 flex items-center gap-4">
+            <span class="h-px w-10 bg-[#F2B544]"></span>
+            <p class="text-base font-semibold md:text-lg">{tanggalLengkap}</p>
+          </div>
+
+          <div class="mt-8 max-w-md">
+            <Countdown target={acara.tanggalISO} />
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#acara"
+              class="inline-flex items-center justify-center rounded-xl bg-[#F2B544] px-6 py-3 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#e3a62f]"
+            >
+              Lihat Detail Acara
+            </a>
+            <a
+              href="#konfirmasi"
+              class="inline-flex items-center justify-center rounded-xl border-2 border-[#1B4965] px-6 py-3 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#1B4965] hover:text-white"
+            >
+              Konfirmasi Kehadiran
+            </a>
+          </div>
+        </div>
+
+        <div class="md:col-span-5">
+          <div class="relative">
+            <img
+              src={fotoHero}
+              alt="Suasana dekorasi tempat acara"
+              class="aspect-[4/5] w-full rounded-xl object-cover"
+            />
+            <div class="absolute -bottom-4 -left-4 rounded-xl bg-[#F2B544] px-4 py-3 shadow-sm md:-left-6">
+              <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1B4965]/70">Pukul</p>
+              <p class="font-display text-xl font-bold text-[#1B4965]">{acara.waktu}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Salam pembuka -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-3xl px-5 py-16 text-center md:px-8 md:py-24">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Assalamu'alaikum warahmatullahi wabarakatuh</p>
+        <p class="font-display mt-6 text-xl leading-relaxed md:text-2xl">{acara.pembuka}</p>
+      </div>
+    </section>
+
+    <!-- Acara -->
+    <section id="acara" class="bg-[#1B4965] text-[#E8F1F8]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
+        <div class="md:col-span-4">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#F2B544]">Waktu &amp; Tempat</p>
+          <h2 class="font-display mt-3 text-3xl font-bold leading-tight md:text-4xl">Rangkaian acara</h2>
+          <p class="mt-4 text-sm leading-relaxed text-[#E8F1F8]/80">
+            Acara berlangsung santai di rumah. Silakan datang kapan pun dalam rentang waktu yang tertera.
+          </p>
+        </div>
+        <dl class="divide-y divide-[#E8F1F8]/15 md:col-span-8">
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3 sm:gap-6">
+            <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[#F2B544]">Hari, tanggal</dt>
+            <dd class="font-display text-xl font-semibold sm:col-span-2">{tanggalLengkap}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3 sm:gap-6">
+            <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[#F2B544]">Pukul</dt>
+            <dd class="font-display text-xl font-semibold sm:col-span-2">{acara.waktu}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3 sm:gap-6">
+            <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[#F2B544]">Tempat</dt>
+            <dd class="sm:col-span-2">
+              <p class="font-display text-xl font-semibold">{acara.tempat}</p>
+              <p class="mt-1 text-sm text-[#E8F1F8]/80">{acara.alamat}</p>
+              <a
+                href={acara.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex h-11 items-center gap-2 rounded-xl bg-[#F2B544] px-5 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#e3a62f]"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z" stroke-linejoin="round" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+                Buka di Google Maps
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Doa -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div class="md:col-span-3">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Doa untuk ananda</p>
+            <span class="mt-4 block h-1 w-12 rounded-full bg-[#F2B544]"></span>
+          </div>
+          <blockquote class="font-display text-2xl italic leading-relaxed md:col-span-9 md:text-3xl">
+            “{acara.doa}”
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galeri -->
+    <section class="bg-[#E8F1F8]">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <div class="flex items-end justify-between">
+          <h2 class="font-display text-3xl font-bold md:text-4xl">Sekilas persiapan</h2>
+          <p class="hidden text-xs font-bold uppercase tracking-[0.2em] text-[#1B4965]/60 md:block">{galeri.length} foto</p>
+        </div>
+        <div class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
+          {galeri.map((g, i) => (
+            <img
+              src={g.src}
+              alt={g.alt}
+              loading="lazy"
+              class:list={[
+                'h-full w-full rounded-xl object-cover',
+                i === 0 ? 'col-span-2 aspect-[16/9] md:row-span-2 md:aspect-auto' : 'aspect-[4/5] md:aspect-square',
+              ]}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Turut mengundang -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div class="md:col-span-5">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Turut mengundang</p>
+            <h2 class="font-display mt-3 text-3xl font-bold leading-tight md:text-4xl">Keluarga besar</h2>
+            <p class="mt-4 max-w-sm text-sm leading-relaxed text-[#1B4965]/80">{acara.penutup}</p>
+          </div>
+          <ul class="divide-y divide-[#1B4965]/10 md:col-span-7">
+            {turutMengundang.map((nama, i) => (
+              <li class="flex items-baseline gap-5 py-4">
+                <span class="font-mono text-xs text-[#1B4965]/50">{String(i + 1).padStart(2, '0')}</span>
+                <span class="font-display text-lg font-semibold">{nama}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Konfirmasi -->
+    <section id="konfirmasi" class="bg-[#E8F1F8]">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
+          <div class="md:col-span-5">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Konfirmasi kehadiran</p>
+            <h2 class="font-display mt-3 text-3xl font-bold leading-tight md:text-4xl">Kabari kami bila berkenan hadir</h2>
+            <p class="mt-4 max-w-sm text-sm leading-relaxed text-[#1B4965]/80">
+              Supaya hidangan dan tempat duduk cukup untuk semua tamu. Konfirmasi terbuka langsung sebagai pesan WhatsApp ke keluarga.
+            </p>
+          </div>
+          <form id="rsvp" class="space-y-4 md:col-span-7">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label for="nama" class="block text-sm font-bold">Nama</label>
+                <input
+                  id="nama" name="nama" required placeholder="Nama Anda / keluarga"
+                  class="mt-1 h-11 w-full rounded-xl border border-[#1B4965]/20 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#1B4965]"
+                />
+              </div>
+              <div>
+                <label for="jumlah" class="block text-sm font-bold">Jumlah orang</label>
+                <input
+                  id="jumlah" name="jumlah" type="number" min="1" value="2" required
+                  class="mt-1 h-11 w-full rounded-xl border border-[#1B4965]/20 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#1B4965]"
+                />
+              </div>
+            </div>
+            <fieldset>
+              <legend class="block text-sm font-bold">Kehadiran</legend>
+              <div class="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label class="flex h-11 cursor-pointer items-center gap-3 rounded-xl border border-[#1B4965]/20 bg-white px-4 text-sm has-[:checked]:border-[#1B4965] has-[:checked]:bg-[#1B4965] has-[:checked]:text-white">
+                  <input type="radio" name="hadir" value="Hadir" checked class="accent-[#F2B544]" />
+                  Insya Allah hadir
+                </label>
+                <label class="flex h-11 cursor-pointer items-center gap-3 rounded-xl border border-[#1B4965]/20 bg-white px-4 text-sm has-[:checked]:border-[#1B4965] has-[:checked]:bg-[#1B4965] has-[:checked]:text-white">
+                  <input type="radio" name="hadir" value="Berhalangan" class="accent-[#F2B544]" />
+                  Mohon maaf, berhalangan
+                </label>
+              </div>
+            </fieldset>
+            <div>
+              <label for="ucapan" class="block text-sm font-bold">Doa &amp; ucapan</label>
+              <textarea
+                id="ucapan" name="ucapan" rows="3" placeholder="Doa untuk ananda"
+                class="mt-1 w-full rounded-xl border border-[#1B4965]/20 bg-white px-3 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-[#1B4965]"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#1B4965] px-6 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#153a50] sm:w-auto"
+            >
+              Kirim via WhatsApp
+            </button>
+            <p class="text-xs text-[#1B4965]/60">
+              Situs ini statis tanpa basis data; konfirmasi dikirim sebagai chat WhatsApp ke keluarga.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-[#1B4965] text-[#E8F1F8]">
+      <div class="mx-auto max-w-6xl px-5 py-12 text-center md:px-8">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#F2B544]">Hormat kami</p>
+        <p class="font-display mt-3 text-2xl font-bold">{acara.ayah} &amp; {acara.ibu}</p>
+        <p class="mt-1 text-sm text-[#E8F1F8]/70">beserta keluarga</p>
+        <p class="mt-8 text-xs text-[#E8F1F8]/50">Wassalamu'alaikum warahmatullahi wabarakatuh</p>
+      </div>
+    </footer>
+  </main>
+
+  <script define:vars={{ wa: acara.wa, anak: acara.panggilan }}>
+    const form = document.getElementById('rsvp');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Konfirmasi kehadiran tasyakuran khitan ${anak}:`,
+        `Nama: ${d.get('nama')}`,
+        `Jumlah: ${d.get('jumlah')} orang`,
+        `Kehadiran: ${d.get('hadir')}`,
+        `Doa/ucapan: ${d.get('ucapan') || '-'}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

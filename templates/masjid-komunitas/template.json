@@ -1,0 +1,13 @@
+{
+  "id": "masjid-komunitas",
+  "name": "Masjid & Komunitas",
+  "description": "Situs masjid atau organisasi: jadwal sholat, kajian rutin, pengumuman, infaq dengan nomor rekening, dan kontak pengurus.",
+  "category": "Lainnya",
+  "tags": ["masjid", "komunitas", "organisasi", "kegiatan"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama masjid atau organisasi}} di {{kota}}. Ganti jadwal sholat, daftar kajian dan kegiatan, pengumuman, nomor rekening infaq, susunan pengurus, alamat, dan nomor WhatsApp contoh di src/data/masjid.ts dengan data asli. Pertahankan struktur 4 halaman, tombol salin nomor rekening, dan form konfirmasi WhatsApp-nya. Bila ini bukan masjid, ganti bagian jadwal sholat dengan agenda rutin organisasi.",
+  "author": "HyVay",
+  "license": "MIT"
+}

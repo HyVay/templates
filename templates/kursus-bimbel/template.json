@@ -1,0 +1,13 @@
+{
+  "id": "kursus-bimbel",
+  "name": "Kursus & Bimbel",
+  "description": "Situs bimbingan belajar multi-halaman: tabel program dan biaya, profil pengajar, info gelombang, dan pendaftaran via WhatsApp.",
+  "category": "Pendidikan",
+  "tags": ["bimbel", "kursus", "pendidikan", "pendaftaran"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama lembaga}} di {{kota}} yang menyediakan {{jenis program, mis. bimbel SMA / kursus bahasa / les musik}}. Ganti daftar program, jadwal, biaya, nama pengajar, tanggal gelombang pendaftaran, alamat, dan nomor WhatsApp contoh dengan data lembaga itu. Pertahankan tabel program, langkah pendaftaran, dan form daftar via WhatsApp-nya.",
+  "author": "HyVay",
+  "license": "MIT"
+}

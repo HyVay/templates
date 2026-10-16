@@ -1,0 +1,64 @@
+---
+import { profil } from '../data/portofolio';
+
+const links = [
+  { href: '/karya/', label: 'karya' },
+  { href: '/tentang/', label: 'tentang' },
+  { href: '/kontak/', label: 'kontak' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 bg-[#FAFAF9]/95 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-16 md:px-8">
+    <a href="/" class="text-sm font-medium tracking-tight text-[#141414]">{profil.nama}<span class="ml-2 hidden text-[#141414]/50 sm:inline">{profil.profesi}, {profil.kota}</span></a>
+    <nav class="hidden md:flex md:items-center md:gap-8">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'text-sm transition-opacity duration-150 hover:opacity-50',
+            here === l.href ? 'underline underline-offset-8 decoration-[#141414]' : '',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center text-[#141414] transition-opacity duration-150 hover:opacity-50 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-y border-[#141414]/10 bg-[#FAFAF9] md:hidden">
+    <nav class="mx-auto flex max-w-7xl flex-col px-4 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block py-3 font-display text-3xl italic text-[#141414] transition-opacity duration-150 hover:opacity-50">
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TabelProgram from '../components/TabelProgram.astro';
+import { lembaga, program } from '../data/bimbel';
+---
+<Base
+  title={`Program — ${lembaga.nama}`}
+  description={`${program.length} program bimbingan belajar ${lembaga.nama}: jadwal, silabus ringkas, dan biaya per bulan.`}
+>
+  <Fonts />
+  <Header />
+  <main class="text-[#14213D]">
+    <section class="border-b border-[#14213D]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Program · {lembaga.tahunAjaran}</p>
+        <h1 class="font-display mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">Program dan biaya</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#14213D]/70 md:text-base">
+          Semua program memakai kelas kecil dan laporan bulanan. Pilih berdasarkan jenjang dan target: nilai sekolah, ujian masuk, atau UTBK.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <TabelProgram />
+    </section>
+
+    <section class="border-t border-[#14213D]/15 bg-white">
+      <div class="mx-auto max-w-6xl divide-y divide-[#14213D]/10 px-4 md:px-6">
+        {program.map((p, i) => (
+          <article id={p.slug} class="grid scroll-mt-20 grid-cols-1 gap-6 py-12 md:grid-cols-12 md:gap-8 md:py-16">
+            <div class="md:col-span-5">
+              <p class="font-mono text-sm text-[#FCA311]">0{i + 1}</p>
+              <h2 class="font-display mt-2 text-3xl font-extrabold tracking-tight">{p.nama}</h2>
+              <p class="mt-1 text-sm text-[#14213D]/65">{p.jenjang}</p>
+              <p class="mt-4 max-w-md text-sm leading-relaxed text-[#14213D]/75 md:text-base">{p.ringkas}</p>
+              <dl class="mt-6 divide-y divide-[#14213D]/10 border-y border-[#14213D]/10 text-sm">
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Jadwal</dt><dd class="text-right font-medium">{p.jadwal}</dd></div>
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Durasi</dt><dd class="text-right font-medium">{p.durasi}</dd></div>
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Biaya</dt><dd class="text-right font-bold">{p.biaya}</dd></div>
+              </dl>
+            </div>
+            <div class="md:col-span-6 md:col-start-7">
+              <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Apa yang dikerjakan</p>
+              <ul class="mt-4 space-y-3">
+                {p.silabus.map((s) => (
+                  <li class="flex gap-3 text-sm leading-relaxed md:text-base">
+                    <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FCA311]" aria-hidden="true"></span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`/daftar/?program=${p.slug}`}
+                class="mt-8 inline-flex items-center justify-center rounded-lg bg-[#14213D] px-5 py-3 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#1f2f55]"
+              >
+                Daftar {p.nama}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

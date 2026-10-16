@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { masjid, takmir } from '../data/masjid';
+---
+<Base
+  title={`Kontak — ${masjid.nama} ${masjid.lokasiSingkat}`}
+  description={`Hubungi takmir ${masjid.nama} di ${masjid.alamat}. Sekretariat buka ${masjid.jamSekretariat}.`}
+>
+  <Fonts />
+  <Header />
+  <main class="bg-[#F7F3EA] text-[#0F3D2E]">
+    <section class="border-b border-[#0F3D2E]/15">
+      <div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Kontak</p>
+        <h1 class="font-display mt-2 text-4xl font-bold leading-tight md:text-6xl">Sekretariat &amp; takmir</h1>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#0F3D2E]/75 md:text-lg">
+          Untuk peminjaman ambulans, pendaftaran TPA, permintaan jadwal khutbah, atau pengaduan fasilitas.
+        </p>
+      </div>
+    </section>
+
+    <section class="border-b border-[#0F3D2E]/15">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-12 md:px-8 md:py-20">
+        <dl class="divide-y divide-[#0F3D2E]/15 border-y border-[#0F3D2E]/15 md:col-span-7">
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3">
+            <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">Alamat</dt>
+            <dd class="sm:col-span-2">
+              <p class="font-semibold">{masjid.alamat}</p>
+              <a href={masjid.maps} target="_blank" rel="noopener noreferrer" class="mt-1 inline-block text-sm font-semibold text-[#B8912E] underline-offset-4 transition-colors duration-150 hover:underline">Buka di Google Maps</a>
+            </dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3">
+            <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">Jam sekretariat</dt>
+            <dd class="font-semibold sm:col-span-2">{masjid.jamSekretariat}</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-1 py-5 sm:grid-cols-3">
+            <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">WhatsApp</dt>
+            <dd class="sm:col-span-2">
+              <a href={`https://wa.me/${masjid.wa}`} target="_blank" rel="noopener noreferrer" class="font-semibold transition-colors duration-150 hover:text-[#B8912E]">{masjid.wa}</a>
+              <p class="mt-1 text-sm text-[#0F3D2E]/70">Dibalas sekretaris pada jam sekretariat.</p>
+            </dd>
+          </div>
+        </dl>
+        <div class="md:col-span-5 md:pl-6">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Susunan takmir</p>
+          <ul class="mt-4 divide-y divide-[#0F3D2E]/15 border-y border-[#0F3D2E]/15">
+            {takmir.map((t) => (
+              <li class="py-4">
+                <p class="text-xs uppercase tracking-wider text-[#0F3D2E]/60">{t.jabatan}</p>
+                <p class="font-display mt-0.5 text-xl font-bold">{t.nama}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-12 md:px-8 md:py-20">
+        <div class="md:col-span-5">
+          <h2 class="font-display text-3xl font-bold leading-tight">Kirim pesan ke sekretariat</h2>
+          <p class="mt-3 text-sm leading-relaxed text-[#0F3D2E]/70">
+            Pesan tersusun otomatis dan terbuka di WhatsApp sekretariat, jadi Anda bisa mengeditnya dulu sebelum mengirim.
+          </p>
+        </div>
+        <form id="form-kontak" class="space-y-4 md:col-span-7">
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label for="nama" class="block text-sm font-semibold">Nama</label>
+              <input id="nama" name="nama" required placeholder="Nama Anda"
+                class="mt-1 h-11 w-full rounded-sm border border-[#0F3D2E]/25 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#0F3D2E]" />
+            </div>
+            <div>
+              <label for="keperluan" class="block text-sm font-semibold">Keperluan</label>
+              <select id="keperluan" name="keperluan"
+                class="mt-1 h-11 w-full rounded-sm border border-[#0F3D2E]/25 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#0F3D2E]">
+                <option>Pendaftaran TPA</option>
+                <option>Peminjaman ambulans</option>
+                <option>Jadwal khutbah / pemateri</option>
+                <option>Fasilitas masjid</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="pesan" class="block text-sm font-semibold">Pesan</label>
+            <textarea id="pesan" name="pesan" rows="4" required placeholder="Tulis keperluan Anda"
+              class="mt-1 w-full rounded-sm border border-[#0F3D2E]/25 bg-white px-3 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-[#0F3D2E]"></textarea>
+          </div>
+          <button type="submit"
+            class="inline-flex h-12 w-full items-center justify-center rounded-sm bg-[#0F3D2E] px-6 text-sm font-semibold uppercase tracking-wider text-[#F7F3EA] transition-colors duration-150 hover:bg-[#0b2e22] sm:w-auto">
+            Kirim via WhatsApp
+          </button>
+          <p class="text-xs text-[#0F3D2E]/60">Situs ini statis tanpa basis data; pesan dikirim sebagai chat WhatsApp ke sekretariat.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: masjid.wa }}>
+    const form = document.getElementById('form-kontak');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Assalamu’alaikum, saya ${d.get('nama')}.`,
+        `Keperluan: ${d.get('keperluan')}`,
+        `${d.get('pesan')}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

@@ -1,0 +1,68 @@
+---
+import { masjid } from '../data/masjid';
+
+const links = [
+  { href: '/', label: 'Beranda' },
+  { href: '/kegiatan/', label: 'Kegiatan' },
+  { href: '/infaq/', label: 'Infaq' },
+  { href: '/kontak/', label: 'Kontak' },
+];
+const here = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-[#0F3D2E]/15 bg-[#F7F3EA]/95 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
+    <a href="/" class="flex items-baseline gap-3">
+      <span class="font-display text-xl font-bold leading-none text-[#0F3D2E] md:text-2xl">{masjid.nama}</span>
+      <span class="hidden text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E] sm:inline">{masjid.lokasiSingkat}</span>
+    </a>
+    <nav class="hidden md:flex md:items-center md:gap-8">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'border-b-2 py-1 text-sm font-semibold uppercase tracking-wider transition-colors duration-150 hover:text-[#0F3D2E]',
+            here === l.href ? 'border-[#B8912E] text-[#0F3D2E]' : 'border-transparent text-[#0F3D2E]/60',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-sm text-[#0F3D2E] transition-colors duration-150 hover:bg-[#0F3D2E]/10 md:hidden"
+    >
+      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-[#0F3D2E]/15 bg-[#F7F3EA] md:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-5 py-2">
+      {links.map((l) => (
+        <a href={l.href} class="block rounded-sm px-2 py-3 text-base font-semibold text-[#0F3D2E] transition-colors duration-150 hover:bg-[#0F3D2E]/10">
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  const set = (isOpen: boolean) => {
+    btn?.setAttribute('aria-expanded', String(isOpen));
+    menu?.classList.toggle('hidden', !isOpen);
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

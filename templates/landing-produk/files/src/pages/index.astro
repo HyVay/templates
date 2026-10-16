@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Mockup from '../components/Mockup.astro';
+import { produk, angka, fitur, testimoni } from '../data/produk';
+---
+<Base title={`${produk.nama} — ${produk.tagline}`} description={produk.deskripsi}>
+  <Fonts />
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="border-b border-[#0b1220]/10">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 pb-16 pt-14 md:grid-cols-12 md:items-center md:px-6 md:pb-24 md:pt-20">
+        <div class="md:col-span-6">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#ff5a1f]">Android · gratis untuk satu kasir</p>
+          <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl">
+            {produk.tagline}
+          </h1>
+          <p class="mt-6 max-w-lg text-base leading-relaxed text-[#0b1220]/70 md:text-lg">{produk.deskripsi}</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#0b1220]">Unduh di Play Store</a>
+            <a href="/harga/" class="inline-flex items-center justify-center rounded-md border border-[#0b1220]/20 px-6 py-3.5 text-sm font-bold transition-colors duration-150 hover:border-[#0b1220]">Lihat harga</a>
+          </div>
+          <dl class="mt-12 grid grid-cols-1 gap-4 border-t border-[#0b1220]/10 pt-6 sm:grid-cols-3">
+            {angka.map((a) => (
+              <div>
+                <dt class="font-display text-xl font-extrabold tracking-tight md:text-2xl">{a.nilai}</dt>
+                <dd class="mt-1 text-xs text-[#0b1220]/60">{a.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="md:col-span-6">
+          <div class="rounded-md bg-[#f3f4f2] px-6 py-10 md:px-12 md:py-14">
+            <Mockup nama={produk.nama} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fitur -->
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+        <h2 class="font-display text-3xl font-extrabold leading-tight tracking-tight md:col-span-5 md:text-4xl">Dibuat untuk toko yang sibuk, bukan untuk demo.</h2>
+        <p class="text-base leading-relaxed text-[#0b1220]/70 md:col-span-6 md:col-start-7">Empat hal yang paling sering ditanyakan pemilik warung sebelum pindah dari buku catatan. Semuanya ada sejak paket gratis.</p>
+      </div>
+      <ol class="mt-14 divide-y divide-[#0b1220]/10 border-y border-[#0b1220]/10">
+        {fitur.map((f, i) => (
+          <li class="grid grid-cols-1 gap-8 py-12 md:grid-cols-12 md:items-center">
+            <div class:list={['md:col-span-6', i % 2 === 1 && 'md:order-2 md:col-start-7']}>
+              <p class="font-mono text-sm text-[#ff5a1f]">0{i + 1}</p>
+              <h3 class="mt-3 font-display text-2xl font-extrabold leading-tight tracking-tight md:text-3xl">{f.judul}</h3>
+              <p class="mt-4 max-w-md text-base leading-relaxed text-[#0b1220]/70">{f.isi}</p>
+            </div>
+            <div class:list={['md:col-span-5', i % 2 === 1 ? 'md:order-1 md:col-start-1' : 'md:col-start-8']}>
+              <div class="rounded-md border border-[#0b1220]/10 bg-[#f3f4f2] p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">{f.contoh.label}</p>
+                <ul class="mt-3 divide-y divide-[#0b1220]/10 text-sm">
+                  {f.contoh.baris.map((b) => <li class="py-2.5 tabular-nums">{b}</li>)}
+                </ul>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Testimoni -->
+    <section class="border-y border-[#0b1220]/10 bg-[#f3f4f2]">
+      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <blockquote class="grid grid-cols-1 gap-6 md:grid-cols-12">
+          <p class="font-display text-2xl font-bold leading-snug tracking-tight md:col-span-9 md:text-4xl">“{testimoni.kutipan}”</p>
+          <footer class="text-sm md:col-span-3 md:self-end md:text-right">
+            <p class="font-bold">{testimoni.nama}</p>
+            <p class="text-[#0b1220]/60">{testimoni.peran}</p>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-[#0b1220] text-white">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-16 md:grid-cols-12 md:items-center md:px-6 md:py-24">
+        <div class="md:col-span-8">
+          <h2 class="font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">Mulai dari paket gratis. Naik ke Pro kalau pegawai bertambah.</h2>
+          <p class="mt-4 text-sm text-white/60">Tidak perlu kartu kredit. Katalog bisa diimpor dari Excel.</p>
+        </div>
+        <div class="flex flex-col gap-3 md:col-span-4 md:items-end">
+          <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-white hover:text-[#0b1220]">Unduh di Play Store</a>
+          <a href="/harga/" class="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3.5 text-sm font-bold transition-colors duration-150 hover:border-white">Minta demo via WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { produk, faq } from '../data/produk';
+---
+<Base title={`Pertanyaan umum — ${produk.nama}`} description={`${faq.length} pertanyaan yang paling sering ditanyakan sebelum memakai ${produk.nama}: data offline, printer, ganti HP, dan cara bayar.`}>
+  <Fonts />
+  <Header />
+  <main>
+    <section class="border-b border-[#0b1220]/10">
+      <div class="mx-auto max-w-6xl px-4 pb-12 pt-14 md:px-6 md:pt-20">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#ff5a1f]">FAQ</p>
+        <h1 class="mt-4 max-w-2xl font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">Yang biasanya ditanyakan sebelum pindah dari buku catatan.</h1>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-20">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <p class="text-sm leading-relaxed text-[#0b1220]/60 md:col-span-3">Tidak ketemu jawabannya? Tanya langsung ke <a href={`https://wa.me/${produk.wa}`} class="font-bold text-[#0b1220] underline underline-offset-4 transition-colors duration-150 hover:text-[#ff5a1f]">WhatsApp tim kami</a>, Senin–Sabtu 09.00–18.00 WIB.</p>
+        <div class="divide-y divide-[#0b1220]/10 border-y border-[#0b1220]/10 md:col-span-8 md:col-start-5">
+          {faq.map((f, i) => (
+            <details class="group">
+              <summary class="flex cursor-pointer list-none items-start gap-5 py-5 text-base font-bold leading-snug md:text-lg [&::-webkit-details-marker]:hidden">
+                <span class="mt-0.5 font-mono text-sm font-normal text-[#ff5a1f]">{String(i + 1).padStart(2, '0')}</span>
+                <span class="flex-1">{f.t}</span>
+                <svg class="mt-1 h-5 w-5 shrink-0 transition-transform duration-150 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round" /></svg>
+              </summary>
+              <p class="pb-6 pl-11 text-sm leading-relaxed text-[#0b1220]/70 md:text-base">{f.j}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

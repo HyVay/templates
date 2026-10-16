@@ -1,0 +1,21 @@
+---
+import { rupiah, type MenuItem } from '../data/kedai';
+
+interface Props { item: MenuItem[]; tandai?: boolean }
+const { item, tandai = true } = Astro.props;
+---
+<ul class="divide-y divide-[#1F3D2B]/10">
+  {item.map((m) => (
+    <li class="py-4">
+      <div class="flex items-baseline gap-3">
+        <span class="font-display text-lg text-[#1F3D2B] md:text-xl">
+          {m.nama}
+          {tandai && m.favorit && <span class="ml-2 align-middle text-[11px] font-medium uppercase tracking-widest text-[#C8553D] font-body">favorit</span>}
+        </span>
+        <span class="flex-1 translate-y-[-4px] border-b border-dotted border-[#1F3D2B]/40" aria-hidden="true"></span>
+        <span class="shrink-0 tabular-nums text-sm text-[#1F3D2B] md:text-base">{rupiah(m.harga)}</span>
+      </div>
+      {m.keterangan && <p class="mt-1 max-w-md font-display text-sm italic leading-relaxed text-[#1F3D2B]/65">{m.keterangan}</p>}
+    </li>
+  ))}
+</ul>

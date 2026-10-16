@@ -1,0 +1,13 @@
+{
+  "id": "restoran-kafe",
+  "name": "Restoran & Kafe",
+  "description": "Situs kedai makan multi-halaman: menu bergaya cetak dengan harga, galeri, jam buka, dan reservasi meja via WhatsApp.",
+  "category": "Kuliner",
+  "tags": ["restoran", "kafe", "menu", "reservasi"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "featured",
+  "seedPrompt": "Sesuaikan situs ini untuk {{nama restoran/kafe}} di {{kota}} yang menyajikan {{jenis masakan}}. Ganti seluruh daftar menu, harga, jam buka, alamat, dan nomor WhatsApp contoh dengan data tempat itu. Pertahankan gaya daftar menu dengan titik-titik penghubung harga, navigasi kategori yang menempel di atas, dan form reservasi yang mengirim ke WhatsApp. Sesuaikan warna agar cocok dengan suasana tempat, tetap hangat dan tidak mencolok.",
+  "author": "HyVay",
+  "license": "MIT"
+}

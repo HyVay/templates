@@ -1,0 +1,13 @@
+{
+  "id": "portofolio-kreatif",
+  "name": "Portofolio Kreatif",
+  "description": "Portofolio fotografer atau desainer: indeks karya bernomor, galeri dengan filter kategori, halaman tentang, paket jasa, dan kontak via WhatsApp.",
+  "category": "Portofolio",
+  "tags": ["portofolio", "fotografer", "desainer", "galeri"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan portofolio ini untuk {{nama}}, {{profesi}} di {{kota}} yang mengerjakan {{jenis karya}}. Ganti daftar karya, kategori, tahun, lokasi, paket jasa, harga, dan nomor WhatsApp contoh dengan data itu, termasuk foto-fotonya. Pertahankan indeks karya bernomor di beranda, galeri dengan filter kategori, dan tampilan hitam-putih minimal tanpa warna aksen.",
+  "author": "HyVay",
+  "license": "MIT"
+}

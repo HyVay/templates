@@ -1,0 +1,34 @@
+---
+interface Props { target: string }
+const { target } = Astro.props;
+const unit = ['Hari', 'Jam', 'Menit', 'Detik'];
+---
+<div id="countdown" data-target={target} class="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+  {unit.map((label) => (
+    <div class="rounded-xl bg-[#1B4965] px-2 py-3 text-center sm:py-4">
+      <p class="font-display text-2xl font-semibold tabular-nums text-[#F2B544] sm:text-3xl" data-unit={label}>00</p>
+      <p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#E8F1F8]/80 sm:text-[11px]">{label}</p>
+    </div>
+  ))}
+</div>
+<script>
+  const root = document.getElementById('countdown');
+  const target = new Date(root?.dataset.target ?? '').getTime();
+  const cell = (u: string) => root?.querySelector(`[data-unit="${u}"]`);
+  const tick = () => {
+    const left = Math.max(0, target - Date.now());
+    const s = Math.floor(left / 1000);
+    const map: Record<string, number> = {
+      Hari: Math.floor(s / 86400),
+      Jam: Math.floor((s % 86400) / 3600),
+      Menit: Math.floor((s % 3600) / 60),
+      Detik: s % 60,
+    };
+    for (const [u, v] of Object.entries(map)) {
+      const el = cell(u);
+      if (el) el.textContent = String(v).padStart(2, '0');
+    }
+  };
+  tick();
+  setInterval(tick, 1000);
+</script>

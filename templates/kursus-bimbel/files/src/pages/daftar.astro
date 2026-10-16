@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { lembaga, pendaftaran, program } from '../data/bimbel';
+
+const langkah = [
+  { judul: 'Isi formulir di bawah', isi: 'Pesan terbuka di WhatsApp kami lengkap dengan data yang Anda tulis. Kami balas dengan jadwal tes penempatan.' },
+  { judul: 'Ikuti tes penempatan', isi: `Tes 60 menit di cabang, ${pendaftaran.tesPenempatan}. Hasil keluar di hari yang sama.` },
+  { judul: 'Bayar dan mulai kelas', isi: `Biaya pendaftaran ${pendaftaran.biayaDaftar}. Kelas dimulai ${pendaftaran.mulaiKelas}.` },
+];
+---
+<Base
+  title={`Pendaftaran — ${lembaga.nama}`}
+  description={`Pendaftaran ${pendaftaran.gelombang} ${lembaga.nama}: ${pendaftaran.periode}. Tes penempatan ${pendaftaran.tesPenempatan}.`}
+>
+  <Fonts />
+  <Header />
+  <main class="text-[#14213D]">
+    <section class="border-b border-[#14213D]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">{pendaftaran.gelombang} · {pendaftaran.periode}</p>
+        <h1 class="font-display mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">Pendaftaran</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#14213D]/70 md:text-base">
+          Tiga langkah dari formulir sampai duduk di kelas. Kuota {pendaftaran.kuota}, kelas ditutup begitu penuh.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
+      <div class="md:col-span-5">
+        <ol class="divide-y divide-[#14213D]/10 border-y border-[#14213D]/10">
+          {langkah.map((l, i) => (
+            <li class="grid grid-cols-[3rem_1fr] gap-4 py-5">
+              <span class="font-mono text-sm text-[#FCA311]">0{i + 1}</span>
+              <div>
+                <h2 class="font-display text-lg font-bold tracking-tight">{l.judul}</h2>
+                <p class="mt-1.5 text-sm leading-relaxed text-[#14213D]/70">{l.isi}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-8 rounded-lg bg-[#14213D] p-6 text-white">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#FCA311]">Cabang</p>
+          <p class="mt-2 text-sm leading-relaxed">{lembaga.alamat}</p>
+          <p class="mt-1 text-sm text-white/70">{lembaga.jam}</p>
+        </div>
+      </div>
+
+      <div class="md:col-span-6 md:col-start-7">
+        <form id="daftar-form" class="space-y-5">
+          <div>
+            <label for="siswa" class="block text-sm font-semibold">Nama siswa</label>
+            <input id="siswa" name="siswa" required placeholder="Nama lengkap siswa"
+              class="mt-1.5 w-full rounded-lg border border-[#14213D]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#14213D]" />
+          </div>
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              <label for="jenjang" class="block text-sm font-semibold">Kelas saat ini</label>
+              <select id="jenjang" name="jenjang"
+                class="mt-1.5 w-full rounded-lg border border-[#14213D]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#14213D]">
+                {['Kelas 7', 'Kelas 8', 'Kelas 9', 'Kelas 10', 'Kelas 11', 'Kelas 12', 'Gap year'].map((k) => <option value={k}>{k}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="program" class="block text-sm font-semibold">Program</label>
+              <select id="program" name="program"
+                class="mt-1.5 w-full rounded-lg border border-[#14213D]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#14213D]">
+                {program.map((p) => <option value={p.slug}>{p.nama} · {p.biaya}</option>)}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="wali" class="block text-sm font-semibold">Nama orang tua / wali</label>
+            <input id="wali" name="wali" required placeholder="Nama yang bisa kami hubungi"
+              class="mt-1.5 w-full rounded-lg border border-[#14213D]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#14213D]" />
+          </div>
+          <div>
+            <label for="catatan" class="block text-sm font-semibold">Catatan <span class="font-normal text-[#14213D]/50">(opsional)</span></label>
+            <textarea id="catatan" name="catatan" rows="3" placeholder="Mata pelajaran yang paling perlu dikejar, sekolah asal, atau pertanyaan"
+              class="mt-1.5 w-full rounded-lg border border-[#14213D]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#14213D]"></textarea>
+          </div>
+          <button type="submit"
+            class="w-full rounded-lg bg-[#FCA311] px-6 py-3.5 text-sm font-bold text-[#14213D] transition-colors duration-150 hover:bg-[#e3920d] sm:w-auto">
+            Kirim pendaftaran via WhatsApp
+          </button>
+          <p class="text-xs leading-relaxed text-[#14213D]/55">
+            Situs ini tidak menyimpan data apa pun. Isian di atas disusun menjadi pesan WhatsApp ke nomor {lembaga.telepon}.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script define:vars={{ wa: lembaga.telepon, programs: program.map((p) => [p.slug, p.nama]) }}>
+    const form = document.getElementById('daftar-form');
+    const select = document.getElementById('program');
+    // Pra-pilih program dari ?program=slug (tautan di halaman Program).
+    const wanted = new URLSearchParams(location.search).get('program');
+    if (wanted && select) select.value = wanted;
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const nama = Object.fromEntries(programs)[d.get('program')] || d.get('program');
+      const text = [
+        'Halo, saya ingin mendaftarkan:',
+        `Nama siswa: ${d.get('siswa')}`,
+        `Kelas: ${d.get('jenjang')}`,
+        `Program: ${nama}`,
+        `Orang tua/wali: ${d.get('wali')}`,
+        `Catatan: ${d.get('catatan') || '-'}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>

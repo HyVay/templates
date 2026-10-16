@@ -1,0 +1,13 @@
+{
+  "id": "landing-produk",
+  "name": "Landing Page Produk",
+  "description": "Landing page untuk aplikasi atau produk: hero dengan mockup, fitur berbaris, harga dua paket, FAQ, dan permintaan demo via WhatsApp.",
+  "category": "Bisnis",
+  "tags": ["landing-page", "produk", "aplikasi", "saas"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan landing page ini untuk produk {{nama produk}}, yaitu {{apa produknya dan untuk siapa}}. Ganti nama, tagline, daftar fitur, angka-angka, isi mockup, paket harga, FAQ, dan nomor WhatsApp contoh dengan data produk itu — semuanya di src/data/produk.ts. Pertahankan 3 halaman (beranda, harga, FAQ), mockup ponsel berbasis HTML di hero, dan form minta demo WhatsApp. Warna aksen boleh diganti sesuai merek, tetap tanpa gradien.",
+  "author": "HyVay",
+  "license": "MIT"
+}

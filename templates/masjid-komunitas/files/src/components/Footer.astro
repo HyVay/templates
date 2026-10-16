@@ -1,0 +1,37 @@
+---
+import { masjid, jadwalSholat, takmir } from '../data/masjid';
+---
+<footer class="bg-[#0F3D2E] text-[#F7F3EA]">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-12 md:px-8">
+    <div class="md:col-span-5">
+      <p class="font-display text-3xl text-[#F7F3EA]" dir="rtl" lang="ar">{masjid.namaArab}</p>
+      <p class="font-display mt-1 text-2xl font-bold">{masjid.nama} {masjid.lokasiSingkat}</p>
+      <p class="mt-3 max-w-sm text-sm leading-relaxed text-[#F7F3EA]/70">{masjid.alamat}</p>
+      <a href={masjid.maps} target="_blank" rel="noopener noreferrer" class="mt-3 inline-block text-sm font-semibold text-[#B8912E] underline-offset-4 transition-colors duration-150 hover:underline">
+        Petunjuk arah
+      </a>
+    </div>
+    <div class="md:col-span-4">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Jadwal sholat · {jadwalSholat.berlakuUntuk}</p>
+      <ul class="mt-3 divide-y divide-[#F7F3EA]/10 text-sm">
+        {jadwalSholat.waktu.map((w) => (
+          <li class="flex justify-between py-1.5">
+            <span class="text-[#F7F3EA]/80">{w.nama}</span>
+            <span class="font-display text-base tabular-nums">{w.jam}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="md:col-span-3">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Sekretariat</p>
+      <p class="mt-3 text-sm text-[#F7F3EA]/80">{masjid.jamSekretariat}</p>
+      <a href={`https://wa.me/${masjid.wa}`} target="_blank" rel="noopener noreferrer" class="mt-2 block text-sm font-semibold text-[#F7F3EA] transition-colors duration-150 hover:text-[#B8912E]">
+        WhatsApp {masjid.wa}
+      </a>
+      <p class="mt-4 text-xs text-[#F7F3EA]/50">Ketua takmir: {takmir[0].nama}</p>
+    </div>
+  </div>
+  <div class="border-t border-[#F7F3EA]/10 px-5 py-5 text-center text-xs text-[#F7F3EA]/50 md:px-8">
+    © {new Date().getFullYear()} {masjid.nama} {masjid.lokasiSingkat}. Laporan keuangan tersedia di sekretariat setiap bulan.
+  </div>
+</footer>

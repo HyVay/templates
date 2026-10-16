@@ -1,0 +1,13 @@
+{
+  "id": "konferensi-seminar",
+  "name": "Konferensi & Seminar",
+  "description": "Situs acara multi-halaman: agenda dua hari dengan tab, daftar pembicara, tabel tiket, dan pendaftaran via WhatsApp.",
+  "category": "Acara",
+  "tags": ["konferensi", "seminar", "acara", "tiket"],
+  "scaffold": "astro-static",
+  "contract": 1,
+  "badge": "new",
+  "seedPrompt": "Sesuaikan situs ini untuk acara {{nama acara}} pada {{tanggal}} di {{kota/venue}}. Ganti nama acara, tanggal, lokasi, daftar track, sesi agenda, pembicara, sponsor, harga tiket, dan nomor WhatsApp contoh dengan data acara itu — semuanya ada di src/data/acara.ts. Pertahankan struktur 4 halaman (beranda, agenda, pembicara, tiket), tab Hari 1/Hari 2 di agenda, dan form pendaftaran WhatsApp. Warna aksen boleh diganti agar cocok dengan identitas acara.",
+  "author": "HyVay",
+  "license": "MIT"
+}

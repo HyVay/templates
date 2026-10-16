@@ -17,6 +17,102 @@
       "files": 7
     },
     {
+      "id": "klinik-praktik",
+      "name": "Klinik & Praktik Dokter",
+      "description": "Situs klinik multi-halaman: jadwal praktik per dokter dalam tabel, daftar layanan dengan biaya, profil dokter, dan janji temu via WhatsApp.",
+      "category": "Lainnya",
+      "tags": [
+        "klinik",
+        "dokter",
+        "kesehatan",
+        "janji-temu"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "konferensi-seminar",
+      "name": "Konferensi & Seminar",
+      "description": "Situs acara multi-halaman: agenda dua hari dengan tab, daftar pembicara, tabel tiket, dan pendaftaran via WhatsApp.",
+      "category": "Acara",
+      "tags": [
+        "konferensi",
+        "seminar",
+        "acara",
+        "tiket"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 8
+    },
+    {
+      "id": "kursus-bimbel",
+      "name": "Kursus & Bimbel",
+      "description": "Situs bimbingan belajar multi-halaman: tabel program dan biaya, profil pengajar, info gelombang, dan pendaftaran via WhatsApp.",
+      "category": "Pendidikan",
+      "tags": [
+        "bimbel",
+        "kursus",
+        "pendidikan",
+        "pendaftaran"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "landing-produk",
+      "name": "Landing Page Produk",
+      "description": "Landing page untuk aplikasi atau produk: hero dengan mockup, fitur berbaris, harga dua paket, FAQ, dan permintaan demo via WhatsApp.",
+      "category": "Bisnis",
+      "tags": [
+        "landing-page",
+        "produk",
+        "aplikasi",
+        "saas"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 8
+    },
+    {
+      "id": "masjid-komunitas",
+      "name": "Masjid & Komunitas",
+      "description": "Situs masjid atau organisasi: jadwal sholat, kajian rutin, pengumuman, infaq dengan nomor rekening, dan kontak pengurus.",
+      "category": "Lainnya",
+      "tags": [
+        "masjid",
+        "komunitas",
+        "organisasi",
+        "kegiatan"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "portofolio-kreatif",
+      "name": "Portofolio Kreatif",
+      "description": "Portofolio fotografer atau desainer: indeks karya bernomor, galeri dengan filter kategori, halaman tentang, paket jasa, dan kontak via WhatsApp.",
+      "category": "Portofolio",
+      "tags": [
+        "portofolio",
+        "fotografer",
+        "desainer",
+        "galeri"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 8
+    },
+    {
       "id": "profil-usaha",
       "name": "Profil Usaha",
       "description": "Situs perusahaan multi-halaman: beranda, layanan, tentang, dan kontak dengan form WhatsApp.",
@@ -30,6 +126,38 @@
       "scaffold": "astro-static",
       "contract": 1,
       "files": 7
+    },
+    {
+      "id": "restoran-kafe",
+      "name": "Restoran & Kafe",
+      "description": "Situs kedai makan multi-halaman: menu bergaya cetak dengan harga, galeri, jam buka, dan reservasi meja via WhatsApp.",
+      "category": "Kuliner",
+      "tags": [
+        "restoran",
+        "kafe",
+        "menu",
+        "reservasi"
+      ],
+      "badge": "featured",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 9
+    },
+    {
+      "id": "undangan-khitanan",
+      "name": "Undangan Khitanan",
+      "description": "Undangan digital satu halaman untuk tasyakuran khitan: hitung mundur, detail acara, doa, galeri, dan konfirmasi via WhatsApp.",
+      "category": "Undangan",
+      "tags": [
+        "undangan",
+        "khitanan",
+        "keluarga",
+        "acara"
+      ],
+      "badge": "new",
+      "scaffold": "astro-static",
+      "contract": 1,
+      "files": 4
     },
     {
       "id": "undangan-pernikahan",

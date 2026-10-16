@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { klinik, layanan } from '../data/klinik';
+---
+<Base
+  title={`Layanan & Biaya — ${klinik.nama}`}
+  description={`Daftar layanan ${klinik.nama} ${klinik.kota} beserta kisaran biaya: pemeriksaan umum, gigi, anak, dan laboratorium dasar.`}
+>
+  <Fonts />
+  <Header />
+  <main class="text-[#0F2A44]">
+    <section class="border-b border-[#0F2A44]/15">
+      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Layanan</p>
+        <h1 class="font-display mt-3 text-4xl md:text-5xl">Layanan dan biaya</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#0F2A44]/70 md:text-base">
+          Tarif di bawah berlaku untuk pasien umum dan belum termasuk obat. Rentang biaya tergantung bahan dan tingkat kesulitan tindakan; dokter menjelaskan perkiraannya sebelum tindakan dimulai.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <div class="divide-y divide-[#0F2A44]/10">
+        {layanan.map((k, i) => (
+          <div class="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12">
+            <div class="md:col-span-4">
+              <p class="font-mono text-sm text-[#2E7D6B]">0{i + 1}</p>
+              <h2 class="font-display mt-2 text-2xl md:text-3xl">{k.kelompok}</h2>
+            </div>
+            <ul class="divide-y divide-[#0F2A44]/10 border-y border-[#0F2A44]/10 md:col-span-8">
+              {k.item.map((it) => (
+                <li class="flex items-baseline justify-between gap-6 py-3.5">
+                  <div>
+                    <p class="font-medium">{it.nama}</p>
+                    {it.catatan && <p class="text-xs text-[#0F2A44]/60">{it.catatan}</p>}
+                  </div>
+                  <p class="shrink-0 font-semibold tabular-nums">{it.biaya}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="mt-4 rounded-lg border border-[#0F2A44]/15 bg-white p-6 md:flex md:items-center md:justify-between md:gap-8">
+        <p class="text-sm leading-relaxed text-[#0F2A44]/75">{klinik.pembayaran}</p>
+        <a href="/janji-temu/" class="mt-4 inline-flex shrink-0 items-center justify-center rounded-lg bg-[#2E7D6B] px-5 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#256655] md:mt-0">Buat janji temu</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { profil, karya, kategori } from '../data/portofolio';
+
+const rasio = { tinggi: 'aspect-[3/4]', kotak: 'aspect-square', lebar: 'aspect-[4/3]' };
+---
+<Base title={`Karya — ${profil.nama}`} description={`${karya.length} karya pilihan ${profil.nama}: foto keluarga, pernikahan intim, dan produk UMKM di ${profil.kota} dan sekitarnya.`}>
+  <Fonts />
+  <div class="bg-[#FAFAF9] text-[#141414]">
+    <Header />
+    <main class="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-20">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <h1 class="font-display text-5xl italic leading-[0.95] tracking-tight md:text-7xl">Karya</h1>
+        <div class="flex flex-wrap gap-x-6 gap-y-2" role="group" aria-label="Filter kategori">
+          {kategori.map((k, i) => (
+            <button
+              type="button"
+              data-filter={k}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              class="filter-btn border-b py-2 text-sm transition-colors duration-150 border-transparent text-[#141414]/60 hover:text-[#141414] aria-pressed:border-[#141414] aria-pressed:text-[#141414]"
+            >
+              {k}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div id="grid" class="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 md:gap-6">
+        {karya.map((k, i) => (
+          <figure data-kategori={k.kategori} class="mb-4 break-inside-avoid md:mb-6">
+            <img src={k.foto} alt={k.judul} loading={i < 3 ? 'eager' : 'lazy'} class:list={['w-full object-cover', rasio[k.bentuk]]} />
+            <figcaption class="mt-2 flex items-baseline justify-between gap-4">
+              <span class="font-display text-lg">{k.judul}</span>
+              <span class="shrink-0 text-xs text-[#141414]/60">{k.tahun}</span>
+            </figcaption>
+            <p class="text-xs uppercase tracking-widest text-[#141414]/60">{k.kategori} · {k.lokasi}</p>
+          </figure>
+        ))}
+      </div>
+      <p id="kosong" class="hidden py-16 text-center text-sm text-[#141414]/60">Belum ada karya di kategori ini.</p>
+    </main>
+    <Footer />
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const items = document.querySelectorAll<HTMLElement>('#grid [data-kategori]');
+    const empty = document.getElementById('kosong');
+    const apply = (pilihan: string) => {
+      let terlihat = 0;
+      items.forEach((el) => {
+        const cocok = pilihan === 'Semua' || el.dataset.kategori === pilihan;
+        el.classList.toggle('hidden', !cocok);
+        if (cocok) terlihat += 1;
+      });
+      empty?.classList.toggle('hidden', terlihat > 0);
+    };
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        apply(btn.dataset.filter ?? 'Semua');
+      });
+    });
+  </script>
+</Base>

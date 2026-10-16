@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { kedai } from '../data/kedai';
+
+const input = 'mt-1 w-full rounded-sm border border-[#1F3D2B]/30 bg-white px-3 py-3 text-sm text-[#1F3D2B] outline-none transition-colors duration-150 focus:border-[#C8553D]';
+---
+<Base
+  title={`Reservasi — ${kedai.nama}`}
+  description={`Pesan meja di ${kedai.nama}, ${kedai.alamat}. Isi tanggal, jam, dan jumlah orang; konfirmasi lewat WhatsApp.`}
+>
+  <Fonts />
+  <div class="bg-[#F6F1E7] text-[#1F3D2B]">
+    <Header />
+    <main>
+      <section class="border-b border-[#1F3D2B]/15">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+          <p class="text-xs uppercase tracking-[0.25em] text-[#C8553D]">Tanpa uang muka</p>
+          <h1 class="mt-4 font-display text-5xl leading-[0.95] tracking-tight md:text-7xl">Pesan meja</h1>
+          <p class="mt-6 max-w-lg font-display text-lg italic text-[#1F3D2B]/75 md:text-xl">
+            Isi formulir, kami balas di WhatsApp untuk memastikan mejanya. {kedai.kapasitas}
+          </p>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-12">
+          <form id="reservasi-form" class="space-y-5 md:col-span-7">
+            <div>
+              <label for="nama" class="text-xs uppercase tracking-widest text-[#1F3D2B]/70">Nama</label>
+              <input id="nama" name="nama" required placeholder="Nama pemesan" class={input} />
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="tanggal" class="text-xs uppercase tracking-widest text-[#1F3D2B]/70">Tanggal</label>
+                <input id="tanggal" name="tanggal" type="date" required class={input} />
+              </div>
+              <div>
+                <label for="jam" class="text-xs uppercase tracking-widest text-[#1F3D2B]/70">Jam</label>
+                <input id="jam" name="jam" type="time" required class={input} />
+              </div>
+            </div>
+            <div>
+              <label for="orang" class="text-xs uppercase tracking-widest text-[#1F3D2B]/70">Jumlah orang</label>
+              <select id="orang" name="orang" class={input}>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => <option value={n}>{n} orang</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="catatan" class="text-xs uppercase tracking-widest text-[#1F3D2B]/70">Catatan</label>
+              <textarea id="catatan" name="catatan" rows="3" placeholder="Kursi bayi, ulang tahun, dekat jendela, dan sebagainya" class={input}></textarea>
+            </div>
+            <button type="submit" class="w-full rounded-sm bg-[#1F3D2B] px-5 py-3 text-sm font-medium text-[#F6F1E7] transition-colors duration-150 hover:bg-[#C8553D] sm:w-auto">
+              Kirim via WhatsApp
+            </button>
+            <p class="text-xs text-[#1F3D2B]/60">
+              Situs ini tidak menyimpan data apa pun. Isian di atas dikirim sebagai pesan WhatsApp ke kedai, dan reservasi baru pasti setelah kami balas.
+            </p>
+          </form>
+
+          <aside class="md:col-span-5">
+            <dl class="divide-y divide-[#1F3D2B]/15 border-y border-[#1F3D2B]/15">
+              {kedai.jam.map((j) => (
+                <div class="py-4">
+                  <dt class="text-xs uppercase tracking-widest text-[#1F3D2B]/60">{j.hari}</dt>
+                  <dd class="mt-1 font-display text-xl">{j.buka}</dd>
+                </div>
+              ))}
+              <div class="py-4">
+                <dt class="text-xs uppercase tracking-widest text-[#1F3D2B]/60">Alamat</dt>
+                <dd class="mt-1 font-display text-xl">{kedai.alamat}</dd>
+                <a href={kedai.maps} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#C8553D]">Buka di Google Maps</a>
+              </div>
+              <div class="py-4">
+                <dt class="text-xs uppercase tracking-widest text-[#1F3D2B]/60">Langsung chat</dt>
+                <dd class="mt-1"><a href={`https://wa.me/${kedai.telepon}`} target="_blank" rel="noopener noreferrer" class="font-display text-xl underline underline-offset-4 transition-colors duration-150 hover:text-[#C8553D]">{kedai.telepon}</a></dd>
+              </div>
+            </dl>
+            <p class="mt-6 text-sm leading-relaxed text-[#1F3D2B]/70">{kedai.catatanJam}</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+
+  <script define:vars={{ wa: kedai.telepon, nama: kedai.nama }}>
+    const form = document.getElementById('reservasi-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const text = [
+        `Halo ${nama}, saya ${d.get('nama')} mau pesan meja.`,
+        `Tanggal: ${d.get('tanggal')}`,
+        `Jam: ${d.get('jam')}`,
+        `Jumlah: ${d.get('orang')} orang`,
+        `Catatan: ${d.get('catatan') || '-'}`,
+      ].join('\n');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  </script>
+</Base>
