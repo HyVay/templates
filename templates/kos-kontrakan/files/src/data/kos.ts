@@ -18,7 +18,7 @@ export const kos = {
     telepon: '6281234567890',
     maps: 'https://maps.google.com/?q=Kaliurang+Km+5+Sleman',
     pembaruan: 'Oktober 2026',
-    jamSurvei: 'Setiap hari 09.00 - 19.00 WIB, kecuali Jumat 12.00 - 13.00',
+    jamSurvei: 'Setiap hari 09.00–19.00 WIB, kecuali Jumat 12.00–13.00',
 };
 
 export interface TipeKamar {
@@ -43,8 +43,8 @@ export const tipeKamar: TipeKamar[] = [
         jumlah: 8,
         sisa: 1,
         fasilitas: ['Kasur busa 120 cm', 'Lemari 2 pintu', 'Meja & kursi belajar', 'Kipas angin', 'Kamar mandi luar (1:3)'],
-        foto: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000&q=80',
-        alt: 'Kamar sederhana dengan jendela besar dan tanaman',
+        foto: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=1000&q=75&auto=format&fit=crop',
+        alt: 'Kamar standar dengan kasur rendah dan seprai putih',
         catatan: 'Lantai 1 dan 2. Kamar mandi luar dibagi tiga kamar, dibersihkan tiap pagi.',
     },
     {
@@ -55,8 +55,8 @@ export const tipeKamar: TipeKamar[] = [
         jumlah: 6,
         sisa: 1,
         fasilitas: ['AC 1/2 PK', 'Kasur spring bed 120 cm', 'Lemari 2 pintu', 'Meja & kursi belajar', 'Kamar mandi luar (1:2)'],
-        foto: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1000&q=80',
-        alt: 'Kamar dengan tempat tidur, bantal oranye, dan jendela',
+        foto: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=75&auto=format&fit=crop',
+        alt: 'Kamar AC dengan kasur, meja samping, dan lampu baca',
         catatan: 'Listrik AC dihitung dari meteran kamar (token sendiri).',
     },
     {
@@ -67,8 +67,8 @@ export const tipeKamar: TipeKamar[] = [
         jumlah: 4,
         sisa: 0,
         fasilitas: ['AC 1/2 PK', 'Kamar mandi dalam, shower air hangat', 'Kasur spring bed 140 cm', 'Lemari 3 pintu', 'Meja kerja 120 cm', 'Balkon kecil'],
-        foto: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80',
-        alt: 'Kamar luas dengan tempat tidur besar dan jendela tinggi',
+        foto: 'https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?w=1000&q=75&auto=format&fit=crop',
+        alt: 'Kamar dengan kasur 140 cm dan dinding putih',
         catatan: 'Hanya di lantai 2. Daftar tunggu dibuka, biasanya kosong saat pergantian semester.',
     },
 ];
@@ -85,7 +85,7 @@ export const fasilitasUmum = [
 ];
 
 export const aturan = [
-    'Tamu diterima di ruang tamu pukul 08.00 - 21.00. Tamu laki-laki tidak masuk area kamar.',
+    'Tamu diterima di ruang tamu pukul 08.00–21.00. Tamu laki-laki tidak masuk area kamar.',
     'Gerbang dikunci pukul 23.00. Pulang lebih malam, kabari Bu Endang lewat WhatsApp sebelum 21.00.',
     'Tidak merokok di dalam kamar dan lorong. Area merokok di halaman belakang.',
     'Tidak memasak dengan kompor atau rice cooker di kamar; pakai dapur bersama.',
@@ -97,7 +97,7 @@ export const aturan = [
 export const biayaTambahan = [
     { nama: 'Deposit', nilai: '1 bulan sewa', catatan: 'Dikembalikan saat keluar, dipotong kerusakan bila ada' },
     { nama: 'Listrik kamar Standar', nilai: 'Termasuk', catatan: 'Pemakaian wajar: lampu, laptop, kipas' },
-    { nama: 'Listrik kamar AC', nilai: 'Token sendiri', catatan: 'Rata-rata Rp 100.000 - 150.000 / bulan' },
+    { nama: 'Listrik kamar AC', nilai: 'Token sendiri', catatan: 'Rata-rata Rp 100.000–150.000 / bulan' },
     { nama: 'Parkir mobil', nilai: 'Rp 100.000 / bulan', catatan: 'Hanya 2 slot, bergantian' },
     { nama: 'Pembayaran', nilai: 'Tanggal 1 - 5', catatan: 'Transfer ke rekening pemilik, bukti dikirim via WhatsApp' },
 ];

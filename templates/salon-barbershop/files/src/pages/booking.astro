@@ -10,8 +10,9 @@ const slot = slotJam();
 ---
 <Base title={`Booking — ${toko.nama}`} description={`Ambil jadwal di ${toko.nama}: pilih layanan, barber, tanggal, dan jam. Konfirmasi lewat WhatsApp, tanpa uang muka.`}>
   <Fonts />
+  <Header />
+  <main id="konten">
   <div class="bg-[#111111] text-[#EFE9E1]">
-    <Header />
     <section class="border-b border-[#EFE9E1]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333]">Tanpa uang muka · slot 30 menit</p>
@@ -22,21 +23,21 @@ const slot = slotJam();
       </div>
     </section>
   </div>
-  <main class="bg-[#EFE9E1] text-[#111111]">
+  <div class="bg-[#EFE9E1] text-[#111111]">
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
       <form id="booking-form" class="space-y-5 md:col-span-7">
         <div>
-          <label for="nama" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Nama</label>
-          <input id="nama" name="nama" required placeholder="Nama Anda" class={input} />
+          <label for="nama" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Nama</label>
+          <input id="nama" name="nama" required placeholder="Nama Anda" class={input} autocomplete="name" />
         </div>
         <div>
-          <label for="layanan" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Layanan</label>
+          <label for="layanan" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Layanan</label>
           <select id="layanan" name="layanan" class={input}>
             {layanan.map((l) => <option value={l.nama}>{l.nama} — {rupiah(l.harga)} · {l.durasi} mnt</option>)}
           </select>
         </div>
         <div>
-          <label for="barber" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Barber</label>
+          <label for="barber" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Barber</label>
           <select id="barber" name="barber" class={input}>
             <option value="Siapa saja">Siapa saja yang kosong</option>
             {barber.map((b) => <option value={b.nama} data-slug={b.slug}>{b.nama} — {b.spesialisasi} (libur {b.libur})</option>)}
@@ -44,24 +45,25 @@ const slot = slotJam();
         </div>
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
-            <label for="tanggal" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Tanggal</label>
+            <label for="tanggal" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Tanggal</label>
             <input id="tanggal" name="tanggal" type="date" required class={input} />
           </div>
           <div>
-            <label for="jam" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Jam</label>
+            <label for="jam" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Jam</label>
             <select id="jam" name="jam" class={input}>
               {slot.map((s) => <option value={s}>{s.replace(':', '.')}</option>)}
             </select>
           </div>
         </div>
         <div>
-          <label for="catatan" class="text-xs uppercase tracking-[0.18em] text-[#111111]/65">Catatan</label>
+          <label for="catatan" class="text-xs uppercase tracking-[0.18em] font-medium text-[#111111]/85">Catatan</label>
           <textarea id="catatan" name="catatan" rows="3" placeholder="Referensi gaya, alergi produk, atau datang bersama anak" class={input}></textarea>
         </div>
-        <button type="submit" class="inline-flex h-12 w-full items-center justify-center bg-[#111111] px-6 text-xs uppercase tracking-[0.18em] text-[#EFE9E1] transition-colors duration-150 hover:bg-[#B87333] sm:w-auto">
+        <button type="submit" class="inline-flex h-12 w-full items-center justify-center bg-[#111111] px-6 text-xs uppercase tracking-[0.18em] text-[#EFE9E1] transition-colors duration-150 hover:bg-[#8E5524] sm:w-auto">
           Kirim via WhatsApp
         </button>
-        <p class="text-xs leading-relaxed text-[#111111]/60">
+        <p id="status" role="status" aria-live="polite" class="hidden border border-[#111111]/20 bg-white/60 px-4 py-3 text-sm"></p>
+        <p class="text-xs leading-relaxed text-[#111111]/75">
           Situs ini statis dan tidak menyimpan data. Isian dikirim sebagai pesan WhatsApp ke {toko.nama}.
         </p>
       </form>
@@ -70,27 +72,29 @@ const slot = slotJam();
         <dl class="divide-y divide-[#111111]/15 border-y border-[#111111]/15">
           {toko.jam.map((j) => (
             <div class="py-4">
-              <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/55">{j.hari}</dt>
+              <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/75">{j.hari}</dt>
               <dd class="mt-1 font-display text-2xl">{j.buka}</dd>
             </div>
           ))}
           <div class="py-4">
-            <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/55">Alamat</dt>
+            <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/75">Alamat</dt>
             <dd class="mt-1 font-display text-2xl leading-tight">{toko.alamat}</dd>
-            <a href={toko.maps} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B87333]">Buka di Google Maps</a>
+            <a href={toko.maps} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#8E5524]">Buka di Google Maps</a>
           </div>
           <div class="py-4">
-            <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/55">Langsung chat</dt>
-            <dd class="mt-1"><a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="font-display text-2xl underline underline-offset-4 transition-colors duration-150 hover:text-[#B87333]">{toko.telepon}</a></dd>
+            <dt class="text-xs uppercase tracking-[0.18em] text-[#111111]/75">Langsung chat</dt>
+            <dd class="mt-1"><a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="font-display text-2xl underline underline-offset-4 transition-colors duration-150 hover:text-[#8E5524]">{toko.telepon}</a></dd>
           </div>
         </dl>
-        <img src={toko.foto.alat} alt="Gunting, sisir, dan clipper di meja barber" loading="lazy" class="mt-8 aspect-[4/3] w-full object-cover" />
+        <img width="1200" height="900" decoding="async" src={toko.foto.alat} alt="Gunting, sisir, dan clipper di meja barber" loading="lazy" class="mt-8 aspect-[4/3] w-full object-cover" />
       </aside>
     </div>
+  </div>
   </main>
   <Footer />
 
   <script define:vars={{ wa: toko.telepon, nama: toko.nama }}>
+    document.querySelectorAll('input[type="date"]').forEach((el) => { el.min = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); });
     const form = document.getElementById('booking-form');
     // Pra-pilih barber dari tautan /booking/?barber=<slug> di halaman tim.
     const slug = new URLSearchParams(location.search).get('barber');
@@ -109,6 +113,8 @@ const slot = slotJam();
         `Catatan: ${d.get('catatan') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const st = document.getElementById('status');
+      if (st) { st.textContent = 'WhatsApp dibuka di tab baru. Tekan kirim di sana; kami balas di jam kerja.'; st.classList.remove('hidden'); }
     });
   </script>
 </Base>

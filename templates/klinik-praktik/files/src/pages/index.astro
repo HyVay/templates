@@ -4,7 +4,7 @@ import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JadwalPraktik from '../components/JadwalPraktik.astro';
-import { klinik, dokter, layanan } from '../data/klinik';
+import { klinik, dokter, layanan, fotoKlinik, src } from '../data/klinik';
 
 // Ringkasan layanan di beranda: satu item unggulan per kelompok.
 const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
@@ -12,24 +12,16 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
 <Base title={`${klinik.nama} ${klinik.kota} — ${klinik.tagline}`} description={klinik.deskripsi}>
   <Fonts />
   <Header />
-  <main class="text-[#0F2A44]">
+  <main id="konten" class="text-[#0F2A44]">
     <!-- Hero: teks kiri, foto kanan -->
     <section class="border-b border-[#0F2A44]/15">
-      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:items-center md:gap-10 md:px-6 md:py-20">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-12 md:grid-cols-12 md:items-stretch md:gap-12 md:px-6 md:py-16">
         <div class="md:col-span-6">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Klinik pratama · {klinik.kota}</p>
-          <h1 class="font-display mt-4 text-4xl leading-[1.05] md:text-6xl">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Klinik pratama · {klinik.kota}</p>
+          <h1 class="font-display mt-4 text-balance text-4xl leading-[1.05] md:text-6xl">
             Dokter umum, gigi, dan anak. Daftar dari rumah, datang sesuai jam.
           </h1>
-          <p class="mt-6 max-w-lg text-base leading-relaxed text-[#0F2A44]/75">{klinik.deskripsi}</p>
-          <dl class="mt-8 divide-y divide-[#0F2A44]/10 border-y border-[#0F2A44]/10 text-sm">
-            {klinik.jam.map((j) => (
-              <div class="flex justify-between gap-4 py-2.5">
-                <dt class="text-[#0F2A44]/60">{j.hari}</dt>
-                <dd class="font-medium tabular-nums">{j.jam}</dd>
-              </div>
-            ))}
-          </dl>
+          <p class="mt-6 max-w-lg text-pretty text-base leading-relaxed text-[#0F2A44]/80">{klinik.deskripsi}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="/janji-temu/" class="inline-flex items-center justify-center rounded-lg bg-[#2E7D6B] px-6 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#256655]">
               Buat janji temu
@@ -38,12 +30,24 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
               Lihat jadwal praktik
             </a>
           </div>
+          <dl class="mt-10 divide-y divide-[#0F2A44]/10 border-y border-[#0F2A44]/10 text-sm">
+            {klinik.jam.map((j) => (
+              <div class="flex justify-between gap-4 py-2.5">
+                <dt class="text-[#0F2A44]/75">{j.hari}</dt>
+                <dd class="font-medium tabular-nums">{j.jam}</dd>
+              </div>
+            ))}
+          </dl>
+
         </div>
         <div class="md:col-span-6">
           <img
-            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&q=80"
+            src={src(fotoKlinik, 1200, 1200)}
+            width="1200"
+            height="1200"
+            fetchpriority="high"
             alt="Ruang periksa gigi yang terang dan rapi"
-            class="aspect-[4/3] w-full rounded-lg object-cover"
+            class="aspect-[4/3] w-full rounded-lg bg-[#0F2A44]/5 object-cover md:aspect-auto md:h-full"
           />
         </div>
       </div>
@@ -53,7 +57,7 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
     <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Jadwal praktik</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Jadwal praktik</p>
           <h2 class="font-display mt-2 text-3xl md:text-4xl">Minggu ini</h2>
         </div>
         <p class="max-w-md text-sm leading-relaxed text-[#0F2A44]/70">Jadwal dapat berubah saat dokter cuti. Konfirmasi lewat WhatsApp sebelum datang untuk hari yang sama.</p>
@@ -67,7 +71,7 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
     <section class="border-y border-[#0F2A44]/15 bg-white">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
         <div class="md:col-span-4">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Layanan</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Layanan</p>
           <h2 class="font-display mt-2 text-3xl md:text-4xl">Biaya ditulis di depan</h2>
           <p class="mt-4 text-sm leading-relaxed text-[#0F2A44]/70">Semua tarif konsultasi dan tindakan umum tercantum di halaman layanan, jadi Anda tahu kisarannya sebelum datang.</p>
           <a href="/layanan/" class="mt-6 inline-block text-sm font-semibold underline decoration-[#2E7D6B] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#2E7D6B]">Semua layanan dan biaya</a>
@@ -76,9 +80,9 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
           {sorotan.map((s) => (
             <li class="flex items-baseline justify-between gap-6 py-4">
               <div>
-                <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/50">{s.kelompok}</p>
+                <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">{s.kelompok}</p>
                 <p class="mt-1 font-medium">{s.nama}</p>
-                {s.catatan && <p class="text-xs text-[#0F2A44]/60">{s.catatan}</p>}
+                {s.catatan && <p class="text-xs text-[#0F2A44]/75">{s.catatan}</p>}
               </div>
               <p class="shrink-0 font-semibold tabular-nums">{s.biaya}</p>
             </li>
@@ -97,9 +101,9 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
         {dokter.map((d) => (
           <li>
             <a href={`/dokter/#${d.slug}`} class="group block">
-              <img src={d.foto} alt={d.nama} loading="lazy" class="aspect-[3/4] w-full rounded-lg object-cover transition-opacity duration-150 group-hover:opacity-90" />
-              <p class="mt-3 text-sm font-semibold">{d.nama}</p>
-              <p class="text-xs text-[#0F2A44]/65">{d.spesialisasi}</p>
+              <img src={src(d.foto, 600, 800)} width="600" height="800" alt={`Foto ${d.nama}`} loading="lazy" decoding="async" class="aspect-[3/4] w-full rounded-lg bg-[#0F2A44]/5 object-cover transition-opacity duration-150 group-hover:opacity-90" />
+              <p class="mt-3 text-sm font-semibold underline-offset-4 group-hover:underline">{d.nama}</p>
+              <p class="text-xs text-[#0F2A44]/75">{d.spesialisasi}</p>
             </a>
           </li>
         ))}
@@ -110,8 +114,8 @@ const sorotan = layanan.map((k) => ({ kelompok: k.kelompok, ...k.item[0] }));
     <section class="border-t border-[#0F2A44]/15 bg-[#0F2A44] text-white">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-14 md:grid-cols-12 md:items-center md:px-6 md:py-20">
         <div class="md:col-span-7">
-          <p class="font-mono text-xs uppercase tracking-widest text-white/50">Lokasi</p>
-          <p class="font-display mt-2 text-2xl md:text-3xl">{klinik.alamat}</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-white/75">Lokasi</p>
+          <p class="font-display mt-2 text-balance text-2xl md:text-3xl">{klinik.alamat}</p>
           <p class="mt-3 text-sm text-white/70">Parkir motor dan mobil tersedia di depan klinik. Dekat halte angkot Cibabat.</p>
         </div>
         <div class="flex flex-col gap-3 md:col-span-5 md:items-end">

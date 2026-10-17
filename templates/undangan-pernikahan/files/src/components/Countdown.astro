@@ -1,12 +1,13 @@
 ---
 interface Props { target: string }
 const { target } = Astro.props;
+const unit = ['Hari', 'Jam', 'Menit', 'Detik'];
 ---
-<div id="countdown" data-target={target} class="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
-  {['Hari', 'Jam', 'Menit', 'Detik'].map((label) => (
-    <div class="rounded-xl border border-stone-200 bg-white/70 px-2 py-3 backdrop-blur">
-      <p class="text-2xl font-semibold tabular-nums text-stone-800" data-unit={label}>0</p>
-      <p class="mt-0.5 text-[11px] uppercase tracking-wider text-stone-500">{label}</p>
+<div id="countdown" data-target={target} role="timer" aria-label="Hitung mundur menuju hari pernikahan" class="flex justify-center divide-x divide-white/25 text-center">
+  {unit.map((label) => (
+    <div class="min-w-0 flex-1 px-2 sm:px-6">
+      <p class="font-display text-4xl tabular-nums leading-none sm:text-5xl" data-unit={label}>00</p>
+      <p class="label mt-2 opacity-80">{label}</p>
     </div>
   ))}
 </div>
@@ -15,18 +16,9 @@ const { target } = Astro.props;
   const target = new Date(root?.dataset.target ?? '').getTime();
   const cell = (u: string) => root?.querySelector(`[data-unit="${u}"]`);
   const tick = () => {
-    const left = Math.max(0, target - Date.now());
-    const s = Math.floor(left / 1000);
-    const map: Record<string, number> = {
-      Hari: Math.floor(s / 86400),
-      Jam: Math.floor((s % 86400) / 3600),
-      Menit: Math.floor((s % 3600) / 60),
-      Detik: s % 60,
-    };
-    for (const [u, v] of Object.entries(map)) {
-      const el = cell(u);
-      if (el) el.textContent = String(v).padStart(2, '0');
-    }
+    const s = Math.floor(Math.max(0, target - Date.now()) / 1000);
+    const map: Record<string, number> = { Hari: Math.floor(s / 86400), Jam: Math.floor((s % 86400) / 3600), Menit: Math.floor((s % 3600) / 60), Detik: s % 60 };
+    for (const [u, v] of Object.entries(map)) { const el = cell(u); if (el) el.textContent = String(v).padStart(2, '0'); }
   };
   tick();
   setInterval(tick, 1000);

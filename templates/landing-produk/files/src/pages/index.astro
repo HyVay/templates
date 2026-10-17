@@ -9,18 +9,18 @@ import { produk, angka, fitur, testimoni } from '../data/produk';
 <Base title={`${produk.nama} — ${produk.tagline}`} description={produk.deskripsi}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <!-- Hero -->
     <section class="border-b border-[#0b1220]/10">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 pb-16 pt-14 md:grid-cols-12 md:items-center md:px-6 md:pb-24 md:pt-20">
         <div class="md:col-span-6">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#ff5a1f]">Android · gratis untuk satu kasir</p>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#C2410C]">Android · gratis untuk satu kasir</p>
           <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl">
             {produk.tagline}
           </h1>
           <p class="mt-6 max-w-lg text-base leading-relaxed text-[#0b1220]/70 md:text-lg">{produk.deskripsi}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#0b1220]">Unduh di Play Store</a>
+            <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-[#0b1220] transition-colors duration-150 hover:bg-[#0b1220]">Unduh di Play Store</a>
             <a href="/harga/" class="inline-flex items-center justify-center rounded-md border border-[#0b1220]/20 px-6 py-3.5 text-sm font-bold transition-colors duration-150 hover:border-[#0b1220]">Lihat harga</a>
           </div>
           <dl class="mt-12 grid grid-cols-1 gap-4 border-t border-[#0b1220]/10 pt-6 sm:grid-cols-3">
@@ -50,13 +50,13 @@ import { produk, angka, fitur, testimoni } from '../data/produk';
         {fitur.map((f, i) => (
           <li class="grid grid-cols-1 gap-8 py-12 md:grid-cols-12 md:items-center">
             <div class:list={['md:col-span-6', i % 2 === 1 && 'md:order-2 md:col-start-7']}>
-              <p class="font-mono text-sm text-[#ff5a1f]">0{i + 1}</p>
+              <p class="font-mono text-sm text-[#C2410C]">0{i + 1}</p>
               <h3 class="mt-3 font-display text-2xl font-extrabold leading-tight tracking-tight md:text-3xl">{f.judul}</h3>
               <p class="mt-4 max-w-md text-base leading-relaxed text-[#0b1220]/70">{f.isi}</p>
             </div>
             <div class:list={['md:col-span-5', i % 2 === 1 ? 'md:order-1 md:col-start-1' : 'md:col-start-8']}>
               <div class="rounded-md border border-[#0b1220]/10 bg-[#f3f4f2] p-5">
-                <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">{f.contoh.label}</p>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/65">{f.contoh.label}</p>
                 <ul class="mt-3 divide-y divide-[#0b1220]/10 text-sm">
                   {f.contoh.baris.map((b) => <li class="py-2.5 tabular-nums">{b}</li>)}
                 </ul>
@@ -70,13 +70,18 @@ import { produk, angka, fitur, testimoni } from '../data/produk';
     <!-- Testimoni -->
     <section class="border-y border-[#0b1220]/10 bg-[#f3f4f2]">
       <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-        <blockquote class="grid grid-cols-1 gap-6 md:grid-cols-12">
-          <p class="font-display text-2xl font-bold leading-snug tracking-tight md:col-span-9 md:text-4xl">“{testimoni.kutipan}”</p>
-          <footer class="text-sm md:col-span-3 md:self-end md:text-right">
-            <p class="font-bold">{testimoni.nama}</p>
-            <p class="text-[#0b1220]/60">{testimoni.peran}</p>
-          </footer>
-        </blockquote>
+        <figure class="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#C2410C] md:col-span-3">Dari pengguna</p>
+          <div class="md:col-span-9">
+            <blockquote>
+              <p class="font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">“{testimoni.kutipan}”</p>
+            </blockquote>
+            <figcaption class="mt-8 flex items-center gap-4 border-t border-[#0b1220]/15 pt-5 text-sm">
+              <span aria-hidden="true" class="grid h-11 w-11 place-items-center rounded-md bg-[#0b1220] font-display font-extrabold text-white">{testimoni.nama.replace('Ibu ', '').slice(0, 1)}</span>
+              <span><span class="block font-bold">{testimoni.nama}</span><span class="text-[#0b1220]/70">{testimoni.peran}</span></span>
+            </figcaption>
+          </div>
+        </figure>
       </div>
     </section>
 
@@ -85,11 +90,11 @@ import { produk, angka, fitur, testimoni } from '../data/produk';
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-16 md:grid-cols-12 md:items-center md:px-6 md:py-24">
         <div class="md:col-span-8">
           <h2 class="font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">Mulai dari paket gratis. Naik ke Pro kalau pegawai bertambah.</h2>
-          <p class="mt-4 text-sm text-white/60">Tidak perlu kartu kredit. Katalog bisa diimpor dari Excel.</p>
+          <p class="mt-4 text-sm text-white/75">Tidak perlu kartu kredit. Katalog bisa diimpor dari Excel.</p>
         </div>
         <div class="flex flex-col gap-3 md:col-span-4 md:items-end">
-          <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-white hover:text-[#0b1220]">Unduh di Play Store</a>
-          <a href="/harga/" class="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3.5 text-sm font-bold transition-colors duration-150 hover:border-white">Minta demo via WhatsApp</a>
+          <a href={produk.playStore} class="inline-flex items-center justify-center rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-[#0b1220] transition-colors duration-150 hover:bg-white hover:text-[#0b1220]">Unduh di Play Store</a>
+          <a href="/harga/#demo" class="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3.5 text-sm font-bold transition-colors duration-150 hover:border-white">Minta demo via WhatsApp</a>
         </div>
       </div>
     </section>

@@ -5,19 +5,19 @@ import { sekolah } from '../data/sekolah';
   <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
     <div>
       <p class="font-display text-xl font-semibold">{sekolah.nama}</p>
-      <p class="mt-1 text-sm text-[#1F4E79]/65">{sekolah.jenjang} · sejak {sekolah.berdiri}</p>
+      <p class="mt-1 text-sm text-[#1F4E79]/75">{sekolah.jenjang} · sejak {sekolah.berdiri}</p>
     </div>
     <div>
-      <p class="text-xs font-bold uppercase tracking-widest text-[#1F4E79]/50">Alamat</p>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#1F4E79]/75">Alamat</p>
       <p class="mt-2 text-sm">{sekolah.alamat}</p>
-      <p class="mt-1 text-sm text-[#1F4E79]/65">Kantor: {sekolah.jamKantor}</p>
+      <p class="mt-1 text-sm text-[#1F4E79]/75">Kantor: {sekolah.jamKantor}</p>
     </div>
     <div>
-      <p class="text-xs font-bold uppercase tracking-widest text-[#1F4E79]/50">Hubungi</p>
-      <a href={`https://wa.me/${sekolah.wa}`} class="mt-2 block text-sm font-semibold transition-colors duration-150 hover:text-[#F28C38]">WhatsApp {sekolah.wa}</a>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#1F4E79]/75">Hubungi</p>
+      <a href={`https://wa.me/${sekolah.wa}`} class="mt-2 block text-sm font-semibold transition-colors duration-150 hover:text-[#B4501A]">WhatsApp {sekolah.wa}</a>
     </div>
   </div>
-  <div class="border-t border-[#1F4E79]/15 px-4 py-5 text-center text-xs text-[#1F4E79]/50 md:px-6">
+  <div class="border-t border-[#1F4E79]/15 px-4 py-5 text-center text-xs text-[#1F4E79]/75 md:px-6">
     © {new Date().getFullYear()} {sekolah.nama}, {sekolah.kota}.
   </div>
 </footer>

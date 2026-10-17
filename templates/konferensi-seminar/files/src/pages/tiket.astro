@@ -8,7 +8,7 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
 <Base title={`Tiket — ${acara.nama} ${acara.tahun}`} description={`Harga tiket ${acara.nama} ${acara.tahun}: Early Bird, Reguler, dan Pelajar. Daftar lewat WhatsApp panitia.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#f5f5f0]/15">
       <div class="mx-auto max-w-7xl px-4 pb-10 pt-14 md:px-6 md:pt-20">
         <p class="font-mono text-xs uppercase tracking-widest text-[#e2ff4d]">{acara.tanggalPendek} · {acara.kapasitas}</p>
@@ -26,12 +26,13 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
         {tiket.map((t, i) => (
           <div class="py-6">
             <p class="font-mono text-xs uppercase tracking-widest text-[#e2ff4d]">{t.nama}</p>
-            <p class="mt-2 font-display text-3xl font-extrabold tracking-tight">{rupiah(t.harga)}</p>
-            <p class="mt-1 text-xs leading-snug text-[#f5f5f0]/60">{t.catatan}</p>
+            <p class="mt-2 font-display text-3xl font-extrabold tabular-nums tracking-tight">{rupiah(t.harga)}</p>
+            <p class="mt-1 text-xs leading-snug text-[#f5f5f0]/70">{t.catatan}</p>
             <ul class="mt-4 space-y-1.5 text-sm">
               {fiturTiket.map((f) => (
-                <li class:list={['flex gap-3', !f.termasuk[i] && 'text-[#f5f5f0]/35 line-through']}>
-                  <span class="font-mono text-[#e2ff4d]">{f.termasuk[i] ? 'YA' : '—'}</span>{f.nama}
+                <li class:list={['flex items-center gap-3', !f.termasuk[i] && 'text-[#f5f5f0]/50']}>
+                  <span class:list={['shrink-0', f.termasuk[i] ? 'text-[#e2ff4d]' : 'text-[#f5f5f0]/40']}>{f.termasuk[i] ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="square" /></svg> : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 12h12" /></svg>}</span>
+                  {f.nama}<span class="sr-only">{f.termasuk[i] ? ' (termasuk)' : ' (tidak termasuk)'}</span>
                 </li>
               ))}
             </ul>
@@ -44,11 +45,11 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
           <thead>
             <tr class="border-b border-[#f5f5f0]/15 align-bottom">
               <th class="w-1/3 pb-5 pr-4 font-mono text-xs font-normal uppercase tracking-widest text-[#f5f5f0]/50">Termasuk</th>
-              {tiket.map((t) => (
-                <th class="pb-5 pr-4">
-                  <p class="font-mono text-xs uppercase tracking-widest text-[#e2ff4d]">{t.nama}</p>
-                  <p class="mt-2 font-display text-2xl font-extrabold tracking-tight md:text-3xl">{rupiah(t.harga)}</p>
-                  <p class="mt-1 text-xs font-normal leading-snug text-[#f5f5f0]/60">{t.catatan}</p>
+              {tiket.map((t, i) => (
+                <th scope="col" class:list={['pb-5 pr-4', i === 0 && 'relative']}>
+                  <p class="font-mono text-xs uppercase tracking-widest text-[#e2ff4d]">{t.nama}{i === 0 && <span class="ml-2 bg-[#e2ff4d] px-1.5 py-0.5 text-[#0b0b0b]">Hemat {Math.round((1 - t.harga / tiket[1].harga) * 100)}%</span>}</p>
+                  <p class="mt-2 font-display text-2xl font-extrabold tabular-nums tracking-tight md:text-3xl">{rupiah(t.harga)}</p>
+                  <p class="mt-1 text-xs font-normal leading-snug text-[#f5f5f0]/70">{t.catatan}</p>
                 </th>
               ))}
             </tr>
@@ -56,10 +57,10 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
           <tbody class="divide-y divide-[#f5f5f0]/15">
             {fiturTiket.map((f) => (
               <tr>
-                <td class="py-4 pr-4 text-sm">{f.nama}</td>
+                <th scope="row" class="py-4 pr-4 text-left text-sm font-normal">{f.nama}</th>
                 {f.termasuk.map((ya) => (
-                  <td class="py-4 pr-4 font-mono text-sm">
-                    {ya ? <span class="text-[#e2ff4d]">YA</span> : <span class="text-[#f5f5f0]/30">—</span>}
+                  <td class="py-4 pr-4">
+                    {ya ? <span class="text-[#e2ff4d]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="square" /></svg><span class="sr-only">Termasuk</span></span> : <span class="text-[#f5f5f0]/35"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 12h12" /></svg><span class="sr-only">Tidak termasuk</span></span>}
                   </td>
                 ))}
               </tr>
@@ -84,11 +85,11 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <label for="nama" class="font-mono text-xs uppercase tracking-widest text-[#f5f5f0]/70">Nama lengkap</label>
-              <input id="nama" name="nama" required placeholder="Sesuai kartu identitas" class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/30 focus:border-[#e2ff4d]" />
+              <input id="nama" name="nama" autocomplete="name" required placeholder="Sesuai kartu identitas" class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/45 focus:border-[#e2ff4d]" />
             </div>
             <div>
               <label for="email" class="font-mono text-xs uppercase tracking-widest text-[#f5f5f0]/70">Email</label>
-              <input id="email" name="email" type="email" required placeholder="untuk e-tiket" class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/30 focus:border-[#e2ff4d]" />
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="untuk e-tiket" class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/45 focus:border-[#e2ff4d]" />
             </div>
             <div>
               <label for="tier" class="font-mono text-xs uppercase tracking-widest text-[#f5f5f0]/70">Jenis tiket</label>
@@ -98,15 +99,16 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
             </div>
             <div>
               <label for="jumlah" class="font-mono text-xs uppercase tracking-widest text-[#f5f5f0]/70">Jumlah</label>
-              <input id="jumlah" name="jumlah" type="number" min="1" max="10" value="1" required class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#e2ff4d]" />
+              <input id="jumlah" name="jumlah" type="number" inputmode="numeric" min="1" max="10" value="1" required class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#e2ff4d]" />
             </div>
           </div>
           <div>
             <label for="catatan" class="font-mono text-xs uppercase tracking-widest text-[#f5f5f0]/70">Catatan (opsional)</label>
-            <textarea id="catatan" name="catatan" rows="3" placeholder="Nama peserta lain kalau beli lebih dari satu, kebutuhan khusus, dll." class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/30 focus:border-[#e2ff4d]"></textarea>
+            <textarea id="catatan" name="catatan" rows="3" placeholder="Nama peserta lain kalau beli lebih dari satu, kebutuhan khusus, dll." class="mt-2 w-full border border-[#f5f5f0]/30 bg-transparent px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#f5f5f0]/45 focus:border-[#e2ff4d]"></textarea>
           </div>
-          <button type="submit" class="w-full bg-[#e2ff4d] px-6 py-4 font-mono text-sm uppercase tracking-widest text-[#0b0b0b] transition-colors duration-150 hover:bg-[#f5f5f0] sm:w-auto">Kirim via WhatsApp</button>
-          <p class="font-mono text-xs text-[#f5f5f0]/50">Situs ini statis. Formulir hanya menyusun pesan dan membukanya di WhatsApp panitia; tidak ada data yang disimpan di sini.</p>
+          <button type="submit" class="inline-flex min-h-[52px] w-full items-center justify-center gap-3 bg-[#e2ff4d] px-6 font-mono text-sm uppercase tracking-widest text-[#0b0b0b] transition-colors duration-150 hover:bg-[#f5f5f0] sm:w-auto">Kirim via WhatsApp</button>
+          <p id="status" role="status" aria-live="polite" class="hidden border-l-2 border-[#e2ff4d] pl-3 text-sm text-[#f5f5f0]"></p>
+          <p class="font-mono text-xs leading-relaxed text-[#f5f5f0]/60">Situs ini statis. Formulir hanya menyusun pesan dan membukanya di WhatsApp panitia; tidak ada data yang disimpan di sini.</p>
         </form>
       </div>
     </section>
@@ -126,6 +128,11 @@ import { acara, tiket, fiturTiket, rupiah } from '../data/acara';
         `Catatan: ${d.get('catatan') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru. Kirim pesannya, panitia membalas dengan nomor rekening dalam 1×24 jam.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

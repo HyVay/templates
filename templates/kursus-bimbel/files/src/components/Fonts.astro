@@ -8,4 +8,14 @@
   body { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; background: #FBFAF7; }
   .font-display { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
   .font-body { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
+  ::selection { background: #FCA311; color: #14213D; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid #FCA311 !important;
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

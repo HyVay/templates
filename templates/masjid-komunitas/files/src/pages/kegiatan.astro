@@ -11,10 +11,10 @@ import { masjid, kajianRutin, programSosial, foto } from '../data/masjid';
 >
   <Fonts />
   <Header />
-  <main class="bg-[#F7F3EA] text-[#0F3D2E]">
+  <main id="konten" class="bg-[#F7F3EA] text-[#0F3D2E]">
     <section class="border-b border-[#0F3D2E]/15">
       <div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Kegiatan</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6A1C]">Kegiatan</p>
         <h1 class="font-display mt-2 text-4xl font-bold leading-tight md:text-6xl">Jadwal rutin &amp; program</h1>
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#0F3D2E]/75 md:text-lg">
           Semua kajian terbuka untuk umum dan tidak dipungut biaya. Jadwal bisa bergeser saat Ramadan dan hari besar; perubahan diumumkan di papan masjid dan grup WhatsApp jamaah.
@@ -28,7 +28,7 @@ import { masjid, kajianRutin, programSosial, foto } from '../data/masjid';
         <h2 class="font-display text-3xl font-bold">Kajian pekanan</h2>
         <!-- Desktop: tabel. HP: tiap baris jadi blok bertumpuk. -->
         <div class="mt-8 overflow-hidden border-t border-[#0F3D2E]/15">
-          <div class="hidden grid-cols-1 gap-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60 md:grid md:grid-cols-12">
+          <div class="hidden grid-cols-1 gap-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/75 md:grid md:grid-cols-12">
             <span class="col-span-2">Hari</span>
             <span class="col-span-1">Jam</span>
             <span class="col-span-4">Tema</span>
@@ -39,10 +39,10 @@ import { masjid, kajianRutin, programSosial, foto } from '../data/masjid';
             {kajianRutin.map((k) => (
               <li class="grid grid-cols-1 gap-1 py-5 md:grid-cols-12 md:items-baseline md:gap-4">
                 <span class="font-display text-xl font-bold md:col-span-2">{k.hari}</span>
-                <span class="font-mono text-sm tabular-nums text-[#0F3D2E]/70 md:col-span-1">{k.jam}</span>
+                <span class="font-mono text-sm tabular-nums text-[#0F3D2E]/80 md:col-span-1">{k.jam}</span>
                 <span class="mt-1 font-semibold md:col-span-4 md:mt-0">{k.tema}</span>
-                <span class="text-sm text-[#0F3D2E]/70 md:col-span-3">{k.pemateri}</span>
-                <span class="text-xs font-semibold uppercase tracking-wider text-[#B8912E] md:col-span-2">{k.untuk}</span>
+                <span class="text-sm text-[#0F3D2E]/80 md:col-span-3">{k.pemateri}</span>
+                <span class="text-xs font-semibold uppercase tracking-wider text-[#8A6A1C] md:col-span-2">{k.untuk}</span>
               </li>
             ))}
           </ul>
@@ -55,15 +55,15 @@ import { masjid, kajianRutin, programSosial, foto } from '../data/masjid';
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-14 md:grid-cols-12 md:px-8 md:py-20">
         <div class="md:col-span-4">
           <h2 class="font-display text-3xl font-bold">Program sosial</h2>
-          <p class="mt-3 text-sm leading-relaxed text-[#0F3D2E]/70">
+          <p class="mt-3 text-sm leading-relaxed text-[#0F3D2E]/80">
             Dijalankan relawan dari jamaah. Yang ingin ikut membantu bisa mendaftar di sekretariat.
           </p>
-          <img src={foto.kegiatan} alt="Al-Quran untuk kegiatan TPA" loading="lazy" class="mt-6 aspect-[4/3] w-full rounded-sm object-cover" />
+          <img src={foto.kegiatan} alt="Mushaf Al-Quran untuk kegiatan TPA" width="800" height="600" loading="lazy" decoding="async" class="mt-6 aspect-[4/3] w-full rounded-sm object-cover" />
         </div>
         <ol class="md:col-span-8">
           {programSosial.map((p, i) => (
             <li class="flex gap-5 border-t border-[#0F3D2E]/15 py-6 last:border-b">
-              <span class="w-8 shrink-0 pt-2 font-mono text-sm text-[#B8912E]">{String(i + 1).padStart(2, '0')}</span>
+              <span class="w-8 shrink-0 pt-2 font-mono text-sm text-[#8A6A1C]">{String(i + 1).padStart(2, '0')}</span>
               <div class="min-w-0 flex-1">
                 <h3 class="font-display text-2xl font-bold">{p.nama}</h3>
                 <p class="mt-2 text-base leading-relaxed text-[#0F3D2E]/75">{p.ringkas}</p>

@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:bg-[#3A4A2F] focus:text-[#FCFAF5]">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#3A4A2F]/15 bg-[#FCFAF5]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-2xl font-semibold text-[#3A4A2F]">{dapur.nama}</a>
@@ -18,14 +19,14 @@ const here = Astro.url.pathname;
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm transition-colors duration-150 hover:text-[#8C2F39]',
+            'inline-flex h-11 items-center text-sm transition-colors duration-150 hover:text-[#8C2F39]',
             here === l.href ? 'text-[#8C2F39] underline underline-offset-8 decoration-[#8C2F39]' : 'text-[#3A4A2F]',
           ]}
         >
           {l.label}
         </a>
       ))}
-      <a href="/pesan/" class="rounded-sm bg-[#3A4A2F] px-4 py-2 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#8C2F39]">
+      <a href="/pesan/" class="inline-flex h-10 items-center whitespace-nowrap rounded-sm bg-[#3A4A2F] px-4 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#2B3823]">
         Pesan sekarang
       </a>
     </nav>
@@ -44,7 +45,7 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#3A4A2F]/15 bg-[#FCFAF5] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block border-b border-[#3A4A2F]/10 px-2 py-3 text-base text-[#3A4A2F] transition-colors duration-150 hover:text-[#8C2F39]">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block border-b border-[#3A4A2F]/10 px-2 py-3 text-base text-[#3A4A2F] transition-colors duration-150 hover:text-[#8C2F39]">
           {l.label}
         </a>
       ))}

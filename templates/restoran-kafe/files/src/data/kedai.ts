@@ -13,8 +13,8 @@ export const kedai = {
     telepon: '6281234567890',
     instagram: 'kedaiteduh.jogja',
     jam: [
-        { hari: 'Senin - Jumat', buka: '08.00 - 21.00 WIB' },
-        { hari: 'Sabtu - Minggu', buka: '07.00 - 22.00 WIB' },
+        { hari: 'Senin–Jumat', buka: '08.00–21.00 WIB' },
+        { hari: 'Sabtu–Minggu', buka: '07.00–22.00 WIB' },
     ],
     catatanJam: 'Dapur tutup 30 menit sebelum kedai tutup. Libur di hari pertama Lebaran.',
     kapasitas: 'Maksimal 8 orang per reservasi. Rombongan lebih besar silakan hubungi lewat WhatsApp dulu.',
@@ -52,7 +52,7 @@ export const menu: KategoriMenu[] = [
         id: 'non-kopi',
         nama: 'Non-Kopi',
         item: [
-            { nama: 'Wedang Uwuh', harga: 18000, keterangan: 'Rempah Imogiri: secang, jahe, cengkih, kayu manis.' },
+            { nama: 'Wedang Uwuh', harga: 18000, keterangan: 'Rempah Imogiri: secang, jahe, cengkih, kayu manis.', favorit: true },
             { nama: 'Teh Tubruk Melati', harga: 12000 },
             { nama: 'Es Jeruk Nipis', harga: 15000 },
             { nama: 'Cokelat Panas', harga: 24000, keterangan: 'Cokelat Gunungkidul, tanpa bubuk instan.' },
@@ -84,13 +84,20 @@ export const menu: KategoriMenu[] = [
 ];
 
 export const galeri = [
-    { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&q=80', alt: 'Ruang dalam kedai dengan meja kayu dan jendela besar', bentuk: 'lebar' },
-    { src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80', alt: 'Secangkir kopi susu di meja kayu', bentuk: 'kotak' },
-    { src: 'https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=800&q=80', alt: 'Semangkuk mie kuah dengan jeruk nipis dan sambal', bentuk: 'tinggi' },
-    { src: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80', alt: 'Sate dan sambal di atas meja', bentuk: 'kotak' },
-    { src: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&q=80', alt: 'Nasi goreng kampung di piring putih', bentuk: 'tinggi' },
-    { src: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1200&q=80', alt: 'Suasana teras kedai di sore hari', bentuk: 'lebar' },
-    { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80', alt: 'Biji kopi dan alat seduh', bentuk: 'kotak' },
+    { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1400&q=75&auto=format&fit=crop', alt: 'Ruang dalam kedai dengan meja kayu dan jendela besar', bentuk: 'lebar' },
+    { src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=75&auto=format&fit=crop', alt: 'Secangkir kopi susu di meja kayu', bentuk: 'kotak' },
+    { src: 'https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=800&q=75&auto=format&fit=crop', alt: 'Semangkuk mie kuah dengan jeruk nipis dan sambal', bentuk: 'tinggi' },
+    { src: 'https://images.unsplash.com/photo-1529563021893-cc83c992d75d?w=800&q=75&auto=format&fit=crop', alt: 'Sate dibakar di atas arang', bentuk: 'kotak' },
+    { src: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&q=75&auto=format&fit=crop', alt: 'Nasi goreng kampung di piring putih', bentuk: 'tinggi' },
+    { src: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1400&q=75&auto=format&fit=crop', alt: 'Suasana teras kedai di sore hari', bentuk: 'lebar' },
+    { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=75&auto=format&fit=crop', alt: 'Biji kopi dan alat seduh', bentuk: 'kotak' },
 ];
+
+/** Foto utama halaman. Ganti dengan foto kedai Anda sendiri. */
+export const foto = {
+    hero: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1400&q=75&auto=format&fit=crop',
+    dapur1: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&q=75&auto=format&fit=crop',
+    dapur2: 'https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=800&q=75&auto=format&fit=crop',
+};
 
 export const rupiah = (n: number) => `Rp ${n.toLocaleString('id-ID')}`;

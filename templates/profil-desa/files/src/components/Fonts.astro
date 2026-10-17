@@ -8,4 +8,12 @@
   body { font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif; }
   .font-display { font-family: 'Spectral', Georgia, serif; }
   .font-body { font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+  /* Fokus keyboard: hijau lumut di latar terang, krem di latar gelap (.on-dark). */
+  :focus-visible { outline: 2px solid #2F4A2A; outline-offset: 3px; }
+  .on-dark :focus-visible { outline-color: #EEF2E6; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>

@@ -17,6 +17,11 @@ export const acara = {
     email: 'halo@nusantaradevsummit.id',
     instagram: '@nusantaradevsummit',
     kapasitas: '600 kursi',
+    /** Batas early bird; dipakai di hero, banner, dan tabel tiket. */
+    earlyBirdTutup: '31 Oktober 2026',
+    earlyBirdTutupPendek: '31 OKT',
+    /** Foto audiens di bawah hero. */
+    fotoAudiens: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87',
 };
 
 export const track = [
@@ -57,7 +62,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Tokolaju',
         topik: 'Memecah monolit 9 tahun tanpa menghentikan rilis',
         track: 'WEB',
-        foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2',
         utama: true,
     },
     {
@@ -66,7 +71,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Ruangkerja',
         topik: 'Pipeline data yang bisa dipercaya finance',
         track: 'DATA',
-        foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
         utama: true,
     },
     {
@@ -75,7 +80,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Dapur Digital',
         topik: 'Roadmap yang bertahan lebih dari satu kuartal',
         track: 'PROD',
-        foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956',
         utama: true,
     },
     {
@@ -84,7 +89,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Bayarin',
         topik: 'Mengoperasikan LLM di jalur pembayaran',
         track: 'DATA',
-        foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
         utama: true,
     },
     {
@@ -93,7 +98,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Kirimaja',
         topik: 'On-call yang tidak membakar tim',
         track: 'PROD',
-        foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
     },
     {
         nama: 'Arif Kurniawan',
@@ -101,7 +106,7 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Sehatku',
         topik: 'Satu codebase Android untuk 40 juta HP kelas bawah',
         track: 'WEB',
-        foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
     },
     {
         nama: 'Nadia Putri',
@@ -109,15 +114,15 @@ export const pembicara: Pembicara[] = [
         perusahaan: 'Lensa Tani',
         topik: 'Model deteksi hama yang jalan offline di HP petani',
         track: 'DATA',
-        foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2',
     },
     {
-        nama: 'Yoga Pratama',
+        nama: 'Ayu Pratiwi',
         jabatan: 'Frontend Architect',
         perusahaan: 'Studio Kode',
         topik: 'Mengukur performa web di jaringan 3G sungguhan',
         track: 'WEB',
-        foto: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce',
     },
 ];
 
@@ -144,7 +149,7 @@ export const agenda: { hari: string; tanggal: string; sesi: Sesi[] }[] = [
             { jam: '11.30', judul: 'Model deteksi hama yang jalan offline di HP petani', pembicara: 'Nadia Putri', track: 'DATA' },
             { jam: '11.30', judul: 'On-call yang tidak membakar tim', pembicara: 'Siti Rahmawati', track: 'PROD' },
             { jam: '12.30', judul: 'Makan siang', jenis: 'istirahat' },
-            { jam: '13.45', judul: 'Mengukur performa web di jaringan 3G sungguhan', pembicara: 'Yoga Pratama', track: 'WEB' },
+            { jam: '13.45', judul: 'Mengukur performa web di jaringan 3G sungguhan', pembicara: 'Ayu Pratiwi', track: 'WEB' },
             { jam: '13.45', judul: 'Mengoperasikan LLM di jalur pembayaran', pembicara: 'Reza Firmansyah', track: 'DATA' },
             { jam: '13.45', judul: 'Diskusi meja: hiring engineer pertama di startup', track: 'PROD' },
             { jam: '15.00', judul: 'Istirahat sore', jenis: 'istirahat' },
@@ -158,7 +163,7 @@ export const agenda: { hari: string; tanggal: string; sesi: Sesi[] }[] = [
         sesi: [
             { jam: '08.30', judul: 'Kopi pagi', jenis: 'istirahat' },
             { jam: '09.00', judul: 'Keynote: Apa yang kami pelajari dari 3 insiden besar', pembicara: 'Siti Rahmawati', jenis: 'keynote' },
-            { jam: '10.00', judul: 'Workshop: migrasi ke TypeScript strict tanpa drama', pembicara: 'Yoga Pratama', track: 'WEB' },
+            { jam: '10.00', judul: 'Workshop: migrasi ke TypeScript strict tanpa drama', pembicara: 'Ayu Pratiwi', track: 'WEB' },
             { jam: '10.00', judul: 'Workshop: evaluasi model sebelum masuk produksi', pembicara: 'Reza Firmansyah', track: 'DATA' },
             { jam: '10.00', judul: 'Workshop: menulis PRD yang dibaca engineer', pembicara: 'Mira Anggraini', track: 'PROD' },
             { jam: '12.00', judul: 'Makan siang', jenis: 'istirahat' },
@@ -179,8 +184,8 @@ export interface Tiket {
 }
 
 export const tiket: Tiket[] = [
-    { nama: 'Early Bird', harga: 350000, catatan: 'Sampai 30 September 2026 atau 200 tiket pertama', tersedia: true },
-    { nama: 'Reguler', harga: 550000, catatan: 'Mulai 1 Oktober 2026', tersedia: true },
+    { nama: 'Early Bird', harga: 350000, catatan: `Sampai ${acara.earlyBirdTutup} atau 200 tiket pertama`, tersedia: true },
+    { nama: 'Reguler', harga: 550000, catatan: 'Mulai 1 November 2026', tersedia: true },
     { nama: 'Pelajar', harga: 150000, catatan: 'Tunjukkan kartu mahasiswa saat registrasi', tersedia: true },
 ];
 
@@ -194,3 +199,7 @@ export const fiturTiket: { nama: string; termasuk: boolean[] }[] = [
 
 export const rupiah = (n: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
+
+/** URL foto Unsplash dengan ukuran yang pas untuk tempat tampilnya. */
+export const img = (url: string, w: number, h?: number) =>
+    `${url}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;

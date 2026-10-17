@@ -5,15 +5,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { sekolah, program, ppdb, rupiah } from '../data/sekolah';
 
-const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-4 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#F28C38]';
+const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-4 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#1F4E79]/50 hover:border-[#1F4E79]/45 focus:border-[#1F4E79]';
 ---
 <Base title={`PPDB ${ppdb.tahun} — ${sekolah.nama}`} description={`Penerimaan peserta didik baru ${sekolah.nama} tahun ajaran ${ppdb.tahun}: jadwal gelombang, rincian biaya, syarat, dan pendaftaran lewat WhatsApp.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#1F4E79]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F28C38]">PPDB {ppdb.tahun}</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#B4501A]">PPDB {ppdb.tahun}</p>
         <h1 class="font-display mt-3 text-4xl font-semibold leading-tight md:text-6xl">Pendaftaran peserta didik baru</h1>
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#1F4E79]/75">{ppdb.observasi} Anak tidak dites membaca atau berhitung; guru hanya ingin melihat cara anak bermain dan berinteraksi.</p>
       </div>
@@ -21,14 +21,17 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
 
     <!-- Gelombang -->
     <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-      <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Jadwal</p>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#B4501A]">Jadwal</p>
       <h2 class="font-display mt-2 text-3xl font-semibold md:text-4xl">Tiga gelombang</h2>
       <ol class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         {ppdb.gelombang.map((g, i) => (
-          <li class:list={['rounded-2xl border p-6', i === 0 ? 'border-[#F28C38] bg-white' : 'border-[#1F4E79]/15 bg-white/60']}>
-            <p class="font-display text-xl font-semibold">{g.nama}</p>
+          <li class:list={['rounded-2xl border p-6', g.aktif ? 'border-2 border-[#F28C38] bg-white' : 'border-[#1F4E79]/15 bg-white/60']}>
+            <div class="flex items-center justify-between gap-3">
+              <p class="font-display text-xl font-semibold">{g.nama}</p>
+              {g.aktif && <span class="rounded-full bg-[#F28C38] px-3 py-1 text-xs font-bold text-[#13324F]">Sedang dibuka</span>}
+            </div>
             <p class="mt-2 text-sm font-semibold">{g.periode}</p>
-            <p class="mt-1 text-sm text-[#1F4E79]/65">{g.catatan}</p>
+            <p class="mt-1 text-sm text-[#1F4E79]/75">{g.catatan}</p>
           </li>
         ))}
       </ol>
@@ -37,11 +40,11 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
     <!-- Biaya -->
     <section class="border-t border-[#1F4E79]/15 bg-white/60">
       <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Biaya</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#B4501A]">Biaya</p>
         <h2 class="font-display mt-2 text-3xl font-semibold md:text-4xl">Rincian biaya {ppdb.tahun}</h2>
         <div class="mt-6 overflow-hidden rounded-2xl border border-[#1F4E79]/15 bg-white">
           <table class="w-full text-left text-sm">
-            <thead class="border-b border-[#1F4E79]/15 bg-[#FFF7E8] text-xs font-bold uppercase tracking-widest text-[#1F4E79]/60">
+            <thead class="border-b border-[#1F4E79]/15 bg-[#FFF7E8] text-xs font-bold uppercase tracking-widest text-[#1F4E79]/75">
               <tr>
                 <th scope="col" class="px-5 py-3">Komponen</th>
                 <th scope="col" class="px-5 py-3 text-right">Nominal</th>
@@ -51,7 +54,7 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
             <tbody class="divide-y divide-[#1F4E79]/10">
               {ppdb.biaya.map((b) => (
                 <tr>
-                  <td class="px-5 py-3.5 font-semibold">{b.item}<span class="block text-xs font-normal text-[#1F4E79]/60 sm:hidden">{b.keterangan}</span></td>
+                  <td class="px-5 py-3.5 font-semibold">{b.item}<span class="block text-xs font-normal text-[#1F4E79]/75 sm:hidden">{b.keterangan}</span></td>
                   <td class="px-5 py-3.5 text-right font-bold tabular-nums">{rupiah(b.nominal)}</td>
                   <td class="hidden px-5 py-3.5 text-[#1F4E79]/70 sm:table-cell">{b.keterangan}</td>
                 </tr>
@@ -59,7 +62,7 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
             </tbody>
           </table>
         </div>
-        <p class="mt-3 text-xs text-[#1F4E79]/55">Tidak ada biaya lain selama tahun ajaran. Kegiatan luar sekolah bersifat sukarela dan diumumkan sebulan sebelumnya.</p>
+        <p class="mt-3 text-xs text-[#1F4E79]/75">Tidak ada biaya lain selama tahun ajaran. Kegiatan luar sekolah bersifat sukarela dan diumumkan sebulan sebelumnya.</p>
       </div>
     </section>
 
@@ -67,24 +70,24 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
     <section class="border-t border-[#1F4E79]/15">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
         <div class="md:col-span-5">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Syarat</p>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#B4501A]">Syarat</p>
           <h2 class="font-display mt-2 text-3xl font-semibold">Yang perlu disiapkan</h2>
           <ol class="mt-5 divide-y divide-[#1F4E79]/10 border-y border-[#1F4E79]/10">
             {ppdb.syarat.map((s, i) => (
               <li class="grid grid-cols-[2.5rem_1fr] gap-3 py-4">
-                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-[#F28C38] font-display text-sm font-semibold text-white">{i + 1}</span>
+                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-[#F28C38] font-display text-sm font-semibold text-[#13324F]">{i + 1}</span>
                 <p class="text-sm leading-relaxed">{s}</p>
               </li>
             ))}
           </ol>
         </div>
         <form id="ppdb-form" class="space-y-5 md:col-span-6 md:col-start-7">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Daftar</p>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#B4501A]">Daftar</p>
           <h2 class="font-display !mt-2 text-3xl font-semibold">Isi, lalu lanjut di WhatsApp</h2>
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <label for="anak" class="block text-sm font-bold">Nama anak</label>
-              <input id="anak" name="anak" required placeholder="Nama panggilan boleh" class={field} />
+              <input id="anak" name="anak" required autocomplete="off" placeholder="Nama panggilan boleh" class={field} />
             </div>
             <div>
               <label for="lahir" class="block text-sm font-bold">Tanggal lahir</label>
@@ -100,11 +103,12 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
             </div>
             <div>
               <label for="wali" class="block text-sm font-bold">Nama orang tua / wali</label>
-              <input id="wali" name="wali" required placeholder="Yang bisa dihubungi" class={field} />
+              <input id="wali" name="wali" required autocomplete="name" placeholder="Yang bisa dihubungi" class={field} />
             </div>
           </div>
-          <button type="submit" class="w-full rounded-2xl bg-[#F28C38] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#d9772a] sm:w-auto">Kirim via WhatsApp</button>
-          <p class="text-xs leading-relaxed text-[#1F4E79]/60">Situs ini tidak menyimpan data. Isian disusun menjadi pesan WhatsApp ke sekolah ({sekolah.wa}); admin membalas dengan jadwal observasi dan formulir resmi.</p>
+          <button type="submit" class="w-full rounded-2xl bg-[#F28C38] px-6 py-3.5 text-sm font-bold text-[#13324F] transition-colors duration-150 hover:bg-[#F5A15B] sm:w-auto">Kirim via WhatsApp</button>
+          <p id="status" aria-live="polite" class="hidden rounded-2xl border border-[#1F4E79]/15 bg-white px-4 py-3 text-sm"></p>
+          <p class="text-xs leading-relaxed text-[#1F4E79]/75">Situs ini tidak menyimpan data. Isian disusun menjadi pesan WhatsApp ke sekolah ({sekolah.wa}); admin membalas dengan jadwal observasi dan formulir resmi.</p>
         </form>
       </div>
     </section>
@@ -113,6 +117,8 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
 
   <script define:vars={{ wa: sekolah.wa, tahun: ppdb.tahun }}>
     const form = document.getElementById('ppdb-form');
+    const lahir = document.getElementById('lahir');
+    if (lahir) lahir.max = new Date().toISOString().slice(0, 10);
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const d = new FormData(form);
@@ -123,7 +129,12 @@ const field = 'mt-1.5 w-full rounded-2xl border border-[#1F4E79]/25 bg-white px-
         `Kelompok: ${d.get('kelompok')}`,
         `Orang tua/wali: ${d.get('wali')}`,
       ].join('\n');
-      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru dengan data pendaftaran. Tekan kirim di sana; admin membalas dengan jadwal observasi.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

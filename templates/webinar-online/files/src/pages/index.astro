@@ -4,20 +4,20 @@ import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Countdown from '../components/Countdown.astro';
-import { webinar, sesi, pelajari, pemateri, paket, rupiah, foto } from '../data/webinar';
+import { webinar, sesi, pelajari, pemateri, paket, rupiah, foto, img } from '../data/webinar';
 
+const terisi = Math.round(((webinar.kuota - webinar.sisaKursi) / webinar.kuota) * 100);
 const detail = [
   { k: 'Sesi 1', v: `${sesi[0].tanggal}, ${sesi[0].jam}` },
   { k: 'Sesi 2', v: `${sesi[1].tanggal}, ${sesi[1].jam}` },
   { k: 'Platform', v: webinar.platform },
   { k: 'Harga', v: `${rupiah(webinar.hargaEarly)} early bird · ${rupiah(webinar.harga)} normal` },
-  { k: 'Kursi', v: `Sisa ${webinar.sisaKursi} dari ${webinar.kuota}` },
 ];
 ---
 <Base title={`${webinar.judul} — ${webinar.penyelenggara}`} description={`${webinar.format}: ${webinar.subjudul} Bersama ${pemateri.nama}, ${sesi[0].tanggal}. Daftar via WhatsApp.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <!-- Hero -->
     <section class="mx-auto max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-24 md:pt-20">
       <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
@@ -26,22 +26,35 @@ const detail = [
           <h1 class="font-display mt-5 text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">{webinar.judul}</h1>
           <p class="mt-6 max-w-xl text-base leading-relaxed text-[#3B2A1A]/75 md:text-lg">{webinar.subjudul}</p>
           <div class="mt-10">
-            <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/50">Sesi pertama dimulai dalam</p>
-            <div class="mt-4"><Countdown target={webinar.mulaiISO} /></div>
+            <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/70">Sesi pertama dimulai dalam</p>
+            <div class="mt-4"><Countdown target={webinar.mulaiISO} teks={`${sesi[0].tanggal}, ${sesi[0].jam}`} /></div>
           </div>
           <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a href="/daftar/" class="inline-flex items-center justify-center rounded-sm bg-[#B5452E] px-6 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823]">Daftar early bird</a>
-            <a href="/materi/" class="inline-flex items-center justify-center rounded-sm border border-[#3B2A1A]/30 px-6 py-3 text-sm font-semibold transition-colors duration-150 hover:bg-[#3B2A1A]/5">Lihat silabus</a>
+            <a href="/daftar/" class="inline-flex min-h-[48px] items-center justify-center rounded-sm bg-[#B5452E] px-6 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823]">Daftar early bird</a>
+            <a href="/materi/" class="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-[#3B2A1A]/30 px-6 text-sm font-semibold transition-colors duration-150 hover:bg-[#3B2A1A]/5">Lihat silabus</a>
           </div>
         </div>
-        <dl class="divide-y divide-[#FAF7F2]/15 rounded-sm bg-[#3B2A1A] p-6 text-[#FAF7F2] md:col-span-5 md:self-start md:p-8">
-          {detail.map((d) => (
-            <div class="py-3.5 first:pt-0 last:pb-0">
-              <dt class="font-mono text-[11px] uppercase tracking-widest text-[#FAF7F2]/50">{d.k}</dt>
-              <dd class="mt-1 text-sm font-medium leading-relaxed">{d.v}</dd>
+        <aside class="rounded-sm bg-[#3B2A1A] p-6 text-[#FAF7F2] md:col-span-5 md:self-end md:p-8" aria-label="Ringkasan acara">
+          <dl class="divide-y divide-[#FAF7F2]/15">
+            {detail.map((d) => (
+              <div class="py-3.5 first:pt-0">
+                <dt class="font-mono text-[11px] uppercase tracking-widest text-[#FAF7F2]/75">{d.k}</dt>
+                <dd class="mt-1 text-[15px] font-medium leading-relaxed">{d.v}</dd>
+              </div>
+            ))}
+          </dl>
+          <!-- Kursi: meter sederhana, diisi dari kuota dan sisaKursi -->
+          <div class="mt-5 border-t border-[#FAF7F2]/15 pt-6">
+            <div class="flex items-baseline justify-between">
+              <p class="font-display text-3xl font-medium tabular-nums md:text-4xl">{webinar.sisaKursi} <span class="text-base text-[#FAF7F2]/75">kursi tersisa</span></p>
+              <p class="font-mono text-xs tabular-nums text-[#FAF7F2]/75">dari {webinar.kuota}</p>
             </div>
-          ))}
-        </dl>
+            <div class="mt-3 h-1.5 w-full rounded-full bg-[#FAF7F2]/15" role="img" aria-label={`${terisi}% kursi sudah terisi`}>
+              <div class="h-full rounded-full bg-[#E07A5F]" style={`width:${terisi}%`}></div>
+            </div>
+            <p class="mt-3 text-sm text-[#FAF7F2]/75">Early bird {rupiah(webinar.hargaEarly)} sampai {webinar.batasEarly}.</p>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -51,12 +64,12 @@ const detail = [
         <div class="md:col-span-4">
           <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Yang Anda pelajari</p>
           <h2 class="font-display mt-3 text-3xl font-medium leading-tight md:text-4xl">Enam hal yang bisa langsung dipakai Senin pagi</h2>
-          <img src={foto.hero} alt="Struk belanja, kalkulator, dan catatan di atas meja" loading="lazy" class="mt-8 hidden aspect-[4/3] w-full rounded-sm object-cover md:block" />
+          <img src={img(foto.hero, 800, 600)} alt="Struk belanja, kalkulator, dan catatan di atas meja" width="800" height="600" loading="lazy" decoding="async" class="mt-8 hidden aspect-[4/3] w-full rounded-sm object-cover md:block" />
         </div>
         <ol class="divide-y divide-[#3B2A1A]/15 border-y border-[#3B2A1A]/15 md:col-span-8">
           {pelajari.map((p, i) => (
             <li class="grid grid-cols-[3.5rem_1fr] gap-4 py-5">
-              <span class="font-display text-2xl text-[#B5452E]">0{i + 1}</span>
+              <span class="font-display text-2xl tabular-nums text-[#B5452E]">0{i + 1}</span>
               <p class="font-display text-xl leading-snug md:text-2xl">{p}</p>
             </li>
           ))}
@@ -65,13 +78,23 @@ const detail = [
     </section>
 
     <!-- Pemateri -->
-    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
-      <img src={pemateri.foto} alt={`Potret ${pemateri.nama}`} loading="lazy" class="aspect-square w-full max-w-sm rounded-sm object-cover md:col-span-4" />
-      <div class="md:col-span-7 md:col-start-6">
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:items-center md:gap-12 md:px-6 md:py-24">
+      <div class="md:col-span-5">
+        <img src={img(pemateri.foto, 800, 1000)} alt={`Potret ${pemateri.nama}`} width="800" height="1000" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-sm object-cover" />
+      </div>
+      <div class="md:col-span-7">
         <p class="font-mono text-xs uppercase tracking-widest text-[#B5452E]">Pemateri</p>
-        <h2 class="font-display mt-3 text-3xl font-medium md:text-4xl">{pemateri.nama}</h2>
-        <p class="mt-1 text-sm font-medium text-[#3B2A1A]/60">{pemateri.peran}</p>
-        <p class="mt-5 max-w-xl text-base leading-relaxed text-[#3B2A1A]/80">{pemateri.bio}</p>
+        <h2 class="font-display mt-3 text-4xl font-medium md:text-5xl">{pemateri.nama}</h2>
+        <p class="mt-1 text-base font-medium text-[#3B2A1A]/70">{pemateri.peran}</p>
+        <p class="mt-6 max-w-[58ch] font-display text-xl leading-relaxed md:text-2xl">{pemateri.bio}</p>
+        <dl class="mt-8 divide-y divide-[#3B2A1A]/15 border-y border-[#3B2A1A]/15">
+          {pemateri.fakta.map((f) => (
+            <div class="grid grid-cols-1 gap-1 py-3.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+              <dt class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/70">{f.k}</dt>
+              <dd class="text-[15px]">{f.v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
 
@@ -84,14 +107,14 @@ const detail = [
           {sesi.map((s) => (
             <div>
               <div class="border-b-2 border-[#3B2A1A] pb-3">
-                <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/55">{s.nomor} · {s.tanggal}</p>
+                <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/70">{s.nomor} · {s.tanggal}</p>
                 <h3 class="font-display mt-1 text-2xl font-medium">{s.tema}</h3>
               </div>
               <table class="mt-2 w-full text-sm">
                 <tbody class="divide-y divide-[#3B2A1A]/10">
                   {s.agenda.map((a) => (
                     <tr>
-                      <td class="w-16 py-3 pr-3 align-top font-mono text-[#B5452E]">{a.jam}</td>
+                      <td class="w-16 py-3 pr-3 align-top font-mono tabular-nums text-[#B5452E]">{a.jam}</td>
                       <td class="py-3 align-top leading-relaxed">{a.apa}</td>
                     </tr>
                   ))}
@@ -110,7 +133,7 @@ const detail = [
         <h2 class="font-display mt-3 text-3xl font-medium md:text-4xl">Satu harga untuk kedua sesi</h2>
         <div class="mt-8 overflow-hidden rounded-sm border border-[#3B2A1A]/20 bg-[#FAF7F2]">
           <table class="w-full text-left text-sm">
-            <thead class="border-b border-[#3B2A1A]/20 font-mono text-[11px] uppercase tracking-widest text-[#3B2A1A]/55">
+            <thead class="border-b border-[#3B2A1A]/20 font-mono text-[11px] uppercase tracking-widest text-[#3B2A1A]/70">
               <tr>
                 <th scope="col" class="px-4 py-3 font-medium md:px-6">Paket</th>
                 <th scope="col" class="px-4 py-3 font-medium md:px-6">Harga</th>
@@ -121,7 +144,7 @@ const detail = [
             <tbody class="divide-y divide-[#3B2A1A]/10">
               {paket.map((p) => (
                 <tr>
-                  <td class="px-4 py-4 font-semibold md:px-6">{p.nama}<span class="block text-xs font-normal text-[#3B2A1A]/55 sm:hidden">{p.berlaku}</span></td>
+                  <td class="px-4 py-4 font-semibold md:px-6">{p.nama}<span class="block text-xs font-normal text-[#3B2A1A]/70 sm:hidden">{p.berlaku}</span></td>
                   <td class="font-display px-4 py-4 text-2xl md:px-6">{rupiah(p.harga)}</td>
                   <td class="hidden px-4 py-4 text-[#3B2A1A]/75 sm:table-cell md:px-6">{p.berlaku}</td>
                   <td class="hidden px-4 py-4 text-[#3B2A1A]/75 md:table-cell md:px-6">{p.catatan}</td>

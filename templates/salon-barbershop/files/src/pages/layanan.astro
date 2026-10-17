@@ -10,8 +10,9 @@ const kategori = ['Rambut', 'Cukur', 'Perawatan', 'Paket'] as const;
 ---
 <Base title={`Layanan & harga — ${toko.nama}`} description={`Daftar harga ${toko.nama} ${toko.kota}: ${layanan.length} layanan potong, cukur, perawatan, dan paket. Booking via WhatsApp.`}>
   <Fonts />
+  <Header />
+  <main id="konten">
   <div class="bg-[#111111] text-[#EFE9E1]">
-    <Header />
     <section class="border-b border-[#EFE9E1]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333]">{layanan.length} layanan · harga sudah termasuk pajak</p>
@@ -22,13 +23,13 @@ const kategori = ['Rambut', 'Cukur', 'Perawatan', 'Paket'] as const;
       </div>
     </section>
   </div>
-  <main class="bg-[#EFE9E1] text-[#111111]">
+  <div class="bg-[#EFE9E1] text-[#111111]">
     <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
       {kategori.map((k) => {
         const items = layanan.filter((l) => l.kategori === k);
         return items.length ? (
           <section class="grid grid-cols-1 gap-6 py-8 md:grid-cols-12 md:gap-10">
-            <h2 class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333] md:col-span-3">{k}</h2>
+            <h2 class="font-mono text-xs uppercase tracking-[0.22em] text-[#8E5524] md:col-span-3">{k}</h2>
             <div class="md:col-span-9">
               <DaftarHarga items={items} />
             </div>
@@ -36,7 +37,7 @@ const kategori = ['Rambut', 'Cukur', 'Perawatan', 'Paket'] as const;
         ) : null;
       })}
       <div class="mt-6 grid grid-cols-1 gap-6 border-t border-[#111111]/15 pt-10 md:grid-cols-12">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#B87333] md:col-span-3">Catatan</p>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-[#8E5524] md:col-span-3">Catatan</p>
         <ul class="space-y-2 text-sm leading-relaxed text-[#111111]/80 md:col-span-9">
           <li>Pembayaran tunai, QRIS, atau transfer setelah selesai.</li>
           <li>Terlambat lebih dari 15 menit, jadwal dialihkan ke slot kosong berikutnya.</li>
@@ -44,6 +45,7 @@ const kategori = ['Rambut', 'Cukur', 'Perawatan', 'Paket'] as const;
         </ul>
       </div>
     </div>
+  </div>
   </main>
   <Footer />
 </Base>

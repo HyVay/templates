@@ -9,26 +9,27 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:rounded-2xl focus:bg-[#1F4E79] focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-white">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#1F4E79]/15 bg-[#FFF7E8]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="flex items-center gap-2.5">
       <span class="block h-7 w-7 rounded-full bg-[#F28C38]" aria-hidden="true"></span>
       <span class="font-display text-lg font-semibold md:text-xl">{sekolah.nama}</span>
     </a>
-    <nav class="hidden md:flex md:items-center md:gap-7">
+    <nav aria-label="Utama" class="hidden md:flex md:items-center md:gap-1 lg:gap-2">
       {links.map((l) => (
         <a
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm font-semibold transition-colors duration-150 hover:text-[#F28C38]',
-            here === l.href ? 'text-[#F28C38]' : 'text-[#1F4E79]/70',
+            'rounded-2xl px-3 py-2.5 text-sm font-semibold transition-colors duration-150 hover:text-[#B4501A]',
+            here === l.href ? 'bg-[#F28C38]/20 text-[#13324F]' : 'text-[#1F4E79]/80',
           ]}
         >
           {l.label}
         </a>
       ))}
-      <a href="/ppdb/" class="rounded-2xl bg-[#1F4E79] px-4 py-2 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#F28C38]">Daftar PPDB</a>
+      <a href="/ppdb/" class="ml-2 rounded-2xl bg-[#1F4E79] px-4 py-2.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#13324F]">Daftar PPDB</a>
     </nav>
     <button
       id="nav-toggle"
@@ -43,10 +44,11 @@ const here = Astro.url.pathname;
     </button>
   </div>
   <div id="mobile-menu" class="hidden border-t border-[#1F4E79]/15 bg-[#FFF7E8] md:hidden">
-    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+    <nav aria-label="Utama" class="mx-auto flex max-w-6xl flex-col px-4 pb-4 pt-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-2xl px-3 py-3 text-base font-semibold transition-colors duration-150 hover:bg-[#1F4E79]/5">{l.label}</a>
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block rounded-2xl px-3 py-3 text-base font-semibold transition-colors duration-150 hover:bg-[#1F4E79]/5 aria-[current=page]:bg-[#F28C38]/20">{l.label}</a>
       ))}
+      <a href="/ppdb/" class="mt-3 rounded-2xl bg-[#F28C38] px-4 py-3.5 text-center text-sm font-bold text-[#13324F]">Daftar PPDB</a>
     </nav>
   </div>
 </header>
@@ -57,11 +59,14 @@ const here = Astro.url.pathname;
   const iconClose = document.getElementById('icon-close');
   const set = (isOpen: boolean) => {
     btn?.setAttribute('aria-expanded', String(isOpen));
+    btn?.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
     menu?.classList.toggle('hidden', !isOpen);
     iconOpen?.classList.toggle('hidden', isOpen);
     iconClose?.classList.toggle('hidden', !isOpen);
   };
   btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+  });
 </script>

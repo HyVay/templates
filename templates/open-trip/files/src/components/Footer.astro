@@ -1,27 +1,27 @@
 ---
 import { travel, paket } from '../data/trip';
 ---
-<footer class="bg-[#0B3C5D] text-white">
+<footer class="on-dark bg-[#0B3C5D] text-white">
   <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6">
     <div class="md:col-span-5">
       <p class="font-display text-3xl font-extrabold tracking-tight">{travel.nama}</p>
       <p class="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{travel.tagline}.</p>
       <p class="mt-5 text-sm leading-relaxed text-white/85">{travel.alamat}</p>
-      <p class="mt-1 text-sm text-white/60">{travel.jam}</p>
+      <p class="mt-1 text-sm text-white/75">{travel.jam}</p>
     </div>
     <div class="md:col-span-4">
-      <p class="font-mono text-xs uppercase tracking-widest text-[#F26B1D]">Paket</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-[#FF8A4C]">Paket</p>
       <ul class="mt-3 divide-y divide-white/10 text-sm">
         {paket.map((p) => (
-          <li class="py-2"><a href={`/paket/#${p.slug}`} class="transition-colors duration-150 hover:text-[#F26B1D]">{p.nama}</a></li>
+          <li class="py-2"><a href={`/paket/#${p.slug}`} class="transition-colors duration-150 hover:text-[#FF8A4C]">{p.nama}</a></li>
         ))}
       </ul>
     </div>
     <div class="md:col-span-3">
-      <p class="font-mono text-xs uppercase tracking-widest text-[#F26B1D]">Hubungi</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-[#FF8A4C]">Hubungi</p>
       <ul class="mt-3 space-y-1.5 text-sm">
-        <li><a href={`https://wa.me/${travel.telepon}`} target="_blank" rel="noopener noreferrer" class="transition-colors duration-150 hover:text-[#F26B1D]">WhatsApp {travel.telepon}</a></li>
-        <li><a href="/info/" class="transition-colors duration-150 hover:text-[#F26B1D]">Syarat & pembatalan</a></li>
+        <li><a href={`https://wa.me/${travel.telepon}`} target="_blank" rel="noopener noreferrer" class="transition-colors duration-150 hover:text-[#FF8A4C]">WhatsApp {travel.telepon}</a></li>
+        <li><a href="/info/" class="transition-colors duration-150 hover:text-[#FF8A4C]">Syarat & pembatalan</a></li>
       </ul>
       <p class="mt-5 text-xs leading-relaxed text-white/55">{travel.dp}.</p>
     </div>

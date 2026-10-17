@@ -1,95 +1,176 @@
 ---
 import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { usaha, layanan, keunggulan } from '../data/site';
+import { usaha, angka, layanan, keunggulan, contohRab, proyek, foto, rupiah } from '../data/site';
+
+const totalRab = contohRab.baris.reduce((s, b) => s + b.harga, 0);
+const wa = `https://wa.me/${usaha.telepon}?text=${encodeURIComponent(`Halo ${usaha.nama}, saya ingin minta survei untuk renovasi.`)}`;
 ---
 <Base title={`${usaha.nama} — ${usaha.tagline}`} description={usaha.deskripsi}>
+  <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <!-- Hero -->
-    <section class="relative overflow-hidden border-b border-slate-200 bg-slate-900">
-      <div class="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80"
-          alt=""
-          class="h-full w-full object-cover opacity-30"
-        />
-      </div>
-      <div class="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-32">
-        <div class="max-w-2xl">
-          <h1 class="text-3xl font-semibold leading-tight text-white md:text-5xl">{usaha.tagline}</h1>
-          <p class="mt-5 text-base leading-relaxed text-slate-200 md:text-lg">{usaha.deskripsi}</p>
+    <section class="kisi relative border-b border-[#CFCAC0]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 pb-14 pt-10 md:grid-cols-12 md:items-end md:gap-12 md:px-6 md:pb-20 md:pt-16">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#1D4E89]">{usaha.bidang} · {usaha.wilayah} · sejak {usaha.sejak}</p>
+          <h1 class="mt-5 font-display text-[2.6rem] font-bold leading-[1.02] tracking-tight md:text-[4.25rem]">{usaha.tagline}</h1>
+          <p class="mt-6 max-w-[56ch] text-base leading-relaxed text-[#45423C] md:text-lg">{usaha.deskripsi}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="/kontak/"
-              class="inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
-            >
-              Minta Penawaran
-            </a>
-            <a
-              href="/layanan/"
-              class="inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/10"
-            >
-              Lihat Layanan
-            </a>
+            <a href="/kontak/" class="inline-flex h-12 items-center justify-center bg-[#1D4E89] px-6 text-sm font-medium text-white transition-colors duration-150 hover:bg-[#163D6C]">Minta survei gratis</a>
+            <a href="#rab" class="inline-flex h-12 items-center justify-center border border-[#1C1B19] px-6 text-sm font-medium transition-colors duration-150 hover:bg-[#1C1B19] hover:text-white">Lihat contoh RAB</a>
           </div>
+          <dl class="mt-12 flex border-t border-[#1C1B19]">
+            {angka.map((a, i) => (
+              <div class:list={["flex-1 pt-4", i > 0 && "border-l border-[#CFCAC0] pl-4"]}>
+                <dt class="sr-only">{a.label}</dt>
+                <dd class="font-display text-3xl font-bold tabular-nums md:text-4xl">{a.nilai}</dd>
+                <dd class="mt-1 text-xs leading-snug text-[#5B5850] md:text-sm">{a.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <figure class="md:col-span-5">
+          <img src={foto.hero} alt="Tukang memotong papan kayu untuk kitchen set di bengkel" width="1000" height="1250" fetchpriority="high" class="aspect-[4/5] w-full object-cover" />
+          <figcaption class="mt-3 flex justify-between font-mono text-xs text-[#5B5850]">
+            <span>Bengkel kayu, Pasar Minggu</span><span>Foto: tim sendiri</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Layanan -->
+    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-6">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#1D4E89]">Layanan</p>
+          <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-5xl">{layanan.length} lini pekerjaan, satu tim.</h2>
+        </div>
+        <p class="max-w-[48ch] text-[#45423C] md:col-span-5 md:col-start-8">Harga adalah kisaran awal. Angka final mengikuti hasil survei dan material pilihan Anda.</p>
+      </div>
+      <ol class="mt-10 border-t border-[#1C1B19]">
+        {layanan.map((l, i) => (
+          <li class="border-b border-[#CFCAC0]">
+            <a href="/layanan/" class="group grid grid-cols-1 gap-2 py-6 transition-colors duration-150 hover:bg-[#E3DFD6] md:grid-cols-12 md:items-baseline md:gap-6 md:px-3">
+              <span class="font-mono text-xs text-[#5B5850] md:col-span-1">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-display text-2xl font-bold tracking-tight md:col-span-4 md:text-3xl">{l.nama}</span>
+              <span class="text-[#45423C] md:col-span-4">{l.ringkas}</span>
+              <span class="flex items-baseline justify-between gap-4 md:col-span-3 md:flex-col md:items-end md:gap-1">
+                <span class="font-mono text-sm font-medium tabular-nums text-[#1D4E89]">{l.mulai}</span>
+                <span class="font-mono text-xs text-[#5B5850]">{l.durasi} <span aria-hidden="true" class="inline-block transition-transform duration-150 group-hover:translate-x-1">→</span></span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Contoh RAB -->
+    <section id="rab" class="scroll-mt-20 border-y border-[#CFCAC0] bg-[#F6F4EF]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:gap-12 md:px-6 md:py-24">
+        <div class="md:col-span-4">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#1D4E89]">Contoh RAB</p>
+          <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">Setiap baris bisa Anda tanyakan.</h2>
+          <p class="mt-4 max-w-[46ch] leading-relaxed text-[#45423C]">Sebelum tanda tangan, Anda menerima rincian seperti ini: volume, satuan, dan harga per item. Ingin ganti material? Kami hitung ulang baris itu saja.</p>
+        </div>
+        <div class="md:col-span-8">
+          <div class="border border-[#1C1B19] bg-white">
+            <div class="flex items-center justify-between border-b border-[#1C1B19] px-4 py-3">
+              <p class="text-sm font-medium">{contohRab.judul}</p>
+              <p class="font-mono text-xs text-[#5B5850]">RAB-0247</p>
+            </div>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[#CFCAC0] font-mono text-xs uppercase tracking-wider text-[#5B5850]">
+                  <th scope="col" class="px-4 py-2.5 text-left font-normal">Item</th>
+                  <th scope="col" class="hidden px-4 py-2.5 text-right font-normal sm:table-cell">Volume</th>
+                  <th scope="col" class="px-4 py-2.5 text-right font-normal">Harga</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contohRab.baris.map((b) => (
+                  <tr class="border-b border-[#E3DFD6]">
+                    <td class="px-4 py-3">
+                      {b.item}
+                      <span class="block font-mono text-xs text-[#5B5850] sm:hidden">{b.vol} {b.sat}</span>
+                    </td>
+                    <td class="hidden whitespace-nowrap px-4 py-3 text-right font-mono tabular-nums text-[#45423C] sm:table-cell">{b.vol} {b.sat}</td>
+                    <td class="whitespace-nowrap px-4 py-3 text-right font-mono tabular-nums">{rupiah(b.harga)}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row" class="px-4 py-4 text-left font-medium">Total</th>
+                  <td class="hidden sm:table-cell"></td>
+                  <td class="whitespace-nowrap px-4 py-4 text-right font-mono text-base font-medium tabular-nums text-[#1D4E89]">{rupiah(totalRab)}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <p class="mt-3 font-mono text-xs text-[#5B5850]">Angka contoh, belum termasuk PPN. Harga material mengikuti bulan penawaran.</p>
         </div>
       </div>
     </section>
 
-    <!-- Layanan ringkas -->
+    <!-- Proyek -->
     <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-      <h2 class="text-2xl font-semibold text-slate-900 md:text-3xl">Layanan kami</h2>
-      <p class="mt-2 max-w-2xl text-sm text-slate-600 md:text-base">
-        Tiga lini pekerjaan utama, semuanya dikerjakan tim internal dengan pengawas di lokasi.
-      </p>
-      <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
-        {layanan.map((l) => (
-          <article class="rounded-xl border border-slate-200 bg-white p-6 transition-shadow duration-150 hover:shadow-md">
-            <h3 class="text-lg font-medium text-slate-900">{l.nama}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-600">{l.ringkas}</p>
-            <p class="mt-4 text-sm font-medium text-teal-700">{l.mulai}</p>
-          </article>
-        ))}
+      <div class="flex items-end justify-between gap-6">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#1D4E89]">Proyek terakhir</p>
+          <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-5xl">Selesai, diserahkan, bergaransi.</h2>
+        </div>
       </div>
+      <ul class="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-3">
+        {proyek.map((p) => (
+          <li>
+            <img src={p.foto} alt={`${p.judul} di ${p.lokasi}`} width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover" />
+            <div class="mt-4 flex items-baseline justify-between gap-4 border-t border-[#1C1B19] pt-3">
+              <h3 class="font-display text-xl font-bold tracking-tight">{p.judul}</h3>
+              <span class="font-mono text-xs text-[#5B5850]">{p.tahun}</span>
+            </div>
+            <p class="mt-1 text-sm text-[#45423C]">{p.lokasi}</p>
+            <p class="mt-2 font-mono text-xs text-[#5B5850]">{p.luas} · {p.durasi}</p>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <!-- Keunggulan -->
-    <section class="border-y border-slate-200 bg-slate-50">
-      <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-        <h2 class="text-2xl font-semibold text-slate-900 md:text-3xl">Kenapa memilih kami</h2>
-        <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {keunggulan.map((k) => (
-            <div>
-              <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-teal-600/10 text-teal-700">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                  <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </div>
-              <h3 class="mt-4 text-base font-medium text-slate-900">{k.judul}</h3>
-              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{k.isi}</p>
+    <section class="border-t border-[#CFCAC0]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:gap-12 md:px-6 md:py-24">
+        <div class="md:col-span-4">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#1D4E89]">Yang kami pegang</p>
+          <h2 class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">Tiga janji yang tertulis di kontrak.</h2>
+        </div>
+        <dl class="divide-y divide-[#CFCAC0] border-y border-[#CFCAC0] md:col-span-8">
+          {keunggulan.map((k, i) => (
+            <div class="grid grid-cols-1 gap-2 py-6 sm:grid-cols-12 sm:gap-6">
+              <dt class="flex gap-4 font-display text-xl font-bold tracking-tight sm:col-span-5">
+                <span class="font-mono text-xs font-normal leading-7 text-[#1D4E89]">{String(i + 1).padStart(2, '0')}</span>{k.judul}
+              </dt>
+              <dd class="leading-relaxed text-[#45423C] sm:col-span-7">{k.isi}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-      <div class="rounded-2xl bg-slate-900 px-6 py-12 text-center md:px-12">
-        <h2 class="text-2xl font-semibold text-white md:text-3xl">Punya rencana pekerjaan?</h2>
-        <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-          Kirim ukuran ruang dan kebutuhan Anda, kami balas dengan estimasi biaya di hari yang sama.
-        </p>
-        <a
-          href={`https://wa.me/${usaha.telepon}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="mt-7 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-teal-700"
-        >
-          Chat WhatsApp
-        </a>
+    <section class="relative overflow-hidden bg-[#1D4E89] text-white">
+      <div class="absolute inset-0 z-0 pointer-events-none opacity-60 [background-image:linear-gradient(to_right,rgb(255_255_255/.08)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/.08)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+      <div class="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-16 md:grid-cols-12 md:items-end md:px-6 md:py-20">
+        <div class="md:col-span-7">
+          <h2 class="font-display text-3xl font-bold tracking-tight md:text-5xl">Kirim ukuran ruangnya. Estimasi kami kirim hari itu juga.</h2>
+          <p class="mt-4 max-w-[52ch] text-[#D5E0EE]">Foto kondisi sekarang dan perkiraan luas sudah cukup untuk estimasi awal. Survei lokasi gratis di {usaha.wilayah}.</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
+          <a href={wa} target="_blank" rel="noopener noreferrer" class="inline-flex h-12 items-center justify-center bg-white px-6 text-sm font-medium text-[#1D4E89] transition-colors duration-150 hover:bg-[#E8EEF6]">Chat WhatsApp</a>
+          <a href="/kontak/" class="inline-flex h-12 items-center justify-center border border-white/60 px-6 text-sm font-medium transition-colors duration-150 hover:bg-white/10">Isi formulir</a>
+        </div>
       </div>
     </section>
   </main>

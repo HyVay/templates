@@ -1,15 +1,16 @@
 ---
 /** Hitung mundur bergaya angka besar Newsreader, dipisah titik dua. Tanpa kotak. */
-interface Props { target: string }
-const { target } = Astro.props;
+interface Props { target: string; teks: string }
+const { target, teks } = Astro.props;
 const unit = ['Hari', 'Jam', 'Menit', 'Detik'];
 ---
-<div id="countdown" data-target={target} class="flex items-start gap-2 sm:gap-3">
+<p class="sr-only">Sesi pertama dimulai {teks}.</p>
+<div id="countdown" data-target={target} aria-hidden="true" class="flex items-start gap-2 sm:gap-3">
   {unit.map((label, i) => (
     <>
       <div class="text-center">
         <p class="font-display text-4xl font-medium tabular-nums leading-none sm:text-5xl md:text-6xl" data-unit={label}>00</p>
-        <p class="mt-2 text-[11px] uppercase tracking-[0.2em] text-[#3B2A1A]/55">{label}</p>
+        <p class="mt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#3B2A1A]/70">{label}</p>
       </div>
       {i < unit.length - 1 && <span class="font-display text-4xl leading-none text-[#B5452E] sm:text-5xl md:text-6xl" aria-hidden="true">:</span>}
     </>

@@ -16,13 +16,13 @@ const unggulan = paket.slice(0, 3);
 <Base title={`${travel.nama} — ${travel.tagline}`} description={travel.deskripsi}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <!-- Hero: foto 21/9, judul di blok pasir bawah-kiri -->
     <section class="relative">
-      <img src={foto.hero} alt="Gugusan pulau dan laut biru dilihat dari bukit" class="aspect-[4/5] w-full object-cover sm:aspect-[16/9] md:aspect-[21/9]" />
+      <img src={foto.hero} alt="Gugusan pulau dan laut biru dilihat dari bukit" width="2000" height="857" fetchpriority="high" class="aspect-[4/3] w-full object-cover sm:aspect-[16/9] md:aspect-[16/5]" />
       <div class="mx-auto max-w-6xl px-4 md:px-6">
         <div class="relative max-w-3xl bg-[#F4EBDD] pt-6 before:absolute before:inset-y-0 before:right-full before:w-screen before:bg-[#F4EBDD] before:content-[''] md:-mt-28 md:pr-12 md:pt-8">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#F26B1D]">Dari {travel.kota} · sejak {travel.sejak} · maks 14 orang</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#B4470B]">Dari {travel.kota} · sejak {travel.sejak} · maks 14 orang</p>
           <h1 class="mt-3 font-display text-4xl font-extrabold leading-[0.98] tracking-tight text-[#0B3C5D] sm:text-5xl md:text-7xl">
             Rombongan kecil, itinerary yang tidak terburu-buru.
           </h1>
@@ -33,8 +33,8 @@ const unggulan = paket.slice(0, 3);
     <section class="mx-auto max-w-6xl px-4 pb-14 pt-6 md:px-6 md:pb-20 md:pt-8">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
         <p class="max-w-xl text-base leading-relaxed text-[#0B3C5D]/80 md:col-span-7 md:text-lg">{travel.deskripsi}</p>
-        <div class="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
-          <a href="/paket/" class="inline-flex items-center justify-center rounded-lg bg-[#0B3C5D] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#F26B1D]">Lihat semua paket</a>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center md:col-span-5 md:justify-end md:self-end">
+          <a href="/paket/" class="inline-flex items-center justify-center rounded-lg bg-[#0B3C5D] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#B4470B]">Lihat semua paket</a>
           <a href="/booking/" class="inline-flex items-center justify-center rounded-lg border border-[#0B3C5D] px-6 py-3.5 text-sm font-semibold text-[#0B3C5D] transition-colors duration-150 hover:bg-[#0B3C5D] hover:text-white">Booking</a>
         </div>
       </div>
@@ -45,15 +45,15 @@ const unggulan = paket.slice(0, 3);
       <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <h2 class="font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D] md:text-4xl">Berangkat terdekat</h2>
-          <p class="font-mono text-xs uppercase tracking-widest text-[#0B3C5D]/60">Kursi diperbarui setiap hari</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#0B3C5D]/75">Kursi diperbarui setiap hari</p>
         </div>
         <ol class="mt-6 divide-y divide-[#0B3C5D]/15 border-y border-[#0B3C5D]/15">
           {jadwal.map((j) => (
             <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:gap-6">
               <span class="w-36 shrink-0 font-mono text-sm tabular-nums text-[#0B3C5D]">{tanggalPendek(j.tanggal)}</span>
-              <a href={`/paket/#${j.paket.slug}`} class="flex-1 font-semibold text-[#0B3C5D] transition-colors duration-150 hover:text-[#F26B1D]">{j.paket.nama}</a>
-              <span class="text-sm text-[#0B3C5D]/70">{j.paket.destinasi}</span>
-              <span class:list={['font-mono text-xs uppercase tracking-widest sm:w-32 sm:text-right', j.sisa <= 5 ? 'font-semibold text-[#F26B1D]' : 'text-[#0B3C5D]/60']}>Sisa {j.sisa} kursi</span>
+              <a href={`/paket/#${j.paket.slug}`} class="flex-1 font-semibold text-[#0B3C5D] transition-colors duration-150 hover:text-[#B4470B]">{j.paket.nama}</a>
+              <span class="text-sm text-[#0B3C5D]/80">{j.paket.destinasi}</span>
+              <span class:list={['font-mono text-xs uppercase tracking-widest sm:w-32 sm:text-right', j.sisa <= 5 ? 'font-semibold text-[#B4470B]' : 'text-[#0B3C5D]/75']}>Sisa {j.sisa} kursi</span>
             </li>
           ))}
         </ol>
@@ -64,7 +64,7 @@ const unggulan = paket.slice(0, 3);
     <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
       <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <h2 class="font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D] md:text-4xl">Tiga paket favorit</h2>
-        <a href="/paket/" class="text-sm font-semibold text-[#0B3C5D] underline decoration-[#F26B1D] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#F26B1D]">Semua {paket.length} paket</a>
+        <a href="/paket/" class="text-sm font-semibold text-[#0B3C5D] underline decoration-[#F26B1D] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#B4470B]">Semua {paket.length} paket</a>
       </div>
       <ul class="mt-4 divide-y divide-[#0B3C5D]/15 border-y border-[#0B3C5D]/15">
         {unggulan.map((p) => <BarisPaket p={p} />)}
@@ -72,13 +72,13 @@ const unggulan = paket.slice(0, 3);
     </section>
 
     <!-- Cara kami bekerja -->
-    <section class="border-y border-[#0B3C5D]/15 bg-[#0B3C5D] text-white">
+    <section class="on-dark border-y border-[#0B3C5D]/15 bg-[#0B3C5D] text-white">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
         <div class="md:col-span-5">
-          <img src={foto.tentang} alt="Seseorang berdiri menghadap candi saat pagi" loading="lazy" class="aspect-[4/5] w-full rounded-lg object-cover" />
+          <img src={foto.tentang} alt="Seseorang berdiri menghadap candi saat pagi" width="900" height="1125" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-lg object-cover" />
         </div>
         <div class="md:col-span-7">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#F26B1D]">Cara kami bekerja</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#FF8A4C]">Cara kami bekerja</p>
           <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-5xl">Yang tertulis, itu yang Anda bayar</h2>
           <ol class="mt-8 divide-y divide-white/15 border-y border-white/15">
             {[
@@ -88,7 +88,7 @@ const unggulan = paket.slice(0, 3);
               ['Kabar cuaca jujur', 'Kalau laut tidak aman, rute diubah atau jadwal digeser. Keputusan diumumkan di grup WhatsApp peserta.'],
             ].map(([judul, isi], i) => (
               <li class="flex gap-5 py-5">
-                <span class="w-10 shrink-0 font-display text-2xl font-extrabold text-[#F26B1D]">{String(i + 1).padStart(2, '0')}</span>
+                <span class="w-10 shrink-0 font-display text-2xl font-extrabold text-[#FF8A4C]">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 class="font-semibold">{judul}</h3>
                   <p class="mt-1 text-sm leading-relaxed text-white/70">{isi}</p>
@@ -107,7 +107,7 @@ const unggulan = paket.slice(0, 3);
           <h2 class="font-display text-3xl font-extrabold tracking-tight text-[#0B3C5D] md:text-4xl">Belum yakin tanggalnya?</h2>
           <p class="mt-2 text-sm text-[#0B3C5D]/75 md:text-base">Tanyakan dulu lewat WhatsApp. Kami balas pada jam kerja, biasanya kurang dari 30 menit.</p>
         </div>
-        <a href={`https://wa.me/${travel.telepon}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-lg bg-[#F26B1D] px-6 py-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#0B3C5D]">Tanya via WhatsApp</a>
+        <a href={`https://wa.me/${travel.telepon}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-lg bg-[#B4470B] px-6 py-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#0B3C5D]">Tanya via WhatsApp</a>
       </div>
     </section>
   </main>

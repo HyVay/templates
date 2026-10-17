@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:bg-[#B87333] focus:text-[#111111]">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#EFE9E1]/15 bg-[#111111]/95 text-[#EFE9E1] backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-2xl font-semibold tracking-tight">{toko.nama}</a>
@@ -44,7 +45,7 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#EFE9E1]/15 bg-[#111111] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block border-b border-[#EFE9E1]/10 px-2 py-3 text-base text-[#EFE9E1] transition-colors duration-150 hover:text-[#B87333]">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block border-b border-[#EFE9E1]/10 px-2 py-3 text-base text-[#EFE9E1] transition-colors duration-150 hover:text-[#B87333]">
           {l.label}
         </a>
       ))}

@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:bg-[#D92525] focus:px-4 focus:py-3 focus:font-display focus:text-sm focus:font-bold focus:uppercase focus:text-white">Langsung ke konten</a>
 <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0A0F1E]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-base font-bold uppercase tracking-wide text-white md:text-lg">
@@ -29,7 +30,7 @@ const here = Astro.url.pathname;
       ))}
       <a
         href="/daftar/"
-        class="font-display bg-[#FF3D3D] px-4 py-2 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#e03030]"
+        class="font-display bg-[#D92525] inline-flex min-h-[40px] items-center px-4 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#B91C1C]"
       >
         Daftar tim
       </a>
@@ -49,11 +50,12 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0A0F1E] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="font-display block px-2 py-3 text-base font-semibold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-white/5">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="font-display block border-l-2 border-transparent px-2 py-3 aria-[current=page]:border-[#FF3D3D] aria-[current=page]:text-[#FF3D3D] text-base font-semibold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-white/5">
           {l.label}
         </a>
       ))}
-      <p class="mt-2 border-t border-white/10 px-2 pt-3 text-xs text-white/50">{turnamen.nama}</p>
+      <a href="/daftar/" class="font-display mt-3 flex min-h-[48px] items-center justify-center bg-[#D92525] text-sm font-bold uppercase tracking-wider text-white">Daftar tim · sisa {turnamen.sisaSlot} slot</a>
+      <p class="mt-3 px-2 pb-2 text-xs text-white/60">{turnamen.nama}</p>
     </nav>
   </div>
 </header>

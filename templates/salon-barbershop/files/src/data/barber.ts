@@ -47,14 +47,16 @@ export interface Barber {
     spesialisasi: string;
     sejak: number;
     libur: string;
+    /** Dua kalimat tentang cara kerja barber ini. */
+    bio: string;
     foto: string;
 }
 
 export const barber: Barber[] = [
-    { slug: 'rizky', nama: 'Rizky Maulana', spesialisasi: 'Fade dan potongan pendek', sejak: 2016, libur: 'Selasa', foto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80' },
-    { slug: 'bagas', nama: 'Bagas Saputra', spesialisasi: 'Rambut panjang dan tekstur', sejak: 2018, libur: 'Rabu', foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80' },
-    { slug: 'yusuf', nama: 'Yusuf Hidayat', spesialisasi: 'Cukur klasik dan jenggot', sejak: 2014, libur: 'Kamis', foto: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&q=80' },
-    { slug: 'dika', nama: 'Dika Pratama', spesialisasi: 'Pewarnaan dan styling', sejak: 2020, libur: 'Senin', foto: 'https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?w=800&q=80' },
+    { slug: 'rizky', nama: 'Rizky Maulana', spesialisasi: 'Fade dan potongan pendek', sejak: 2016, libur: 'Selasa', bio: 'Belajar memotong di barbershop ayahnya di Cimahi. Teliti di garis fade dan selalu menunjukkan hasil dari tiga sudut sebelum selesai.', foto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80' },
+    { slug: 'bagas', nama: 'Bagas Saputra', spesialisasi: 'Rambut panjang dan tekstur', sejak: 2018, libur: 'Rabu', bio: 'Spesialis rambut panjang, ikal, dan bergelombang yang sering dihindari barber lain. Suka mengobrol soal perawatan harian di rumah.', foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80' },
+    { slug: 'yusuf', nama: 'Yusuf Hidayat', spesialisasi: 'Cukur klasik dan jenggot', sejak: 2014, libur: 'Kamis', bio: 'Barber paling senior di kursi nomor satu. Cukur dengan pisau lipat dan handuk hangat, cara lama yang tidak pernah ia tinggalkan.', foto: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&q=80' },
+    { slug: 'dika', nama: 'Dika Pratama', spesialisasi: 'Pewarnaan dan styling', sejak: 2020, libur: 'Senin', bio: 'Mengurus pewarnaan dan styling untuk acara. Bisa dipanggil ke lokasi untuk paket pengantin pria di Bandung Raya.', foto: 'https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?w=800&q=80' },
 ];
 
 export const galeri = [

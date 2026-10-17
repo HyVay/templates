@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { lembaga, pengajar } from '../data/bimbel';
+import { lembaga, pengajar, src } from '../data/bimbel';
 ---
 <Base
   title={`Pengajar — ${lembaga.nama}`}
@@ -11,10 +11,10 @@ import { lembaga, pengajar } from '../data/bimbel';
 >
   <Fonts />
   <Header />
-  <main class="text-[#14213D]">
+  <main id="konten" class="text-[#14213D]">
     <section class="border-b border-[#14213D]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Pengajar</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Pengajar</p>
         <h1 class="font-display mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">Pengajar tetap, bukan pengajar lepas.</h1>
         <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#14213D]/70 md:text-base">
           Semua pengajar di sini mengajar penuh waktu. Siswa bertemu orang yang sama sepanjang semester, jadi pengajar tahu persis siapa yang tertinggal di bab mana.
@@ -25,20 +25,27 @@ import { lembaga, pengajar } from '../data/bimbel';
     <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
       <ul class="divide-y divide-[#14213D]/10">
         {pengajar.map((g, i) => (
-          <li class="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-8">
+          <li class="grid grid-cols-[5.5rem_1fr] items-start gap-5 py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 md:grid-cols-12 md:py-10">
             <div class="md:col-span-3">
-              <img src={g.foto} alt={g.nama} loading="lazy" class="aspect-square w-full max-w-xs rounded-lg object-cover grayscale" />
+              <img src={src(g.foto, 560, 560)} width="560" height="560" alt={`Foto ${g.nama}`} loading={i < 2 ? undefined : "lazy"} decoding="async" class="aspect-square w-full rounded-lg bg-[#14213D]/5 object-cover grayscale" />
             </div>
-            <div class="md:col-span-8 md:col-start-5">
-              <p class="font-mono text-sm text-[#FCA311]">0{i + 1}</p>
-              <h2 class="font-display mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">{g.nama}</h2>
+            <div class="md:col-span-9 md:pl-4">
+              <p class="font-mono text-sm font-bold text-[#9A5B00]">0{i + 1}</p>
+              <h2 class="font-display mt-1 text-xl font-extrabold tracking-tight sm:mt-2 sm:text-2xl md:text-3xl">{g.nama}</h2>
               <p class="mt-1 text-sm font-semibold text-[#14213D]/70">{g.mapel}</p>
-              <p class="mt-4 max-w-xl text-sm leading-relaxed text-[#14213D]/75 md:text-base">{g.latar}</p>
-              <p class="mt-4 font-mono text-xs uppercase tracking-widest text-[#14213D]/50">Mengajar di sini sejak {g.sejak}</p>
+              <p class="mt-4 max-w-[60ch] text-pretty text-[15px] leading-relaxed text-[#14213D]/80 md:text-base">{g.latar}</p>
+              <p class="mt-4 font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Mengajar di sini sejak {g.sejak}</p>
             </div>
           </li>
         ))}
       </ul>
+      <div class="mt-6 flex flex-col gap-4 rounded-lg bg-[#14213D] p-6 text-white sm:flex-row sm:items-center sm:justify-between md:p-8">
+        <div>
+          <p class="font-display text-xl font-extrabold tracking-tight md:text-2xl">Ingin bertemu pengajarnya dulu?</p>
+          <p class="mt-1 text-sm text-white/75">Tes penempatan {lembaga.nama} sekaligus jadi sesi kenalan dengan pengajar kelas.</p>
+        </div>
+        <a href="/daftar/" class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-[#FCA311] px-6 text-sm font-bold text-[#14213D] transition-colors duration-150 hover:bg-[#e3920d]">Daftar tes penempatan</a>
+      </div>
     </section>
   </main>
   <Footer />

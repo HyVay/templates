@@ -1,0 +1,72 @@
+---
+/**
+ * Siluet samping per kelas kendaraan, dipakai saat unit belum punya foto sendiri.
+ * Isi `foto` di data/rental.ts dengan foto unit asli, dan siluet ini otomatis diganti.
+ */
+import type { Kelas } from '../data/rental';
+
+interface Props { kelas: Kelas }
+const { kelas } = Astro.props;
+---
+<svg viewBox="0 0 120 60" class="h-full w-full" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+  {kelas === 'Hatchback' && (
+    <g>
+      <path d="M12 42 V35 Q12 31 17 30 L30 28 L42 19 Q46 16 53 16 H74 Q81 16 85 21 L92 30 L103 32 Q108 33 108 38 V42" />
+      <path d="M45 27 L52 20 H72 Q77 20 80 24 L83 27 Z" stroke-width="1.5" />
+      <path d="M64 20 V27" stroke-width="1.5" />
+      <path d="M38 42 H84 M12 42 H22 M100 42 H108" />
+      <circle cx="30" cy="42" r="7.5" fill="var(--tile)" />
+      <circle cx="92" cy="42" r="7.5" fill="var(--tile)" />
+      <circle cx="30" cy="42" r="2.5" />
+      <circle cx="92" cy="42" r="2.5" />
+    </g>
+  )}
+  {kelas === 'MPV' && (
+    <g>
+      <path d="M8 42 V33 Q8 29 13 28 L26 26 L38 15 Q41 12 47 12 H92 Q99 12 102 18 L107 28 Q112 29 112 35 V42" />
+      <path d="M40 25 L48 16 H62 V25 Z M66 16 H84 V25 H66 Z M88 16 H93 Q97 16 99 20 L101 25 H88 Z" stroke-width="1.5" />
+      <path d="M36 42 H82 M8 42 H18 M106 42 H112" />
+      <circle cx="27" cy="42" r="8" fill="var(--tile)" />
+      <circle cx="94" cy="42" r="8" fill="var(--tile)" />
+      <circle cx="27" cy="42" r="2.5" />
+      <circle cx="94" cy="42" r="2.5" />
+    </g>
+  )}
+  {kelas === 'SUV' && (
+    <g>
+      <path d="M10 40 V30 Q10 26 15 25 L28 23 L39 13 Q42 10 48 10 H86 Q93 10 97 16 L103 24 Q110 25 110 31 V40" />
+      <path d="M41 22 L48 14 H64 V22 Z M68 14 H86 Q90 14 92 17 L96 22 H68 Z" stroke-width="1.5" />
+      <path d="M38 40 H82 M10 40 H19 M101 40 H110" />
+      <path d="M48 8 H84" stroke-width="1.5" />
+      <circle cx="29" cy="41" r="9" fill="var(--tile)" />
+      <circle cx="92" cy="41" r="9" fill="var(--tile)" />
+      <circle cx="29" cy="41" r="3" />
+      <circle cx="92" cy="41" r="3" />
+    </g>
+  )}
+  {kelas === 'Van' && (
+    <g>
+      <path d="M6 42 V13 Q6 8 11 8 H96 Q102 8 105 13 L113 27 Q115 29 115 33 V42" />
+      <path d="M12 14 H30 V24 H12 Z M34 14 H52 V24 H34 Z M56 14 H74 V24 H56 Z M78 14 H96 L103 24 H78 Z" stroke-width="1.5" />
+      <path d="M36 42 H86 M6 42 H16 M106 42 H115" />
+      <circle cx="26" cy="42" r="8" fill="var(--tile)" />
+      <circle cx="96" cy="42" r="8" fill="var(--tile)" />
+      <circle cx="26" cy="42" r="2.5" />
+      <circle cx="96" cy="42" r="2.5" />
+    </g>
+  )}
+  {kelas === 'Skuter' && (
+    <g>
+      <path d="M86 12 L94 40" />
+      <path d="M80 12 H92" />
+      <path d="M38 42 H70 Q78 42 82 34 L86 22" />
+      <path d="M30 40 Q32 30 42 29 H70 Q76 29 76 34" />
+      <path d="M44 25 H66 Q70 25 70 28" stroke-width="3" />
+      <circle cx="26" cy="43" r="9" fill="var(--tile)" />
+      <circle cx="96" cy="43" r="9" fill="var(--tile)" />
+      <circle cx="26" cy="43" r="2.5" />
+      <circle cx="96" cy="43" r="2.5" />
+    </g>
+  )}
+  <path d="M4 52 H116" stroke-width="1" stroke-dasharray="2 4" opacity="0.5" />
+</svg>

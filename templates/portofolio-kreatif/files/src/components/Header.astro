@@ -8,22 +8,24 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
-<header class="sticky top-0 z-50 bg-[#FAFAF9]/95 backdrop-blur">
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:bg-[#141414] focus:px-4 focus:py-3 focus:text-sm focus:text-[#FAFAF9]">Lewati ke konten</a>
+<header class="sticky top-0 z-50 border-b border-transparent bg-[#FAFAF9]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-16 md:px-8">
-    <a href="/" class="text-sm font-medium tracking-tight text-[#141414]">{profil.nama}<span class="ml-2 hidden text-[#141414]/50 sm:inline">{profil.profesi}, {profil.kota}</span></a>
-    <nav class="hidden md:flex md:items-center md:gap-8">
+    <a href="/" class="py-3 text-sm font-medium tracking-tight text-[#141414]">{profil.nama}<span class="ml-2 hidden font-normal text-[#141414]/60 sm:inline">{profil.profesi}, {profil.kota}</span></a>
+    <nav aria-label="Utama" class="hidden md:flex md:items-center md:gap-2">
       {links.map((l) => (
         <a
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm transition-opacity duration-150 hover:opacity-50',
-            here === l.href ? 'underline underline-offset-8 decoration-[#141414]' : '',
+            'px-3 py-3 text-sm transition-opacity duration-150 hover:opacity-60',
+            here === l.href ? 'underline decoration-1 underline-offset-[10px]' : '',
           ]}
         >
           {l.label}
         </a>
       ))}
+      <a href="/kontak/#pesan" class="ml-3 border border-[#141414] px-4 py-2 text-sm transition-colors duration-150 hover:bg-[#141414] hover:text-[#FAFAF9]">Pesan tanggal</a>
     </nav>
     <button
       id="nav-toggle"
@@ -31,19 +33,20 @@ const here = Astro.url.pathname;
       aria-label="Buka menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      class="inline-flex h-11 w-11 items-center justify-center text-[#141414] transition-opacity duration-150 hover:opacity-50 md:hidden"
+      class="-mr-2 inline-flex h-11 w-11 items-center justify-center text-[#141414] transition-opacity duration-150 hover:opacity-60 md:hidden"
     >
       <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke-linecap="round" /></svg>
       <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
     </button>
   </div>
   <div id="mobile-menu" class="hidden border-y border-[#141414]/10 bg-[#FAFAF9] md:hidden">
-    <nav class="mx-auto flex max-w-7xl flex-col px-4 py-2">
+    <nav aria-label="Utama" class="mx-auto flex max-w-7xl flex-col px-4 pb-6 pt-2">
       {links.map((l) => (
-        <a href={l.href} class="block py-3 font-display text-3xl italic text-[#141414] transition-opacity duration-150 hover:opacity-50">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block py-2 font-display text-4xl italic text-[#141414] transition-opacity duration-150 hover:opacity-60 aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-8">
           {l.label}
         </a>
       ))}
+      <a href="/kontak/#pesan" class="mt-6 bg-[#141414] px-5 py-3.5 text-center text-sm text-[#FAFAF9]">Pesan tanggal via WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -54,11 +57,14 @@ const here = Astro.url.pathname;
   const iconClose = document.getElementById('icon-close');
   const set = (isOpen: boolean) => {
     btn?.setAttribute('aria-expanded', String(isOpen));
+    btn?.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
     menu?.classList.toggle('hidden', !isOpen);
     iconOpen?.classList.toggle('hidden', isOpen);
     iconClose?.classList.toggle('hidden', !isOpen);
   };
   btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+  });
 </script>

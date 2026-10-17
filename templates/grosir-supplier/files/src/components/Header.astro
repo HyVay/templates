@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:bg-[#0A2342] focus:text-[#FFFFFF]">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b-2 border-[#0A2342] bg-[#F2F2F0]">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-xl font-bold uppercase tracking-wide text-[#0A2342] md:text-2xl">{toko.nama}</a>
@@ -18,8 +19,8 @@ const here = Astro.url.pathname;
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'font-display text-base font-semibold uppercase tracking-wide transition-colors duration-150 hover:text-[#F28C28]',
-            here === l.href ? 'text-[#F28C28]' : 'text-[#0A2342]',
+            'font-display text-base font-semibold uppercase tracking-wide transition-colors duration-150 hover:text-[#9A4F0A]',
+            here === l.href ? 'text-[#0A2342] underline decoration-[#F28C28] decoration-[3px] underline-offset-[10px]' : 'text-[#0A2342]',
           ]}
         >
           {l.label}
@@ -47,7 +48,7 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t-2 border-[#0A2342] bg-[#F2F2F0] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block border-b border-[#0A2342]/15 px-2 py-3 font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:text-[#F28C28]">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block border-b border-[#0A2342]/15 px-2 py-3 font-display text-lg font-semibold uppercase tracking-wide text-[#0A2342] transition-colors duration-150 hover:text-[#9A4F0A]">
           {l.label}
         </a>
       ))}

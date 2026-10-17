@@ -11,10 +11,10 @@ import { klinik, dokter, aturanKunjungan } from '../data/klinik';
 >
   <Fonts />
   <Header />
-  <main class="text-[#0F2A44]">
+  <main id="konten" class="text-[#0F2A44]">
     <section class="border-b border-[#0F2A44]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Janji temu</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Janji temu</p>
         <h1 class="font-display mt-3 text-4xl md:text-5xl">Daftar lewat WhatsApp</h1>
         <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#0F2A44]/70 md:text-base">
           Isi formulir, pesan terbuka di WhatsApp klinik dengan isian Anda. Petugas membalas dengan nomor antrean dan perkiraan jam dilayani.
@@ -27,51 +27,52 @@ import { klinik, dokter, aturanKunjungan } from '../data/klinik';
         <form id="janji-form" class="space-y-5">
           <div>
             <label for="pasien" class="block text-sm font-semibold">Nama pasien</label>
-            <input id="pasien" name="pasien" required placeholder="Nama sesuai kartu identitas"
-              class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#2E7D6B]" />
+            <input id="pasien" name="pasien" required autocomplete="name" placeholder="Nama sesuai kartu identitas"
+              class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#0F2A44]/50 hover:border-[#0F2A44]/45 focus:border-[#2E7D6B]" />
           </div>
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div class="grid grid-cols-1 gap-5">
             <div>
               <label for="dokter" class="block text-sm font-semibold">Dokter</label>
               <select id="dokter" name="dokter"
-                class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#2E7D6B]">
+                class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#0F2A44]/50 hover:border-[#0F2A44]/45 focus:border-[#2E7D6B]">
                 {dokter.map((d) => <option value={d.slug}>{d.nama} · {d.spesialisasi}</option>)}
                 <option value="siapa-saja">Dokter umum yang tersedia</option>
               </select>
             </div>
-            <div>
+            <div class="sm:max-w-[50%]">
               <label for="tanggal" class="block text-sm font-semibold">Tanggal kunjungan</label>
               <input id="tanggal" name="tanggal" type="date" required
-                class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#2E7D6B]" />
+                class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#0F2A44]/50 hover:border-[#0F2A44]/45 focus:border-[#2E7D6B]" />
             </div>
           </div>
           <div>
             <label for="keluhan" class="block text-sm font-semibold">Keluhan singkat</label>
             <textarea id="keluhan" name="keluhan" rows="3" required placeholder="Misalnya: demam sejak 2 hari, atau kontrol gigi tambalan"
-              class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#2E7D6B]"></textarea>
+              class="mt-1.5 w-full rounded-lg border border-[#0F2A44]/25 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 placeholder:text-[#0F2A44]/50 hover:border-[#0F2A44]/45 focus:border-[#2E7D6B]"></textarea>
           </div>
           <button type="submit"
             class="w-full rounded-lg bg-[#2E7D6B] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#256655] sm:w-auto">
             Kirim via WhatsApp
           </button>
-          <p class="text-xs leading-relaxed text-[#0F2A44]/55">
+          <p id="status" aria-live="polite" class="hidden rounded-lg border border-[#2E7D6B]/30 bg-[#2E7D6B]/5 px-4 py-3 text-sm"></p>
+          <p class="text-xs leading-relaxed text-[#0F2A44]/75">
             Situs ini tidak menyimpan data apa pun. Isian di atas hanya disusun menjadi pesan WhatsApp ke nomor {klinik.telepon}. Untuk kondisi gawat darurat, jangan pakai formulir ini: hubungi 119 atau IGD terdekat.
           </p>
         </form>
       </div>
 
       <div class="md:col-span-5 md:col-start-8">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Sebelum datang</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Sebelum datang</p>
         <ol class="mt-4 divide-y divide-[#0F2A44]/10 border-y border-[#0F2A44]/10">
           {aturanKunjungan.map((a, i) => (
             <li class="grid grid-cols-[2.5rem_1fr] gap-3 py-4">
-              <span class="font-mono text-sm text-[#2E7D6B]">0{i + 1}</span>
+              <span class="font-mono text-sm font-semibold text-[#2E7D6B]">0{i + 1}</span>
               <p class="text-sm leading-relaxed text-[#0F2A44]/80">{a}</p>
             </li>
           ))}
         </ol>
         <div class="mt-8 rounded-lg bg-[#0F2A44] p-6 text-white">
-          <p class="font-mono text-xs uppercase tracking-widest text-white/50">Alamat</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-white/75">Alamat</p>
           <p class="mt-2 text-sm leading-relaxed">{klinik.alamat}</p>
           <dl class="mt-4 divide-y divide-white/10 text-sm">
             {klinik.jam.map((j) => (
@@ -93,6 +94,8 @@ import { klinik, dokter, aturanKunjungan } from '../data/klinik';
     // Pra-pilih dokter dari ?dokter=slug (tautan di halaman Dokter).
     const wanted = new URLSearchParams(location.search).get('dokter');
     if (wanted && select) select.value = wanted;
+    const tanggal = document.getElementById('tanggal');
+    if (tanggal) tanggal.min = new Date().toISOString().slice(0, 10);
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -105,7 +108,12 @@ import { klinik, dokter, aturanKunjungan } from '../data/klinik';
         `Tanggal: ${d.get('tanggal')}`,
         `Keluhan: ${d.get('keluhan')}`,
       ].join('\n');
-      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru dengan isian Anda. Tekan kirim di sana; petugas membalas dengan nomor antrean.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

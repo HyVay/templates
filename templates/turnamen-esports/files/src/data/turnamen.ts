@@ -136,6 +136,11 @@ export const rupiah = (n: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
 
 export const foto = {
-    hero: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&q=80',
-    arena: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1200&q=80',
+    /** Foto netral tanpa logo merek; ganti dengan foto acara Anda sendiri. */
+    hero: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f',
+    arena: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f',
 };
+
+/** URL foto Unsplash dengan ukuran yang pas untuk tempat tampilnya. */
+export const img = (url: string, w: number, h?: number) =>
+    `${url}?w=${w}${h ? `&h=${h}&fit=crop` : ''}&q=75&auto=format`;

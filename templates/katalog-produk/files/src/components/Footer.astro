@@ -1,26 +1,26 @@
 ---
 import { toko } from '../data/toko';
 ---
-<footer class="border-t border-stone-200 bg-stone-50">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
-    <div>
-      <p class="text-base font-semibold text-stone-900">{toko.nama}</p>
-      <p class="mt-2 text-sm leading-relaxed text-stone-600">{toko.tagline}</p>
+<footer class="border-t border-[#231A13] bg-[#231A13] text-[#EFE7DA]">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-6">
+    <div class="sm:col-span-2">
+      <p class="font-display text-3xl">{toko.nama}</p>
+      <p class="mt-3 max-w-sm text-sm leading-relaxed text-[#CFC3B1]">{toko.deskripsi}</p>
     </div>
     <div>
-      <p class="text-sm font-medium text-stone-900">Toko</p>
-      <ul class="mt-2 space-y-1.5 text-sm text-stone-600">
-        <li>{toko.alamat}</li>
-        <li>{toko.jam}</li>
-        <li><a href={`https://wa.me/${toko.telepon}`} class="transition-colors hover:text-amber-700">WhatsApp {toko.telepon}</a></li>
+      <p class="font-mono text-xs uppercase tracking-widest text-[#A89A86]">Toko</p>
+      <p class="mt-3 text-sm text-[#CFC3B1]">{toko.alamat}</p>
+      <p class="mt-2 text-sm text-[#CFC3B1]">{toko.jam}</p>
+      <a href={toko.maps} target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex min-h-11 items-center text-sm underline underline-offset-4 transition-colors duration-150 hover:text-white">Petunjuk arah</a>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-[#A89A86]">Pesan</p>
+      <ul class="mt-2 text-sm">
+        <li><a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">WhatsApp {toko.telepon}</a></li>
+        <li><a href="/produk/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">Katalog lengkap</a></li>
+        <li><a href="/kontak/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">Formulir pesanan</a></li>
       </ul>
     </div>
-    <div>
-      <p class="text-sm font-medium text-stone-900">Pengiriman</p>
-      <p class="mt-2 text-sm leading-relaxed text-stone-600">{toko.ongkir}</p>
-    </div>
   </div>
-  <div class="border-t border-stone-200 px-4 py-5 text-center text-xs text-stone-500 md:px-6">
-    © {new Date().getFullYear()} {toko.nama}
-  </div>
+  <p class="border-t border-white/10 px-4 py-5 text-center font-mono text-xs text-[#A89A86]">© {new Date().getFullYear()} {toko.nama} · {toko.alamat}</p>
 </footer>

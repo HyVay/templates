@@ -11,14 +11,14 @@ export const dapur = {
     telepon: '6281234567890',
     instagram: 'dapuriburatna',
     jamPesan: 'Pesan H-1 sebelum pukul 15.00; prasmanan dan hampers H-7',
-    areaAntar: 'Tangerang, Jakarta Barat, Jakarta Selatan. Ongkir Rp 15.000 - 40.000, gratis untuk pesanan di atas Rp 1.500.000.',
+    areaAntar: 'Tangerang, Jakarta Barat, Jakarta Selatan. Ongkir Rp 15.000–40.000, gratis untuk pesanan di atas Rp 1.500.000.',
     dp: 'DP 50% saat pesanan dikonfirmasi, pelunasan saat pengiriman.',
 };
 
 export const poMusiman = {
     judul: 'Hampers Lebaran 2027',
     tutup: 'PO ditutup 1 Maret 2027',
-    kirim: 'Pengiriman 10 - 15 Maret 2027',
+    kirim: 'Pengiriman 10–15 Maret 2027',
     catatan: 'Kuota 300 paket, 112 sudah dipesan.',
 };
 

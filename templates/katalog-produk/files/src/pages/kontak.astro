@@ -1,87 +1,74 @@
 ---
 import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { toko, produk } from '../data/toko';
+import { toko, produk, gilingan, foto, rupiah } from '../data/toko';
+
+const input = 'mt-2 block h-12 w-full border border-[#8F806B] bg-[#F8F4EC] px-3 text-base outline-none transition-colors duration-150 placeholder:text-[#8F806B] focus:border-[#2340A8]';
 ---
 <Base
-  title={`Kontak — ${toko.nama}`}
+  title={`Pesan & kontak — ${toko.nama}`}
   description={`Alamat, jam buka, dan cara memesan dari ${toko.nama} di ${toko.alamat}.`}
 >
+  <Fonts />
   <Header />
-  <main>
-    <section class="border-b border-stone-200 bg-stone-50">
-      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <h1 class="text-3xl font-semibold text-stone-900 md:text-4xl">Kontak & pesanan</h1>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-stone-600 md:text-base">
-          Susun pesanan Anda di formulir ini, lalu kirim. Kami balas dengan total harga dan ongkir.
-        </p>
+  <main id="konten">
+    <section class="border-b border-[#231A13]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-12 md:grid-cols-12 md:items-end md:px-6 md:py-16">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#2340A8]">Formulir pesanan</p>
+          <h1 class="mt-4 font-display text-5xl md:text-6xl">Susun pesanan, kirim lewat WhatsApp.</h1>
+        </div>
+        <p class="max-w-[46ch] leading-relaxed text-[#4A3D31] md:col-span-5">Kami balas dengan total harga, ongkir, dan nomor rekening. Pembayaran dikonfirmasi lewat chat yang sama.</p>
       </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+    <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
+      <form id="pesan-form" class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:col-span-7">
+        <div class="sm:col-span-2">
+          <label for="produk" class="block text-sm font-semibold">Produk</label>
+          <select id="produk" name="produk" class={input}>
+            {produk.filter((p) => p.stok).map((p) => <option value={`${p.nama} (${p.satuan})`}>{p.nama} — {p.satuan} · {rupiah(p.harga)}</option>)}
+          </select>
+        </div>
         <div>
-          <form id="pesan-form" class="space-y-4">
-            <div>
-              <label for="nama" class="block text-sm font-medium text-stone-800">Nama</label>
-              <input
-                id="nama" name="nama" required placeholder="Nama penerima"
-                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
-              />
-            </div>
-            <div>
-              <label for="produk" class="block text-sm font-medium text-stone-800">Produk</label>
-              <select
-                id="produk" name="produk"
-                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
-              >
-                {produk.filter((p) => p.stok).map((p) => <option value={p.nama}>{p.nama} — {p.satuan}</option>)}
-              </select>
-            </div>
-            <div>
-              <label for="jumlah" class="block text-sm font-medium text-stone-800">Jumlah</label>
-              <input
-                id="jumlah" name="jumlah" type="number" min="1" value="1"
-                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
-              />
-            </div>
-            <div>
-              <label for="catatan" class="block text-sm font-medium text-stone-800">Catatan</label>
-              <textarea
-                id="catatan" name="catatan" rows="3" placeholder="Alat seduh, tingkat gilingan, alamat kirim"
-                class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-amber-700"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="w-full rounded-lg bg-amber-700 px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-amber-800 sm:w-auto"
-            >
-              Kirim pesanan via WhatsApp
-            </button>
-          </form>
-          <p class="mt-3 text-xs text-stone-500">
-            Situs ini statis tanpa keranjang dan tanpa pembayaran online — pesanan masuk sebagai chat WhatsApp.
-          </p>
+          <label for="jumlah" class="block text-sm font-semibold">Jumlah</label>
+          <input id="jumlah" name="jumlah" type="number" min="1" value="1" inputmode="numeric" required class={input} />
         </div>
+        <div>
+          <label for="gilingan" class="block text-sm font-semibold">Gilingan</label>
+          <select id="gilingan" name="gilingan" class={input}>
+            {gilingan.map((g) => <option>{g}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="nama" class="block text-sm font-semibold">Nama penerima</label>
+          <input id="nama" name="nama" required autocomplete="name" class={input} />
+        </div>
+        <div>
+          <label for="kota" class="block text-sm font-semibold">Kota tujuan</label>
+          <input id="kota" name="kota" required autocomplete="address-level2" placeholder="Contoh: Bandung" class={input} />
+        </div>
+        <div class="sm:col-span-2">
+          <label for="catatan" class="block text-sm font-semibold">Catatan <span class="font-normal text-[#6B5D4F]">(opsional)</span></label>
+          <textarea id="catatan" name="catatan" rows="3" placeholder="Produk tambahan, alamat lengkap, waktu kirim" class={`${input} h-auto py-3`}></textarea>
+        </div>
+        <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
+          <button type="submit" class="inline-flex h-12 items-center justify-center bg-[#231A13] px-6 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#2340A8]">Kirim pesanan via WhatsApp</button>
+          <p class="text-sm text-[#6B5D4F]">Tanpa keranjang dan tanpa pembayaran online.</p>
+        </div>
+        <p id="status" role="status" aria-live="polite" class="text-sm font-medium text-[#2340A8] sm:col-span-2"></p>
+      </form>
 
-        <div class="space-y-6">
-          <div class="rounded-xl border border-stone-200 bg-white p-6">
-            <p class="text-sm font-medium text-stone-900">Alamat toko</p>
-            <p class="mt-1 text-sm text-stone-600">{toko.alamat}</p>
-            <p class="mt-4 text-sm font-medium text-stone-900">Jam buka</p>
-            <p class="mt-1 text-sm text-stone-600">{toko.jam}</p>
-            <p class="mt-4 text-sm font-medium text-stone-900">Pengiriman</p>
-            <p class="mt-1 text-sm text-stone-600">{toko.ongkir}</p>
-          </div>
-          <img
-            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&q=80"
-            alt="Bagian dalam toko kopi"
-            loading="lazy"
-            class="h-auto max-w-full rounded-xl object-cover"
-          />
-        </div>
-      </div>
+      <aside class="md:col-span-4 md:col-start-9">
+        <img src={foto.toko} alt="Meja bar dan rak alat seduh di toko" width="1100" height="825" loading="lazy" decoding="async" class="aspect-[4/3] w-full border border-[#231A13] object-cover" />
+        <dl class="mt-6 divide-y divide-[#D9CDB9] border-y border-[#231A13]">
+          <div class="py-4"><dt class="font-mono text-xs uppercase tracking-widest text-[#6B5D4F]">Alamat toko</dt><dd class="mt-1">{toko.alamat}</dd></div>
+          <div class="py-4"><dt class="font-mono text-xs uppercase tracking-widest text-[#6B5D4F]">Jam buka</dt><dd class="mt-1 tabular-nums">{toko.jam}</dd></div>
+          <div class="py-4"><dt class="font-mono text-xs uppercase tracking-widest text-[#6B5D4F]">Pengiriman</dt><dd class="mt-1">{toko.ongkir}</dd></div>
+        </dl>
+      </aside>
     </section>
   </main>
   <Footer />
@@ -92,11 +79,13 @@ import { toko, produk } from '../data/toko';
       e.preventDefault();
       const d = new FormData(form);
       const text = [
-        `Halo ${namaToko}, saya ${d.get('nama')}.`,
+        `Halo ${namaToko}, saya ${d.get('nama')} (${d.get('kota')}).`,
         `Pesanan: ${d.get('produk')} x ${d.get('jumlah')}`,
+        `Gilingan: ${d.get('gilingan')}`,
         `Catatan: ${d.get('catatan') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      document.getElementById('status').textContent = 'WhatsApp dibuka di tab baru. Kalau tidak muncul, izinkan pop-up lalu kirim lagi.';
     });
   </script>
 </Base>

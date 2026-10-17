@@ -11,10 +11,10 @@ import { klinik, layanan } from '../data/klinik';
 >
   <Fonts />
   <Header />
-  <main class="text-[#0F2A44]">
+  <main id="konten" class="text-[#0F2A44]">
     <section class="border-b border-[#0F2A44]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">Layanan</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">Layanan</p>
         <h1 class="font-display mt-3 text-4xl md:text-5xl">Layanan dan biaya</h1>
         <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#0F2A44]/70 md:text-base">
           Tarif di bawah berlaku untuk pasien umum dan belum termasuk obat. Rentang biaya tergantung bahan dan tingkat kesulitan tindakan; dokter menjelaskan perkiraannya sebelum tindakan dimulai.
@@ -35,7 +35,7 @@ import { klinik, layanan } from '../data/klinik';
                 <li class="flex items-baseline justify-between gap-6 py-3.5">
                   <div>
                     <p class="font-medium">{it.nama}</p>
-                    {it.catatan && <p class="text-xs text-[#0F2A44]/60">{it.catatan}</p>}
+                    {it.catatan && <p class="text-xs text-[#0F2A44]/75">{it.catatan}</p>}
                   </div>
                   <p class="shrink-0 font-semibold tabular-nums">{it.biaya}</p>
                 </li>

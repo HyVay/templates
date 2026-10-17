@@ -8,6 +8,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-sm focus:bg-[#3B2A1A] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[#FAF7F2]">Langsung ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#3B2A1A]/15 bg-[#FAF7F2]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-lg font-semibold md:text-xl">{webinar.penyelenggara}</a>
@@ -43,7 +44,7 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#3B2A1A]/15 bg-[#FAF7F2] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-sm px-2 py-3 text-base font-medium transition-colors duration-150 hover:bg-[#3B2A1A]/5">{l.label}</a>
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block rounded-sm px-2 py-3 text-base font-medium aria-[current=page]:text-[#B5452E] transition-colors duration-150 hover:bg-[#3B2A1A]/5">{l.label}</a>
       ))}
     </nav>
   </div>

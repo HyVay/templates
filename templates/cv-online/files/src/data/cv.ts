@@ -15,6 +15,8 @@ export const orang = {
     /** Ganti dengan tautan berkas PDF Anda (mis. dari Google Drive). */
     pdf: '#',
     diperbarui: 'Oktober 2026',
+    /** Kosongkan ('') bila tidak sedang mencari pekerjaan. */
+    status: 'Terbuka untuk peran penuh waktu, mulai Januari 2027',
 };
 
 export interface Pengalaman {
@@ -80,7 +82,7 @@ export const proyek: Proyek[] = [
         href: '#',
     },
     {
-        nama: 'Design System "Rangka"',
+        nama: 'Design System “Rangka”',
         tahun: '2024',
         peran: 'Pemilik sistem',
         ringkas: 'Token warna dan tipografi, 60+ komponen Figma, dan dokumentasi yang dipelihara bersama 2 engineer frontend.',

@@ -11,16 +11,16 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
 <Base title={`${masjid.nama} ${masjid.lokasiSingkat} — ${masjid.tagline}`} description={masjid.deskripsi}>
   <Fonts />
   <Header />
-  <main class="bg-[#F7F3EA] text-[#0F3D2E]">
+  <main id="konten" class="bg-[#F7F3EA] text-[#0F3D2E]">
     <!-- Hero -->
-    <section class="relative overflow-hidden bg-[#0F3D2E] text-[#F7F3EA]">
+    <section class="on-dark relative overflow-hidden bg-[#0F3D2E] text-[#F7F3EA]">
       <Pola />
-      <div class="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
+      <div class="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-12 md:grid-cols-12 md:items-center md:px-8 md:py-24">
         <div class="md:col-span-7">
-          <p class="font-display text-2xl text-[#B8912E] md:text-3xl" dir="rtl" lang="ar">{masjid.namaArab}</p>
-          <h1 class="font-display mt-4 text-5xl font-bold leading-[0.98] tracking-tight md:text-7xl">
+          <p class="font-display text-left text-2xl text-[#D4AF55] md:text-3xl" dir="rtl" lang="ar">{masjid.namaArab}</p>
+          <h1 class="font-display mt-4 text-[2.5rem] font-bold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl">
             {masjid.nama}<br />
-            <span class="text-[#B8912E]">{masjid.lokasiSingkat}</span>
+            <span class="text-[#D4AF55]">{masjid.lokasiSingkat}</span>
           </h1>
           <p class="mt-6 max-w-lg text-base leading-relaxed text-[#F7F3EA]/80 md:text-lg">{masjid.tagline}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -41,8 +41,11 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
         <div class="md:col-span-5">
           <img
             src={foto.hero}
-            alt={`Bangunan ${masjid.nama}`}
-            class="aspect-[4/5] w-full rounded-sm object-cover md:aspect-[3/4]"
+            alt={`Kubah dan menara ${masjid.nama}`}
+            width="900"
+            height="1125"
+            fetchpriority="high"
+            class="aspect-[4/3] w-full rounded-sm object-cover object-bottom md:aspect-[4/5]"
           />
         </div>
       </div>
@@ -53,20 +56,27 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
       <div class="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Jadwal sholat</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6A1C]">Jadwal sholat</p>
             <h2 class="font-display mt-1 text-3xl font-bold">{jadwalSholat.berlakuUntuk}</h2>
           </div>
-          <p class="text-xs text-[#0F3D2E]/60">{jadwalSholat.sumber}</p>
+          <p class="text-xs text-[#0F3D2E]/75">{jadwalSholat.sumber}</p>
         </div>
-        <div class="mt-8 grid grid-cols-2 border-l border-t border-[#0F3D2E]/15 md:grid-cols-5">
+        <!-- Waktu berikutnya ditandai oleh script di bawah (berdasarkan jam WIB). -->
+        <ol id="jadwal-sholat" class="mt-8 grid grid-cols-2 border-l border-t border-[#0F3D2E]/15 md:grid-cols-5">
           {jadwalSholat.waktu.map((w) => (
-            <div class="border-b border-r border-[#0F3D2E]/15 px-4 py-5 last:col-span-2 md:px-6 md:py-7 md:last:col-span-1">
-              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">{w.nama}</p>
+            <li
+              data-jam={w.jam}
+              class="group relative border-b border-r border-[#0F3D2E]/15 px-4 py-5 transition-colors duration-150 last:col-span-2 data-[next]:bg-[#0F3D2E] data-[next]:text-[#F7F3EA] md:px-6 md:py-7 md:last:col-span-1"
+            >
+              <p class="flex items-center justify-between gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/75 group-data-[next]:text-[#D4AF55]">
+                {w.nama}
+                <span class="hidden rounded-sm bg-[#D4AF55] px-1.5 py-0.5 text-[10px] tracking-wider text-[#0F3D2E] group-data-[next]:inline">Berikutnya</span>
+              </p>
               <p class="font-display mt-2 text-3xl font-bold tabular-nums md:text-4xl">{w.jam}</p>
-            </div>
+            </li>
           ))}
-        </div>
-        <p class="mt-4 text-sm text-[#0F3D2E]/70">{jadwalSholat.catatan}</p>
+        </ol>
+        <p class="mt-4 text-sm text-[#0F3D2E]/80">{jadwalSholat.catatan}</p>
       </div>
     </section>
 
@@ -74,23 +84,23 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
     <section class="border-b border-[#0F3D2E]/15">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
         <div class="md:col-span-5">
-          <img src={foto.serambi} alt="Serambi masjid" loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover" />
+          <img src={foto.serambi} alt="Jamaah duduk bersila mengikuti kajian di dalam masjid" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-sm object-cover" />
         </div>
         <div class="md:col-span-7 md:pl-6">
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Tentang masjid</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6A1C]">Tentang masjid</p>
           <h2 class="font-display mt-2 text-3xl font-bold leading-tight md:text-4xl">Dikelola warga, untuk warga</h2>
           <p class="mt-5 text-base leading-relaxed text-[#0F3D2E]/80 md:text-lg">{masjid.deskripsi}</p>
           <dl class="mt-8 grid grid-cols-1 gap-6 border-t border-[#0F3D2E]/15 pt-6 sm:grid-cols-3">
             <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">Berdiri</dt>
+              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/75">Berdiri</dt>
               <dd class="font-display mt-1 text-2xl font-bold">1987</dd>
             </div>
             <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">Kajian rutin</dt>
+              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/75">Kajian rutin</dt>
               <dd class="font-display mt-1 text-2xl font-bold">{kajianRutin.length} / pekan</dd>
             </div>
             <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/60">Daya tampung</dt>
+              <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-[#0F3D2E]/75">Daya tampung</dt>
               <dd class="font-display mt-1 text-2xl font-bold">±600 jamaah</dd>
             </div>
           </dl>
@@ -104,34 +114,34 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
         <div class="md:col-span-7">
           <div class="flex items-end justify-between">
             <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Kajian pekan ini</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6A1C]">Kajian pekan ini</p>
               <h2 class="font-display mt-1 text-3xl font-bold">Majelis rutin</h2>
             </div>
-            <a href="/kegiatan/" class="text-sm font-semibold text-[#0F3D2E] underline-offset-4 transition-colors duration-150 hover:underline">Semua kegiatan</a>
+            <a href="/kegiatan/" class="inline-flex min-h-11 items-center text-sm font-semibold text-[#0F3D2E] underline underline-offset-4 decoration-[#B8912E] transition-colors duration-150 hover:decoration-[#0F3D2E]">Semua kegiatan</a>
           </div>
           <ul class="mt-6 divide-y divide-[#0F3D2E]/15 border-y border-[#0F3D2E]/15">
             {kajianTerdekat.map((k) => (
               <li class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-12 sm:gap-4">
-                <div class="font-mono text-xs uppercase tracking-wider text-[#0F3D2E]/60 sm:col-span-3">
+                <div class="font-mono text-xs uppercase tracking-wider text-[#0F3D2E]/75 sm:col-span-3">
                   {k.hari} · {k.jam}
                 </div>
                 <div class="sm:col-span-9">
                   <p class="font-display text-xl font-bold">{k.tema}</p>
-                  <p class="mt-0.5 text-sm text-[#0F3D2E]/70">{k.pemateri} · {k.untuk}</p>
+                  <p class="mt-0.5 text-sm text-[#0F3D2E]/80">{k.pemateri} · {k.untuk}</p>
                 </div>
               </li>
             ))}
           </ul>
         </div>
         <div class="md:col-span-5">
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Pengumuman</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6A1C]">Pengumuman</p>
           <h2 class="font-display mt-1 text-3xl font-bold">Kabar terbaru</h2>
           <ul class="mt-6 space-y-5">
             {pengumuman.map((p) => (
               <li class="border-l-2 border-[#B8912E] pl-4">
-                <p class="font-mono text-xs uppercase tracking-wider text-[#0F3D2E]/60">{p.tanggal}</p>
+                <p class="font-mono text-xs uppercase tracking-wider text-[#0F3D2E]/75">{p.tanggal}</p>
                 <p class="mt-1 font-semibold">{p.judul}</p>
-                <p class="mt-1 text-sm leading-relaxed text-[#0F3D2E]/70">{p.isi}</p>
+                <p class="mt-1 text-sm leading-relaxed text-[#0F3D2E]/80">{p.isi}</p>
               </li>
             ))}
           </ul>
@@ -140,11 +150,11 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
     </section>
 
     <!-- Ajakan infaq -->
-    <section class="relative overflow-hidden bg-[#0F3D2E] text-[#F7F3EA]">
+    <section class="on-dark relative overflow-hidden bg-[#0F3D2E] text-[#F7F3EA]">
       <Pola opasitas={0.12} />
       <div class="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-16 md:grid-cols-12 md:items-center md:px-8 md:py-20">
         <div class="md:col-span-8">
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#B8912E]">Infaq &amp; sedekah</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF55]">Infaq &amp; sedekah</p>
           <h2 class="font-display mt-2 text-3xl font-bold leading-tight md:text-4xl">Setiap rupiah tercatat dan dilaporkan tiap bulan</h2>
           <p class="mt-4 max-w-xl text-base leading-relaxed text-[#F7F3EA]/75">
             Infaq dipakai untuk operasional, TPA, santunan, dan pemeliharaan. Rinciannya terbuka di halaman infaq dan papan pengumuman.
@@ -162,4 +172,23 @@ const kajianTerdekat = kajianRutin.slice(0, 3);
     </section>
   </main>
   <Footer />
+
+  <script>
+    // Tandai waktu sholat berikutnya menurut jam WIB, apa pun zona waktu pengunjung.
+    const daftar = document.querySelectorAll<HTMLElement>('#jadwal-sholat [data-jam]');
+    const tandai = () => {
+      const [j, m] = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+        .format(new Date()).split(':').map(Number);
+      const sekarang = j * 60 + m;
+      const menit = (el: HTMLElement) => { const [a, b] = (el.dataset.jam ?? '0.0').split('.').map(Number); return a * 60 + b; };
+      const berikut = [...daftar].find((el) => menit(el) > sekarang) ?? daftar[0];
+      daftar.forEach((el) => {
+        const aktif = el === berikut;
+        el.toggleAttribute('data-next', aktif);
+        if (aktif) el.setAttribute('aria-current', 'time'); else el.removeAttribute('aria-current');
+      });
+    };
+    tandai();
+    setInterval(tandai, 60_000);
+  </script>
 </Base>

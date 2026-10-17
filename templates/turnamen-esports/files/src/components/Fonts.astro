@@ -5,7 +5,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Rubik:wght@400;500&display=swap" />
 <style is:global>
-  body { font-family: 'Rubik', ui-sans-serif, system-ui, sans-serif; background: #0A0F1E; color: #F4F6FA; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+  body { font-family: 'Rubik', ui-sans-serif, system-ui, sans-serif; background: #0A0F1E; color: #F4F6FA; -webkit-font-smoothing: antialiased; }
   .font-display { font-family: 'Chakra Petch', 'Arial Narrow', sans-serif; }
   .font-body { font-family: 'Rubik', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  ::selection { background: #FF3D3D; color: #0A0F1E; }
+  /* Merah terang (#FF3D3D) untuk teks dan garis; tombol memakai #D92525 agar teks putih lolos kontras AA. */
+  :focus-visible { outline: 2px solid #FF3D3D; outline-offset: 3px; }
+  .bg-\[\#D92525\]:focus-visible { outline-color: #F4F6FA; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>

@@ -5,34 +5,45 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { kedai, galeri } from '../data/kedai';
 
+// Semua foto setinggi dua baris; "lebar" mengambil dua kolom. Grid tidak pernah bolong
+// selama jumlah kolom habis dibagi, dan foto terakhir melebar di HP bila sisa satu.
 const kelas: Record<string, string> = {
-  lebar: 'col-span-2 aspect-[16/9]',
-  kotak: 'aspect-square',
-  tinggi: 'aspect-[3/4]',
+  lebar: 'col-span-2',
+  kotak: '',
+  tinggi: '',
 };
+const unitHp = galeri.reduce((n, g) => n + (g.bentuk === 'lebar' ? 2 : 1), 0);
 ---
 <Base title={`Galeri — ${kedai.nama}`} description={`Suasana ${kedai.nama} di ${kedai.kota}: ruang dalam, teras, dapur, dan sajian kami.`}>
   <Fonts />
   <div class="bg-[#F6F1E7] text-[#1F3D2B]">
     <Header />
-    <main>
+    <main id="konten">
       <section class="border-b border-[#1F3D2B]/15">
         <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-          <p class="text-xs uppercase tracking-[0.25em] text-[#C8553D]">Sekilas suasana</p>
-          <h1 class="mt-4 font-display text-5xl leading-[0.95] tracking-tight md:text-7xl">Galeri</h1>
-          <p class="mt-6 max-w-lg font-display text-lg italic text-[#1F3D2B]/75 md:text-xl">
+          <p class="text-xs font-medium uppercase tracking-[0.2em] text-[#A8432D]">Sekilas suasana</p>
+          <h1 class="mt-4 font-display text-6xl leading-[0.92] tracking-tight md:text-8xl">Galeri</h1>
+          <p class="mt-6 max-w-lg font-display text-lg italic text-[#1F3D2B]/85 md:text-xl [text-wrap:balance]">
             Tiga puluh dua kursi, satu teras, dan dapur yang terbuka. Foto diambil pada hari kerja biasa.
           </p>
         </div>
       </section>
       <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <div class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
-          {galeri.map((g) => (
-            <img src={g.src} alt={g.alt} loading="lazy" class:list={['w-full object-cover', kelas[g.bentuk]]} />
+        <ul class="grid auto-rows-[200px] grid-cols-2 gap-3 sm:auto-rows-[260px] md:auto-rows-[300px] md:grid-cols-3 md:gap-5">
+          {galeri.map((g, i) => (
+            <li class:list={[
+              kelas[g.bentuk],
+              unitHp % 2 === 1 && i === galeri.length - 1 && g.bentuk !== 'lebar' ? 'col-span-2 md:col-span-1' : '',
+            ]}>
+              <figure class="group relative h-full overflow-hidden rounded-sm bg-[#EFE8D9]">
+                <img src={g.src} alt={g.alt} width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03]" />
+                <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-4 pb-3 pt-10 text-sm text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">{g.alt}</figcaption>
+              </figure>
+            </li>
           ))}
-        </div>
-        <p class="mt-8 text-sm text-[#1F3D2B]/70">
-          Mau memotret di sini untuk keperluan komersial? Kabari dulu lewat <a href={`https://wa.me/${kedai.telepon}`} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-colors duration-150 hover:text-[#C8553D]">WhatsApp</a>, biasanya kami oke.
+        </ul>
+        <p class="mt-8 text-sm text-[#1F3D2B]/80">
+          Mau memotret di sini untuk keperluan komersial? Kabari dulu lewat <a href={`https://wa.me/${kedai.telepon}`} target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 transition-colors duration-150 hover:text-[#A8432D]">WhatsApp</a>, biasanya kami oke.
         </p>
       </section>
     </main>

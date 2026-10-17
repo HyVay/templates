@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-[#1C1C1C] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white">Lompat ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#1C1C1C]/15 bg-[#FAFAFA]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-xl font-semibold uppercase tracking-wide text-[#1C1C1C] md:text-2xl">{rental.nama}</a>
@@ -49,7 +50,14 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#1C1C1C]/15 bg-[#FAFAFA] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-md px-2 py-3 font-display text-lg font-medium uppercase tracking-wide text-[#1C1C1C] transition-colors duration-150 hover:bg-[#1C1C1C]/5">
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'block rounded-md px-3 py-3 font-display text-lg font-medium uppercase tracking-wide transition-colors duration-150 hover:bg-[#1C1C1C]/5',
+            here === l.href ? 'bg-[#1C1C1C]/5 text-[#1E5EFF]' : 'text-[#1C1C1C]',
+          ]}
+        >
           {l.label}
         </a>
       ))}

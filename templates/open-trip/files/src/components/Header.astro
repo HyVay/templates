@@ -9,17 +9,18 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-[#0B3C5D] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white">Lompat ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#0B3C5D]/15 bg-[#F4EBDD]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-xl font-extrabold tracking-tight text-[#0B3C5D] md:text-2xl">{travel.nama}</a>
     <nav class="hidden md:flex md:items-center md:gap-7">
-      {links.map((l) => (
+      {links.filter((l) => l.href !== '/booking/').map((l) => (
         <a
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm font-medium transition-colors duration-150 hover:text-[#F26B1D]',
-            here === l.href ? 'text-[#F26B1D]' : 'text-[#0B3C5D]/80',
+            'text-sm font-medium transition-colors duration-150 hover:text-[#B4470B]',
+            here === l.href ? 'text-[#B4470B]' : 'text-[#0B3C5D]/80',
           ]}
         >
           {l.label}
@@ -27,7 +28,8 @@ const here = Astro.url.pathname;
       ))}
       <a
         href="/booking/"
-        class="rounded-lg bg-[#0B3C5D] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#F26B1D]"
+        aria-current={here === '/booking/' ? 'page' : undefined}
+        class="inline-flex h-10 items-center rounded-lg bg-[#0B3C5D] px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#B4470B]"
       >
         Booking
       </a>
@@ -47,7 +49,14 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#0B3C5D]/15 bg-[#F4EBDD] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-lg px-2 py-3 text-base font-medium text-[#0B3C5D] transition-colors duration-150 hover:bg-[#0B3C5D]/5">
+        <a
+          href={l.href}
+          aria-current={here === l.href ? 'page' : undefined}
+          class:list={[
+            'block rounded-lg px-3 py-3 text-base font-medium transition-colors duration-150 hover:bg-[#0B3C5D]/5',
+            here === l.href ? 'bg-[#0B3C5D]/5 text-[#B4470B]' : 'text-[#0B3C5D]',
+          ]}
+        >
           {l.label}
         </a>
       ))}

@@ -2,9 +2,15 @@
 import Base from '../layouts/Base.astro';
 import Fonts from '../components/Fonts.astro';
 import Countdown from '../components/Countdown.astro';
-import { acara, turutMengundang, galeri, fotoHero } from '../data/acara';
+import { acara, turutMengundang, galeri, fotoHero, img } from '../data/acara';
 
 const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
+
+// Tautan Google Calendar dihitung dari tanggalISO + durasiJam.
+const mulai = new Date(acara.tanggalISO);
+const selesai = new Date(mulai.getTime() + acara.durasiJam * 3600_000);
+const utc = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+const kalender = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${acara.judul} ${acara.panggilan}`)}&dates=${utc(mulai)}/${utc(selesai)}&location=${encodeURIComponent(acara.alamat)}&details=${encodeURIComponent(`${acara.judul} ${acara.anak}, putra ${acara.ayah} & ${acara.ibu}.`)}`;
 ---
 <Base
   title={`${acara.judul} ${acara.anak}`}
@@ -48,19 +54,19 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
           </div>
 
           <div class="mt-8 max-w-md">
-            <Countdown target={acara.tanggalISO} />
+            <Countdown target={acara.tanggalISO} teks={`${tanggalLengkap}, pukul ${acara.waktu}`} />
           </div>
 
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="#acara"
-              class="inline-flex items-center justify-center rounded-xl bg-[#F2B544] px-6 py-3 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#e3a62f]"
+              class="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-[#F2B544] px-6 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#e3a62f]"
             >
               Lihat Detail Acara
             </a>
             <a
               href="#konfirmasi"
-              class="inline-flex items-center justify-center rounded-xl border-2 border-[#1B4965] px-6 py-3 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#1B4965] hover:text-white"
+              class="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-[#1B4965] px-6 text-sm font-bold text-[#1B4965] transition-colors duration-150 hover:bg-[#1B4965] hover:text-white"
             >
               Konfirmasi Kehadiran
             </a>
@@ -70,8 +76,14 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
         <div class="md:col-span-5">
           <div class="relative">
             <img
-              src={fotoHero}
-              alt="Suasana dekorasi tempat acara"
+              src={img(fotoHero, 800, 1000)}
+              srcset={`${img(fotoHero, 500, 625)} 500w, ${img(fotoHero, 800, 1000)} 800w, ${img(fotoHero, 1200, 1500)} 1200w`}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              width="800"
+              height="1000"
+              fetchpriority="high"
+              decoding="async"
+              alt="Hidangan syukuran: sate, mi, dan lauk di atas meja"
               class="aspect-[4/5] w-full rounded-xl object-cover"
             />
             <div class="absolute -bottom-4 -left-4 rounded-xl bg-[#F2B544] px-4 py-3 shadow-sm md:-left-6">
@@ -86,7 +98,7 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
     <!-- Salam pembuka -->
     <section class="bg-white">
       <div class="mx-auto max-w-3xl px-5 py-16 text-center md:px-8 md:py-24">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Assalamu'alaikum warahmatullahi wabarakatuh</p>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/75">Assalamu'alaikum warahmatullahi wabarakatuh</p>
         <p class="font-display mt-6 text-xl leading-relaxed md:text-2xl">{acara.pembuka}</p>
       </div>
     </section>
@@ -127,6 +139,18 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
                 </svg>
                 Buka di Google Maps
               </a>
+              <a
+                href={kalender}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-3 inline-flex h-11 items-center gap-2 rounded-xl border border-[#E8F1F8]/40 px-5 text-sm font-bold text-[#E8F1F8] transition-colors duration-150 hover:bg-[#E8F1F8]/10 sm:ml-3"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="4" y="5" width="16" height="15" rx="2" />
+                  <path d="M4 10h16M9 3v4M15 3v4" stroke-linecap="round" />
+                </svg>
+                Simpan ke kalender
+              </a>
             </dd>
           </div>
         </dl>
@@ -138,10 +162,10 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
       <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div class="md:col-span-3">
-            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Doa untuk ananda</p>
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/75">Doa untuk ananda</p>
             <span class="mt-4 block h-1 w-12 rounded-full bg-[#F2B544]"></span>
           </div>
-          <blockquote class="font-display text-2xl italic leading-relaxed md:col-span-9 md:text-3xl">
+          <blockquote class="font-display max-w-[52ch] text-xl italic leading-relaxed md:col-span-9 md:text-3xl md:leading-relaxed">
             “{acara.doa}”
           </blockquote>
         </div>
@@ -152,20 +176,23 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
     <section class="bg-[#E8F1F8]">
       <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div class="flex items-end justify-between">
-          <h2 class="font-display text-3xl font-bold md:text-4xl">Sekilas persiapan</h2>
-          <p class="hidden text-xs font-bold uppercase tracking-[0.2em] text-[#1B4965]/60 md:block">{galeri.length} foto</p>
+          <h2 class="font-display text-3xl font-bold md:text-4xl">Yang kami siapkan</h2>
+          <p class="hidden text-xs font-bold uppercase tracking-[0.2em] text-[#1B4965]/75 md:block">{galeri.length} foto</p>
         </div>
         <div class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
           {galeri.map((g, i) => (
-            <img
-              src={g.src}
-              alt={g.alt}
-              loading="lazy"
-              class:list={[
-                'h-full w-full rounded-xl object-cover',
-                i === 0 ? 'col-span-2 aspect-[16/9] md:row-span-2 md:aspect-auto' : 'aspect-[4/5] md:aspect-square',
-              ]}
-            />
+            <figure class:list={['relative overflow-hidden rounded-xl bg-[#1B4965]/10', i === 0 ? 'col-span-2 aspect-[16/10] md:row-span-2 md:aspect-auto' : 'aspect-[4/5] md:aspect-square']}>
+              <img
+                src={img(g.src, i === 0 ? 1200 : 600, i === 0 ? 1200 : 600)}
+                alt={g.alt}
+                width={i === 0 ? 1200 : 600}
+                height={i === 0 ? 1200 : 600}
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover"
+              />
+              <figcaption class="absolute bottom-2 left-2 rounded-lg bg-[#E8F1F8]/95 px-2.5 py-1 text-xs font-semibold text-[#1B4965]">{g.keterangan}</figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -176,14 +203,14 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
       <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div class="md:col-span-5">
-            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Turut mengundang</p>
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/75">Turut mengundang</p>
             <h2 class="font-display mt-3 text-3xl font-bold leading-tight md:text-4xl">Keluarga besar</h2>
             <p class="mt-4 max-w-sm text-sm leading-relaxed text-[#1B4965]/80">{acara.penutup}</p>
           </div>
           <ul class="divide-y divide-[#1B4965]/10 md:col-span-7">
             {turutMengundang.map((nama, i) => (
               <li class="flex items-baseline gap-5 py-4">
-                <span class="font-mono text-xs text-[#1B4965]/50">{String(i + 1).padStart(2, '0')}</span>
+                <span class="font-mono text-xs text-[#1B4965]/70">{String(i + 1).padStart(2, '0')}</span>
                 <span class="font-display text-lg font-semibold">{nama}</span>
               </li>
             ))}
@@ -197,7 +224,7 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
       <div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div class="md:col-span-5">
-            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/60">Konfirmasi kehadiran</p>
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#1B4965]/75">Konfirmasi kehadiran</p>
             <h2 class="font-display mt-3 text-3xl font-bold leading-tight md:text-4xl">Kabari kami bila berkenan hadir</h2>
             <p class="mt-4 max-w-sm text-sm leading-relaxed text-[#1B4965]/80">
               Supaya hidangan dan tempat duduk cukup untuk semua tamu. Konfirmasi terbuka langsung sebagai pesan WhatsApp ke keluarga.
@@ -208,14 +235,14 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
               <div>
                 <label for="nama" class="block text-sm font-bold">Nama</label>
                 <input
-                  id="nama" name="nama" required placeholder="Nama Anda / keluarga"
+                  id="nama" name="nama" required placeholder="Nama Anda / keluarga" autocomplete="name"
                   class="mt-1 h-11 w-full rounded-xl border border-[#1B4965]/20 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#1B4965]"
                 />
               </div>
               <div>
                 <label for="jumlah" class="block text-sm font-bold">Jumlah orang</label>
                 <input
-                  id="jumlah" name="jumlah" type="number" min="1" value="2" required
+                  id="jumlah" name="jumlah" type="number" inputmode="numeric" min="1" max="20" value="2" required
                   class="mt-1 h-11 w-full rounded-xl border border-[#1B4965]/20 bg-white px-3 text-sm outline-none transition-colors duration-150 focus:border-[#1B4965]"
                 />
               </div>
@@ -246,7 +273,8 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
             >
               Kirim via WhatsApp
             </button>
-            <p class="text-xs text-[#1B4965]/60">
+            <p id="status" role="status" aria-live="polite" class="hidden rounded-xl bg-white px-4 py-3 text-sm font-semibold"></p>
+            <p class="text-xs text-[#1B4965]/75">
               Situs ini statis tanpa basis data; konfirmasi dikirim sebagai chat WhatsApp ke keluarga.
             </p>
           </form>
@@ -259,7 +287,7 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-[#F2B544]">Hormat kami</p>
         <p class="font-display mt-3 text-2xl font-bold">{acara.ayah} &amp; {acara.ibu}</p>
         <p class="mt-1 text-sm text-[#E8F1F8]/70">beserta keluarga</p>
-        <p class="mt-8 text-xs text-[#E8F1F8]/50">Wassalamu'alaikum warahmatullahi wabarakatuh</p>
+        <p class="mt-8 text-xs text-[#E8F1F8]/75">Wassalamu'alaikum warahmatullahi wabarakatuh</p>
       </div>
     </footer>
   </main>
@@ -277,6 +305,11 @@ const tanggalLengkap = `${acara.hari}, ${acara.tanggalTeks}`;
         `Doa/ucapan: ${d.get('ucapan') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'Terima kasih. WhatsApp dibuka di tab baru, tinggal tekan kirim.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

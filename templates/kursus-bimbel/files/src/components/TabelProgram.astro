@@ -8,29 +8,36 @@ import { program } from '../data/bimbel';
 <div class="overflow-hidden rounded-lg border border-[#14213D]/15 bg-white">
   <table class="w-full border-collapse text-left text-sm">
     <thead class="hidden md:table-header-group">
-      <tr class="border-b border-[#14213D]/15 bg-[#FBFAF7] font-mono text-xs uppercase tracking-widest text-[#14213D]/60">
+      <tr class="border-b border-[#14213D]/15 bg-[#FBFAF7] font-mono text-xs uppercase tracking-widest text-[#14213D]/70">
         <th scope="col" class="px-5 py-3 font-medium">Program</th>
         <th scope="col" class="px-5 py-3 font-medium">Jenjang</th>
         <th scope="col" class="px-5 py-3 font-medium">Jadwal</th>
         <th scope="col" class="px-5 py-3 text-right font-medium">Biaya</th>
+        <th scope="col" class="px-5 py-3"><span class="sr-only">Aksi</span></th>
       </tr>
     </thead>
     <tbody class="divide-y divide-[#14213D]/10">
       {program.map((p) => (
-        <tr class="block p-5 md:table-row md:p-0">
+        <tr class="block p-5 transition-colors duration-150 md:table-row md:p-0 md:hover:bg-[#FBFAF7]">
           <td class="block pb-1 md:table-cell md:px-5 md:py-4">
-            <a href={`/program/#${p.slug}`} class="font-display text-base font-bold text-[#14213D] transition-colors duration-150 hover:text-[#FCA311] md:text-sm">
+            <a href={`/program/#${p.slug}`} class="font-display text-base font-bold text-[#14213D] transition-colors duration-150 hover:text-[#9A5B00] md:text-sm">
               {p.nama}
             </a>
           </td>
           <td class="block text-[#14213D]/70 md:table-cell md:px-5 md:py-4">
-            <span class="font-mono text-xs uppercase tracking-widest text-[#14213D]/50 md:hidden">Jenjang · </span>{p.jenjang}
+            <span class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70 md:hidden">Jenjang · </span>{p.jenjang}
           </td>
           <td class="block text-[#14213D]/70 md:table-cell md:px-5 md:py-4">
-            <span class="font-mono text-xs uppercase tracking-widest text-[#14213D]/50 md:hidden">Jadwal · </span>{p.jadwal}
+            <span class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70 md:hidden">Jadwal · </span>{p.jadwal}
           </td>
           <td class="block pt-2 font-semibold tabular-nums text-[#14213D] md:table-cell md:px-5 md:py-4 md:pt-4 md:text-right">
             {p.biaya}
+          </td>
+          <td class="block pt-3 md:table-cell md:px-5 md:py-4 md:text-right">
+            <a href={`/program/#${p.slug}`} class="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-[#14213D] underline decoration-[#FCA311] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#9A5B00] md:min-h-0 md:whitespace-nowrap">
+              Rincian<span class="sr-only"> {p.nama}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
           </td>
         </tr>
       ))}

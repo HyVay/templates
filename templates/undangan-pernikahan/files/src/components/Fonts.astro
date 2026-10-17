@@ -1,0 +1,20 @@
+---
+// Font dari Google Fonts. Ganti family di sini dan di .font-display / body.
+---
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
+<style is:global>
+  :root { --aksen: #8A5A2B; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'EB Garamond', Georgia, serif; background: #F4EFE6; color: #2E2A24; font-size: 1.0625rem; }
+  .font-display { font-family: 'Italiana', 'EB Garamond', serif; font-weight: 400; }
+  .label { font-family: 'EB Garamond', serif; font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :where(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid var(--aksen); outline-offset: 3px; }
+  /* Garis ganda ala cetak letterpress. */
+  .garis-ganda { border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; padding: 3px 0; }
+  .garis-ganda > * { border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+</style>

@@ -12,10 +12,10 @@ import { lembaga, program } from '../data/bimbel';
 >
   <Fonts />
   <Header />
-  <main class="text-[#14213D]">
+  <main id="konten" class="text-[#14213D]">
     <section class="border-b border-[#14213D]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Program · {lembaga.tahunAjaran}</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Program · {lembaga.tahunAjaran}</p>
         <h1 class="font-display mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">Program dan biaya</h1>
         <p class="mt-4 max-w-2xl text-sm leading-relaxed text-[#14213D]/70 md:text-base">
           Semua program memakai kelas kecil dan laporan bulanan. Pilih berdasarkan jenjang dan target: nilai sekolah, ujian masuk, atau UTBK.
@@ -32,18 +32,18 @@ import { lembaga, program } from '../data/bimbel';
         {program.map((p, i) => (
           <article id={p.slug} class="grid scroll-mt-20 grid-cols-1 gap-6 py-12 md:grid-cols-12 md:gap-8 md:py-16">
             <div class="md:col-span-5">
-              <p class="font-mono text-sm text-[#FCA311]">0{i + 1}</p>
+              <p class="font-mono text-sm font-bold text-[#9A5B00]">0{i + 1}</p>
               <h2 class="font-display mt-2 text-3xl font-extrabold tracking-tight">{p.nama}</h2>
-              <p class="mt-1 text-sm text-[#14213D]/65">{p.jenjang}</p>
+              <p class="mt-1 text-sm text-[#14213D]/70">{p.jenjang}</p>
               <p class="mt-4 max-w-md text-sm leading-relaxed text-[#14213D]/75 md:text-base">{p.ringkas}</p>
               <dl class="mt-6 divide-y divide-[#14213D]/10 border-y border-[#14213D]/10 text-sm">
-                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Jadwal</dt><dd class="text-right font-medium">{p.jadwal}</dd></div>
-                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Durasi</dt><dd class="text-right font-medium">{p.durasi}</dd></div>
-                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/60">Biaya</dt><dd class="text-right font-bold">{p.biaya}</dd></div>
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/70">Jadwal</dt><dd class="text-right font-medium">{p.jadwal}</dd></div>
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/70">Durasi</dt><dd class="text-right font-medium">{p.durasi}</dd></div>
+                <div class="flex justify-between gap-4 py-2.5"><dt class="text-[#14213D]/70">Biaya</dt><dd class="text-right font-bold tabular-nums">{p.biaya}</dd></div>
               </dl>
             </div>
             <div class="md:col-span-6 md:col-start-7">
-              <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Apa yang dikerjakan</p>
+              <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Apa yang dikerjakan</p>
               <ul class="mt-4 space-y-3">
                 {p.silabus.map((s) => (
                   <li class="flex gap-3 text-sm leading-relaxed md:text-base">

@@ -9,7 +9,7 @@ import { dokter, hari } from '../data/klinik';
 <div class="hidden overflow-hidden rounded-lg border border-[#0F2A44]/15 bg-white md:block">
   <table class="w-full border-collapse text-left text-sm">
     <thead>
-      <tr class="border-b border-[#0F2A44]/15 bg-[#FBFBF9] font-mono text-xs uppercase tracking-widest text-[#0F2A44]/60">
+      <tr class="border-b border-[#0F2A44]/15 bg-[#FBFBF9] font-mono text-xs uppercase tracking-widest text-[#0F2A44]/75">
         <th scope="col" class="px-5 py-3 font-medium">Dokter</th>
         {hari.map((h) => <th scope="col" class="px-3 py-3 font-medium">{h}</th>)}
       </tr>
@@ -19,7 +19,7 @@ import { dokter, hari } from '../data/klinik';
         <tr>
           <th scope="row" class="px-5 py-4 align-top font-normal">
             <a href={`/dokter/#${d.slug}`} class="font-semibold text-[#0F2A44] transition-colors duration-150 hover:text-[#2E7D6B]">{d.nama}</a>
-            <span class="block text-xs text-[#0F2A44]/60">{d.spesialisasi}</span>
+            <span class="block text-xs text-[#0F2A44]/75">{d.spesialisasi}</span>
           </th>
           {hari.map((h) => (
             <td class="px-3 py-4 align-top tabular-nums">
@@ -37,11 +37,11 @@ import { dokter, hari } from '../data/klinik';
   {dokter.map((d) => (
     <li class="p-5">
       <a href={`/dokter/#${d.slug}`} class="font-semibold text-[#0F2A44]">{d.nama}</a>
-      <p class="text-xs text-[#0F2A44]/60">{d.spesialisasi}</p>
+      <p class="text-xs text-[#0F2A44]/75">{d.spesialisasi}</p>
       <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
         {hari.map((h) => (
           <div class="flex justify-between gap-2 border-b border-dotted border-[#0F2A44]/15 py-1">
-            <dt class="text-[#0F2A44]/60">{h}</dt>
+            <dt class="text-[#0F2A44]/75">{h}</dt>
             <dd class="tabular-nums">{d.jadwal[h] ?? <span class="text-[#0F2A44]/30">—</span>}</dd>
           </div>
         ))}

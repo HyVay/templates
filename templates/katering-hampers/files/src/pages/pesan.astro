@@ -17,7 +17,7 @@ const pilihan = [
   <Fonts />
   <div class="bg-[#FCFAF5] text-[#3A4A2F]">
     <Header />
-    <main>
+    <main id="konten">
       <section class="border-b border-[#3A4A2F]/15">
         <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
           <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">{dapur.jamPesan}</p>
@@ -36,11 +36,11 @@ const pilihan = [
       <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
         <form id="pesan-form" class="space-y-5 md:col-span-7">
           <div>
-            <label for="nama" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Nama pemesan</label>
-            <input id="nama" name="nama" required placeholder="Nama Anda / nama acara" class={input} />
+            <label for="nama" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Nama pemesan</label>
+            <input id="nama" name="nama" required placeholder="Nama Anda / nama acara" class={input} autocomplete="name" />
           </div>
           <div>
-            <label for="jenis" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Paket</label>
+            <label for="jenis" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Paket</label>
             <select id="jenis" name="jenis" class={input}>
               {pilihan.map((g) => (
                 <optgroup label={g.grup}>
@@ -51,40 +51,41 @@ const pilihan = [
           </div>
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              <label for="jumlah" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Jumlah (porsi / box / pax / paket)</label>
-              <input id="jumlah" name="jumlah" type="number" min="1" required placeholder="20" class={input} />
+              <label for="jumlah" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Jumlah (porsi / box / pax / paket)</label>
+              <input id="jumlah" name="jumlah" type="number" min="1" required placeholder="20" class={input} inputmode="numeric" />
             </div>
             <div>
-              <label for="tanggal" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Tanggal kirim</label>
+              <label for="tanggal" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Tanggal kirim</label>
               <input id="tanggal" name="tanggal" type="date" required class={input} />
             </div>
           </div>
           <div>
-            <label for="alamat" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Alamat kirim</label>
-            <textarea id="alamat" name="alamat" rows="2" required placeholder="Nama gedung / jalan, kelurahan, kota" class={input}></textarea>
+            <label for="alamat" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Alamat kirim</label>
+            <textarea id="alamat" name="alamat" rows="2" required placeholder="Nama gedung / jalan, kelurahan, kota" class={input} autocomplete="street-address"></textarea>
           </div>
           <div>
-            <label for="catatan" class="text-xs uppercase tracking-widest text-[#3A4A2F]/70">Catatan</label>
+            <label for="catatan" class="text-xs uppercase tracking-widest font-medium text-[#3A4A2F]/85">Catatan</label>
             <textarea id="catatan" name="catatan" rows="3" placeholder="Tanpa pedas, alergi, jam kirim, label nama acara" class={input}></textarea>
           </div>
           <button type="submit" class="inline-flex h-12 w-full items-center justify-center rounded-sm bg-[#3A4A2F] px-6 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#8C2F39] sm:w-auto">
             Kirim via WhatsApp
           </button>
-          <p class="text-xs text-[#3A4A2F]/60">
+          <p id="status" role="status" aria-live="polite" class="hidden rounded-sm border border-[#3A4A2F]/20 bg-[#F3EFE4] px-4 py-3 text-sm"></p>
+          <p class="text-xs text-[#3A4A2F]/75">
             Situs ini statis dan tidak memproses pembayaran. Isian dikirim sebagai pesan WhatsApp; pesanan berlaku setelah DP dikonfirmasi.
           </p>
         </form>
         <aside class="space-y-6 md:col-span-5">
           <div class="border-t-2 border-[#3A4A2F] pt-4">
-            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/60">Area antar</p>
+            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/75">Area antar</p>
             <p class="mt-1 text-sm leading-relaxed">{dapur.areaAntar}</p>
           </div>
           <div class="border-t-2 border-[#3A4A2F] pt-4">
-            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/60">Pembayaran</p>
+            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/75">Pembayaran</p>
             <p class="mt-1 text-sm leading-relaxed">{dapur.dp} Nomor rekening dikirim lewat WhatsApp saat konfirmasi.</p>
           </div>
           <div class="border-t-2 border-[#3A4A2F] pt-4">
-            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/60">Dapur</p>
+            <p class="text-xs uppercase tracking-widest text-[#3A4A2F]/75">Dapur</p>
             <p class="mt-1 text-sm">{dapur.alamat}</p>
             <a href={`https://wa.me/${dapur.telepon}`} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#8C2F39]">WhatsApp {dapur.telepon}</a>
           </div>
@@ -95,6 +96,7 @@ const pilihan = [
   </div>
 
   <script define:vars={{ wa: dapur.telepon, nama: dapur.nama }}>
+    document.querySelectorAll('input[type="date"]').forEach((el) => { el.min = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); });
     const form = document.getElementById('pesan-form');
     const select = document.getElementById('jenis');
     const jenisParam = new URLSearchParams(location.search).get('jenis');
@@ -114,6 +116,8 @@ const pilihan = [
         `Catatan: ${d.get('catatan') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const st = document.getElementById('status');
+      if (st) { st.textContent = 'WhatsApp dibuka di tab baru. Tekan kirim di sana; kami balas di jam kerja.'; st.classList.remove('hidden'); }
     });
   </script>
 </Base>

@@ -9,4 +9,13 @@
   .font-display { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
   .font-body { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+  ::selection { background: #1D3557; color: #fff; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid #1D3557 !important;
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

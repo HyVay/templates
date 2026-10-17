@@ -14,7 +14,7 @@ const filter = ['Semua', 'Mobil', 'Motor'];
 >
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#1C1C1C]/15 bg-white">
       <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <p class="font-mono text-xs uppercase tracking-widest text-[#1E5EFF]">{unit.length} unit · harga per 24 jam</p>
@@ -41,7 +41,7 @@ const filter = ['Semua', 'Mobil', 'Motor'];
       <ul id="daftar-unit" class="mt-6 divide-y divide-[#1C1C1C]/15 border-y border-[#1C1C1C]/15">
         {unit.map((u) => <BarisUnit u={u} />)}
       </ul>
-      <p class="mt-4 text-sm text-[#1C1C1C]/60">Sewa 3 hari atau lebih dapat potongan 10%, sewa mingguan 20%. Sebutkan saat booking.</p>
+      <p class="mt-4 text-sm text-[#1C1C1C]/75">Sewa 3 hari atau lebih dapat potongan 10%, sewa mingguan 20%. Sebutkan saat booking.</p>
       <div class="mt-8">
         <a href="/booking/" class="inline-flex w-full items-center justify-center rounded-md bg-[#1E5EFF] px-6 py-4 font-display text-lg font-medium uppercase tracking-wide text-white transition-colors duration-150 hover:bg-[#1C1C1C] sm:w-auto">Booking unit</a>
       </div>

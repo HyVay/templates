@@ -8,4 +8,14 @@
   body { font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif; background: #FFF7E8; color: #1F4E79; }
   .font-display { font-family: 'Fredoka', 'Nunito Sans', sans-serif; }
   .font-body { font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif; }
+  ::selection { background: #F28C38; color: #13324F; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid #1F4E79 !important;
+    outline-offset: 3px;
+    border-radius: 1rem;
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

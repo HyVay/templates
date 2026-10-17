@@ -4,7 +4,7 @@ import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TabelProgram from '../components/TabelProgram.astro';
-import { lembaga, pendaftaran, pengajar, testimoni, faq } from '../data/bimbel';
+import { lembaga, pendaftaran, pengajar, testimoni, faq, fotoKelas, src } from '../data/bimbel';
 
 const infoGelombang = [
   { label: 'Pendaftaran', nilai: pendaftaran.periode },
@@ -16,16 +16,16 @@ const infoGelombang = [
 <Base title={`${lembaga.nama} — ${lembaga.tagline}`} description={lembaga.deskripsi}>
   <Fonts />
   <Header />
-  <main class="text-[#14213D]">
+  <main id="konten" class="text-[#14213D]">
     <!-- Hero: 12 kolom, teks kiri, blok info gelombang kanan -->
     <section class="border-b border-[#14213D]/15">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:gap-8 md:px-6 md:py-24">
         <div class="md:col-span-7">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Tahun ajaran {lembaga.tahunAjaran} · Depok</p>
-          <h1 class="font-display mt-4 text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Tahun ajaran {lembaga.tahunAjaran} · Depok</p>
+          <h1 class="font-display mt-4 text-balance text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
             Kelas kecil, pengajar tetap, dan laporan yang orang tua benar-benar baca.
           </h1>
-          <p class="mt-6 max-w-xl text-base leading-relaxed text-[#14213D]/75 md:text-lg">{lembaga.deskripsi}</p>
+          <p class="mt-6 max-w-xl text-pretty text-base leading-relaxed text-[#14213D]/75 md:text-lg">{lembaga.deskripsi}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="/daftar/" class="inline-flex items-center justify-center rounded-lg bg-[#FCA311] px-6 py-3 text-sm font-bold text-[#14213D] transition-colors duration-150 hover:bg-[#e3920d]">
               Daftar {pendaftaran.gelombang}
@@ -35,17 +35,26 @@ const infoGelombang = [
             </a>
           </div>
         </div>
-        <aside class="rounded-lg bg-[#14213D] p-6 text-white md:col-span-5 md:self-start md:p-8">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#FCA311]">{pendaftaran.gelombang} dibuka</p>
+        <aside aria-label="Info pendaftaran" class="flex flex-col rounded-lg bg-[#14213D] p-6 text-white md:col-span-5 md:p-8">
+          <p class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#FCA311]">
+            <span class="relative flex h-2 w-2" aria-hidden="true"><span class="absolute inline-flex h-full w-full rounded-full bg-[#FCA311] opacity-60 motion-safe:animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-[#FCA311]"></span></span>
+            {pendaftaran.gelombang} dibuka
+          </p>
           <dl class="mt-4 divide-y divide-white/15">
             {infoGelombang.map((i) => (
               <div class="flex flex-col gap-0.5 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                <dt class="text-xs uppercase tracking-wider text-white/55">{i.label}</dt>
-                <dd class="text-sm font-semibold sm:text-right">{i.nilai}</dd>
+                <dt class="text-xs uppercase tracking-wider text-white/70">{i.label}</dt>
+                <dd class="text-sm font-semibold tabular-nums sm:text-right">{i.nilai}</dd>
               </div>
             ))}
           </dl>
-          <p class="mt-5 text-xs leading-relaxed text-white/60">Biaya pendaftaran {pendaftaran.biayaDaftar}.</p>
+          <p class="mt-5 text-sm leading-relaxed text-white/75">Biaya pendaftaran {pendaftaran.biayaDaftar}.</p>
+          <div class="mt-auto pt-6">
+            <a href="/daftar/" class="flex items-center justify-between gap-3 rounded-lg bg-white/10 px-4 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-white/15">
+              Isi formulir pendaftaran
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+          </div>
         </aside>
       </div>
     </section>
@@ -54,7 +63,7 @@ const infoGelombang = [
     <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Program</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Program</p>
           <h2 class="font-display mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">Lima program, satu cara mengajar.</h2>
         </div>
         <p class="max-w-md text-sm leading-relaxed text-[#14213D]/70">Biaya sudah termasuk modul dan kuis mingguan. Tidak ada biaya buku terpisah.</p>
@@ -69,14 +78,17 @@ const infoGelombang = [
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
         <div class="md:col-span-5">
           <img
-            src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&q=80"
-            alt="Siswa di antara rak buku perpustakaan"
+            src={src(fotoKelas, 900, 1200)}
+            width="900"
+            height="1200"
+            alt="Siswa SMA belajar bersama di kelas kecil"
             loading="lazy"
-            class="aspect-[3/4] w-full rounded-lg object-cover"
+            decoding="async"
+            class="aspect-[3/4] w-full rounded-lg object-cover md:sticky md:top-24"
           />
         </div>
         <div class="md:col-span-7 md:pl-6">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60">Cara kami mengajar</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70">Cara kami mengajar</p>
           <ol class="mt-4 divide-y divide-[#14213D]/10">
             {[
               { judul: 'Tes penempatan dulu, baru kelas', isi: 'Setiap siswa baru mengerjakan tes 60 menit. Hasilnya menentukan kelas dan bab mana yang perlu dikejar lebih dulu, bukan sekadar urutan daftar.' },
@@ -84,7 +96,7 @@ const infoGelombang = [
               { judul: 'Laporan bulanan ke orang tua', isi: 'Satu halaman: bab yang sudah dikuasai, bab yang belum, kehadiran, dan skor kuis. Dikirim lewat WhatsApp setiap akhir bulan.' },
             ].map((item, i) => (
               <li class="grid grid-cols-[3rem_1fr] gap-4 py-6">
-                <span class="font-mono text-sm text-[#FCA311]">0{i + 1}</span>
+                <span class="font-mono text-sm font-bold text-[#9A5B00]">0{i + 1}</span>
                 <div>
                   <h3 class="font-display text-xl font-bold tracking-tight">{item.judul}</h3>
                   <p class="mt-2 text-sm leading-relaxed text-[#14213D]/70 md:text-base">{item.isi}</p>
@@ -99,7 +111,7 @@ const infoGelombang = [
     <!-- Testimoni: satu kutipan besar -->
     <section class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/60 md:col-span-3">Kata orang tua</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#14213D]/70 md:col-span-3">Kata orang tua</p>
         <blockquote class="md:col-span-9">
           <p class="font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">“{testimoni.kutipan}”</p>
           <footer class="mt-6 text-sm text-[#14213D]/70">
@@ -114,14 +126,14 @@ const infoGelombang = [
       <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
         <div class="flex items-end justify-between gap-4">
           <h2 class="font-display text-3xl font-extrabold tracking-tight md:text-4xl">Pengajar tetap</h2>
-          <a href="/pengajar/" class="text-sm font-semibold underline decoration-[#FCA311] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#FCA311]">Semua pengajar</a>
+          <a href="/pengajar/" class="text-sm font-semibold underline decoration-[#FCA311] decoration-2 underline-offset-4 transition-colors duration-150 hover:text-[#9A5B00]">Semua pengajar</a>
         </div>
         <ul class="mt-8 grid grid-cols-2 gap-5 md:grid-cols-4">
           {pengajar.map((g) => (
             <li>
-              <img src={g.foto} alt={g.nama} loading="lazy" class="aspect-square w-full rounded-lg object-cover grayscale" />
+              <img src={src(g.foto, 480, 480)} width="480" height="480" alt={`Foto ${g.nama}`} loading="lazy" decoding="async" class="aspect-square w-full rounded-lg bg-[#14213D]/5 object-cover grayscale" />
               <p class="mt-3 text-sm font-bold">{g.nama}</p>
-              <p class="text-xs text-[#14213D]/65">{g.mapel}</p>
+              <p class="text-xs text-[#14213D]/70">{g.mapel}</p>
             </li>
           ))}
         </ul>
@@ -134,15 +146,16 @@ const infoGelombang = [
         <div class="md:col-span-4">
           <h2 class="font-display text-3xl font-extrabold tracking-tight md:text-4xl">Sering ditanyakan</h2>
           <p class="mt-3 text-sm leading-relaxed text-[#14213D]/70">Belum terjawab? Chat kami, dibalas di jam kerja.</p>
+          <a href={`https://wa.me/${lembaga.telepon}`} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex min-h-11 items-center rounded-lg border border-[#14213D]/25 px-5 text-sm font-semibold transition-colors duration-150 hover:bg-[#14213D]/5">Tanya via WhatsApp</a>
         </div>
         <div class="divide-y divide-[#14213D]/10 border-y border-[#14213D]/10 md:col-span-8">
           {faq.map((f) => (
             <details class="group py-4">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-1 text-base font-semibold">
+              <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-1 text-base font-semibold [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 transition-transform duration-150 group-open:rotate-45" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round" /></svg>
               </summary>
-              <p class="mt-2 pr-8 text-sm leading-relaxed text-[#14213D]/70">{f.a}</p>
+              <p class="mt-2 max-w-[62ch] pr-8 text-pretty text-sm leading-relaxed text-[#14213D]/75 md:text-base">{f.a}</p>
             </details>
           ))}
         </div>

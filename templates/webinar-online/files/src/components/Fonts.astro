@@ -5,7 +5,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Figtree:wght@400;500;600&display=swap" />
 <style is:global>
-  body { font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif; background: #FAF7F2; color: #3B2A1A; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+  body { font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif; background: #FAF7F2; color: #3B2A1A; -webkit-font-smoothing: antialiased; }
   .font-display { font-family: 'Newsreader', Georgia, serif; }
   .font-body { font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+  ::selection { background: #B5452E; color: #FAF7F2; }
+  :focus-visible { outline: 2px solid #B5452E; outline-offset: 3px; border-radius: 2px; }
+  .bg-\[\#3B2A1A\] :focus-visible, .bg-\[\#B5452E\]:focus-visible { outline-color: #3B2A1A; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>

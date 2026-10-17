@@ -1,26 +1,35 @@
 ---
 import { usaha } from '../data/site';
+const tahun = new Date().getFullYear();
 ---
-<footer class="border-t border-slate-200 bg-slate-50">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
-    <div>
-      <p class="text-base font-semibold text-slate-900">{usaha.nama}</p>
-      <p class="mt-2 text-sm leading-relaxed text-slate-600">{usaha.tagline}</p>
+<footer class="bg-[#1C1B19] text-[#E8E5DE]">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 md:grid-cols-12 md:px-6">
+    <div class="md:col-span-5">
+      <p class="font-display text-2xl font-bold tracking-tight text-white">{usaha.nama}</p>
+      <p class="mt-3 max-w-sm text-sm leading-relaxed text-[#B9B5AC]">{usaha.deskripsi}</p>
     </div>
-    <div>
-      <p class="text-sm font-medium text-slate-900">Kontak</p>
-      <ul class="mt-2 space-y-1.5 text-sm text-slate-600">
-        <li><a href={`https://wa.me/${usaha.telepon}`} class="transition-colors hover:text-teal-700">WhatsApp {usaha.telepon}</a></li>
-        <li><a href={`mailto:${usaha.email}`} class="transition-colors hover:text-teal-700">{usaha.email}</a></li>
-        <li>{usaha.alamat}</li>
+    <div class="md:col-span-3">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#9C978C]">Kontak</p>
+      <ul class="mt-3 text-sm">
+        <li><a href={`https://wa.me/${usaha.telepon}`} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">WhatsApp {usaha.telepon}</a></li>
+        <li><a href={`mailto:${usaha.email}`} class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">{usaha.email}</a></li>
+        <li class="py-2 text-[#B9B5AC]">{usaha.alamat}</li>
       </ul>
     </div>
-    <div>
-      <p class="text-sm font-medium text-slate-900">Jam operasional</p>
-      <p class="mt-2 text-sm text-slate-600">{usaha.jam}</p>
+    <div class="md:col-span-2">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#9C978C]">Jam kantor</p>
+      <p class="mt-3 py-2 text-sm text-[#B9B5AC]">{usaha.jam}</p>
+    </div>
+    <div class="md:col-span-2">
+      <p class="font-mono text-xs uppercase tracking-widest text-[#9C978C]">Halaman</p>
+      <ul class="mt-3 text-sm">
+        <li><a href="/layanan/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">Layanan</a></li>
+        <li><a href="/tentang/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">Tentang</a></li>
+        <li><a href="/kontak/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-white">Kontak</a></li>
+      </ul>
     </div>
   </div>
-  <div class="border-t border-slate-200 px-4 py-5 text-center text-xs text-slate-500 md:px-6">
-    © {new Date().getFullYear()} {usaha.nama}. Seluruh hak cipta dilindungi.
+  <div class="border-t border-white/10">
+    <p class="mx-auto max-w-6xl px-4 py-5 font-mono text-xs text-[#9C978C] md:px-6">© {tahun} {usaha.nama} · {usaha.bidang}, {usaha.wilayah}</p>
   </div>
 </footer>

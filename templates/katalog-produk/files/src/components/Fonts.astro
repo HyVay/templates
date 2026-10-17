@@ -1,0 +1,16 @@
+---
+// Font dari Google Fonts. Ganti family di sini dan di .font-display / body.
+---
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" />
+<style is:global>
+  :root { --aksen: #2340A8; }
+  body { font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; background: #EFE7DA; color: #231A13; }
+  .font-display { font-family: 'Young Serif', Georgia, serif; font-weight: 400; }
+  .font-mono { font-family: 'DM Mono', ui-monospace, monospace; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :where(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid var(--aksen); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+</style>

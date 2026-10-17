@@ -35,7 +35,7 @@ export const fitur = [
     {
         judul: 'Laporan harian ke WhatsApp',
         isi: 'Jam 21.00 pemilik menerima ringkasan: omzet, barang terlaris, dan transaksi yang dibatalkan. Tidak perlu buka aplikasi untuk tahu toko hari ini untung berapa.',
-        contoh: { label: 'Ringkasan Selasa', baris: ['Omzet Rp 2.340.000', 'Terlaris: Aqua 600ml (68)', 'Dibatalkan: 2 transaksi'] },
+        contoh: { label: 'Ringkasan Selasa', baris: ['Omzet Rp 2.340.000', 'Terlaris: Air mineral 600 ml (68)', 'Dibatalkan: 2 transaksi'] },
     },
     {
         judul: 'Beberapa kasir, satu laporan',
@@ -57,11 +57,13 @@ export interface Paket {
     ringkas: string;
     cta: string;
     utama?: boolean;
+    /** Tiga poin singkat di kartu paket. */
+    poin: string[];
 }
 
 export const paket: Paket[] = [
-    { nama: 'Gratis', harga: 'Rp 0', periode: 'selamanya', ringkas: 'Untuk warung dengan satu kasir dan katalog kecil.', cta: 'Unduh di Play Store' },
-    { nama: 'Pro', harga: 'Rp 49.000', periode: 'per bulan', ringkas: 'Untuk toko yang pegawainya lebih dari satu dan ingin laporan lengkap.', cta: 'Minta demo', utama: true },
+    { nama: 'Gratis', harga: 'Rp 0', periode: 'selamanya', ringkas: 'Untuk warung dengan satu kasir dan katalog kecil.', cta: 'Unduh di Play Store', poin: ['1 kasir, 100 produk', 'Jalan tanpa internet', 'Laporan harian ringkas'] },
+    { nama: 'Pro', harga: 'Rp 49.000', periode: 'per bulan', ringkas: 'Untuk toko yang pegawainya lebih dari satu dan ingin laporan lengkap.', cta: 'Minta demo', utama: true, poin: ['Kasir dan produk tak terbatas', 'Printer struk Bluetooth', 'Dukungan WhatsApp Senin–Sabtu'] },
 ];
 
 export const perbandingan: { nama: string; gratis: string; pro: string }[] = [

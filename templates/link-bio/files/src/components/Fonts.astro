@@ -5,7 +5,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" />
 <style is:global>
-  body { font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif; background: #F3EFE6; -webkit-font-smoothing: antialiased; }
   .font-display { font-family: 'Syne', ui-sans-serif, system-ui, sans-serif; }
   .font-body { font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: #1F6F8B; color: #fff; }
+  :focus-visible { outline: 2px solid #1F6F8B; outline-offset: 2px; }
+  .bg-\[\#141414\]:focus-visible { outline-color: #1F6F8B; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

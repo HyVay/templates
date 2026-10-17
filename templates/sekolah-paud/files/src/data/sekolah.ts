@@ -36,17 +36,17 @@ export const caraMengajar = [
 ];
 
 export const guru = [
-    { nama: 'Dewi Lestari', peran: 'Kepala sekolah · TK B', latar: 'S1 PG-PAUD, mengajar sejak 2012', foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80' },
-    { nama: 'Siti Rahmawati', peran: 'Guru kelas · TK A', latar: 'S1 Psikologi, pelatihan sentra BCCT', foto: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=800&q=80' },
-    { nama: 'Anisa Fitriani', peran: 'Guru kelas · Kelompok Bermain', latar: 'D3 PGTK, 8 tahun mengajar', foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80' },
-    { nama: 'Yohana Kristanti', peran: 'Guru pendamping · TK B', latar: 'S1 PG-PAUD, pendidik seni', foto: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' },
-    { nama: 'Bagus Setiawan', peran: 'Guru pendamping · TK A', latar: 'S1 Penjaskes, kegiatan halaman dan olah tubuh', foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80' },
+    { nama: 'Dewi Lestari', peran: 'Kepala sekolah · TK B', latar: 'S1 PG-PAUD, mengajar sejak 2012', foto: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' },
+    { nama: 'Siti Rahmawati', peran: 'Guru kelas · TK A', latar: 'S1 Psikologi, pelatihan sentra BCCT', foto: 'https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=800&q=80' },
+    { nama: 'Anisa Fitriani', peran: 'Guru kelas · Kelompok Bermain', latar: 'D3 PGTK, 8 tahun mengajar', foto: 'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=800&q=80' },
+    { nama: 'Yohana Kristanti', peran: 'Guru pendamping · TK B', latar: 'S1 PG-PAUD, pendidik seni', foto: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=800&q=80' },
+    { nama: 'Bagus Setiawan', peran: 'Guru pendamping · TK A', latar: 'S1 Penjaskes, kegiatan halaman dan olah tubuh', foto: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=800&q=80' },
 ];
 
 export const ppdb = {
     tahun: '2027/2028',
     gelombang: [
-        { nama: 'Gelombang 1', periode: '1 Desember 2026 – 31 Januari 2027', catatan: 'Potongan uang pangkal 20%' },
+        { nama: 'Gelombang 1', periode: '1 Desember 2026 – 31 Januari 2027', catatan: 'Potongan uang pangkal 20%', aktif: true },
         { nama: 'Gelombang 2', periode: '1 Februari – 31 Maret 2027', catatan: 'Potongan uang pangkal 10%' },
         { nama: 'Gelombang 3', periode: 'April – Juni 2027', catatan: 'Selama kuota tersisa' },
     ],
@@ -74,4 +74,14 @@ export const foto = {
     hero: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1400&q=80',
     kegiatan: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1000&q=80',
     alat: 'https://images.unsplash.com/photo-1564429238817-393bd4286b2d?w=1000&q=80',
+};
+
+/**
+ * URL foto dengan ukuran yang pas. Untuk Unsplash, ukuran dan format diatur lewat parameter;
+ * URL dari tempat lain dipakai apa adanya.
+ */
+export const src = (url: string, w: number, h?: number) => {
+    if (!url.includes('images.unsplash.com')) return url;
+    const base = url.split('?')[0];
+    return `${base}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;
 };

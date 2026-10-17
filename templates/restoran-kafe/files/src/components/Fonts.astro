@@ -5,7 +5,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" />
 <style is:global>
-  body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+  body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   .font-display { font-family: 'Fraunces', Georgia, serif; }
   .font-body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+  /* Fokus keyboard selalu terlihat; selector berspesifisitas lebih tinggi dari .outline-none. */
+  html :focus-visible { outline: 2px solid #C8553D; outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

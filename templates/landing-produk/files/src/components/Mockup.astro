@@ -3,34 +3,34 @@
 interface Props { nama: string }
 const { nama } = Astro.props;
 const keranjang = [
-  { n: 'Aqua 600ml', q: 3, h: '12.000' },
+  { n: 'Air mineral 600 ml', q: 3, h: '12.000' },
   { n: 'Indomie goreng', q: 5, h: '17.500' },
   { n: 'Minyak goreng 2L', q: 1, h: '36.000' },
   { n: 'Gula pasir 1kg', q: 2, h: '34.000' },
 ];
 ---
 <div class="mx-auto w-full max-w-[300px] rounded-[2rem] border-8 border-[#0b1220] bg-white shadow-[0_20px_60px_-20px_rgba(11,18,32,0.4)]">
-  <div class="flex items-center justify-between px-5 pt-3 text-[10px] font-bold text-[#0b1220]/50">
+  <div class="flex items-center justify-between px-5 pt-3 text-[10px] font-bold text-[#0b1220]/65">
     <span>21.07</span>
     <span class="flex items-center gap-1"><span class="inline-block h-2 w-2 rounded-full bg-[#ff5a1f]"></span>offline</span>
   </div>
   <div class="px-5 pb-6 pt-4">
-    <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">{nama} · Kasir Rina</p>
+    <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/65">{nama} · Kasir Rina</p>
     <ul class="mt-4 divide-y divide-[#0b1220]/10 border-y border-[#0b1220]/10 text-sm">
       {keranjang.map((k) => (
         <li class="flex items-center justify-between py-2.5">
-          <span>{k.n} <span class="text-[#0b1220]/40">×{k.q}</span></span>
+          <span>{k.n} <span class="text-[#0b1220]/60">×{k.q}</span></span>
           <span class="font-bold tabular-nums">{k.h}</span>
         </li>
       ))}
     </ul>
     <div class="mt-4 flex items-baseline justify-between">
-      <span class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">Total</span>
+      <span class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/65">Total</span>
       <span class="font-display text-2xl font-extrabold tabular-nums tracking-tight">Rp 99.500</span>
     </div>
     <div class="mt-4 grid grid-cols-2 gap-2 text-center text-xs font-bold">
       <span class="rounded-md border border-[#0b1220]/15 py-2.5">QRIS</span>
-      <span class="rounded-md bg-[#ff5a1f] py-2.5 text-white">Tunai</span>
+      <span class="rounded-md bg-[#ff5a1f] py-2.5 text-[#0b1220]">Tunai</span>
     </div>
   </div>
 </div>

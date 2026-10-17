@@ -12,20 +12,20 @@ const unggulan = [...kateringHarian, ...nasiBox, ...prasmanan].filter((p) => p.f
   <Fonts />
   <div class="bg-[#FCFAF5] text-[#3A4A2F]">
     <Header />
-    <main>
+    <main id="konten">
       <!-- Hero: foto kiri, nama + batas PO kanan -->
       <section class="border-b border-[#3A4A2F]/15">
-        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-0 md:grid-cols-12">
-          <img src={foto.hero} alt={foto.heroAlt} class="aspect-[4/3] w-full object-cover md:col-span-5 md:aspect-[4/5]" />
-          <div class="flex flex-col justify-center px-4 py-10 md:col-span-7 md:px-12 md:py-16">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-12 md:items-center md:gap-12 md:px-6 md:py-14 lg:py-16">
+          <img width="1200" height="1500" fetchpriority="high" src={foto.hero} alt={foto.heroAlt} class="aspect-[4/3] w-full object-cover md:col-span-5 md:aspect-[4/5] md:rounded-sm" />
+          <div class="flex flex-col justify-center px-4 py-10 md:col-span-7 md:px-0 md:py-0">
             <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">Katering rumahan · {dapur.kota} · sejak 2017</p>
-            <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] md:text-7xl">{dapur.tagline}</h1>
-            <p class="mt-6 max-w-lg text-base leading-relaxed text-[#3A4A2F]/80">{dapur.deskripsi}</p>
-            <div class="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-              <a href="/pesan/" class="inline-flex h-12 shrink-0 items-center justify-center whitespace-nowrap rounded-sm bg-[#3A4A2F] px-6 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#8C2F39]">Pesan sekarang</a>
-              <a href="/hampers/" class="inline-block border-l-4 border-[#8C2F39] bg-[#8C2F39]/10 px-4 py-3 text-sm transition-colors duration-150 hover:bg-[#8C2F39]/20">
+            <h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] md:text-6xl lg:text-7xl [text-wrap:balance]">{dapur.tagline}</h1>
+            <p class="mt-6 max-w-[52ch] text-base leading-relaxed text-[#3A4A2F]/85 [text-wrap:pretty]">{dapur.deskripsi}</p>
+            <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-stretch">
+              <a href="/pesan/" class="inline-flex min-h-[48px] shrink-0 items-center justify-center whitespace-nowrap rounded-sm bg-[#3A4A2F] px-6 text-sm font-medium text-[#FCFAF5] transition-colors duration-150 hover:bg-[#2B3823]">Pesan sekarang</a>
+              <a href="/hampers/" class="block rounded-sm border-l-4 border-[#8C2F39] bg-[#8C2F39]/[0.07] px-4 py-2.5 text-sm transition-colors duration-150 hover:bg-[#8C2F39]/15">
                 <span class="block font-semibold text-[#8C2F39]">{poMusiman.judul}</span>
-                <span class="block text-[#3A4A2F]/80">{poMusiman.tutup} · {poMusiman.kirim}</span>
+                <span class="block text-[#3A4A2F]/85">{poMusiman.tutup} · {poMusiman.kirim} →</span>
               </a>
             </div>
           </div>
@@ -35,20 +35,20 @@ const unggulan = [...kateringHarian, ...nasiBox, ...prasmanan].filter((p) => p.f
       <!-- Paling sering dipesan -->
       <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <DaftarPaket judul="Paling sering dipesan" keterangan="Satu dari tiap jenis layanan. Daftar lengkap ada di halaman paket." items={unggulan} />
-        <a href="/paket/" class="mt-5 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#8C2F39]">Semua paket & menu mingguan</a>
+        <a href="/paket/" class="mt-4 inline-flex min-h-[44px] items-center text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#8C2F39]">Semua paket &amp; menu mingguan →</a>
       </section>
 
       <!-- Tiga layanan dengan foto -->
       <section class="border-y border-[#3A4A2F]/15 bg-[#F3EFE4]">
-        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-3 md:px-6 md:py-20">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-3 sm:gap-6 md:px-6 md:py-20 lg:gap-10">
           {[
             { foto: foto.lauk, alt: foto.laukAlt, judul: 'Katering harian', teks: 'Menu berganti tiap hari, dikirim sebelum jam makan siang ke kantor atau rumah.', href: '/paket/#harian' },
             { foto: foto.nasiBox, alt: foto.nasiBoxAlt, judul: 'Nasi box', teks: 'Untuk rapat, pengajian, dan aqiqah. Label nama acara bisa ditempel di tiap box.', href: '/paket/#nasi-box' },
             { foto: foto.prasmanan, alt: foto.prasmananAlt, judul: 'Prasmanan', teks: 'Termasuk peralatan saji, pemanas, dan dua pramusaji untuk 100 pax pertama.', href: '/paket/#prasmanan' },
           ].map((s) => (
-            <a href={s.href} class="group">
-              <img src={s.foto} alt={s.alt} loading="lazy" class="aspect-[4/5] w-full rounded-sm object-cover" />
-              <h2 class="mt-4 font-display text-2xl font-semibold group-hover:text-[#8C2F39]">{s.judul}</h2>
+            <a href={s.href} class="group block">
+              <div class="overflow-hidden rounded-sm"><img width="1200" height="1500" decoding="async" src={s.foto} alt={s.alt} loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.02] sm:aspect-[4/5]" /></div>
+              <h2 class="mt-4 font-display text-2xl font-semibold transition-colors duration-150 group-hover:text-[#8C2F39]">{s.judul} <span aria-hidden="true">→</span></h2>
               <p class="mt-1 text-sm leading-relaxed text-[#3A4A2F]/75">{s.teks}</p>
             </a>
           ))}
@@ -57,7 +57,7 @@ const unggulan = [...kateringHarian, ...nasiBox, ...prasmanan].filter((p) => p.f
 
       <!-- Hampers ringkas -->
       <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:items-center md:px-6 md:py-20">
-        <img src={foto.hampers} alt={foto.hampersAlt} loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover md:col-span-5" />
+        <img width="1200" height="900" decoding="async" src={foto.hampers} alt={foto.hampersAlt} loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover md:col-span-5" />
         <div class="md:col-span-7 md:pl-6">
           <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">{poMusiman.judul}</p>
           <h2 class="mt-3 font-display text-4xl font-semibold leading-none md:text-5xl">Tiga tier, satu dapur yang sama.</h2>

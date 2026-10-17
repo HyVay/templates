@@ -15,7 +15,7 @@ const field = 'mt-1.5 w-full rounded-sm border border-[#3B2A1A]/30 bg-white px-3
 <Base title={`Daftar — ${webinar.judul}`} description={`Pendaftaran ${webinar.judul}. Early bird ${rupiah(webinar.hargaEarly)} sampai ${webinar.batasEarly}, pembayaran transfer dikonfirmasi lewat WhatsApp.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#3B2A1A]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#B5452E]">Sisa {webinar.sisaKursi} kursi</p>
@@ -28,16 +28,16 @@ const field = 'mt-1.5 w-full rounded-sm border border-[#3B2A1A]/30 bg-white px-3
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label for="nama" class="block text-sm font-semibold">Nama lengkap</label>
-            <input id="nama" name="nama" required placeholder="Nama Anda" class={field} />
+            <input id="nama" name="nama" autocomplete="name" required placeholder="Nama Anda" class={field} />
           </div>
           <div>
             <label for="kota" class="block text-sm font-semibold">Kota</label>
-            <input id="kota" name="kota" required placeholder="Kota domisili" class={field} />
+            <input id="kota" name="kota" autocomplete="address-level2" required placeholder="Kota domisili" class={field} />
           </div>
         </div>
         <div>
           <label for="usaha" class="block text-sm font-semibold">Nama dan jenis usaha</label>
-          <input id="usaha" name="usaha" required placeholder="Misalnya: Warung Bu Sri, kelontong" class={field} />
+          <input id="usaha" name="usaha" autocomplete="organization" required placeholder="Misalnya: Warung Bu Sri, kelontong" class={field} />
         </div>
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
@@ -48,15 +48,16 @@ const field = 'mt-1.5 w-full rounded-sm border border-[#3B2A1A]/30 bg-white px-3
           </div>
           <div>
             <label for="jumlah" class="block text-sm font-semibold">Jumlah peserta</label>
-            <input id="jumlah" name="jumlah" type="number" min="1" value="1" class={field} />
+            <input id="jumlah" name="jumlah" type="number" inputmode="numeric" min="1" max="20" required value="1" class={field} />
           </div>
         </div>
-        <button type="submit" class="w-full rounded-sm bg-[#B5452E] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823] sm:w-auto">Kirim via WhatsApp</button>
-        <p class="text-xs leading-relaxed text-[#3B2A1A]/55">Situs ini statis dan tidak menyimpan data. Isian disusun menjadi pesan WhatsApp ke panitia ({webinar.wa}). Pembayaran via transfer, dikonfirmasi lewat WhatsApp yang sama.</p>
+        <button type="submit" class="inline-flex min-h-[48px] w-full items-center justify-center rounded-sm bg-[#B5452E] px-6 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#953823] sm:w-auto">Kirim via WhatsApp</button>
+        <p id="status" role="status" aria-live="polite" class="hidden border-l-2 border-[#B5452E] pl-3 text-sm"></p>
+        <p class="text-xs leading-relaxed text-[#3B2A1A]/70">Situs ini statis dan tidak menyimpan data. Isian disusun menjadi pesan WhatsApp ke panitia ({webinar.wa}). Pembayaran via transfer, dikonfirmasi lewat WhatsApp yang sama.</p>
       </form>
 
       <aside class="md:col-span-5">
-        <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/55">Alur pendaftaran</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-[#3B2A1A]/70">Alur pendaftaran</p>
         <ol class="mt-4 divide-y divide-[#3B2A1A]/10 border-y border-[#3B2A1A]/10">
           {langkah.map((l, i) => (
             <li class="grid grid-cols-[3rem_1fr] gap-3 py-4">
@@ -66,7 +67,7 @@ const field = 'mt-1.5 w-full rounded-sm border border-[#3B2A1A]/30 bg-white px-3
           ))}
         </ol>
         <div class="mt-8 rounded-sm bg-[#3B2A1A] p-6 text-[#FAF7F2]">
-          <p class="font-mono text-[11px] uppercase tracking-widest text-[#FAF7F2]/50">Termasuk dalam biaya</p>
+          <p class="font-mono text-[11px] uppercase tracking-widest text-[#FAF7F2]/75">Termasuk dalam biaya</p>
           <ul class="mt-3 space-y-2 text-sm">
             {webinar.bonus.map((b) => <li class="flex gap-2"><span class="text-[#B5452E]">+</span>{b}</li>)}
           </ul>
@@ -88,6 +89,11 @@ const field = 'mt-1.5 w-full rounded-sm border border-[#3B2A1A]/30 bg-white px-3
         `Paket: ${d.get('paket')} × ${d.get('jumlah')} peserta`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru. Kirim pesannya; panitia membalas dengan nomor rekening dan total biaya.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

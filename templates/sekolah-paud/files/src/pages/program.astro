@@ -9,10 +9,10 @@ import { sekolah, program, jadwalHarian } from '../data/sekolah';
 <Base title={`Program — ${sekolah.nama}`} description={`Program ${sekolah.nama}: ${program.map((p) => `${p.nama} (${p.usia})`).join(', ')}. Jadwal harian dari penyambutan sampai penjemputan.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#1F4E79]/15">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F28C38]">Program</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#B4501A]">Program</p>
         <h1 class="font-display mt-3 text-4xl font-semibold leading-tight md:text-6xl">Kelompok, jam, dan biaya</h1>
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#1F4E79]/75">Kuota tiap kelompok: {program.map((p) => `${p.nama} ${p.kuota} anak`).join(', ')}. Anak bisa pindah kelompok di tengah tahun bila guru dan orang tua sepakat.</p>
       </div>
@@ -24,8 +24,8 @@ import { sekolah, program, jadwalHarian } from '../data/sekolah';
 
     <section class="border-t border-[#1F4E79]/15 bg-white/60">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
-        <div class="md:col-span-4">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#F28C38]">Jadwal harian</p>
+        <div class="md:col-span-4 md:self-start md:sticky md:top-24">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#B4501A]">Jadwal harian</p>
           <h2 class="font-display mt-2 text-3xl font-semibold leading-tight md:text-4xl">Satu hari di TK A dan TK B</h2>
           <p class="mt-4 text-sm leading-relaxed text-[#1F4E79]/75">Kelompok Bermain memakai urutan yang sama, dipadatkan menjadi dua jam: lingkaran pagi, satu sentra, bekal, halaman, pulang.</p>
         </div>

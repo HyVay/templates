@@ -11,10 +11,10 @@ const input = 'mt-1 w-full rounded-lg border border-[#1F2A1F]/25 bg-white px-3 p
   <Fonts />
   <div class="bg-[#F7F5F0] text-[#1F2A1F]">
     <Header />
-    <main>
+    <main id="konten">
       <section class="border-b border-[#1F2A1F]/10">
         <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#6B7F3A]">{kos.jamSurvei}</p>
+          <p class="font-mono text-xs uppercase tracking-widest text-[#55662C]">{kos.jamSurvei}</p>
           <h1 class="mt-3 font-display text-4xl font-semibold leading-[1] tracking-tight md:text-6xl">Lihat kamarnya dulu.</h1>
           <p class="mt-5 max-w-xl text-base leading-relaxed text-[#1F2A1F]/80">
             Isi jadwal yang Anda mau, kami balas di WhatsApp untuk memastikan Bu Endang ada di tempat. Tidak ada biaya survei.
@@ -25,47 +25,48 @@ const input = 'mt-1 w-full rounded-lg border border-[#1F2A1F]/25 bg-white px-3 p
       <section class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
         <form id="survei-form" class="space-y-5 md:col-span-7">
           <div>
-            <label for="nama" class="text-xs uppercase tracking-widest text-[#1F2A1F]/70">Nama</label>
-            <input id="nama" name="nama" required placeholder="Nama Anda" class={input} />
+            <label for="nama" class="text-xs uppercase tracking-widest font-medium text-[#1F2A1F]/85">Nama</label>
+            <input id="nama" name="nama" required placeholder="Nama Anda" class={input} autocomplete="name" />
           </div>
           <div>
-            <label for="tipe" class="text-xs uppercase tracking-widest text-[#1F2A1F]/70">Tipe kamar yang diminati</label>
+            <label for="tipe" class="text-xs uppercase tracking-widest font-medium text-[#1F2A1F]/85">Tipe kamar yang diminati</label>
             <select id="tipe" name="tipe" class={input}>
               {tipeKamar.map((t) => <option value={t.slug}>{t.nama}{t.sisa === 0 ? ' (daftar tunggu)' : ''}</option>)}
             </select>
           </div>
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              <label for="tanggal" class="text-xs uppercase tracking-widest text-[#1F2A1F]/70">Tanggal survei</label>
+              <label for="tanggal" class="text-xs uppercase tracking-widest font-medium text-[#1F2A1F]/85">Tanggal survei</label>
               <input id="tanggal" name="tanggal" type="date" required class={input} />
             </div>
             <div>
-              <label for="jam" class="text-xs uppercase tracking-widest text-[#1F2A1F]/70">Jam</label>
+              <label for="jam" class="text-xs uppercase tracking-widest font-medium text-[#1F2A1F]/85">Jam</label>
               <input id="jam" name="jam" type="time" required class={input} />
             </div>
           </div>
           <div>
-            <label for="mulai" class="text-xs uppercase tracking-widest text-[#1F2A1F]/70">Rencana mulai ngekos</label>
+            <label for="mulai" class="text-xs uppercase tracking-widest font-medium text-[#1F2A1F]/85">Rencana mulai ngekos</label>
             <input id="mulai" name="mulai" placeholder="Misal: awal Februari 2027" class={input} />
           </div>
-          <button type="submit" class="inline-flex h-12 w-full items-center justify-center rounded-lg bg-[#1F2A1F] px-6 text-sm font-medium text-[#F7F5F0] transition-colors duration-150 hover:bg-[#6B7F3A] sm:w-auto">
+          <button type="submit" class="inline-flex h-12 w-full items-center justify-center rounded-lg bg-[#1F2A1F] px-6 text-sm font-medium text-[#F7F5F0] transition-colors duration-150 hover:bg-[#3F4D20] sm:w-auto">
             Kirim via WhatsApp
           </button>
-          <p class="text-xs text-[#1F2A1F]/60">
+          <p id="status" role="status" aria-live="polite" class="hidden rounded-lg border border-[#1F2A1F]/15 bg-white px-4 py-3 text-sm"></p>
+          <p class="text-xs text-[#1F2A1F]/75">
             Situs ini statis dan tidak menyimpan data. Isian dikirim sebagai pesan WhatsApp ke pemilik kos.
           </p>
         </form>
         <aside class="md:col-span-5">
           <div class="rounded-lg border border-[#1F2A1F]/15 bg-white p-6">
-            <p class="text-xs uppercase tracking-widest text-[#1F2A1F]/60">Alamat</p>
+            <p class="text-xs uppercase tracking-widest text-[#1F2A1F]/75">Alamat</p>
             <p class="mt-1 text-sm">{kos.alamat}</p>
             <a href={kos.maps} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#6B7F3A]">Buka di Google Maps</a>
-            <p class="mt-5 text-xs uppercase tracking-widest text-[#1F2A1F]/60">Patokan</p>
+            <p class="mt-5 text-xs uppercase tracking-widest text-[#1F2A1F]/75">Patokan</p>
             <ul class="mt-1 divide-y divide-[#1F2A1F]/10 text-sm">
               {kos.dekat.map((d) => (
                 <li class="flex justify-between gap-3 py-2">
                   <span>{d.tempat}</span>
-                  <span class="shrink-0 text-[#1F2A1F]/60">{d.jarak}</span>
+                  <span class="shrink-0 text-[#1F2A1F]/75">{d.jarak}</span>
                 </li>
               ))}
             </ul>
@@ -85,6 +86,7 @@ const input = 'mt-1 w-full rounded-lg border border-[#1F2A1F]/25 bg-white px-3 p
   </div>
 
   <script define:vars={{ wa: kos.telepon, nama: kos.nama }}>
+    document.querySelectorAll('input[type="date"]').forEach((el) => { el.min = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); });
     const form = document.getElementById('survei-form');
     const tipeParam = new URLSearchParams(location.search).get('tipe');
     const select = document.getElementById('tipe');
@@ -100,6 +102,8 @@ const input = 'mt-1 w-full rounded-lg border border-[#1F2A1F]/25 bg-white px-3 p
         `Rencana mulai: ${d.get('mulai') || '-'}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const st = document.getElementById('status');
+      if (st) { st.textContent = 'WhatsApp dibuka di tab baru. Tekan kirim di sana; kami balas di jam kerja.'; st.classList.remove('hidden'); }
     });
   </script>
 </Base>

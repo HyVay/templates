@@ -10,7 +10,7 @@ const langkah = [
   `Panitia membalas dengan nomor rekening. Transfer ${rupiah(turnamen.biayaDaftar)} dalam 1×24 jam.`,
   'Setelah bukti transfer diterima, tim masuk daftar peserta dan kapten dimasukkan ke grup WhatsApp.',
 ];
-const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm text-white outline-none transition-colors duration-150 placeholder:text-white/30 focus:border-[#FF3D3D]';
+const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm text-white outline-none transition-colors duration-150 placeholder:text-white/45 focus:border-[#FF3D3D]';
 ---
 <Base
   title={`Daftar tim — ${turnamen.nama}`}
@@ -18,7 +18,7 @@ const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm
 >
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-white/10">
       <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <p class="font-mono text-xs uppercase tracking-[0.25em] text-[#FF3D3D]">Sisa {turnamen.sisaSlot} slot · tutup {turnamen.batasDaftar}</p>
@@ -31,37 +31,38 @@ const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label for="tim" class="font-display block text-sm font-semibold uppercase tracking-wide">Nama tim</label>
-            <input id="tim" name="tim" required placeholder="Maks. 20 karakter" maxlength="20" class={field} />
+            <input id="tim" name="tim" autocomplete="organization" required placeholder="Maks. 20 karakter" maxlength="20" class={field} />
           </div>
           <div>
             <label for="kota" class="font-display block text-sm font-semibold uppercase tracking-wide">Asal kota</label>
-            <input id="kota" name="kota" required placeholder="Semarang" class={field} />
+            <input id="kota" name="kota" autocomplete="address-level2" required placeholder="Semarang" class={field} />
           </div>
         </div>
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label for="kapten" class="font-display block text-sm font-semibold uppercase tracking-wide">Nama kapten</label>
-            <input id="kapten" name="kapten" required placeholder="Nama lengkap" class={field} />
+            <input id="kapten" name="kapten" autocomplete="name" required placeholder="Nama lengkap" class={field} />
           </div>
           <div>
             <label for="wa" class="font-display block text-sm font-semibold uppercase tracking-wide">WhatsApp kapten</label>
-            <input id="wa" name="wa" type="tel" required placeholder="08xxxxxxxxxx" class={field} />
+            <input id="wa" name="wa" type="tel" inputmode="tel" autocomplete="tel" required placeholder="08xxxxxxxxxx" class={field} />
           </div>
         </div>
         <div>
           <label for="roster" class="font-display block text-sm font-semibold uppercase tracking-wide">Roster (nickname dan ID, satu per baris)</label>
           <textarea id="roster" name="roster" rows="6" required placeholder={'Contoh:\nRaka — 123456789 (1234)\n… sampai 5 pemain inti + 1 cadangan'} class={field}></textarea>
         </div>
-        <button type="submit" class="font-display w-full bg-[#FF3D3D] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#e03030] sm:w-auto">
+        <button type="submit" class="font-display inline-flex min-h-[52px] w-full items-center justify-center bg-[#D92525] px-6 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-150 hover:bg-[#B91C1C] sm:w-auto">
           Kirim via WhatsApp
         </button>
-        <p class="text-xs leading-relaxed text-white/50">
+        <p id="status" role="status" aria-live="polite" class="hidden border-l-2 border-[#FF3D3D] pl-3 text-sm text-white"></p>
+        <p class="text-xs leading-relaxed text-white/60">
           Situs ini statis dan tidak menyimpan data. Isian di atas disusun menjadi pesan WhatsApp ke panitia ({turnamen.wa}). Pendaftaran sah setelah biaya diterima.
         </p>
       </form>
 
       <aside class="md:col-span-5">
-        <p class="font-mono text-xs uppercase tracking-widest text-white/50">Alur pendaftaran</p>
+        <p class="font-mono text-xs uppercase tracking-widest text-white/60">Alur pendaftaran</p>
         <ol class="mt-4 divide-y divide-white/10 border-y border-white/10">
           {langkah.map((l, i) => (
             <li class="grid grid-cols-[3rem_1fr] gap-3 py-4">
@@ -78,7 +79,7 @@ const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm
             ['Technical meeting', 'Jumat 20 Nov, 13.00 di venue'],
           ].map(([k, v]) => (
             <div class="flex justify-between gap-4 px-4 py-3">
-              <dt class="text-white/55">{k}</dt>
+              <dt class="text-white/65">{k}</dt>
               <dd class="text-right font-medium">{v}</dd>
             </div>
           ))}
@@ -101,6 +102,11 @@ const field = 'mt-1.5 w-full border border-white/25 bg-white/5 px-3 py-3 text-sm
         String(d.get('roster')),
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru. Kirim pesannya; panitia membalas dengan nomor rekening dalam 1×24 jam.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

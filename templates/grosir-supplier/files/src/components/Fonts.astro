@@ -8,4 +8,10 @@
   body { font-family: 'Barlow', ui-sans-serif, system-ui, sans-serif; background: #F2F2F0; color: #0A2342; }
   .font-display { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; }
   .font-body { font-family: 'Barlow', ui-sans-serif, system-ui, sans-serif; }
+  /* Fokus keyboard selalu terlihat; selector ini mengalahkan .outline-none. */
+  html :focus-visible { outline: 2px solid #0A2342; outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

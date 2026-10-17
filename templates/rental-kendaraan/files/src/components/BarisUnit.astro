@@ -1,36 +1,66 @@
 ---
-/** Satu baris armada: foto kecil, nama + spesifikasi mono, dua harga di kanan. */
+/**
+ * Satu baris armada: foto unit (atau siluet kelas bila belum ada foto),
+ * nama + spesifikasi mono, dua harga di kanan, dan tautan booking langsung ke unit itu.
+ */
+import Siluet from './Siluet.astro';
 import { rupiah, type Unit } from '../data/rental';
 
 interface Props { u: Unit }
 const { u } = Astro.props;
+const satuan = u.jenis === 'Motor' ? 'orang' : 'kursi';
 ---
-<li data-jenis={u.jenis} class:list={['flex flex-col gap-4 py-5 md:flex-row md:items-center', !u.tersedia && 'opacity-60']}>
-  <div class="flex gap-4 md:flex-1 md:items-center">
-  <img src={u.foto} alt={u.nama} loading="lazy" class="aspect-[4/3] w-28 shrink-0 rounded-md object-cover sm:w-36 md:w-40" />
-  <div class="min-w-0 flex-1">
-    <div class="flex flex-wrap items-center gap-2">
-      <h3 class="font-display text-2xl font-medium uppercase tracking-wide text-[#1C1C1C]">{u.nama}</h3>
-      {!u.tersedia && <span class="rounded-md bg-[#1C1C1C]/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest">Disewa s.d. pekan depan</span>}
+<li data-jenis={u.jenis} class="grid grid-cols-[7rem_1fr] gap-x-4 gap-y-4 py-6 sm:grid-cols-[9rem_1fr] md:grid-cols-12 md:items-center md:gap-x-6">
+  <div
+    class:list={[
+      'relative aspect-[4/3] w-full overflow-hidden rounded-md md:col-span-2',
+      u.foto ? 'bg-[#EDEDEA]' : 'bg-[#EDEDEA] p-3 text-[#1C1C1C]/80',
+    ]}
+    style="--tile:#EDEDEA"
+  >
+    {u.foto
+      ? <img src={u.foto} alt={u.nama} width="400" height="300" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+      : <Siluet kelas={u.kelas} />}
+    {!u.foto && (
+      <span class="absolute bottom-1.5 left-2 font-mono text-[10px] uppercase tracking-widest text-[#1C1C1C]/75">{u.kelas}</span>
+    )}
+  </div>
+
+  <div class="min-w-0 md:col-span-5">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+      <h3 class="font-display text-xl font-medium uppercase tracking-wide text-[#1C1C1C] sm:text-2xl">{u.nama}</h3>
+      {u.tersedia
+        ? <span class="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/75"><span class="h-1.5 w-1.5 rounded-full bg-[#16A34A]" aria-hidden="true"></span>Tersedia</span>
+        : <span class="inline-flex items-center gap-1.5 rounded-md bg-[#1C1C1C] px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest text-white">Disewa s.d. pekan depan</span>}
     </div>
-    <p class="mt-1 font-mono text-xs uppercase tracking-widest text-[#1C1C1C]/60">
-      {u.jenis} · {u.tahun} · {u.transmisi} · {u.kursi} {u.jenis === 'Motor' ? 'orang' : 'kursi'}
+    <p class="mt-1 font-mono text-xs uppercase tracking-widest text-[#1C1C1C]/75">
+      {u.tahun} · {u.transmisi} · {u.kursi} {satuan}
     </p>
-    <p class="mt-2 text-sm leading-relaxed text-[#1C1C1C]/75">{u.catatan}</p>
+    <p class="mt-2 max-w-prose text-sm leading-relaxed text-[#1C1C1C]/80">{u.catatan}</p>
   </div>
-  </div>
-  <div class="flex flex-wrap gap-x-6 gap-y-2 pl-32 sm:pl-40 md:w-80 md:shrink-0 md:justify-end md:pl-0 md:text-right">
-    <div>
-      <p class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/60">Lepas kunci</p>
-      {u.lepasKunci > 0
-        ? <p class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.lepasKunci)}</p>
-        : <p class="font-display text-2xl font-medium text-[#1C1C1C]/35">—</p>}
-    </div>
-    <div>
-      <p class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/60">Dengan sopir</p>
-      {u.sopir > 0
-        ? <p class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.sopir)}</p>
-        : <p class="font-display text-2xl font-medium text-[#1C1C1C]/35">—</p>}
-    </div>
+
+  <div class="col-span-2 flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-t border-[#1C1C1C]/10 pt-4 sm:col-span-1 sm:col-start-2 sm:border-0 sm:pt-0 md:col-span-5 md:col-start-auto md:flex-nowrap md:items-center md:justify-end">
+    <dl class="flex gap-x-6 md:text-right">
+      <div>
+        <dt class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/75">Lepas kunci</dt>
+        {u.lepasKunci > 0
+          ? <dd class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.lepasKunci)}</dd>
+          : <dd class="font-display text-xl font-medium text-[#1C1C1C]/75 sm:text-2xl"><span aria-hidden="true">—</span><span class="sr-only">Tidak tersedia</span></dd>}
+      </div>
+      <div>
+        <dt class="font-mono text-[11px] uppercase tracking-widest text-[#1C1C1C]/75">Dengan sopir</dt>
+        {u.sopir > 0
+          ? <dd class="font-display text-xl font-semibold tabular-nums text-[#1C1C1C] sm:text-2xl">{rupiah(u.sopir)}</dd>
+          : <dd class="font-display text-xl font-medium text-[#1C1C1C]/75 sm:text-2xl"><span aria-hidden="true">—</span><span class="sr-only">Tidak tersedia</span></dd>}
+      </div>
+    </dl>
+    {u.tersedia && (
+      <a
+        href={`/booking/?unit=${u.slug}`}
+        class="inline-flex h-11 items-center rounded-md border border-[#1C1C1C] px-4 font-display text-sm font-medium uppercase tracking-wide text-[#1C1C1C] transition-colors duration-150 hover:bg-[#1C1C1C] hover:text-white"
+      >
+        Booking
+      </a>
+    )}
   </div>
 </li>

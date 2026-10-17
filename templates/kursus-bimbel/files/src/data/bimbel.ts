@@ -127,28 +127,28 @@ export const pengajar: Pengajar[] = [
         mapel: 'Matematika & Fisika',
         latar: 'Sarjana Fisika Universitas Nusantara. Pengajar UTBK sejak program ini dibuka.',
         sejak: '2016',
-        foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=800&q=80',
     },
     {
         nama: 'Anisa Rahmawati, S.Pd.',
         mapel: 'Bahasa Indonesia & Literasi',
         latar: 'Sarjana Pendidikan Bahasa. Menyusun modul literasi UTBK yang dipakai semua kelas.',
         sejak: '2018',
-        foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1614644147724-2d4785d69962?w=800&q=80',
     },
     {
         nama: 'Reza Maulana, M.Si.',
         mapel: 'Kimia & Biologi',
         latar: 'Magister Kimia. Membimbing siswa olimpiade sains tingkat kota sejak 2019.',
         sejak: '2019',
-        foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?w=800&q=80',
     },
     {
         nama: 'Putri Handayani, S.E.',
         mapel: 'Ekonomi & Penalaran Matematika',
         latar: 'Sarjana Ekonomi. Spesialis soal cerita dan penalaran kuantitatif untuk kelas 12.',
         sejak: '2021',
-        foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80',
     },
 ];
 
@@ -177,3 +177,16 @@ export const faq = [
         a: 'Maksimal 12 siswa untuk kelas reguler dan 15 siswa untuk kelas online, supaya pengajar sempat memeriksa pekerjaan setiap siswa.',
     },
 ];
+
+/** Foto suasana kelas di beranda. */
+export const fotoKelas = 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1200&q=80';
+
+/**
+ * URL foto dengan ukuran yang pas. Untuk Unsplash, ukuran dan format diatur lewat parameter;
+ * URL dari tempat lain dipakai apa adanya.
+ */
+export const src = (url: string, w: number, h?: number) => {
+    if (!url.includes('images.unsplash.com')) return url;
+    const base = url.split('?')[0];
+    return `${base}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;
+};

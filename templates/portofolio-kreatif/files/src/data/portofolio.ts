@@ -12,7 +12,7 @@ export const profil = {
         'Saya lebih suka sesi yang kecil. Satu keluarga, satu pagi, satu lokasi. Pernikahan yang saya ambil maksimal 100 tamu, supaya saya bisa hafal siapa saja yang penting bagi pasangan dan tidak melewatkan momen yang sebenarnya.',
         'Untuk produk, saya datang ke tempat Anda atau memotret di studio kecil di Cipete. Hasil dikirim dalam 5 hari kerja, sudah diedit, siap untuk marketplace dan media sosial.',
     ],
-    potret: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1000&q=80',
+    potret: 'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?w=1000&q=80',
     telepon: '6281234567890',
     email: 'halo@raniaditya.id',
     instagram: 'rani.aditya',
@@ -54,3 +54,20 @@ export const paket = [
 export const klien = ['Toko Kue Bu Rina', 'Kayuku', 'Arloji Pagi', 'Dengar Studio', 'Kopi Pagi Hari', 'Batik Larasati'];
 
 export const peralatan = ['Sony A7 IV', 'Lensa 35mm f/1.4', 'Lensa 85mm f/1.8', 'Lampu Godox AD200', 'Backup dua kartu di lokasi'];
+
+/** Yang terjadi setelah calon klien mengirim pesan. */
+export const alur = [
+    { judul: 'Saya balas dalam satu hari kerja', isi: 'Memastikan tanggal kosong dan menanyakan suasana yang Anda bayangkan.' },
+    { judul: 'Uang muka 30% mengunci tanggal', isi: 'Sisa dibayar di hari pemotretan. Jadwal ulang gratis satu kali.' },
+    { judul: 'Hasil dikirim lewat tautan', isi: 'Galeri daring yang bisa diunduh selama 6 bulan, sudah diedit.' },
+];
+
+/**
+ * URL foto dengan ukuran yang pas. Untuk Unsplash, ukuran dan format diatur lewat parameter;
+ * URL dari tempat lain dipakai apa adanya.
+ */
+export const src = (url: string, w: number, h?: number) => {
+    if (!url.includes('images.unsplash.com')) return url;
+    const base = url.split('?')[0];
+    return `${base}?w=${w}${h ? `&h=${h}&fit=crop` : ''}&q=75&auto=format`;
+};

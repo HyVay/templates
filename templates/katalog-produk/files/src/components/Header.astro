@@ -3,46 +3,35 @@ import { toko } from '../data/toko';
 
 const links = [
   { href: '/', label: 'Beranda' },
-  { href: '/produk/', label: 'Produk' },
-  { href: '/kontak/', label: 'Kontak' },
+  { href: '/produk/', label: 'Katalog' },
+  { href: '/kontak/', label: 'Pesan & kontak' },
 ];
-const here = Astro.url.pathname;
+const here = Astro.url.pathname.replace(/\/?$/, '/');
 ---
-<header class="sticky top-0 z-50 border-b border-stone-200 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
-    <a href="/" class="text-lg font-semibold tracking-tight text-stone-900">{toko.nama}</a>
-    <nav class="hidden md:flex md:items-center md:gap-8">
+<a href="#konten" class="sr-only z-[60] bg-[#231A13] px-4 py-3 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Lompat ke konten</a>
+<div class="bg-[#231A13] px-4 py-2 text-center font-mono text-xs text-[#EFE7DA]">{toko.ongkir}</div>
+<header class="sticky top-0 z-50 border-b border-[#231A13] bg-[#EFE7DA]">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
+    <a href="/" class="font-display text-2xl leading-none">{toko.nama}</a>
+    <nav aria-label="Utama" class="hidden md:flex md:items-center md:gap-8">
       {links.map((l) => (
-        <a
-          href={l.href}
-          aria-current={here === l.href ? 'page' : undefined}
-          class:list={[
-            'text-sm transition-colors hover:text-amber-700',
-            here === l.href ? 'font-medium text-amber-700' : 'text-stone-700',
-          ]}
-        >
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined}
+          class:list={['py-2 text-sm transition-colors duration-150', here === l.href ? 'font-semibold text-[#2340A8] underline decoration-2 underline-offset-8' : 'text-[#4A3D31] hover:text-[#231A13]']}>
           {l.label}
         </a>
       ))}
     </nav>
-    <button
-      id="nav-toggle"
-      type="button"
-      aria-label="Buka menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-stone-700 transition-colors hover:bg-stone-100 md:hidden"
-    >
-      <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
-      <svg id="icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
+    <button id="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu"
+      class="inline-flex h-11 w-11 items-center justify-center transition-colors duration-150 hover:bg-[#E2D7C5] md:hidden">
+      <svg id="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
+      <svg id="icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
     </button>
   </div>
-  <div id="mobile-menu" class="hidden border-t border-stone-200 bg-white md:hidden">
-    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+  <div id="mobile-menu" class="hidden border-t border-[#D9CDB9] md:hidden">
+    <nav aria-label="Utama" class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-lg px-2 py-3 text-base text-stone-800 transition-colors hover:bg-stone-50">
-          {l.label}
-        </a>
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined}
+          class:list={['border-b border-[#D9CDB9] py-3.5 font-display text-xl last:border-0', here === l.href && 'text-[#2340A8]']}>{l.label}</a>
       ))}
     </nav>
   </div>
@@ -50,13 +39,12 @@ const here = Astro.url.pathname;
 <script>
   const btn = document.getElementById('nav-toggle');
   const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-  const set = (isOpen: boolean) => {
-    btn?.setAttribute('aria-expanded', String(isOpen));
-    menu?.classList.toggle('hidden', !isOpen);
-    iconOpen?.classList.toggle('hidden', isOpen);
-    iconClose?.classList.toggle('hidden', !isOpen);
+  const set = (open: boolean) => {
+    btn?.setAttribute('aria-expanded', String(open));
+    btn?.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+    menu?.classList.toggle('hidden', !open);
+    document.getElementById('icon-open')?.classList.toggle('hidden', open);
+    document.getElementById('icon-close')?.classList.toggle('hidden', !open);
   };
   btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));

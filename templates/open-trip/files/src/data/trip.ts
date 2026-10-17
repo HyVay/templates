@@ -11,11 +11,11 @@ export const travel = {
     sejak: 2018,
     telepon: '6281234567890',
     alamat: 'Jl. Tebet Timur Dalam Raya No. 5, Jakarta Selatan',
-    jam: 'Senin - Sabtu, 09.00 - 18.00 WIB',
+    jam: 'Senin – Sabtu, 09.00 – 18.00 WIB',
     dp: 'DP 30% saat booking, pelunasan paling lambat 14 hari sebelum keberangkatan',
     pembatalan: [
         { kapan: 'Lebih dari 30 hari sebelum berangkat', potongan: 'DP dikembalikan penuh, dipotong biaya tiket yang sudah terbit' },
-        { kapan: '15 - 30 hari sebelum berangkat', potongan: 'DP hangus, pelunasan dikembalikan' },
+        { kapan: '15 – 30 hari sebelum berangkat', potongan: 'DP hangus, pelunasan dikembalikan' },
         { kapan: 'Kurang dari 14 hari', potongan: 'Tidak ada pengembalian, kursi bisa dialihkan ke orang lain' },
     ],
 };
@@ -51,7 +51,7 @@ export const paket: Paket[] = [
         kuota: 14,
         meetingPoint: 'Bandara Komodo, Labuan Bajo, pukul 11.00 WITA',
         ringkas: 'Sailing kapal kayu ke Padar, Pink Beach, dan Pulau Komodo. Dua malam di hotel, bukan di kapal.',
-        foto: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=1200&q=80',
+        foto: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=900&q=75&auto=format',
         keberangkatan: [
             { tanggal: '2026-11-13', sisa: 4 },
             { tanggal: '2026-12-18', sisa: 9 },
@@ -63,29 +63,29 @@ export const paket: Paket[] = [
             { hari: 'Hari 3', judul: 'Goa Batu Cermin & pulang', isi: 'Sarapan, Goa Batu Cermin, belanja oleh-oleh, antar ke bandara untuk penerbangan setelah pukul 13.00.' },
         ],
         termasuk: ['Hotel 2 malam (twin share)', 'Kapal kayu private rombongan', 'Tiket masuk Taman Nasional Komodo', 'Makan 3x sehari sesuai program', 'Tour leader dan ranger', 'Alat snorkeling'],
-        tidakTermasuk: ['Tiket pesawat Jakarta - Labuan Bajo PP', 'Pengeluaran pribadi dan tip', 'Kamar single (tambah Rp 600.000)'],
+        tidakTermasuk: ['Tiket pesawat Jakarta – Labuan Bajo PP', 'Pengeluaran pribadi dan tip', 'Kamar single (tambah Rp 600.000)'],
     },
     {
         slug: 'bromo-ijen',
-        nama: 'Bromo - Ijen 3D2N',
+        nama: 'Bromo – Ijen 3D2N',
         destinasi: 'Jawa Timur',
         durasi: '3 hari 2 malam',
         harga: 1650000,
         kuota: 14,
         meetingPoint: 'Stasiun Malang, pukul 13.00 WIB',
         ringkas: 'Sunrise Bromo dari Penanjakan, lalu blue fire Kawah Ijen dini hari. Dua malam di homestay pegunungan.',
-        foto: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=1200&q=80',
+        foto: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=900&q=75&auto=format',
         keberangkatan: [
             { tanggal: '2026-11-06', sisa: 2 },
             { tanggal: '2026-11-27', sisa: 7 },
             { tanggal: '2026-12-11', sisa: 12 },
         ],
         itinerary: [
-            { hari: 'Hari 1', judul: 'Malang - Tumpang - Cemoro Lawang', isi: 'Makan siang di Malang, perjalanan jeep ke Cemoro Lawang, istirahat sore, briefing.' },
+            { hari: 'Hari 1', judul: 'Malang – Tumpang – Cemoro Lawang', isi: 'Makan siang di Malang, perjalanan jeep ke Cemoro Lawang, istirahat sore, briefing.' },
             { hari: 'Hari 2', judul: 'Sunrise Bromo, lanjut Banyuwangi', isi: 'Berangkat 03.00. Penanjakan, kawah Bromo, Pasir Berbisik, Bukit Teletubbies. Siang perjalanan ke Banyuwangi, tidur sore.' },
             { hari: 'Hari 3', judul: 'Blue fire Ijen', isi: 'Berangkat 00.30. Trekking 1,5 jam, blue fire, sunrise di bibir kawah, turun pukul 08.00, antar ke Stasiun Banyuwangi.' },
         ],
-        termasuk: ['Jeep Bromo dan transport Malang - Banyuwangi', 'Homestay 2 malam', 'Tiket masuk Bromo dan Ijen', 'Masker gas Ijen', 'Makan 2x sehari', 'Tour leader'],
+        termasuk: ['Jeep Bromo dan transport Malang – Banyuwangi', 'Homestay 2 malam', 'Tiket masuk Bromo dan Ijen', 'Masker gas Ijen', 'Makan 2x sehari', 'Tour leader'],
         tidakTermasuk: ['Transport ke Malang dan dari Banyuwangi', 'Sewa jaket dan senter', 'Pengeluaran pribadi'],
     },
     {
@@ -97,7 +97,7 @@ export const paket: Paket[] = [
         kuota: 12,
         meetingPoint: 'Pelabuhan Kartini Jepara, pukul 07.00 WIB',
         ringkas: 'Island hopping ke Menjangan Kecil, Cemara Besar, dan penangkaran hiu. Snorkeling di tiga titik, sunset di Tanjung Gelam.',
-        foto: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+        foto: 'https://images.unsplash.com/photo-1619017107453-3d950380f0a9?w=900&q=75&auto=format',
         keberangkatan: [
             { tanggal: '2026-11-20', sisa: 6 },
             { tanggal: '2026-12-04', sisa: 12 },
@@ -108,8 +108,8 @@ export const paket: Paket[] = [
             { hari: 'Hari 2', judul: 'Island hopping', isi: 'Snorkeling Menjangan Kecil, penangkaran hiu, makan siang ikan bakar di Cemara Besar, Pulau Gosong.' },
             { hari: 'Hari 3', judul: 'Bukit Love & pulang', isi: 'Sarapan, Bukit Love, oleh-oleh, kapal cepat pukul 11.00 ke Jepara.' },
         ],
-        termasuk: ['Kapal cepat Jepara - Karimunjawa PP', 'Homestay 2 malam', 'Kapal island hopping dan alat snorkeling', 'Makan 3x sehari', 'Dokumentasi underwater', 'Tour leader'],
-        tidakTermasuk: ['Transport Jakarta - Jepara', 'Pengeluaran pribadi', 'Asuransi perjalanan'],
+        termasuk: ['Kapal cepat Jepara – Karimunjawa PP', 'Homestay 2 malam', 'Kapal island hopping dan alat snorkeling', 'Makan 3x sehari', 'Dokumentasi underwater', 'Tour leader'],
+        tidakTermasuk: ['Transport Jakarta – Jepara', 'Pengeluaran pribadi', 'Asuransi perjalanan'],
     },
     {
         slug: 'belitung',
@@ -120,7 +120,7 @@ export const paket: Paket[] = [
         kuota: 14,
         meetingPoint: 'Bandara H.A.S. Hanandjoeddin, Tanjung Pandan, pukul 09.00 WIB',
         ringkas: 'Pantai Tanjung Tinggi dengan batu granit raksasa, hopping ke Pulau Lengkuas dan mercusuarnya, Danau Kaolin.',
-        foto: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&q=80',
+        foto: 'https://images.unsplash.com/photo-1563087293-f895ad1bd9a4?w=900&q=75&auto=format',
         keberangkatan: [
             { tanggal: '2026-12-25', sisa: 5 },
             { tanggal: '2027-02-12', sisa: 14 },
@@ -142,24 +142,24 @@ export const paket: Paket[] = [
         kuota: 14,
         meetingPoint: 'Kantor Lintas Trip, Tebet, pukul 21.00 WIB (berangkat malam)',
         ringkas: 'Sunrise di Bukit Sikunir, Telaga Warna, Kawah Sikidang, dan Candi Arjuna. Berangkat malam dari Jakarta dengan bus kecil.',
-        foto: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+        foto: 'https://images.unsplash.com/photo-1611656600199-4d3a8845c233?w=900&q=75&auto=format',
         keberangkatan: [
             { tanggal: '2026-11-14', sisa: 0 },
             { tanggal: '2026-11-28', sisa: 8 },
             { tanggal: '2026-12-12', sisa: 14 },
         ],
         itinerary: [
-            { hari: 'Hari 1', judul: 'Jakarta - Dieng', isi: 'Berangkat 21.00 malam sebelumnya. Tiba pagi, sarapan, Telaga Warna, Kawah Sikidang, Candi Arjuna, istirahat di homestay.' },
+            { hari: 'Hari 1', judul: 'Jakarta – Dieng', isi: 'Berangkat 21.00 malam sebelumnya. Tiba pagi, sarapan, Telaga Warna, Kawah Sikidang, Candi Arjuna, istirahat di homestay.' },
             { hari: 'Hari 2', judul: 'Sikunir & pulang', isi: 'Berangkat 03.30 ke Sikunir, sunrise, sarapan mie ongklok, kebun carica, perjalanan pulang, tiba Jakarta malam.' },
         ],
-        termasuk: ['Bus kecil Jakarta - Dieng PP', 'Homestay 1 malam', 'Tiket masuk semua objek', 'Makan 3x', 'Tour leader'],
+        termasuk: ['Bus kecil Jakarta – Dieng PP', 'Homestay 1 malam', 'Tiket masuk semua objek', 'Makan 3x', 'Tour leader'],
         tidakTermasuk: ['Pengeluaran pribadi', 'Sewa jaket'],
     },
 ];
 
 export const foto = {
-    hero: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=1600&q=80',
-    tentang: 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=1200&q=80',
+    hero: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=2000&q=75&auto=format',
+    tentang: 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=900&q=75&auto=format',
 };
 
 export const rupiah = (n: number) =>

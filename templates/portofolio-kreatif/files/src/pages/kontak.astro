@@ -3,71 +3,92 @@ import Base from '../layouts/Base.astro';
 import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { profil, paket } from '../data/portofolio';
+import { profil, paket, alur } from '../data/portofolio';
 
-const input = 'mt-1 w-full border-b border-[#141414]/30 bg-transparent px-0 py-3 text-base outline-none transition-colors duration-150 focus:border-[#141414]';
+const input = 'mt-1 w-full rounded-none border-0 border-b border-[#141414]/40 bg-transparent px-0 py-3 text-base outline-none transition-colors duration-150 placeholder:text-[#141414]/55 hover:border-[#141414]/70 focus:border-[#141414]';
+const label = 'text-sm font-medium';
 ---
 <Base title={`Kontak & paket — ${profil.nama}`} description={`Paket sesi foto ${profil.nama}: keluarga, pernikahan intim, dan produk. Pesan tanggal lewat WhatsApp.`}>
   <Fonts />
   <div class="bg-[#FAFAF9] text-[#141414]">
     <Header />
-    <main class="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-20">
-      <h1 class="font-display text-5xl italic leading-[0.95] tracking-tight md:text-7xl">Kontak & paket</h1>
+    <main id="konten" class="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-20">
+      <h1 class="font-display text-6xl italic leading-[0.95] tracking-tight md:text-8xl">Kontak & paket</h1>
 
-      <div class="mt-12 grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
-        <section class="md:col-span-6">
-          <h2 class="text-xs uppercase tracking-widest text-[#141414]/60">Paket</h2>
-          <ul class="mt-4 divide-y divide-[#141414]/15 border-y border-[#141414]/15">
-            {paket.map((p) => (
-              <li class="py-5">
-                <div class="flex items-baseline justify-between gap-4">
-                  <span class="font-display text-2xl">{p.nama}</span>
-                  <span class="shrink-0 text-sm">{p.harga}</span>
-                </div>
-                <p class="mt-1 max-w-md text-sm leading-relaxed text-[#141414]/70">{p.isi}</p>
-              </li>
-            ))}
-          </ul>
-          <p class="mt-4 text-sm leading-relaxed text-[#141414]/70">
-            Di luar Jabodetabek ditambah biaya perjalanan sesuai lokasi. Tanggal dianggap terpesan setelah uang muka 30%.
-          </p>
-        </section>
-
-        <section class="md:col-span-6">
-          <h2 class="text-xs uppercase tracking-widest text-[#141414]/60">Pesan tanggal</h2>
-          <form id="kontak-form" class="mt-4 space-y-5">
-            <div>
-              <label for="nama" class="text-sm">Nama</label>
-              <input id="nama" name="nama" required placeholder="Nama Anda" class={input} />
-            </div>
-            <div>
-              <label for="jenis" class="text-sm">Jenis sesi</label>
-              <select id="jenis" name="jenis" class={input}>
-                {paket.map((p) => <option value={p.nama}>{p.nama}</option>)}
-                <option value="Lainnya">Lainnya</option>
-              </select>
-            </div>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div>
-                <label for="tanggal" class="text-sm">Tanggal</label>
-                <input id="tanggal" name="tanggal" type="date" required class={input} />
-              </div>
-              <div>
-                <label for="lokasi" class="text-sm">Lokasi</label>
-                <input id="lokasi" name="lokasi" placeholder="Kecamatan / kota" class={input} />
-              </div>
-            </div>
-            <div>
-              <label for="catatan" class="text-sm">Catatan</label>
-              <textarea id="catatan" name="catatan" rows="3" placeholder="Jumlah orang, suasana yang diinginkan, referensi" class={input}></textarea>
-            </div>
-            <button type="submit" class="w-full bg-[#141414] px-6 py-3 text-sm text-[#FAFAF9] transition-opacity duration-150 hover:opacity-80 sm:w-auto">
-              Kirim via WhatsApp
-            </button>
-            <p class="text-xs text-[#141414]/60">
-              Situs ini tidak menyimpan data. Isian dikirim sebagai pesan WhatsApp ke {profil.telepon}; saya balas dalam satu hari kerja.
+      <div class="mt-12 grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-16">
+        <div class="md:col-span-6">
+          <section aria-labelledby="judul-paket">
+            <h2 id="judul-paket" class="text-xs uppercase tracking-widest text-[#141414]/70">Paket</h2>
+            <ul class="mt-4 divide-y divide-[#141414]/15 border-y border-[#141414]/15">
+              {paket.map((p) => (
+                <li class="py-5">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <span class="font-display text-2xl md:text-3xl">{p.nama}</span>
+                    <span class="shrink-0 text-sm tabular-nums">{p.harga}</span>
+                  </div>
+                  <p class="mt-1 max-w-md text-pretty text-sm leading-relaxed text-[#141414]/70">{p.isi}</p>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-4 max-w-md text-sm leading-relaxed text-[#141414]/70">
+              Di luar Jabodetabek ditambah biaya perjalanan sesuai lokasi.
             </p>
-          </form>
+          </section>
+
+          <section aria-labelledby="judul-alur" class="mt-14">
+            <h2 id="judul-alur" class="text-xs uppercase tracking-widest text-[#141414]/70">Setelah Anda mengirim pesan</h2>
+            <ol class="mt-4 space-y-6">
+              {alur.map((a, i) => (
+                <li class="grid grid-cols-[2.5rem_1fr]">
+                  <span class="font-display text-3xl italic leading-none">{i + 1}</span>
+                  <div>
+                    <p class="font-medium">{a.judul}</p>
+                    <p class="mt-1 text-sm leading-relaxed text-[#141414]/70">{a.isi}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </div>
+
+        <section id="pesan" aria-labelledby="judul-pesan" class="scroll-mt-24 md:col-span-6">
+          <div class="md:sticky md:top-24">
+            <h2 id="judul-pesan" class="text-xs uppercase tracking-widest text-[#141414]/70">Pesan tanggal</h2>
+            <form id="kontak-form" class="mt-4 space-y-6">
+              <div>
+                <label for="nama" class={label}>Nama</label>
+                <input id="nama" name="nama" required autocomplete="name" placeholder="Nama Anda" class={input} />
+              </div>
+              <div>
+                <label for="jenis" class={label}>Jenis sesi</label>
+                <select id="jenis" name="jenis" class={input}>
+                  {paket.map((p) => <option value={p.nama}>{p.nama} — {p.harga}</option>)}
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                  <label for="tanggal" class={label}>Tanggal</label>
+                  <input id="tanggal" name="tanggal" type="date" required class={input} />
+                </div>
+                <div>
+                  <label for="lokasi" class={label}>Lokasi</label>
+                  <input id="lokasi" name="lokasi" autocomplete="address-level2" placeholder="Kecamatan / kota" class={input} />
+                </div>
+              </div>
+              <div>
+                <label for="catatan" class={label}>Catatan <span class="font-normal text-[#141414]/70">(opsional)</span></label>
+                <textarea id="catatan" name="catatan" rows="3" placeholder="Jumlah orang, suasana yang diinginkan, referensi" class={input}></textarea>
+              </div>
+              <button type="submit" class="w-full bg-[#141414] px-6 py-3.5 text-sm text-[#FAFAF9] transition-opacity duration-150 hover:opacity-80 sm:w-auto">
+                Kirim via WhatsApp
+              </button>
+              <p id="status" aria-live="polite" class="hidden border-l-2 border-[#141414] pl-3 text-sm"></p>
+              <p class="text-xs leading-relaxed text-[#141414]/70">
+                Situs ini tidak menyimpan data. Isian dikirim sebagai pesan WhatsApp ke {profil.telepon}; saya balas dalam satu hari kerja.
+              </p>
+            </form>
+          </div>
         </section>
       </div>
     </main>
@@ -76,6 +97,9 @@ const input = 'mt-1 w-full border-b border-[#141414]/30 bg-transparent px-0 py-3
 
   <script define:vars={{ wa: profil.telepon, nama: profil.nama }}>
     const form = document.getElementById('kontak-form');
+    const tanggal = document.getElementById('tanggal');
+    const status = document.getElementById('status');
+    if (tanggal) tanggal.min = new Date().toISOString().slice(0, 10);
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const d = new FormData(form);
@@ -86,7 +110,11 @@ const input = 'mt-1 w-full border-b border-[#141414]/30 bg-transparent px-0 py-3
         `Lokasi: ${d.get('lokasi') || '-'}`,
         `Catatan: ${d.get('catatan') || '-'}`,
       ].join('\n');
-      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      if (status) {
+        status.textContent = 'WhatsApp dibuka di tab baru dengan pesan yang sudah terisi. Tekan kirim di sana.';
+        status.classList.remove('hidden');
+      }
     });
   </script>
 </Base>

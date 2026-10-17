@@ -8,4 +8,14 @@
   body { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; background: #F4EBDD; color: #0B3C5D; }
   .font-display { font-family: 'Epilogue', ui-sans-serif, system-ui, sans-serif; }
   .font-body { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+  /* Fokus keyboard: navy di latar terang, pasir di latar navy (.on-dark). */
+  :focus-visible { outline: 2px solid #0B3C5D; outline-offset: 3px; border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: #F4EBDD; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>

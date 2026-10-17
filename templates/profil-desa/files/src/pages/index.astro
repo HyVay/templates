@@ -11,12 +11,15 @@ const hero = destinasi[0];
   <Fonts />
   <div class="bg-[#EEF2E6] text-[#2F4A2A]">
     <Header />
-    <main>
+    <main id="konten">
       <!-- Hero: foto lebar dengan blok nama di sudut kiri bawah -->
       <section class="relative">
         <img
-          src="https://images.unsplash.com/photo-1558005530-a7958896ec60?w=1600&q=80"
+          src="https://images.unsplash.com/photo-1558005530-a7958896ec60?w=1800&q=75&auto=format"
           alt="Sawah hijau dengan latar gunung berkabut"
+          width="1800"
+          height="771"
+          fetchpriority="high"
           class="aspect-[4/3] w-full object-cover sm:aspect-[21/9]"
         />
         <div class="bg-[#2F4A2A] px-5 py-6 text-[#EEF2E6] md:absolute md:bottom-0 md:left-0 md:max-w-xl md:px-10 md:py-8">
@@ -31,10 +34,10 @@ const hero = destinasi[0];
         <dl class="mx-auto grid max-w-6xl grid-cols-2 divide-y divide-[#2F4A2A]/15 px-4 md:grid-cols-4 md:divide-x md:divide-y-0 md:px-6">
           {angka.map((a, i) => (
             <div class:list={['py-6 md:py-8', i % 2 === 1 ? 'pl-5 md:pl-6' : 'md:pr-6', i >= 2 ? '' : 'border-b border-[#2F4A2A]/15 md:border-b-0']}>
-              <dt class="text-xs uppercase tracking-widest text-[#2F4A2A]/60">{a.label}</dt>
+              <dt class="text-xs uppercase tracking-widest text-[#2F4A2A]/75">{a.label}</dt>
               <dd class="mt-1 flex items-baseline gap-2">
                 <span class="font-display text-4xl font-semibold tabular-nums md:text-5xl">{a.nilai}</span>
-                <span class="text-sm text-[#2F4A2A]/70">{a.satuan}</span>
+                <span class="text-sm text-[#2F4A2A]/80">{a.satuan}</span>
               </dd>
             </div>
           ))}
@@ -44,17 +47,17 @@ const hero = destinasi[0];
       <!-- Sekilas + dusun -->
       <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
         <div class="md:col-span-7">
-          <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Sekilas desa</p>
+          <p class="text-xs uppercase tracking-widest text-[#9A5520]">Sekilas desa</p>
           <h2 class="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">Dikelola gotong royong, hasilnya kembali ke dusun.</h2>
           <p class="mt-5 max-w-xl text-base leading-relaxed text-[#2F4A2A]/80">{desa.deskripsi}</p>
         </div>
         <div class="md:col-span-5">
-          <p class="text-xs uppercase tracking-widest text-[#2F4A2A]/60">Empat dusun</p>
+          <p class="text-xs uppercase tracking-widest text-[#2F4A2A]/75">Empat dusun</p>
           <ul class="mt-3 divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
             {dusun.map((d) => (
               <li class="flex items-baseline justify-between gap-4 py-3">
                 <span class="font-display text-lg font-medium">{d.nama}</span>
-                <span class="text-right text-sm text-[#2F4A2A]/70">{d.catatan}</span>
+                <span class="text-right text-sm text-[#2F4A2A]/80">{d.catatan}</span>
               </li>
             ))}
           </ul>
@@ -66,25 +69,25 @@ const hero = destinasi[0];
         <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
           <div class="flex items-end justify-between gap-6">
             <div>
-              <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Wisata desa</p>
+              <p class="text-xs uppercase tracking-widest text-[#9A5520]">Wisata desa</p>
               <h2 class="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">Tiga tempat, satu hari.</h2>
             </div>
-            <a href="/wisata/" class="shrink-0 text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B86B2C]">Semua detail</a>
+            <a href="/wisata/" class="inline-flex min-h-11 shrink-0 items-center text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#9A5520]">Semua detail</a>
           </div>
           <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
             <a href={`/wisata/#${hero.slug}`} class="group md:col-span-7">
-              <img src={hero.foto} alt={hero.alt} loading="lazy" class="aspect-[4/3] w-full rounded-sm object-cover" />
-              <p class="mt-4 font-display text-2xl font-semibold group-hover:text-[#B86B2C]">{hero.nama}</p>
+              <img src={hero.foto} alt={hero.alt} width="1200" height="900" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-sm object-cover" />
+              <p class="mt-4 font-display text-2xl font-semibold group-hover:text-[#9A5520]">{hero.nama}</p>
               <p class="mt-1 text-sm text-[#2F4A2A]/75">{hero.ringkas}</p>
             </a>
             <div class="grid grid-cols-1 gap-8 md:col-span-5">
               {destinasi.slice(1).map((d) => (
                 <a href={`/wisata/#${d.slug}`} class="group flex gap-4">
-                  <img src={d.foto} alt={d.alt} loading="lazy" class="aspect-square w-28 shrink-0 rounded-sm object-cover sm:w-36" />
+                  <img src={d.foto} alt={d.alt} width="300" height="300" loading="lazy" decoding="async" class="aspect-square w-28 shrink-0 rounded-sm object-cover sm:w-36" />
                   <div class="min-w-0 flex-1">
-                    <p class="font-display text-xl font-semibold leading-tight group-hover:text-[#B86B2C]">{d.nama}</p>
+                    <p class="font-display text-xl font-semibold leading-tight group-hover:text-[#9A5520]">{d.nama}</p>
                     <p class="mt-1 text-sm text-[#2F4A2A]/75">{d.ringkas}</p>
-                    <p class="mt-2 font-mono text-xs text-[#B86B2C]">{d.tiket}</p>
+                    <p class="mt-2 font-mono text-xs text-[#9A5520]">{d.tiket}</p>
                   </div>
                 </a>
               ))}
@@ -95,14 +98,14 @@ const hero = destinasi[0];
 
       <!-- UMKM -->
       <section class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Produk warga</p>
+        <p class="text-xs uppercase tracking-widest text-[#9A5520]">Produk warga</p>
         <h2 class="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">Oleh-oleh dari dapur dan kebun sendiri.</h2>
         <ul class="mt-8 divide-y divide-[#2F4A2A]/15 border-y border-[#2F4A2A]/15">
           {umkm.map((u) => (
             <li class="grid grid-cols-1 gap-2 py-4 sm:grid-cols-12 sm:items-baseline sm:gap-4">
               <p class="font-display text-lg font-medium sm:col-span-4">{u.nama}</p>
               <p class="text-sm text-[#2F4A2A]/75 sm:col-span-5">{u.produk} · {u.pelaku}</p>
-              <p class="font-mono text-sm sm:col-span-3 sm:text-right">{u.harga}</p>
+              <p class="font-mono text-sm tabular-nums sm:col-span-3 sm:text-right">{u.harga}</p>
             </li>
           ))}
         </ul>
@@ -112,27 +115,27 @@ const hero = destinasi[0];
       <section class="border-t border-[#2F4A2A]/15">
         <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-14 md:grid-cols-12 md:px-6 md:py-20">
           <div class="md:col-span-7">
-            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Pengumuman</p>
+            <p class="text-xs uppercase tracking-widest text-[#9A5520]">Pengumuman</p>
             <ul class="mt-4 divide-y divide-[#2F4A2A]/15">
               {pengumuman.slice(0, 2).map((p) => (
                 <li class="py-5">
-                  <p class="font-mono text-xs text-[#2F4A2A]/60">{p.tanggal}</p>
+                  <p class="font-mono text-xs text-[#2F4A2A]/75">{p.tanggal}</p>
                   <p class="mt-1 font-display text-xl font-semibold leading-snug">{p.judul}</p>
                   <p class="mt-2 text-sm leading-relaxed text-[#2F4A2A]/75">{p.isi}</p>
                 </li>
               ))}
             </ul>
-            <a href="/kabar/" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B86B2C]">Semua pengumuman</a>
+            <a href="/kabar/" class="mt-1 inline-flex min-h-11 items-center text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#9A5520]">Semua pengumuman</a>
           </div>
           <div class="md:col-span-5">
-            <p class="text-xs uppercase tracking-widest text-[#B86B2C]">Agenda</p>
+            <p class="text-xs uppercase tracking-widest text-[#9A5520]">Agenda</p>
             <ul class="mt-4 divide-y divide-[#2F4A2A]/15">
               {agenda.map((a) => (
                 <li class="flex gap-5 py-4">
                   <span class="w-16 shrink-0 font-display text-lg font-semibold leading-tight">{a.tanggal}</span>
                   <span>
                     <span class="block font-medium">{a.kegiatan}</span>
-                    <span class="block text-sm text-[#2F4A2A]/70">{a.tempat}</span>
+                    <span class="block text-sm text-[#2F4A2A]/80">{a.tempat}</span>
                   </span>
                 </li>
               ))}

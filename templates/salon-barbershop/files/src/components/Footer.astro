@@ -9,7 +9,7 @@ import { toko } from '../data/barber';
       <p class="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-[#B87333]">Sejak {toko.sejak} · {toko.kota}</p>
     </div>
     <dl class="md:col-span-4">
-      <dt class="text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/60">Jam buka</dt>
+      <dt class="text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/75">Jam buka</dt>
       {toko.jam.map((j) => (
         <dd class="mt-2 flex justify-between border-b border-[#EFE9E1]/10 pb-2 text-sm">
           <span class="text-[#EFE9E1]/80">{j.hari}</span><span class="font-display text-base">{j.buka}</span>
@@ -17,14 +17,14 @@ import { toko } from '../data/barber';
       ))}
     </dl>
     <div class="md:col-span-3">
-      <p class="text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/60">Alamat</p>
+      <p class="text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/75">Alamat</p>
       <p class="mt-2 text-sm leading-relaxed text-[#EFE9E1]/80">{toko.alamat}</p>
       <a href={toko.maps} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B87333]">Petunjuk arah</a>
-      <p class="mt-4 text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/60">WhatsApp</p>
+      <p class="mt-4 text-xs uppercase tracking-[0.18em] text-[#EFE9E1]/75">WhatsApp</p>
       <a href={`https://wa.me/${toko.telepon}`} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm underline underline-offset-4 transition-colors duration-150 hover:text-[#B87333]">{toko.telepon}</a>
     </div>
   </div>
-  <div class="border-t border-[#EFE9E1]/10 px-4 py-5 text-center text-xs text-[#EFE9E1]/50 md:px-6">
+  <div class="border-t border-[#EFE9E1]/10 px-4 py-5 text-center text-xs text-[#EFE9E1]/75 md:px-6">
     © {new Date().getFullYear()} {toko.nama}. Booking tanpa uang muka, datang 5 menit sebelum jadwal.
   </div>
 </footer>

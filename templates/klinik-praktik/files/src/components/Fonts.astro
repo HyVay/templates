@@ -8,4 +8,14 @@
   body { font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; background: #FBFBF9; }
   .font-display { font-family: 'DM Serif Display', Georgia, serif; }
   .font-body { font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; }
+  ::selection { background: #2E7D6B; color: #fff; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid #2E7D6B !important;
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

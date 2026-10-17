@@ -14,15 +14,15 @@ import { lembaga, pendaftaran } from '../data/bimbel';
     </div>
     <div class="md:col-span-4">
       <p class="font-mono text-xs uppercase tracking-widest text-[#FCA311]">Hubungi</p>
-      <ul class="mt-3 space-y-1.5 text-sm text-white/85">
-        <li><a href={`https://wa.me/${lembaga.telepon}`} target="_blank" rel="noopener noreferrer" class="transition-colors duration-150 hover:text-[#FCA311]">WhatsApp {lembaga.telepon}</a></li>
-        <li><a href={`mailto:${lembaga.email}`} class="transition-colors duration-150 hover:text-[#FCA311]">{lembaga.email}</a></li>
+      <ul class="mt-2 text-sm text-white/85">
+        <li><a href={`https://wa.me/${lembaga.telepon}`} target="_blank" rel="noopener noreferrer" class="inline-block py-1 transition-colors duration-150 hover:text-[#FCA311]">WhatsApp {lembaga.telepon}</a></li>
+        <li><a href={`mailto:${lembaga.email}`} class="inline-block py-1 transition-colors duration-150 hover:text-[#FCA311]">{lembaga.email}</a></li>
       </ul>
       <p class="mt-5 text-sm text-white/70">{pendaftaran.gelombang} dibuka {pendaftaran.periode}.</p>
     </div>
   </div>
-  <div class="border-t border-white/10 px-4 py-5 text-xs text-white/50 md:px-6">
-    <div class="mx-auto flex max-w-6xl flex-col gap-1 sm:flex-row sm:justify-between">
+  <div class="border-t border-white/10 py-5 text-xs text-white/70">
+    <div class="mx-auto flex max-w-6xl flex-col gap-1 px-4 sm:flex-row sm:justify-between md:px-6">
       <span>© {new Date().getFullYear()} {lembaga.nama}</span>
       <span>Kelas kecil, pengajar tetap, laporan bulanan.</span>
     </div>

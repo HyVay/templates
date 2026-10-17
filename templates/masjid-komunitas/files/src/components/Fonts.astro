@@ -11,4 +11,12 @@
   body { font-family: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif; }
   .font-display { font-family: 'Amiri', Georgia, serif; }
   .font-body { font-family: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+  /* Fokus keyboard: tinta hijau di latar terang, emas muda di latar gelap (.on-dark). */
+  :focus-visible { outline: 2px solid #0F3D2E; outline-offset: 3px; }
+  .on-dark :focus-visible { outline-color: #E3C26A; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>

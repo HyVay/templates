@@ -8,7 +8,7 @@ export const profil = {
     bio: 'Resep sederhana dari dapur kontrakan di Depok. Tayang baru tiap Selasa dan Jumat.',
     kota: 'Depok',
     telepon: '6281234567890',
-    foto: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=900&q=80',
+    foto: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604',
 };
 
 export interface Tautan {
@@ -40,14 +40,14 @@ export const sorotan: Sorotan[] = [
         nama: 'Ebook 40 Resep Harian',
         harga: 'Rp 35.000',
         keterangan: 'PDF, 92 halaman, termasuk daftar belanja mingguan.',
-        foto: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352',
         href: '#',
     },
     {
         nama: 'Bumbu Dasar Putih 250 g',
         harga: 'Rp 28.000',
         keterangan: 'Tanpa pengawet, tahan 3 minggu di kulkas.',
-        foto: 'https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1532336414038-cf19250c5757',
         href: '#',
     },
 ];
@@ -59,3 +59,10 @@ export const sosial = [
     { jenis: 'youtube', label: 'YouTube', href: '#' },
     { jenis: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/6281234567890' },
 ] as const;
+
+/** URL foto Unsplash dengan ukuran yang pas untuk tempat tampilnya. */
+export const img = (url: string, w: number, h?: number) =>
+    `${url}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;
+
+/** 6281234567890 → +62 812-3456-7890 */
+export const formatWa = (n: string) => `+${n.slice(0, 2)} ${n.slice(2, 5)}-${n.slice(5, 9)}-${n.slice(9)}`;

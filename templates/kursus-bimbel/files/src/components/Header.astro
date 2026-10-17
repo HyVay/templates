@@ -9,20 +9,21 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:rounded-lg focus:bg-[#14213D] focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-white">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#14213D]/15 bg-[#FBFAF7]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
     <a href="/" class="flex items-center gap-2.5 text-[#14213D]">
       <span class="inline-block h-6 w-6 rounded-lg bg-[#FCA311]" aria-hidden="true"></span>
       <span class="font-display text-lg font-extrabold tracking-tight">{lembaga.nama}</span>
     </a>
-    <nav class="hidden md:flex md:items-center md:gap-7">
+    <nav aria-label="Utama" class="hidden md:flex md:items-center md:gap-1 lg:gap-3">
       {links.map((l) => (
         <a
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm font-medium transition-colors duration-150 hover:text-[#14213D]',
-            here === l.href ? 'text-[#14213D] underline decoration-[#FCA311] decoration-2 underline-offset-8' : 'text-[#14213D]/65',
+            'px-2 py-3 text-sm font-medium transition-colors duration-150 hover:text-[#14213D]',
+            here === l.href ? 'text-[#14213D] underline decoration-[#FCA311] decoration-2 underline-offset-8' : 'text-[#14213D]/70',
           ]}
         >
           {l.label}
@@ -30,7 +31,7 @@ const here = Astro.url.pathname;
       ))}
       <a
         href="/daftar/"
-        class="rounded-lg bg-[#14213D] px-4 py-2 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#1f2f55]"
+        class="ml-2 rounded-lg bg-[#14213D] px-4 py-2.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#1f2f55]"
       >
         Daftar sekarang
       </a>
@@ -48,12 +49,13 @@ const here = Astro.url.pathname;
     </button>
   </div>
   <div id="mobile-menu" class="hidden border-t border-[#14213D]/15 bg-[#FBFAF7] md:hidden">
-    <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
+    <nav aria-label="Utama" class="mx-auto flex max-w-6xl flex-col px-4 pb-4 pt-2">
       {links.map((l) => (
-        <a href={l.href} class="block rounded-lg px-2 py-3 text-base font-medium text-[#14213D] transition-colors duration-150 hover:bg-[#14213D]/5">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block rounded-lg px-2 py-3 text-base font-medium text-[#14213D] transition-colors duration-150 hover:bg-[#14213D]/5 aria-[current=page]:bg-[#FCA311]/15">
           {l.label}
         </a>
       ))}
+      <a href="/daftar/" class="mt-3 rounded-lg bg-[#FCA311] px-4 py-3.5 text-center text-sm font-bold text-[#14213D]">Daftar sekarang</a>
     </nav>
   </div>
 </header>
@@ -64,11 +66,14 @@ const here = Astro.url.pathname;
   const iconClose = document.getElementById('icon-close');
   const set = (isOpen: boolean) => {
     btn?.setAttribute('aria-expanded', String(isOpen));
+    btn?.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
     menu?.classList.toggle('hidden', !isOpen);
     iconOpen?.classList.toggle('hidden', isOpen);
     iconClose?.classList.toggle('hidden', !isOpen);
   };
   btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+  });
 </script>

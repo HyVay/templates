@@ -8,4 +8,8 @@
   body { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; background: #ffffff; color: #0b1220; }
   .font-display { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; }
   .font-body { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :where(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid #C2410C; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
 </style>

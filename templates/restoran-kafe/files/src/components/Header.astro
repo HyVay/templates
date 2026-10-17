@@ -9,6 +9,7 @@ const links = [
 ];
 const here = Astro.url.pathname;
 ---
+<a href="#konten" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-sm focus:bg-[#1F3D2B] focus:px-4 focus:py-3 focus:text-sm focus:text-[#F6F1E7]">Lewati ke konten</a>
 <header class="sticky top-0 z-50 border-b border-[#1F3D2B]/15 bg-[#F6F1E7]/95 backdrop-blur">
   <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:h-16 md:px-6">
     <a href="/" class="font-display text-xl text-[#1F3D2B] md:text-2xl">{kedai.nama}</a>
@@ -18,7 +19,7 @@ const here = Astro.url.pathname;
           href={l.href}
           aria-current={here === l.href ? 'page' : undefined}
           class:list={[
-            'text-sm transition-colors duration-150 hover:text-[#C8553D]',
+            'inline-flex h-11 items-center text-sm transition-colors duration-150 hover:text-[#C8553D]',
             here === l.href ? 'text-[#C8553D] underline underline-offset-8 decoration-[#C8553D]' : 'text-[#1F3D2B]',
           ]}
         >
@@ -27,7 +28,7 @@ const here = Astro.url.pathname;
       ))}
       <a
         href="/reservasi/"
-        class="rounded-sm bg-[#1F3D2B] px-4 py-2 text-sm font-medium text-[#F6F1E7] transition-colors duration-150 hover:bg-[#C8553D]"
+        class="inline-flex h-10 items-center rounded-sm bg-[#1F3D2B] px-4 text-sm font-medium text-[#F6F1E7] transition-colors duration-150 hover:bg-[#C8553D]"
       >
         Pesan meja
       </a>
@@ -47,11 +48,11 @@ const here = Astro.url.pathname;
   <div id="mobile-menu" class="hidden border-t border-[#1F3D2B]/15 bg-[#F6F1E7] md:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-4 py-2">
       {links.map((l) => (
-        <a href={l.href} class="block border-b border-[#1F3D2B]/10 px-2 py-3 text-base text-[#1F3D2B] transition-colors duration-150 hover:text-[#C8553D]">
+        <a href={l.href} aria-current={here === l.href ? 'page' : undefined} class="block border-b border-[#1F3D2B]/10 px-2 py-3 text-base text-[#1F3D2B] transition-colors duration-150 hover:text-[#C8553D]">
           {l.label}
         </a>
       ))}
-      <a href={`https://wa.me/${kedai.telepon}`} target="_blank" rel="noopener noreferrer" class="block px-2 py-3 text-base text-[#C8553D]">
+      <a href={`https://wa.me/${kedai.telepon}`} target="_blank" rel="noopener noreferrer" class="block px-2 py-3 text-base text-[#A8432D]">
         WhatsApp {kedai.telepon}
       </a>
     </nav>

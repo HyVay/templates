@@ -1,164 +1,221 @@
 ---
 import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
 import Countdown from '../components/Countdown.astro';
+import { mempelai, acara, kutipan, amplop, foto } from '../data/undangan';
 
-const acara = {
-  pria: 'Andi Pratama',
-  wanita: 'Sari Wulandari',
-  tanggalISO: '2026-12-20T09:00:00+07:00',
-  tanggalTeks: 'Sabtu, 20 Desember 2026',
-  akad: '09.00 WIB',
-  resepsi: '11.00 - 14.00 WIB',
-  tempat: 'Gedung Graha Wisata',
-  alamat: 'Jl. Melati No. 21, Bandung',
-  maps: 'https://maps.google.com/?q=Graha+Wisata+Bandung',
-  wa: '6281234567890',
-};
-
-const galeri = [
-  'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-  'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80',
-  'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80',
-];
+const pria = mempelai.pria.panggilan;
+const wanita = mempelai.wanita.panggilan;
+const gcal = (iso: string) => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+const kalender = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Pernikahan ${pria} & ${wanita}`)}&dates=${gcal(acara.mulaiISO)}/${gcal(acara.selesaiISO)}&location=${encodeURIComponent(`${acara.tempat}, ${acara.alamat}`)}`;
+const input = 'mt-2 block h-12 w-full border-0 border-b border-[#8C8273] bg-transparent px-0 text-lg outline-none transition-colors duration-150 placeholder:text-[#8C8273] focus:border-[#8A5A2B]';
 ---
 <Base
-  title={`Undangan Pernikahan ${acara.pria} & ${acara.wanita}`}
-  description={`Kami mengundang Anda ke pernikahan ${acara.pria} dan ${acara.wanita}, ${acara.tanggalTeks} di ${acara.tempat}, ${acara.alamat}.`}
+  title={`Undangan Pernikahan ${pria} & ${wanita}`}
+  description={`Kami mengundang Anda ke pernikahan ${mempelai.pria.lengkap} dan ${mempelai.wanita.lengkap}, ${acara.tanggalTeks} di ${acara.tempat}, ${acara.alamat}.`}
 >
-  <main class="bg-stone-50 text-stone-800">
-    <!-- Pembuka -->
-    <section class="relative flex min-h-[100dvh] items-center justify-center overflow-hidden px-4">
+  <Fonts />
+  <main>
+    <!-- Sampul -->
+    <section class="relative flex min-h-[100dvh] flex-col items-center justify-between overflow-hidden bg-[#2F3A2E] px-6 py-10 text-center text-[#F4EFE6]">
       <div class="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=80"
-          alt=""
-          class="h-full w-full object-cover opacity-25"
-        />
+        <img src={foto.sampul} alt="" width="1600" height="1200" fetchpriority="high" class="h-full w-full object-cover opacity-[0.14] grayscale" />
       </div>
-      <div class="relative z-10 mx-auto max-w-xl text-center">
-        <p class="text-xs uppercase tracking-[0.3em] text-stone-500">Undangan Pernikahan</p>
-        <h1 class="mt-5 font-serif text-4xl leading-tight text-stone-900 md:text-6xl">
-          {acara.pria}<span class="mx-2 text-emerald-700">&</span>{acara.wanita}
+      <p class="label relative z-10">Undangan Pernikahan</p>
+      <div class="relative z-10">
+        <h1 class="font-display text-[4.5rem] leading-[0.95] sm:text-8xl md:text-9xl">
+          {pria}<span class="my-2 block font-['EB_Garamond'] text-3xl italic text-[#D9B98C] md:text-4xl">&amp;</span>{wanita}
         </h1>
-        <p class="mt-4 text-sm text-stone-600 md:text-base">{acara.tanggalTeks}</p>
-        <div class="mx-auto mt-8 max-w-sm">
-          <Countdown target={acara.tanggalISO} />
-        </div>
-        <a
-          href="#acara"
-          class="mt-10 inline-block rounded-lg bg-emerald-700 px-6 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
-        >
-          Lihat Detail Acara
+        <p class="mt-8 label">{acara.tanggalSingkat}</p>
+      </div>
+      <div class="relative z-10 w-full max-w-sm">
+        <p class="text-sm italic text-[#D8D2C4]">Kepada Yth.</p>
+        <p id="nama-tamu" class="mt-1 font-display text-3xl">Bapak/Ibu/Saudara/i</p>
+        <p class="mt-1 text-sm italic text-[#D8D2C4]">di tempat</p>
+        <a href="#pembuka" class="mt-8 inline-flex h-12 items-center justify-center gap-3 border border-[#D9B98C] px-8 label text-[#F4EFE6] transition-colors duration-150 hover:bg-[#D9B98C] hover:text-[#2F3A2E]">
+          Buka undangan
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16m0 0l-6-6m6 6l6-6" /></svg>
         </a>
       </div>
     </section>
 
-    <!-- Acara -->
-    <section id="acara" class="px-4 py-16 md:py-24">
-      <div class="mx-auto max-w-3xl">
-        <h2 class="text-center font-serif text-2xl text-stone-900 md:text-3xl">Rangkaian Acara</h2>
-        <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {[
-            { judul: 'Akad Nikah', waktu: acara.akad },
-            { judul: 'Resepsi', waktu: acara.resepsi },
-          ].map((item) => (
-            <div class="rounded-xl border border-stone-200 bg-white p-6">
-              <h3 class="font-serif text-xl text-stone-900">{item.judul}</h3>
-              <p class="mt-2 text-sm text-stone-600">{acara.tanggalTeks}</p>
-              <p class="text-sm font-medium text-emerald-700">{item.waktu}</p>
-              <p class="mt-4 text-sm text-stone-700">{acara.tempat}</p>
-              <p class="text-sm text-stone-500">{acara.alamat}</p>
-            </div>
-          ))}
-        </div>
-        <div class="mt-8 text-center">
-          <a
-            href={acara.maps}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block rounded-lg border border-stone-300 px-5 py-2.5 text-sm font-medium text-stone-800 transition-colors duration-150 hover:bg-stone-100"
-          >
-            Buka Lokasi di Google Maps
-          </a>
+    <!-- Pembuka -->
+    <section id="pembuka" class="px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
+        <figure class="mx-auto w-full max-w-sm">
+          <img src={foto.utama} alt={`${pria} dan ${wanita} berjalan bergandengan di padang rumput`} width="900" height="1200" loading="lazy" decoding="async" class="aspect-[3/4] w-full rounded-t-full object-cover" />
+        </figure>
+        <div class="text-center md:text-left">
+          <p class="label text-[#8A5A2B]">Bismillahirrahmanirrahim</p>
+          <blockquote class="mt-6">
+            <p class="text-2xl italic leading-relaxed md:text-[1.7rem]">“{kutipan.teks}”</p>
+            <footer class="mt-4 label text-[#6B6255]">{kutipan.sumber}</footer>
+          </blockquote>
         </div>
       </div>
     </section>
 
+    <!-- Mempelai -->
+    <section class="border-y border-[#D8CFBF] bg-[#EDE6D9] px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-5xl text-center">
+        <p class="label text-[#8A5A2B]">Mempelai</p>
+        <p class="mx-auto mt-4 max-w-xl text-lg text-[#4A443B]">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+        <div class="mt-14 grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_auto_1fr] md:gap-12">
+          <div>
+            <h2 class="font-display text-5xl md:text-6xl">{mempelai.pria.lengkap.split(',')[0]}</h2>
+            <p class="mt-1 text-[#6B6255]">{mempelai.pria.lengkap.split(',').slice(1).join(',').trim()}</p>
+            <p class="mt-4 italic text-[#4A443B]">{mempelai.pria.ortu}</p>
+          </div>
+          <p class="font-display text-5xl text-[#8A5A2B]" aria-hidden="true">&amp;</p>
+          <div>
+            <h2 class="font-display text-5xl md:text-6xl">{mempelai.wanita.lengkap.split(',')[0]}</h2>
+            <p class="mt-1 text-[#6B6255]">{mempelai.wanita.lengkap.split(',').slice(1).join(',').trim()}</p>
+            <p class="mt-4 italic text-[#4A443B]">{mempelai.wanita.ortu}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acara -->
+    <section id="acara" class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+          <p class="label text-[#8A5A2B]">Waktu & tempat</p>
+          <h2 class="mt-4 font-display text-5xl md:text-6xl">{acara.tanggalTeks}</h2>
+        </div>
+        <div class="garis-ganda mt-12 text-[#2E2A24]">
+          <div class="grid grid-cols-1 divide-y divide-[#D8CFBF] md:grid-cols-2 md:divide-x md:divide-y-0">
+            {acara.rangkaian.map((r) => (
+              <div class="px-4 py-8 text-center md:px-10">
+                <h3 class="font-display text-4xl">{r.nama}</h3>
+                <p class="mt-3 text-xl tabular-nums">{r.waktu}</p>
+                <p class="mt-2 text-sm italic text-[#6B6255]">{r.catatan}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="mt-10 text-center">
+          <p class="text-xl">{acara.tempat}</p>
+          <p class="mt-1 text-[#4A443B]">{acara.alamat}</p>
+          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href={acara.maps} target="_blank" rel="noopener noreferrer" class="inline-flex h-12 items-center justify-center bg-[#2F3A2E] px-7 label text-[#F4EFE6] transition-colors duration-150 hover:bg-[#8A5A2B]">Petunjuk arah</a>
+            <a href={kalender} target="_blank" rel="noopener noreferrer" class="inline-flex h-12 items-center justify-center border border-[#2F3A2E] px-7 label transition-colors duration-150 hover:bg-[#2F3A2E] hover:text-[#F4EFE6]">Simpan ke kalender</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hitung mundur -->
+    <section class="bg-[#2F3A2E] px-4 py-16 text-[#F4EFE6] md:py-20">
+      <p class="label text-center text-[#D9B98C]">Menuju hari bahagia</p>
+      <div class="mx-auto mt-8 max-w-2xl"><Countdown target={acara.mulaiISO} /></div>
+    </section>
+
     <!-- Galeri -->
-    <section class="bg-white px-4 py-16 md:py-24">
+    <section class="px-4 py-20 md:px-6 md:py-28">
       <div class="mx-auto max-w-5xl">
-        <h2 class="text-center font-serif text-2xl text-stone-900 md:text-3xl">Galeri</h2>
-        <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {galeri.map((src, i) => (
-            <img
-              src={src}
-              alt={`Foto prewedding ${i + 1}`}
-              loading="lazy"
-              class="aspect-[4/5] w-full rounded-xl object-cover"
-            />
+        <p class="label text-center text-[#8A5A2B]">Galeri</p>
+        <h2 class="mt-4 text-center font-display text-5xl md:text-6xl">Sekilas cerita kami</h2>
+        <div class="mt-12 grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
+          {foto.galeri.map((g, i) => (
+            <img src={g.src} alt={g.alt} width="900" height="900" loading="lazy" decoding="async"
+              class:list={['h-full w-full object-cover', [
+                'col-span-1 aspect-[3/4] md:col-span-2 md:row-span-2 md:aspect-auto rounded-t-full',
+                'col-span-1 aspect-[3/4] md:col-span-4 md:aspect-[16/9]',
+                'col-span-1 aspect-square md:col-span-2',
+                'col-span-1 aspect-square md:col-span-2',
+                'col-span-2 aspect-[16/9] md:col-span-6 md:aspect-[21/9]',
+              ][i % 5]]} />
           ))}
         </div>
+      </div>
+    </section>
+
+    <!-- Amplop digital -->
+    <section class="border-y border-[#D8CFBF] bg-[#EDE6D9] px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-xl text-center">
+        <p class="label text-[#8A5A2B]">Tanda kasih</p>
+        <h2 class="mt-4 font-display text-5xl">Amplop digital</h2>
+        <p class="mt-4 text-[#4A443B]">Doa restu Anda adalah hadiah terbaik. Bila ingin memberi tanda kasih, dapat melalui rekening berikut.</p>
+        {amplop.map((a) => (
+          <div class="garis-ganda mt-8 text-[#2E2A24]">
+            <div class="px-6 py-6">
+              <p class="label text-[#6B6255]">{a.bank}</p>
+              <p class="mt-2 font-display text-4xl tracking-wider tabular-nums">{a.nomor}</p>
+              <p class="mt-1 italic">a.n. {a.atasNama}</p>
+              <button type="button" data-salin={a.nomor} class="salin mt-5 inline-flex h-11 items-center justify-center border border-[#2F3A2E] px-6 label transition-colors duration-150 hover:bg-[#2F3A2E] hover:text-[#F4EFE6]">Salin nomor</button>
+            </div>
+          </div>
+        ))}
+        <p id="salin-status" role="status" aria-live="polite" class="mt-3 text-sm italic text-[#8A5A2B]"></p>
       </div>
     </section>
 
     <!-- RSVP -->
-    <section class="px-4 py-16 md:py-24">
-      <div class="mx-auto max-w-md">
-        <h2 class="text-center font-serif text-2xl text-stone-900 md:text-3xl">Konfirmasi Kehadiran</h2>
-        <p class="mt-3 text-center text-sm text-stone-600">
-          Mohon konfirmasi agar kami dapat menyiapkan tempat dengan baik.
-        </p>
-        <form id="rsvp" class="mt-8 space-y-4">
+    <section id="rsvp" class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-lg">
+        <p class="label text-center text-[#8A5A2B]">RSVP</p>
+        <h2 class="mt-4 text-center font-display text-5xl">Konfirmasi kehadiran</h2>
+        <p class="mt-4 text-center text-[#4A443B]">Mohon konfirmasi sebelum 13 Desember agar kami dapat menyiapkan tempat dengan baik.</p>
+        <form id="form-rsvp" class="mt-10 space-y-7">
           <div>
-            <label for="nama" class="block text-sm font-medium text-stone-800">Nama</label>
-            <input
-              id="nama" name="nama" required placeholder="Nama lengkap"
-              class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-emerald-700"
-            />
+            <label for="nama" class="label text-[#4A443B]">Nama</label>
+            <input id="nama" name="nama" required autocomplete="name" class={input} />
           </div>
+          <fieldset>
+            <legend class="label text-[#4A443B]">Kehadiran</legend>
+            <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {['Insya Allah hadir', 'Berhalangan hadir'].map((h, i) => (
+                <label class="flex h-12 cursor-pointer items-center justify-center border border-[#8C8273] text-base transition-colors duration-150 has-[:checked]:border-[#2F3A2E] has-[:checked]:bg-[#2F3A2E] has-[:checked]:text-[#F4EFE6] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#8A5A2B]">
+                  <input type="radio" name="hadir" value={h} checked={i === 0} class="sr-only" />{h}
+                </label>
+              ))}
+            </div>
+          </fieldset>
           <div>
-            <label for="hadir" class="block text-sm font-medium text-stone-800">Kehadiran</label>
-            <select
-              id="hadir" name="hadir"
-              class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-emerald-700"
-            >
-              <option>Hadir</option>
-              <option>Tidak dapat hadir</option>
+            <label for="jumlah" class="label text-[#4A443B]">Jumlah tamu</label>
+            <select id="jumlah" name="jumlah" class={input}>
+              <option value="1">1 orang</option><option value="2">2 orang</option>
             </select>
           </div>
           <div>
-            <label for="ucapan" class="block text-sm font-medium text-stone-800">Ucapan</label>
-            <textarea
-              id="ucapan" name="ucapan" rows="3" placeholder="Doa dan ucapan untuk mempelai"
-              class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm outline-none transition-colors focus:border-emerald-700"
-            ></textarea>
+            <label for="ucapan" class="label text-[#4A443B]">Doa & ucapan</label>
+            <textarea id="ucapan" name="ucapan" rows="3" class={`${input} h-auto py-2`}></textarea>
           </div>
-          <button
-            type="submit"
-            class="w-full rounded-lg bg-emerald-700 px-5 py-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-emerald-800"
-          >
-            Kirim via WhatsApp
-          </button>
+          <button type="submit" class="flex h-12 w-full items-center justify-center bg-[#2F3A2E] label text-[#F4EFE6] transition-colors duration-150 hover:bg-[#8A5A2B]">Kirim via WhatsApp</button>
+          <p class="text-center text-sm italic text-[#6B6255]">Konfirmasi dikirim sebagai pesan WhatsApp ke keluarga mempelai. Situs ini tidak menyimpan data.</p>
+          <p id="rsvp-status" role="status" aria-live="polite" class="text-center text-sm text-[#8A5A2B]"></p>
         </form>
-        <p class="mt-3 text-center text-xs text-stone-500">
-          Konfirmasi dikirim sebagai pesan WhatsApp ke keluarga mempelai.
-        </p>
       </div>
     </section>
 
-    <footer class="border-t border-stone-200 px-4 py-10 text-center">
-      <p class="font-serif text-lg text-stone-800">{acara.pria} & {acara.wanita}</p>
-      <p class="mt-1 text-xs text-stone-500">{acara.tanggalTeks}</p>
+    <footer class="bg-[#2F3A2E] px-6 py-20 text-center text-[#F4EFE6]">
+      <p class="mx-auto max-w-md italic text-[#D8D2C4]">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+      <p class="mt-10 font-display text-6xl">{pria} &amp; {wanita}</p>
+      <p class="mt-4 label text-[#D9B98C]">{mempelai.tagar}</p>
     </footer>
   </main>
 
   <script define:vars={{ wa: acara.wa }}>
-    const form = document.getElementById('rsvp');
+    // Nama tamu dari ?to=… (textContent, jadi aman dari HTML).
+    const to = new URLSearchParams(location.search).get('to');
+    if (to) {
+      const bersih = to.trim().slice(0, 60);
+      document.getElementById('nama-tamu').textContent = bersih;
+      document.getElementById('nama').value = bersih;
+    }
+    document.querySelectorAll('.salin').forEach((b) => b.addEventListener('click', async () => {
+      const status = document.getElementById('salin-status');
+      try { await navigator.clipboard.writeText(b.dataset.salin); status.textContent = 'Nomor rekening disalin.'; }
+      catch { status.textContent = `Salin manual: ${b.dataset.salin}`; }
+    }));
+    const form = document.getElementById('form-rsvp');
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const d = new FormData(form);
-      const text = `Konfirmasi kehadiran:\nNama: ${d.get('nama')}\nKehadiran: ${d.get('hadir')}\nUcapan: ${d.get('ucapan') || '-'}`;
+      const text = `Konfirmasi kehadiran\nNama: ${d.get('nama')}\nKehadiran: ${d.get('hadir')}\nJumlah: ${d.get('jumlah')} orang\nUcapan: ${d.get('ucapan') || '-'}`;
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      document.getElementById('rsvp-status').textContent = 'WhatsApp dibuka di tab baru. Terima kasih atas konfirmasinya.';
     });
   </script>
 </Base>

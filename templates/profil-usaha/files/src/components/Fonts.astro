@@ -1,0 +1,19 @@
+---
+// Font dari Google Fonts. Ganti family di sini dan di .font-display / body.
+---
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+<style is:global>
+  :root { --tinta: #1C1B19; --aksen: #1D4E89; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; background: #ECE9E2; color: var(--tinta); }
+  .font-display { font-family: 'Bricolage Grotesque', 'Geist', ui-sans-serif, sans-serif; font-optical-sizing: auto; }
+  .font-mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :where(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid var(--aksen); outline-offset: 2px; }
+  /* Garis kisi cetak biru untuk latar dekoratif. */
+  .kisi { background-image: linear-gradient(to right, rgb(29 78 137 / .08) 1px, transparent 1px), linear-gradient(to bottom, rgb(29 78 137 / .08) 1px, transparent 1px); background-size: 32px 32px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>

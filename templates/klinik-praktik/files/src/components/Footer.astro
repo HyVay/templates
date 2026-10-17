@@ -9,7 +9,7 @@ import { klinik } from '../data/klinik';
       <p class="mt-4 text-sm leading-relaxed text-white/85">{klinik.alamat}</p>
     </div>
     <div class="md:col-span-4">
-      <p class="font-mono text-xs uppercase tracking-widest text-white/50">Jam buka</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-white/75">Jam buka</p>
       <dl class="mt-3 divide-y divide-white/10 text-sm">
         {klinik.jam.map((j) => (
           <div class="flex justify-between gap-4 py-2">
@@ -20,16 +20,16 @@ import { klinik } from '../data/klinik';
       </dl>
     </div>
     <div class="md:col-span-3">
-      <p class="font-mono text-xs uppercase tracking-widest text-white/50">Hubungi</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-white/75">Hubungi</p>
       <ul class="mt-3 space-y-1.5 text-sm">
         <li><a href={`https://wa.me/${klinik.telepon}`} target="_blank" rel="noopener noreferrer" class="transition-colors duration-150 hover:text-[#8fd3c2]">WhatsApp {klinik.telepon}</a></li>
         <li><a href={`tel:+${klinik.teleponDarurat}`} class="transition-colors duration-150 hover:text-[#8fd3c2]">Telepon +{klinik.teleponDarurat}</a></li>
       </ul>
-      <p class="mt-5 text-xs leading-relaxed text-white/55">{klinik.pembayaran}</p>
+      <p class="mt-5 text-xs leading-relaxed text-white/75">{klinik.pembayaran}</p>
     </div>
   </div>
-  <div class="border-t border-white/10 px-4 py-5 text-xs text-white/50 md:px-6">
-    <div class="mx-auto flex max-w-6xl flex-col gap-1 sm:flex-row sm:justify-between">
+  <div class="border-t border-white/10 py-5 text-xs text-white/75">
+    <div class="mx-auto flex max-w-6xl flex-col gap-1 px-4 sm:flex-row sm:justify-between md:px-6">
       <span>© {new Date().getFullYear()} {klinik.nama} {klinik.kota}</span>
       <span>Untuk kondisi gawat darurat, hubungi 119 atau IGD rumah sakit terdekat.</span>
     </div>

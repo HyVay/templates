@@ -8,22 +8,32 @@ import { produk, paket, perbandingan } from '../data/produk';
 <Base title={`Harga — ${produk.nama}`} description={`Paket ${produk.nama}: Gratis untuk satu kasir, Pro ${paket[1].harga} ${paket[1].periode}. Tanpa kontrak.`}>
   <Fonts />
   <Header />
-  <main>
+  <main id="konten">
     <section class="border-b border-[#0b1220]/10">
-      <div class="mx-auto max-w-6xl px-4 pb-12 pt-14 md:px-6 md:pt-20">
-        <p class="text-xs font-bold uppercase tracking-widest text-[#ff5a1f]">Harga</p>
-        <h1 class="mt-4 max-w-2xl font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">Dua paket. Tanpa kontrak, tanpa biaya pasang.</h1>
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 pb-12 pt-14 md:grid-cols-12 md:items-end md:px-6 md:pt-20">
+        <div class="md:col-span-7">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#C2410C]">Harga</p>
+          <h1 class="mt-4 font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">Dua paket. Tanpa kontrak, tanpa biaya pasang.</h1>
+        </div>
+        <p class="max-w-[46ch] text-base leading-relaxed text-[#0b1220]/70 md:col-span-5">Mulai gratis, naik ke Pro kapan saja dari dalam aplikasi. Bayar per bulan lewat transfer atau QRIS, berhenti kapan pun dan data tetap bisa diunduh.</p>
       </div>
     </section>
 
     <section class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-20">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         {paket.map((p) => (
-          <div class:list={['rounded-md border p-7 md:p-9', p.utama ? 'border-[#0b1220] bg-[#0b1220] text-white' : 'border-[#0b1220]/15']}>
-            <p class:list={['text-xs font-bold uppercase tracking-widest', p.utama ? 'text-[#ff5a1f]' : 'text-[#0b1220]/50']}>{p.nama}</p>
-            <p class="mt-4 font-display text-4xl font-extrabold tracking-tight md:text-5xl">{p.harga} <span class:list={['text-base font-medium', p.utama ? 'text-white/60' : 'text-[#0b1220]/50']}>{p.periode}</span></p>
-            <p class:list={['mt-4 text-sm leading-relaxed', p.utama ? 'text-white/70' : 'text-[#0b1220]/70']}>{p.ringkas}</p>
-            <a href={p.utama ? '#demo' : produk.playStore} class:list={['mt-8 inline-flex w-full items-center justify-center rounded-md px-6 py-3.5 text-sm font-bold transition-colors duration-150', p.utama ? 'bg-[#ff5a1f] text-white hover:bg-white hover:text-[#0b1220]' : 'bg-[#0b1220] text-white hover:bg-[#ff5a1f]']}>{p.cta}</a>
+          <div class:list={['flex flex-col rounded-md border p-7 md:p-9', p.utama ? 'border-[#0b1220] bg-[#0b1220] text-white' : 'border-[#0b1220]/15']}>
+            <p class:list={['text-xs font-bold uppercase tracking-widest', p.utama ? 'text-[#FF8A5C]' : 'text-[#0b1220]/65']}>{p.nama}</p>
+            <p class="mt-4 font-display text-4xl font-extrabold tracking-tight md:text-5xl">{p.harga} <span class:list={['text-base font-medium', p.utama ? 'text-white/75' : 'text-[#0b1220]/65']}>{p.periode}</span></p>
+            <p class:list={['mt-4 text-sm leading-relaxed', p.utama ? 'text-white/80' : 'text-[#0b1220]/70']}>{p.ringkas}</p>
+            <ul class:list={['mb-8 mt-6 space-y-2.5 border-t pt-6 text-sm', p.utama ? 'border-white/15' : 'border-[#0b1220]/10']}>
+              {p.poin.map((x) => (
+                <li class="flex gap-3">
+                  <svg class="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={p.utama ? '#FF8A5C' : '#C2410C'} stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>{x}
+                </li>
+              ))}
+            </ul>
+            <a href={p.utama ? '#demo' : produk.playStore} class:list={['mt-auto inline-flex h-12 w-full items-center justify-center rounded-md px-6 text-sm font-bold transition-colors duration-150', p.utama ? 'bg-[#ff5a1f] text-[#0b1220] hover:bg-white hover:text-[#0b1220]' : 'bg-[#0b1220] text-white hover:bg-[#ff5a1f]']}>{p.cta}</a>
           </div>
         ))}
       </div>
@@ -31,15 +41,15 @@ import { produk, paket, perbandingan } from '../data/produk';
       <!-- Perbandingan -->
       <div class="mt-16 md:mt-24">
         <h2 class="font-display text-2xl font-extrabold tracking-tight md:text-3xl">Apa bedanya</h2>
-        <div class="mt-6 hidden grid-cols-1 border-b border-[#0b1220]/10 pb-3 text-xs font-bold uppercase tracking-widest text-[#0b1220]/50 sm:grid sm:grid-cols-3">
-          <span>Fitur</span><span>Gratis</span><span>Pro</span>
+        <div class="mt-6 hidden grid-cols-1 border-b border-[#0b1220]/10 pb-3 text-xs font-bold uppercase tracking-widest text-[#0b1220]/65 sm:grid sm:grid-cols-3">
+          <span>Fitur</span><span>Gratis</span><span class="text-[#C2410C]">Pro</span>
         </div>
         <ul class="divide-y divide-[#0b1220]/10">
           {perbandingan.map((r) => (
             <li class="grid grid-cols-2 gap-x-3 gap-y-1 py-4 text-sm sm:grid-cols-3">
               <span class="col-span-2 font-medium sm:col-span-1">{r.nama}</span>
-              <span class="text-[#0b1220]/70"><span class="text-xs uppercase tracking-widest text-[#0b1220]/40 sm:hidden">Gratis · </span>{r.gratis}</span>
-              <span class="font-bold"><span class="text-xs font-normal uppercase tracking-widest text-[#0b1220]/40 sm:hidden">Pro · </span>{r.pro}</span>
+              <span class="text-[#0b1220]/70"><span class="text-xs uppercase tracking-widest text-[#0b1220]/60 sm:hidden">Gratis · </span>{r.gratis}</span>
+              <span class="font-bold"><span class="text-xs font-normal uppercase tracking-widest text-[#C2410C] sm:hidden">Pro · </span>{r.pro}</span>
             </li>
           ))}
         </ul>
@@ -47,7 +57,7 @@ import { produk, paket, perbandingan } from '../data/produk';
     </section>
 
     <!-- Demo -->
-    <section id="demo" class="border-t border-[#0b1220]/10 bg-[#f3f4f2]">
+    <section id="demo" class="scroll-mt-16 border-t border-[#0b1220]/10 bg-[#f3f4f2]">
       <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 py-16 md:grid-cols-12 md:px-6 md:py-24">
         <div class="md:col-span-5">
           <h2 class="font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">Minta demo 15 menit</h2>
@@ -56,12 +66,12 @@ import { produk, paket, perbandingan } from '../data/produk';
         <form id="demo-form" class="space-y-5 md:col-span-6 md:col-start-7">
           <div>
             <label for="toko" class="text-sm font-bold">Nama toko</label>
-            <input id="toko" name="toko" required placeholder="Toko Berkah" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
+            <input id="toko" name="toko" required autocomplete="organization" placeholder="Toko Berkah" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white h-12 px-3 text-base outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
           </div>
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <label for="jenis" class="text-sm font-bold">Jenis usaha</label>
-              <select id="jenis" name="jenis" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#ff5a1f]">
+              <select id="jenis" name="jenis" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white h-12 px-3 text-base outline-none transition-colors duration-150 focus:border-[#ff5a1f]">
                 <option>Warung / kelontong</option>
                 <option>Minimarket</option>
                 <option>Toko bangunan</option>
@@ -71,15 +81,16 @@ import { produk, paket, perbandingan } from '../data/produk';
             </div>
             <div>
               <label for="kasir" class="text-sm font-bold">Jumlah kasir</label>
-              <input id="kasir" name="kasir" type="number" min="1" max="50" value="2" required class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
+              <input id="kasir" name="kasir" type="number" min="1" max="50" value="2" required inputmode="numeric" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white h-12 px-3 text-base outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
             </div>
           </div>
           <div>
             <label for="nama" class="text-sm font-bold">Nama Anda</label>
-            <input id="nama" name="nama" required placeholder="Pemilik atau pengelola" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white px-3 py-3 text-sm outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
+            <input id="nama" name="nama" required autocomplete="name" placeholder="Pemilik atau pengelola" class="mt-2 w-full rounded-md border border-[#0b1220]/20 bg-white h-12 px-3 text-base outline-none transition-colors duration-150 focus:border-[#ff5a1f]" />
           </div>
-          <button type="submit" class="w-full rounded-md bg-[#ff5a1f] px-6 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-[#0b1220] sm:w-auto">Kirim via WhatsApp</button>
-          <p class="text-xs text-[#0b1220]/50">Situs ini statis. Formulir hanya menyusun pesan dan membukanya di WhatsApp tim kami; tidak ada data yang disimpan di sini.</p>
+          <button type="submit" class="inline-flex h-12 w-full items-center justify-center rounded-md bg-[#ff5a1f] px-6 text-sm font-bold text-[#0b1220] transition-colors duration-150 hover:bg-[#0b1220] sm:w-auto">Kirim via WhatsApp</button>
+          <p class="text-xs text-[#0b1220]/65">Situs ini statis. Formulir hanya menyusun pesan dan membukanya di WhatsApp tim kami; tidak ada data yang disimpan di sini.</p>
+          <p id="status" role="status" aria-live="polite" class="text-sm font-bold text-[#C2410C]"></p>
         </form>
       </div>
     </section>
@@ -98,6 +109,7 @@ import { produk, paket, perbandingan } from '../data/produk';
         `Nama: ${d.get('nama')}`,
       ].join('\n');
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+      document.getElementById('status').textContent = 'WhatsApp dibuka di tab baru. Kalau tidak muncul, izinkan pop-up lalu kirim lagi.';
     });
   </script>
 </Base>

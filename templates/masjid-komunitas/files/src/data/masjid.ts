@@ -109,8 +109,10 @@ export const takmir = [
 ];
 
 export const foto = {
-    hero: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?w=1600&q=80',
-    kegiatan: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1000&q=80',
-    serambi: 'https://images.unsplash.com/photo-1590076215667-875d4ef2d7de?w=1000&q=80',
-    infaq: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1000&q=80',
+    /** Kubah dan menara masjid kampung; tampil 3:4 di desktop, 4:3 di HP. */
+    hero: 'https://images.unsplash.com/photo-1642547352131-13dc7f97852c?w=1000&q=75&auto=format',
+    kegiatan: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=75&auto=format',
+    /** Kajian bersama jamaah di dalam masjid (Malang). */
+    serambi: 'https://images.unsplash.com/photo-1700716137543-ef7d4d78c5f3?w=1000&q=75&auto=format',
+    infaq: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=900&q=75&auto=format',
 };

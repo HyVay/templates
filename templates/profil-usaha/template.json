@@ -1,13 +1,17 @@
 {
   "id": "profil-usaha",
   "name": "Profil Usaha",
-  "description": "Situs perusahaan multi-halaman: beranda, layanan, tentang, dan kontak dengan form WhatsApp.",
+  "description": "Situs perusahaan jasa multi-halaman: layanan dengan kisaran harga, contoh RAB, proyek terakhir, profil tim, dan kontak via WhatsApp.",
   "category": "Bisnis",
-  "tags": ["perusahaan", "jasa", "multi-halaman"],
+  "tags": [
+    "perusahaan",
+    "jasa",
+    "multi-halaman"
+  ],
   "scaffold": "astro-static",
   "contract": 1,
   "badge": "featured",
-  "seedPrompt": "Sesuaikan situs profil usaha ini untuk {{nama usaha}} yang bergerak di bidang {{bidang}} di {{kota}}. Ganti nama, deskripsi layanan, nomor WhatsApp, dan alamat contoh dengan data itu. Sesuaikan palet warna dengan identitas merek, dan pertahankan struktur 4 halaman beserta hamburger menu-nya.",
+  "seedPrompt": "Sesuaikan situs profil usaha ini untuk {{nama usaha}} yang bergerak di bidang {{bidang}} di {{kota}}. Semua teks ada di src/data/site.ts: ganti nama, tagline, layanan beserta kisaran harga, contoh RAB, proyek, tim, nomor WhatsApp, dan alamat contoh dengan data usaha itu. Bila usahanya bukan kontraktor, ganti bagian contoh RAB dengan contoh penawaran atau rincian harga yang relevan. Pertahankan struktur 4 halaman, hamburger menu, dan form WhatsApp-nya.",
   "author": "HyVay",
   "license": "MIT"
 }

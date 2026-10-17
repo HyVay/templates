@@ -46,7 +46,7 @@
       "badge": "popular",
       "scaffold": "astro-static",
       "contract": 1,
-      "files": 7
+      "files": 8
     },
     {
       "id": "katering-hampers",
@@ -68,7 +68,7 @@
       "id": "klinik-praktik",
       "name": "Klinik & Praktik Dokter",
       "description": "Situs klinik multi-halaman: jadwal praktik per dokter dalam tabel, daftar layanan dengan biaya, profil dokter, dan janji temu via WhatsApp.",
-      "category": "Bisnis",
+      "category": "Lainnya",
       "tags": [
         "klinik",
         "dokter",
@@ -227,7 +227,7 @@
     {
       "id": "profil-usaha",
       "name": "Profil Usaha",
-      "description": "Situs perusahaan multi-halaman: beranda, layanan, tentang, dan kontak dengan form WhatsApp.",
+      "description": "Situs perusahaan jasa multi-halaman: layanan dengan kisaran harga, contoh RAB, proyek terakhir, profil tim, dan kontak via WhatsApp.",
       "category": "Bisnis",
       "tags": [
         "perusahaan",
@@ -237,7 +237,7 @@
       "badge": "featured",
       "scaffold": "astro-static",
       "contract": 1,
-      "files": 7
+      "files": 9
     },
     {
       "id": "rental-kendaraan",
@@ -253,7 +253,7 @@
       "badge": "new",
       "scaffold": "astro-static",
       "contract": 1,
-      "files": 9
+      "files": 10
     },
     {
       "id": "restoran-kafe",
@@ -338,7 +338,7 @@
     {
       "id": "undangan-pernikahan",
       "name": "Undangan Pernikahan",
-      "description": "Undangan digital satu halaman dengan hitung mundur, galeri, peta lokasi, dan RSVP via WhatsApp.",
+      "description": "Undangan digital satu halaman: nama tamu personal, hitung mundur, simpan ke kalender, galeri, amplop digital, dan RSVP via WhatsApp.",
       "category": "Undangan",
       "tags": [
         "undangan",
@@ -348,7 +348,7 @@
       "badge": "popular",
       "scaffold": "astro-static",
       "contract": 1,
-      "files": 2
+      "files": 4
     },
     {
       "id": "webinar-online",

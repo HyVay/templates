@@ -67,7 +67,13 @@ export const pemateri = {
     nama: 'Ratih Kusuma',
     peran: 'Konsultan keuangan UMKM',
     bio: 'Sepuluh tahun mendampingi warung, toko kelontong, dan katering rumahan merapikan pembukuan. Sebelumnya bekerja sebagai akuntan di perusahaan distribusi. Mengajar dengan contoh dari struk belanja sungguhan, bukan teori.',
-    foto: 'https://images.unsplash.com/photo-1548142813-c348350df52b?w=800&q=80',
+    foto: 'https://images.unsplash.com/photo-1548142813-c348350df52b',
+    /** Tiga fakta singkat yang tampil di samping bio. */
+    fakta: [
+        { k: 'Pengalaman', v: '10 tahun mendampingi usaha kecil' },
+        { k: 'Latar', v: 'Akuntan, perusahaan distribusi' },
+        { k: 'Gaya mengajar', v: 'Praktik langsung dari struk dan nota peserta' },
+    ],
 };
 
 export const paket = [
@@ -88,5 +94,9 @@ export const rupiah = (n: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
 
 export const foto = {
-    hero: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80',
+    hero: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f',
 };
+
+/** URL foto Unsplash dengan ukuran yang pas untuk tempat tampilnya. */
+export const img = (url: string, w: number, h?: number) =>
+    `${url}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;

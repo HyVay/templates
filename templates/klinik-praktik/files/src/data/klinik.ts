@@ -38,7 +38,7 @@ export const dokter: Dokter[] = [
         nama: 'dr. Ratna Kusumawati',
         spesialisasi: 'Dokter umum',
         ringkas: 'Menangani keluhan umum, pengelolaan hipertensi dan diabetes, serta surat keterangan sehat. Praktik di klinik ini sejak dibuka.',
-        foto: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=800&q=80',
         jadwal: { Senin: '08.00 - 14.00', Selasa: '08.00 - 14.00', Rabu: '08.00 - 14.00', Kamis: '08.00 - 14.00', Jumat: '08.00 - 12.00' },
     },
     {
@@ -46,7 +46,7 @@ export const dokter: Dokter[] = [
         nama: 'dr. Bagus Wicaksono',
         spesialisasi: 'Dokter umum',
         ringkas: 'Fokus pada layanan sore dan malam: demam, infeksi saluran napas, luka ringan, dan khitan metode konvensional.',
-        foto: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?w=800&q=80',
         jadwal: { Senin: '14.00 - 20.00', Selasa: '14.00 - 20.00', Rabu: '14.00 - 20.00', Kamis: '14.00 - 20.00', Jumat: '14.00 - 20.00', Sabtu: '08.00 - 14.00' },
     },
     {
@@ -54,7 +54,7 @@ export const dokter: Dokter[] = [
         nama: 'drg. Melati Anggraini',
         spesialisasi: 'Dokter gigi',
         ringkas: 'Pembersihan karang gigi, tambal, cabut, dan perawatan gigi anak. Tindakan dengan pembiusan lokal dijadwalkan terpisah.',
-        foto: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&q=80',
         jadwal: { Senin: '16.00 - 20.00', Rabu: '16.00 - 20.00', Jumat: '16.00 - 20.00', Sabtu: '09.00 - 13.00' },
     },
     {
@@ -62,7 +62,7 @@ export const dokter: Dokter[] = [
         nama: 'dr. Hendra Saputra, Sp.A',
         spesialisasi: 'Dokter spesialis anak',
         ringkas: 'Imunisasi dasar dan lanjutan, pemantauan tumbuh kembang, serta konsultasi gizi anak usia 0 - 12 tahun.',
-        foto: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800&q=80',
+        foto: 'https://images.unsplash.com/photo-1637059824899-a441006a6875?w=800&q=80',
         jadwal: { Selasa: '16.00 - 19.00', Kamis: '16.00 - 19.00', Sabtu: '09.00 - 12.00' },
     },
 ];
@@ -116,3 +116,16 @@ export const aturanKunjungan = [
     'Untuk pasien anak, bawa buku KIA atau catatan imunisasi.',
     'Kalau berhalangan, kabari lewat WhatsApp paling lambat 2 jam sebelumnya supaya jadwal bisa diberikan ke pasien lain.',
 ];
+
+/** Foto ruang praktik di beranda. */
+export const fotoKlinik = 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&q=80';
+
+/**
+ * URL foto dengan ukuran yang pas. Untuk Unsplash, ukuran dan format diatur lewat parameter;
+ * URL dari tempat lain dipakai apa adanya.
+ */
+export const src = (url: string, w: number, h?: number) => {
+    if (!url.includes('images.unsplash.com')) return url;
+    const base = url.split('?')[0];
+    return `${base}?w=${w}${h ? `&h=${h}&fit=crop&crop=faces` : ''}&q=75&auto=format`;
+};

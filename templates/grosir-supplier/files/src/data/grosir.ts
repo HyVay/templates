@@ -12,14 +12,14 @@ export const toko = {
     telepon: '6281234567890',
     alamat: 'Jl. Kalianak Barat No. 48, Asemrowo, Surabaya',
     jam: [
-        { hari: 'Senin - Jumat', jam: '07.30 - 17.00 WIB' },
-        { hari: 'Sabtu', jam: '07.30 - 14.00 WIB' },
+        { hari: 'Senin–Jumat', jam: '07.30–17.00 WIB' },
+        { hari: 'Sabtu', jam: '07.30–14.00 WIB' },
         { hari: 'Minggu & libur', jam: 'Tutup' },
     ],
     gratisOngkir: 'Gratis ongkir Surabaya untuk pesanan di atas Rp 1.000.000',
     minimalOrder: 'Minimal pesanan Rp 300.000 per pengiriman',
     pembayaran: ['Transfer bank sebelum kirim', 'COD (bayar saat barang tiba) untuk Surabaya', 'Tempo 7 hari untuk pelanggan tetap, setelah 3 transaksi lancar'],
-    jamKirim: 'Pesanan masuk sebelum 14.00 dikirim besok pukul 08.00 - 12.00. Luar Surabaya H+2 lewat ekspedisi.',
+    jamKirim: 'Pesanan masuk sebelum 14.00 dikirim besok pukul 08.00–12.00. Luar Surabaya H+2 lewat ekspedisi.',
 };
 
 export const areaKirim = [

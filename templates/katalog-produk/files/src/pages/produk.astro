@@ -1,47 +1,51 @@
 ---
 import Base from '../layouts/Base.astro';
+import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import KartuProduk from '../components/KartuProduk.astro';
 import { toko, produk, kategori } from '../data/toko';
+
+const jumlah = (k: string) => (k === 'Semua' ? produk.length : produk.filter((p) => p.kategori === k).length);
 ---
 <Base
-  title={`Produk — ${toko.nama}`}
+  title={`Katalog — ${toko.nama}`}
   description={`Katalog lengkap ${toko.nama}: ${produk.length} produk kopi dan peralatan seduh, pesan langsung via WhatsApp.`}
 >
+  <Fonts />
   <Header />
-  <main>
-    <section class="border-b border-stone-200 bg-stone-50">
-      <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <h1 class="text-3xl font-semibold text-stone-900 md:text-4xl">Katalog</h1>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-stone-600 md:text-base">
-          Harga sudah termasuk kemasan kedap udara. Sebutkan alat seduh Anda saat memesan agar kami sesuaikan gilingannya.
-        </p>
+  <main id="konten">
+    <section class="border-b border-[#231A13]">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-12 md:grid-cols-12 md:items-end md:px-6 md:py-16">
+        <div class="md:col-span-7">
+          <p class="font-mono text-xs uppercase tracking-widest text-[#2340A8]">Katalog</p>
+          <h1 class="mt-4 font-display text-5xl md:text-7xl">Biji & alat seduh</h1>
+        </div>
+        <p class="max-w-[46ch] leading-relaxed text-[#4A3D31] md:col-span-5">Harga sudah termasuk kemasan kedap udara dengan katup. Sebutkan alat seduh Anda saat memesan, kami giling sesuai.</p>
       </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
-      <!-- Filter kategori: tombol biasa + sedikit script, tanpa framework -->
-      <div class="flex flex-wrap gap-2" role="group" aria-label="Filter kategori">
-        {kategori.map((k, i) => (
-          <button
-            type="button"
-            data-filter={k}
-            aria-pressed={i === 0 ? 'true' : 'false'}
-            class="filter-btn rounded-full border border-stone-300 px-4 py-2 text-sm text-stone-700 transition-colors duration-150 hover:bg-stone-100 aria-pressed:border-amber-700 aria-pressed:bg-amber-700 aria-pressed:text-white"
-          >
-            {k}
-          </button>
-        ))}
+    <section class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filter kategori">
+          {kategori.map((k, i) => (
+            <button type="button" data-filter={k} aria-pressed={i === 0 ? 'true' : 'false'}
+              class="filter-btn inline-flex h-11 items-center gap-2 border border-[#231A13] px-4 text-sm transition-colors duration-150 hover:bg-[#E2D7C5] aria-pressed:bg-[#231A13] aria-pressed:text-white">
+              {k}<span class="font-mono text-xs opacity-70">{jumlah(k)}</span>
+            </button>
+          ))}
+        </div>
+        <p id="hitung" aria-live="polite" class="font-mono text-xs text-[#6B5D4F]">Menampilkan {produk.length} produk</p>
       </div>
 
       <div id="grid" class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {produk.map((item) => <KartuProduk item={item} />)}
+        {produk.map((item, i) => <KartuProduk item={item} eager={i < 3} />)}
       </div>
 
-      <p id="kosong" class="hidden py-16 text-center text-sm text-stone-500">
-        Tidak ada produk pada kategori ini.
-      </p>
+      <div id="kosong" class="hidden border border-dashed border-[#B9AA92] px-6 py-16 text-center">
+        <p class="font-display text-2xl">Belum ada produk di kategori ini.</p>
+        <p class="mt-2 text-sm text-[#4A3D31]">Tanyakan stok terbaru lewat WhatsApp, biasanya ada biji musiman yang belum dipajang.</p>
+      </div>
     </section>
   </main>
   <Footer />
@@ -50,7 +54,7 @@ import { toko, produk, kategori } from '../data/toko';
     const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
     const cards = document.querySelectorAll<HTMLElement>('#grid [data-kategori]');
     const empty = document.getElementById('kosong');
-
+    const hitung = document.getElementById('hitung');
     const apply = (pilihan: string) => {
       let terlihat = 0;
       cards.forEach((card) => {
@@ -59,13 +63,11 @@ import { toko, produk, kategori } from '../data/toko';
         if (cocok) terlihat += 1;
       });
       empty?.classList.toggle('hidden', terlihat > 0);
+      if (hitung) hitung.textContent = `Menampilkan ${terlihat} produk`;
     };
-
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-        apply(btn.dataset.filter ?? 'Semua');
-      });
-    });
+    buttons.forEach((btn) => btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      apply(btn.dataset.filter ?? 'Semua');
+    }));
   </script>
 </Base>

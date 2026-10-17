@@ -20,7 +20,7 @@ const anchors = [
   <Fonts />
   <div class="bg-[#FCFAF5] text-[#3A4A2F]">
     <Header />
-    <main>
+    <main id="konten">
       <section class="border-b border-[#3A4A2F]/15">
         <div class="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
           <p class="font-mono text-xs uppercase tracking-widest text-[#8C2F39]">Harga sudah termasuk kemasan</p>
@@ -31,26 +31,26 @@ const anchors = [
         </div>
       </section>
       <nav class="sticky top-14 z-40 border-b border-[#3A4A2F]/15 bg-[#FCFAF5]/95 backdrop-blur md:top-16" aria-label="Lompat ke bagian">
-        <div class="mx-auto flex max-w-6xl gap-6 overflow-x-auto px-4 py-3 text-sm md:px-6">
-          {anchors.map((a) => <a href={a.href} class="shrink-0 transition-colors duration-150 hover:text-[#8C2F39]">{a.label}</a>)}
+        <div class="mx-auto flex max-w-6xl gap-6 overflow-x-auto px-4 text-sm md:px-6">
+          {anchors.map((a) => <a href={a.href} data-target={a.href.slice(1)} class="seksi-link inline-flex min-h-[48px] shrink-0 items-center border-b-2 border-transparent transition-colors duration-150 hover:text-[#8C2F39] aria-[current=true]:border-[#8C2F39] aria-[current=true]:font-semibold aria-[current=true]:text-[#8C2F39]">{a.label}</a>)}
         </div>
       </nav>
 
       <div class="mx-auto max-w-6xl space-y-16 px-4 py-12 md:px-6 md:py-16">
-        <DaftarPaket id="harian" judul="Katering harian" keterangan="Dikirim Senin - Jumat sebelum 11.30. Pesan mingguan, bayar tiap Jumat." items={kateringHarian} />
+        <DaftarPaket id="harian" judul="Katering harian" keterangan="Dikirim Senin–Jumat sebelum 11.30. Pesan mingguan, bayar tiap Jumat." items={kateringHarian} />
         <DaftarPaket id="nasi-box" judul="Nasi box" keterangan="Box kertas food grade dengan sendok dan tisu. Label nama acara gratis." items={nasiBox} />
         <DaftarPaket id="prasmanan" judul="Prasmanan" keterangan="Termasuk meja saji, pemanas, dan pramusaji. Peralatan diambil kembali setelah acara." items={prasmanan} />
 
-        <section id="menu-mingguan" class="scroll-mt-24">
+        <section id="menu-mingguan" class="scroll-mt-32">
           <div class="flex items-baseline justify-between gap-4 border-b-2 border-[#3A4A2F] pb-2">
             <h2 class="font-display text-3xl font-semibold md:text-4xl">Menu mingguan</h2>
-            <span class="font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/60">Paket kantor</span>
+            <span class="font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/75">Paket kantor</span>
           </div>
           <p class="mt-3 text-sm text-[#3A4A2F]/75">Berlaku untuk Paket Kantor A dan B. Minggu berikutnya menunya berganti; daftar dikirim tiap Jumat ke pelanggan.</p>
           <!-- Desktop tabel -->
           <table class="mt-4 hidden w-full border-collapse text-left text-sm md:table">
             <thead>
-              <tr class="border-b border-[#3A4A2F]/20 font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/60">
+              <tr class="border-b border-[#3A4A2F]/20 font-mono text-xs uppercase tracking-widest text-[#3A4A2F]/75">
                 <th scope="col" class="py-3 pr-4 font-medium">Hari</th>
                 <th scope="col" class="py-3 pr-4 font-medium">Lauk utama</th>
                 <th scope="col" class="py-3 pr-4 font-medium">Sayur</th>
@@ -83,4 +83,14 @@ const anchors = [
     </main>
     <Footer />
   </div>
+  <script>
+    const links = document.querySelectorAll<HTMLAnchorElement>('.seksi-link');
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) links.forEach((a) => a.setAttribute('aria-current', String(a.dataset.target === e.target.id)));
+      }),
+      { rootMargin: '-35% 0px -60% 0px' },
+    );
+    links.forEach((a) => { const el = document.getElementById(a.dataset.target ?? ''); if (el) io.observe(el); });
+  </script>
 </Base>

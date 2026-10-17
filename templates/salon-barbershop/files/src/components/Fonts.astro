@@ -8,4 +8,10 @@
   body { font-family: 'Karla', ui-sans-serif, system-ui, sans-serif; }
   .font-display { font-family: 'Bodoni Moda', 'Didot', Georgia, serif; }
   .font-body { font-family: 'Karla', ui-sans-serif, system-ui, sans-serif; }
+  /* Fokus keyboard selalu terlihat; selector ini mengalahkan .outline-none. */
+  html :focus-visible { outline: 2px solid #B87333; outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
 </style>

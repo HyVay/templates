@@ -8,24 +8,24 @@ import { produk } from '../data/produk';
       <p class="mt-2 max-w-sm text-sm leading-relaxed text-[#0b1220]/60">{produk.tagline} {produk.versi}.</p>
     </div>
     <div class="md:col-span-3">
-      <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">Produk</p>
-      <ul class="mt-3 space-y-1.5 text-sm">
-        <li><a href="/harga/" class="transition-colors duration-150 hover:text-[#ff5a1f]">Harga</a></li>
-        <li><a href="/faq/" class="transition-colors duration-150 hover:text-[#ff5a1f]">Pertanyaan umum</a></li>
-        <li><a href={produk.playStore} class="transition-colors duration-150 hover:text-[#ff5a1f]">Unduh di Play Store</a></li>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/65">Produk</p>
+      <ul class="mt-2 text-sm">
+        <li><a href="/harga/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-[#C2410C]">Harga</a></li>
+        <li><a href="/faq/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-[#C2410C]">Pertanyaan umum</a></li>
+        <li><a href={produk.playStore} class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-[#C2410C]">Unduh di Play Store</a></li>
       </ul>
     </div>
     <div class="md:col-span-4">
-      <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/50">Perusahaan</p>
-      <ul class="mt-3 space-y-1.5 text-sm">
-        <li>{produk.perusahaan}</li>
-        <li class="text-[#0b1220]/60">{produk.alamat}</li>
-        <li><a href={`mailto:${produk.email}`} class="transition-colors duration-150 hover:text-[#ff5a1f]">{produk.email}</a></li>
-        <li><a href={`https://wa.me/${produk.wa}`} class="transition-colors duration-150 hover:text-[#ff5a1f]">WhatsApp tim penjualan</a></li>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#0b1220]/65">Perusahaan</p>
+      <ul class="mt-2 text-sm">
+        <li class="py-2">{produk.perusahaan}</li>
+        <li class="pb-2 text-[#0b1220]/70">{produk.alamat}</li>
+        <li><a href={`mailto:${produk.email}`} class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-[#C2410C]">{produk.email}</a></li>
+        <li><a href={`https://wa.me/${produk.wa}`} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-[#C2410C]">WhatsApp tim penjualan</a></li>
       </ul>
     </div>
   </div>
-  <div class="border-t border-[#0b1220]/10 px-4 py-5 md:px-6">
-    <p class="mx-auto max-w-6xl text-xs text-[#0b1220]/50">© {new Date().getFullYear()} {produk.perusahaan}</p>
+  <div class="border-t border-[#0b1220]/10">
+    <p class="mx-auto max-w-6xl px-4 py-5 text-xs md:px-6 text-[#0b1220]/65">© {new Date().getFullYear()} {produk.perusahaan}</p>
   </div>
 </footer>
